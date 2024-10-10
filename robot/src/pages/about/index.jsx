@@ -33,7 +33,6 @@ export default function index() {
         <div>
             <Header activeIndex={0} />
             <main>
-                {' '}
                 <section className="flex relative flex-col items-center px-20 pt-32 pb-7 w-full min-h-[500px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img
                         loading="lazy"
