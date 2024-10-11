@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ProductBundle = () => {
     const productData = [
@@ -47,9 +47,15 @@ const ProductBundle = () => {
     ];
 
     const ProductCard = ({ title, price, imageSrc, isLarge }) => {
+        const [isliked, setIsliked] = useState(false);
+        const [ison, setIson] = useState(false);
         if (isLarge) {
             return (
-                <article className="overflow-hidden grow shrink self-stretch pt-3 pl-5 my-auto rounded-3xl bg-stone-100 min-w-[240px] w-[587px] lg:h-[300px]  max-md:max-w-full">
+                <article
+                    onMouseEnter={() => setIson(true)}
+                    onMouseLeave={() => setIson(false)}
+                    className="relative overflow-hidden grow shrink self-stretch pt-3 pl-5 my-auto rounded-3xl bg-[#ECF3EA] min-w-[240px] w-[587px] lg:h-[300px]  max-md:max-w-full"
+                >
                     <div className="flex gap-5 max-md:flex-col">
                         <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                             <div className="flex flex-col mt-2 w-full text-xl max-md:mt-10">
@@ -62,7 +68,7 @@ const ProductBundle = () => {
                                     </span>
                                     <img
                                         loading="lazy"
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0aab139c6013a4d6935695496f50361c38a6518cb494c71627b3eab60ec3581d?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                        src="/svg/manatGren.svg"
                                         alt=""
                                         className="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
                                     />
@@ -71,12 +77,25 @@ const ProductBundle = () => {
                         </div>
                         <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
                             <div className="flex flex-col grow max-md:mt-10">
-                                <img
+                                <div
+                                    className="bg-white w-[44px] h-[44px] rounded-full flex justify-center items-center  absolute top-3 right-3 "
+                                    onClick={() => setIsliked((prew) => !prew)}
+                                >
+                                    <img
+                                        src={
+                                            isliked
+                                                ? '/svg/heartRed.svg'
+                                                : '/svg/heart.svg'
+                                        }
+                                    />
+                                </div>
+                                {/* <img
                                     loading="lazy"
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/54722cc51ec5f592681f0b44cb471b6c12feb7296ba1ffd9c343aae455f6cdb8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                                     alt=""
                                     className="object-contain self-end w-11 aspect-square rounded-[100px] max-md:mr-2.5"
-                                />
+                                /> */}
+
                                 <img
                                     loading="lazy"
                                     src={imageSrc}
@@ -85,15 +104,29 @@ const ProductBundle = () => {
                                 />
                             </div>
                         </div>
+                        <div className="absolute w-[294px] h-[60px] bottom-0 flex justify-center overflow-hidden">
+                            <button
+                                className={`flex flex-row justify-center items-center h-[44px] w-[90%] bg-[#447355] text-white rounded-[100px]  transition duration-300  ${
+                                    ison ? ' ' : ' translate-y-20'
+                                }`}
+                            >
+                                <img src="/svg/shop.svg" />
+                                Səbətə əlavə et
+                            </button>
+                        </div>
                     </div>
                 </article>
             );
         }
         return (
-            <article className="flex overflow-hidden flex-col grow shrink self-stretch pt-3 pl-5 my-auto rounded-3xl bg-stone-100 min-w-[240px] w-[252px]">
+            <article
+                onMouseEnter={() => setIson(true)}
+                onMouseLeave={() => setIson(false)}
+                className=" relative flex overflow-hidden flex-col grow shrink self-stretch pt-3 pl-5  rounded-3xl bg-[#ECF3EA] min-w-[240px] w-[252px]"
+            >
                 <div className="flex z-10 gap-10 items-start self-start">
                     <div className="flex flex-col mt-2">
-                        <h2 className="text-base font-medium text-black">
+                        <h2 className="text-base font-medium text-black max-w-[188px]">
                             {title}
                         </h2>
                         <div className="flex gap-1 items-center self-start mt-4 text-xl font-semibold text-center text-gray-600 whitespace-nowrap">
@@ -108,12 +141,16 @@ const ProductBundle = () => {
                             />
                         </div>
                     </div>
-                    <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/471741976d0faa9603e7ec3224ed6e4f00f47061b5eb1698547265bd47af612e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        alt=""
-                        className="object-contain shrink-0 w-11 aspect-square rounded-[100px]"
-                    />
+                    <div
+                        className="bg-white w-[44px] h-[44px] rounded-full flex justify-center items-center  absolute top-3 right-3 "
+                        onClick={() => setIsliked((prew) => !prew)}
+                    >
+                        <img
+                            src={
+                                isliked ? '/svg/heartRed.svg' : '/svg/heart.svg'
+                            }
+                        />
+                    </div>
                 </div>
                 <img
                     loading="lazy"
@@ -121,12 +158,22 @@ const ProductBundle = () => {
                     alt={title}
                     className="object-contain self-end -mt-1 w-56 max-w-full aspect-[1.18]"
                 />
+                <div className="absolute w-[294px] h-[60px] bottom-0 flex justify-center overflow-hidden">
+                    <button
+                        className={`flex flex-row justify-center items-center h-[44px] w-[90%] bg-[#447355] text-white rounded-[100px]  transition duration-300  ${
+                            ison ? ' ' : ' translate-y-20'
+                        }`}
+                    >
+                        <img src="/svg/shop.svg" />
+                        Səbətə əlavə et
+                    </button>
+                </div>
             </article>
         );
     };
 
     return (
-        <main className="flex flex-col mt-24 max-w-full w-full max-md:mt-10">
+        <main className="flex flex-col  max-w-full w-full max-md:mt-10">
             <section className="flex flex-col mt-10 w-full max-md:max-w-full">
                 <div className="flex flex-wrap gap-5 items-center w-full max-md:max-w-full justify-between">
                     {productData.slice(0, 3).map((product, index) => (

@@ -40,7 +40,7 @@ const Hero_Swipper = () => {
             </Swiper>
 
             {/* Custom Pagination */}
-            <div className=" absolute flex justify-center buttom-10  right-5 z-[5000] ">
+            <div className=" absolute flex justify-center bottom-5   right-5 z-[5000] ">
                 {[...Array(4)].map((_, index) => (
                     <button
                         key={index}

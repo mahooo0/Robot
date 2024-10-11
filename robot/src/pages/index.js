@@ -14,6 +14,7 @@ import Green_to_none from '@/components/btns/green_to_none';
 import SalesSwipper from '@/components/sales.swipper.jsx';
 import ProductBundle from '@/components/Product_bundle';
 import Footer from '@/components/Footer';
+import White_to_green from '@/components/btns/white_to_green';
 // import ProductBundle from '@/components/ProductBundle';
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -44,7 +45,7 @@ export default function Home() {
                 ></video>
                 <Hero_Swipper />
             </section>
-            <section className="px-5">
+            <section className="px-5 w-full flex justify-center">
                 <FeatureList />
             </section>
             <ProductCategories />
@@ -92,14 +93,14 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col mt-11 mb-0 max-w-full w-[495px] max-md:mt-10 max-md:mb-2.5">
                         <div className="flex flex-col w-full font-semibold text-white max-md:max-w-full">
-                            <div className="flex gap-1 items-center self-start px-3 py-1.5 text-xl text-center whitespace-nowrap bg-green-400 rounded">
+                            <div className="flex gap-1 items-center self-start px-3 py-1.5 text-xl text-center whitespace-nowrap bg-[#69BE56] rounded">
                                 <div className="flex gap-1 items-center self-stretch my-auto">
                                     <div className="self-stretch my-auto">
                                         300
                                     </div>
                                     <img
                                         loading="lazy"
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/af8fae7a6655afbfeb3633a7b815a349723f8071eafa05b694ef7b8516e010c4?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                        src="/svg/manat.svg"
                                         className="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
                                         alt=""
                                     />{' '}
@@ -110,14 +111,14 @@ export default function Home() {
                                 AutoWash Dock
                             </h2>
                         </div>
-                        <button className="gap-2.5 self-start px-7 py-3.5 mt-7 text-base font-medium bg-white rounded-[100px] text-green-950 max-md:px-5">
-                            Məhsula bax
-                        </button>
+                        <div className="mt-[28px]">
+                            <White_to_green>Məhsula bax</White_to_green>
+                        </div>
                     </div>
                 </div>
             </section>
             <section className="lg:px-[60px] px-[30px]">
-                <div className="flex justify-between items-center lg:px-[60px] px-[30px] mt-[104px] flex-wrap">
+                <div className="flex justify-between items-center  mt-[104px] flex-wrap">
                     <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
                         Paket məhsullar{' '}
                     </h3>
@@ -145,12 +146,15 @@ export default function Home() {
                                         endirimli məhsullardan ilk sən yararlan.
                                     </p>
                                 </div>
-                                <button
+                                <Green_to_green classNAME="mt-[32px]">
+                                    Qeydiyyatdan keç
+                                </Green_to_green>
+                                {/* <button
                                     className="gap-2.5 self-stretch px-7 py-3.5 mt-8 text-base font-medium bg-green-400 rounded-[100px] max-md:px-5"
                                     aria-label="Qeydiyyatdan keç"
                                 >
                                     Qeydiyyatdan keç
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full justify-center items-center">
@@ -204,7 +208,7 @@ export default function Home() {
                             loop
                             controlsList="nodownload"
                             width="600"
-                            src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
+                            src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/16c4/4039/-50d9-45aa-a451-9f953bc0289c?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XJ35KmTy7wLKjxq8k1RAxUKWLIK6~B9vAdh-4uWd2I44l4QfIjkopMj8jwgay95HSN6dJ71-MgoTiECKw4O-KkAmt-PTwLfabA5qNQR5Wg5~dogXlWVeVdvsdttWELLxTjUnr9jyIzMYlbSUqAdfHX-ghDAi5ETYTgHH66FYaes-GXRwipNoioBavf5z0EZVSnwCyIYDDqoGylKpK6vD4pGFTMKm9mxOyFgFTJEET4ZAA3PdIryEQwlkzXwqSTOGMhusE8MVeOAXtCGcDkcpRzOp8Uf1QJiIXBgAWSvE8Nfl45nespIgGh-DdMtWQYj~6dy3XTJAwvaLe0T1NWx4Ng__"
                         ></video>
                     </dic>
                 </div>

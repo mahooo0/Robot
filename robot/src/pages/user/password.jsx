@@ -1,11 +1,13 @@
 import Green_to_green from '@/components/btns/green_to_green';
 import Header from '@/components/Header';
 import LoginForum from '@/components/LoiinForum';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 export default function login_register() {
     const [sucses, setsucses] = useState('1');
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
     const MyComponent = ({ sucses }) => {
         let content;
 
@@ -121,10 +123,16 @@ export default function login_register() {
                 break;
 
             case '4':
+                setTimeout(() => {
+                    router.push('/user');
+                }, 1000);
                 content = (
                     <div className="flex justify-center items-center w-1/2 h-full flex-col">
                         <div className="flex justify-center items-center w-[140px] h-[140px] rounded-full border border-[#69BE56]">
-                            <img src="/svg/QalockaGreen.svg" />
+                            <img
+                                src="/svg/QalockaGreen.svg"
+                                alt="Success Icon"
+                            />
                         </div>
                         <p className="w-[457px] text-[20px] font-medium text-center mt-[28px]">
                             Şifrəniz uğurla bərpa edildi!
