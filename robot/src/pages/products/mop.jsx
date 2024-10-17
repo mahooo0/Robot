@@ -56,7 +56,7 @@ export default function Paket() {
     return (
         <div>
             {' '}
-            <Header activeIndex={1} />
+            <Header activeIndex={1} productIndex={1} />
             <main>
                 {' '}
                 <section
@@ -117,12 +117,14 @@ export default function Paket() {
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
+                            bgcolor="#EEEEEE"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                         <ProductCard_MD
+                            bgcolor="#EEEEEE"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}

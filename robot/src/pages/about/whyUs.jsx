@@ -35,7 +35,7 @@ export default function whyUs() {
     ];
     return (
         <div>
-            <Header activeIndex={0} />
+            <Header activeIndex={4} whyindex={1} />
             <main>
                 <section className="w-full flex justify-center">
                     <IROSComponent />

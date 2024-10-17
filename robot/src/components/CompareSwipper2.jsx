@@ -13,8 +13,11 @@ const CompareSwipper2 = () => {
             {Array(10)
                 .fill()
                 .map((_, slideIndex) => (
-                    <SwiperSlide key={slideIndex} className="!w-1/5">
-                        <div className="min-w-[350px]  flex flex-col justify-center items-center ml-[310px]">
+                    <SwiperSlide
+                        key={slideIndex}
+                        className="lg:!w-1/5 md:!w-2/5 w-1/2"
+                    >
+                        <div className="min-w-[350px]  flex flex-col justify-center items-center lg:ml-[310px] md:ml-[310px] ml-[0]">
                             <article className="flex overflow-hidden flex-col justify-center p-5 bg-white rounded-3xl max-w-[310px]">
                                 <div className="flex overflow-hidden flex-col w-full">
                                     <img

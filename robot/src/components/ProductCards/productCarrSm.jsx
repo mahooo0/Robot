@@ -1,11 +1,13 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 function ProductCardSm() {
     const [isliked, setIsliked] = useState(false);
     const [ison, setIson] = useState(false);
-
+    const router = useRouter();
     return (
         <article
+            onClick={() => router.push('products/id')}
             className="flex flex-col self-stretch pb-3 my-auto min-w-[240px] w-[315px] "
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}

@@ -55,14 +55,14 @@ export default function category() {
     return (
         <div>
             {' '}
-            <Header activeIndex={1} />
+            <Header activeIndex={1} productIndex={0} />
             <main>
                 {' '}
                 <section
                     className="flex overflow-hidden flex-col items-start px-16 pt-24 pb-7 w-full max-md:px-5 max-md:max-w-full"
                     style={{
                         backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/1eef/cebc/325df84941b7a72afd9fef7abe155873?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JZ-oW1-43Zy1DJo2rkIsWGa06L1YvApFwikGv3dpeovZP65WanNQrBlX23dsgSp~dtDm8Hu0U1bfv-v0LPAi7EX2koksPd7Y12~OKvF3gi0p~u3XbGKRw9Rhp43Hh2H7qKeSOqXWnlpn38UY2Nc23AgtWKdIu40HOBlDRYo3fP~ek5ajcvB7PvA2RPyTxuKzPnju8Z1Ii7iGUoHaq4J6fdnxj1B1pcCogdgbwC4LaJ5zCKzeh-BuzHsFOYZJzsDhcODLLVVgdKQOkz-VXuj6j2pQq4G9jjBWVHIUNZ6WzdG~l07vdoi~GA90N3qlIdy0gE6HgjLE6mJQf4cLK5JOHA__)',
+                            'url(https://s3-alpha-sig.figma.com/img/1eef/cebc/325df84941b7a72afd9fef7abe155873?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LOsq6kVhw~AN8UW5~Ru-4P0X48FJp26RZMk5loCFXANbCbonKAOezcbilhjId30NaG2Tlsjl24yFJxMsGZuCXvK~qzTjRzDUYB~w1psweaC-bR-h3GLCyQqYRihfR1GJGnivsi38p1ViHSPRAtNyZ-bSJgj9J~ai3bFXBU1T4xF6E7SqyDXfwfMhHCOKmsqzTEro3BIIV6E2qz8j7YXJJNT0afes67SBSDFwlx6xYOCZjVKh9MRdovPco~sKrTcyfTUQDd~XJOCpbQ3hH41ZkDzvcLVYoV06PyknGpIe7yspUdYSuPzQSI0xckR5zTwyEGr8gYJOeK53URK61qlOsg__)',
                         backgroundSize: 'cover', // This makes the image cover the entire div
                         backgroundPosition: 'center', // Centers the image
                         backgroundRepeat: 'no-repeat', // Prevents the image from repeating
@@ -138,7 +138,7 @@ export default function category() {
                         loop
                         controlsList="nodownload"
                         width="600"
-                        src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
+                        src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/a465/a8ac/-bbd3-400c-89be-40c710fb772c?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LCeWRiy1X9BNBKMG~AsutH4yMdOqZ-6Nt1R1Yu~~U4yKMLHdJyrJoHMDoCmmGH0dz~VhQ2p1y08gy3ckg13kb8FhBrdQHWgWMyPoYCWRL-lbYFuGdo0lM86YpnQoox4J~ucFupWs2rY6ynZ3Ux4~aeGKx-Fx~1D75MhasKpduHTr5beg0QUmy4iYXeB6UFGKku~QdOd3XXjB7YXzEEa15yyrlzQ74JXLA9EA0YstxmqLf7kSXbJBKEYJU9lVKNvRSbDmnXwhm~5GwZuy4SB2qS9nWQinwXgOWrwsOQIdQJ6DGVbhxUvgna2~losA7hWXRND4C0LBnNy38gMZggsmlg__"
                     ></video>
                     <div className="flex flex-row flex-wrap justify-between mt-7">
                         <Product_Card_aute />
@@ -153,15 +153,17 @@ export default function category() {
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
-                            desc={'Free Shipping on All Robot Orders'}
+                            // desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
+                            bgcolor="#EEEEEE"
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                         <ProductCard_MD
-                            desc={'Free Shipping on All Robot Orders'}
+                            // desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
+                            bgcolor="#EEEEEE"
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                     </div>
@@ -197,9 +199,11 @@ export default function category() {
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
+                            bgcolor="#ffffff"
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                         <ProductCard_MD
+                            bgcolor="#ffffff"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}

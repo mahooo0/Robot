@@ -20,7 +20,7 @@ export default function HelpCard({ imageSrc, title, description, linkText }) {
                 </div>
             </div>
             {linkText && (
-                <div className="flex gap-2 items-center self-start py-0.5 mt-7 text-base font-medium text-green-400">
+                <div className="flex gap-2 items-center self-start py-0.5 mt-7 text-base font-medium text-[#69BE56]">
                     <span className="self-stretch my-auto">{linkText}</span>
                     <img
                         loading="lazy"

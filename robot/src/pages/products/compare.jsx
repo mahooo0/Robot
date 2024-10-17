@@ -16,10 +16,10 @@ export default function compare() {
             {' '}
             <Header activeIndex={0} />
             <main className="bg-[#ECF3EA] pt-[40px] text-center flex justify-center flex-col items-center w-full pb-[100px]">
-                <h1 className=" text-[40px] font-semibold w-[446px]">
+                <h1 className=" text-[40px] font-semibold max-w-[446px]">
                     Müqayisə etmək üçün məhsulları seç
                 </h1>
-                <p className="text-black text-[16px] font-normal w-[446px] text-center mt-[12px]">
+                <p className="text-black text-[16px] font-normal max-w-[446px] text-center mt-[12px]">
                     Filter compare tool by category
                 </p>
                 <div className="flex flex-row gap-3 flex-wrap mt-[48px]">
@@ -28,11 +28,11 @@ export default function compare() {
                     <Green_to_none isactive={true}>Robot süpürgə</Green_to_none>
                 </div>
                 <CompareSwipperUpper />
-                <h2 className=" text-[36px] font-semibold w-[446px] mt-[103px]">
+                <h2 className=" text-[36px] font-semibold max-w-[446px] mt-[103px]">
                     Seçilən məhsullar
                 </h2>
                 <div className="w-full flex flex-row relative  mt-7 ">
-                    <div className="absolute top-0 left-0 h-[100%] bg-[#ECF3EA] w-[310px] flex flex-col lg:pl-[60px] pl-[30px] z-50 ">
+                    <div className="lg:absolute md:absolute  top-0 left-0 h-[100%] bg-[#ECF3EA] max-w-[310px] flex flex-col lg:pl-[60px] pl-[30px] z-50 ">
                         <section className="flex flex-col self-start">
                             <button
                                 onClick={handleToggle}

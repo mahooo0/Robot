@@ -2,6 +2,7 @@ import FilterComponent from '@/components/FilterCategory';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import NavigationBar from '@/components/Navication_bar';
+import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
@@ -21,7 +22,7 @@ export default function index() {
     };
     return (
         <div>
-            <Header activeIndex={1} />
+            <Header activeIndex={1} productIndex={2} />
             <section className="w-full lg:px-[60px] px-[30px] py-5">
                 <div className=" rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full  min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
@@ -102,17 +103,28 @@ export default function index() {
                 </div>
                 <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                     <ProductCard_MD
-                        desc={'Free Shipping on All Robot Orders'}
+                        // desc={'Free Shipping on All Robot Orders'}
                         title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                         price={300}
+                        bgcolor={'#EEEEEE'}
+                        isLarge={true}
                         imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                     />
                     <ProductCard_MD
+                        // desc={'Free Shipping on All Robot Orders'}
+                        title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
+                        price={300}
+                        bgcolor={'#EEEEEE'}
+                        isLarge={true}
+                        imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                    />
+                    {/* <ProductCard_MD
+                        bgcolor={'#EEEEEE'}
                         desc={'Free Shipping on All Robot Orders'}
                         title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                         price={300}
                         imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                    />
+                    /> */}
                 </div>
                 <div className="flex flex-row flex-wrap justify-between mt-7">
                     <Product_Card_aute />

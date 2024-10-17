@@ -34,7 +34,7 @@ const Control = () => {
 
     return (
         <div>
-            <Header activeIndex={0} />
+            <Header activeIndex={4} whyindex={2} />
             <main>
                 <section className="flex relative flex-col justify-center items-start px-16 py-20 w-full min-h-[500px] max-md:px-5 max-md:max-w-full">
                     <img
@@ -98,6 +98,69 @@ const Control = () => {
                     </div>
                 </section>
                 {/* Additional sections with renderSection */}
+                <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
+                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
+                            İstədiyiniz şəkildə təmizləyin
+                        </h2>
+                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
+                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
+                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
+                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
+                        </p>
+                    </div>
+                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                        <img
+                            loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            alt="iRobot Home App interface showing customizable cleaning map"
+                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
+                        />
+                    </div>
+                </section>
+                <section className="flex flex-row-reverse flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
+                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
+                            İstədiyiniz şəkildə təmizləyin
+                        </h2>
+                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
+                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
+                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
+                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
+                        </p>
+                    </div>
+                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                        <img
+                            loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            alt="iRobot Home App interface showing customizable cleaning map"
+                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
+                        />
+                    </div>
+                </section>
+                <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
+                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
+                            İstədiyiniz şəkildə təmizləyin
+                        </h2>
+                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
+                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
+                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
+                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
+                        </p>
+                    </div>
+                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                        <img
+                            loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            alt="iRobot Home App interface showing customizable cleaning map"
+                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
+                        />
+                    </div>
+                </section>
                 <section className="relative flex flex-col justify-center items-start px-16 py-56 w-full min-h-[656px] max-md:px-5 max-md:py-24 max-md:max-w-full mt-[100px] text-white">
                     <img
                         loading="lazy"

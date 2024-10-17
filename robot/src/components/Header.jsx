@@ -10,7 +10,12 @@ import lupa from '../../public/svg/lupa.svg';
 import ph from '../../public/svg/ph.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-const Header = ({ activeIndex }) => {
+import ProductNavigation from './ProductNavication';
+import ProductNav from './ProductNavication';
+// import WhyNav from './whyNavication';
+import OfferNav from './offersNavication';
+import WhyNav from './whyNavication';
+const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const router = useRouter();
     return (
         <header className="border-b border-[#EFEFEF]">
@@ -92,22 +97,12 @@ const Header = ({ activeIndex }) => {
 
             {/* Bottom section with navigation */}
             <div className="py-[18px] flex justify-center border-b border-solid border-gray-200 bg-[#ffffff] text-black">
-                <div className="px-[60px] mx-auto flex w-full items-center justify-between gap-5 lg:flex-row flex-col md:px-5">
+                <div className="px-[60px] mx-auto flex w-full items-center justify-between gap-5 lg:flex-row flex-col-reverse md:px-5">
                     <ul className="flex gap-5 flex-row text-nowrap flex-wrap">
-                        <li>
-                            <p
-                                onClick={() => {
-                                    router.push('/products');
-                                }}
-                                className={`text-[14px] font-normal cursor-pointer ${
-                                    activeIndex === 1
-                                        ? 'text-[#447355]'
-                                        : 'text-black'
-                                }`}
-                            >
-                                Məhsullar
-                            </p>
-                        </li>
+                        <ProductNav
+                            activeIndex={activeIndex}
+                            productIndex={productIndex}
+                        />
                         <li>
                             <p
                                 className={`text-[14px] font-normal cursor-pointer ${
@@ -119,7 +114,12 @@ const Header = ({ activeIndex }) => {
                                 Aksesuarlar
                             </p>
                         </li>
-                        <li>
+                        <OfferNav
+                            activeIndex={activeIndex}
+                            offerindex={offerindex}
+                        />
+                        <WhyNav activeIndex={activeIndex} whyindex={whyindex} />
+                        {/* <li>
                             <p
                                 className={`text-[14px] font-normal cursor-pointer ${
                                     activeIndex === 3
@@ -129,8 +129,8 @@ const Header = ({ activeIndex }) => {
                             >
                                 Niyə İrobot?
                             </p>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <p
                                 className={`text-[14px] font-normal cursor-pointer ${
                                     activeIndex === 4
@@ -140,7 +140,7 @@ const Header = ({ activeIndex }) => {
                             >
                                 Fürsətlər və təkliflər
                             </p>
-                        </li>
+                        </li> */}
                     </ul>
                     <div className="w-[160px] h-[40px]">
                         <Image

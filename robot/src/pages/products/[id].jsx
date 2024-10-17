@@ -25,7 +25,7 @@ export default function id() {
                 </section>
                 <ProductDetails />
                 <FAQSection Title={'Məhsul haqqında tez-tez verilən suallar'} />
-                <section className="flex justify-center w-full mt-[100px] flex-col items-center bg-[#F5F5F5]">
+                <section className="flex justify-center w-full pt-[100px] flex-col items-center bg-[#F5F5F5]">
                     <CustomerReviews />
                     <CommentsSection />
                 </section>

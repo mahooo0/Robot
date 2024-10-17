@@ -31,7 +31,7 @@ export default function index() {
     ];
     return (
         <div>
-            <Header activeIndex={0} />
+            <Header activeIndex={4} whyindex={3} />
             <main>
                 <section className="flex relative flex-col items-center px-20 pt-32 pb-7 w-full min-h-[500px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img

@@ -41,7 +41,7 @@ export default function Home() {
                     loop
                     controlsList="nodownload"
                     width="600"
-                    src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
+                    src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/24fe/37d5/-68ca-4f7c-b9c4-18adc1ca0a2f?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OeLkLhfr-JOvYzl-sCAabeDDk3ZyVvp9Bpcc9oEDyVJ3j7a6n2tsamtdTl9-eQkkium3tTe7MC5htKqcMRAguD6ufuFm5hdQoW9oiU~ITWFHz2gwsCPfSdCVy8EKq-0w8xksMGi65Q95j-~i5YV41IwvOjP72tHd5e2ldM6WQ33YLVPEPg7JTqOAiJ6n831YqdFs04y-QXXcKVisCHOYEJz4WnMGCSpx5~KS2LVqvHgUXgc8ncRckk9SgNckLKCCvXxnzGX7xRVIDBF7HR1QjXOvDdPnva-Wrpn3wJwH3cnt6yVMbyDOTfOzgeBAv0AOmsINLyTM8RSAcZiAb22APw__"
                 ></video>
                 <Hero_Swipper />
             </section>
@@ -84,7 +84,7 @@ export default function Home() {
                 <div
                     style={{
                         backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/ea8c/d6bf/9c48576ee287164253abe4ca60f991ee?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q71rMzDjSO5foGcVvYR6NmOgxHbo~0tYh6MmRSNhXVwFYRBZWevRjx~4JnoMWIJQhxU2B5XrpY6G7aO2Tg47GFc4e8kTXLHliD8NbzQZTVxbhcLagLb4C0m6ynhiCHD~WL4iY8gpwiK9f7y4eBaCAkJKDrt5jESal~JyN6jAK~jzxlSpKP6crAO6rwt3lhD6h61t2JAfCUGv3nYfT~MasoNQB-h6y6lATO5Er-snrD9z3yRU60VKY0pbo4JP1f8zvmN2Hz5xf7dUCiHa31EUSrvg367X7GkaI7Xe9ZLqBHjNio0AaqbnrW8bltHFuWX~x-vGKYnKLP6qLVxXJZB35A__)',
+                            'url(https://s3-alpha-sig.figma.com/img/ea8c/d6bf/9c48576ee287164253abe4ca60f991ee?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BSwR5kON9eEBRuUU2Jb3jeUnByFQHTkxU22RMNb0tWdmhKZdH5v45OfKoryIrQNHIGxbyGMpISB9p4EusSGv~JeaL7k-LdXXT~l8nSnAztXZOLh39YWNvWL6Cl6EGJ1NV8qZ4fmYFXmaqGQPgb~AdrWMaw41cmcAaAO8nZgZXReGHYfOm9AF9bKcjw3fZNROuxTdIzuXcYNOzZeZWTvHphXRdLtDKpKVpWx~BuoxrGYPGM2qJOn3rRfSJ2GO7BLIlpO30ke1zzwhT5AZjFjVGy~fAz2wCAyN5zAB3OAz-T2IK1q6ig85x0myZTVUf-nTTAZSCmqM33aD8T7g2Adt4g__)',
                     }}
                     className="flex overflow-hidden flex-col items-start pt-10 pr-20 pb-28 pl-10 mt-24 max-w-full rounded-3xl w-full  max-md:px-5 max-md:pb-24 max-md:mt-10"
                 >
@@ -228,7 +228,7 @@ export default function Home() {
             <section
                 style={{
                     backgroundImage:
-                        'url(https://s3-alpha-sig.figma.com/img/b00d/4a63/56b9a3f4d4b1da6394cc94353b1189ab?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SqHMWYlqwkbDjsEl0oX0mAh~TNuUFu0Hu9r7WqicinC~VEGrfENLki4ajvGwsW5V2nHj-tf9ggNh9F3Va6V5uWl8ZPVWTpH1WrqPVNteUoyTdM29voUrQ8qCiTqmM2wo1eLiGvZP2BzeGwW3rB4EfrzUQUGNUYsFNaGQ8~xsrqnzdm1LlCfdswxiW0oPuIEG-SuffZ2qrUTrB36JgN-FZO~jZJR6y1nvblMVRRs3-T~w0n9SjYUxS4vZmbnN1w5~WbJaYNmiL46jpCQW6lLSc4mKwrOBo2NmbpbbvX6trXy9Y4mF~GlQM18D~2AtvjkLM8rJATU2hUQY0RTr6XTBzg__)',
+                        'url(https://s3-alpha-sig.figma.com/img/b00d/4a63/56b9a3f4d4b1da6394cc94353b1189ab?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nXCvaOlTTD5SjFeCq4m0k8JDO~DA9UlHJk2Pw4Vw2YNeb9PEKssCPfdpwoDzpfQ2KaC4mzcK4LaC~dDAwFghRJOiKEjhfLXsLuzeaToBhWRAs-GvFpakbF2diwn0AzB~1h5fmU-40sWVfy4w3nqBevWXYN51bZ8YVQcGPzFW-YoJNVxmYW6A491Fnn30s4vp-JhrBT5~KC2t6LHZcQNcQgSwn7jVw8sGjmfwFmGc9iI56i4N2B14gYD-t~7GjmzUb9NXuS2vxzy-KJwfX6fopdSb~JZjDENAcAaAFDJgUTfV91~1ygxrmexHmpamDFWKO3Yi9us8axHPLo2XzrC1GQ__)',
                     backgroundSize: 'cover', // This makes the image cover the entire div
                     backgroundPosition: 'center', // Centers the image
                     backgroundRepeat: 'no-repeat', // Prevents the image from repeating

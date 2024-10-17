@@ -11,7 +11,7 @@ export default function IrobutOs() {
     return (
         <div>
             {' '}
-            <Header activeIndex={0} />
+            <Header activeIndex={4} whyindex={0} />
             <main>
                 <section className="w-full flex justify-center">
                     <IROSComponent />
