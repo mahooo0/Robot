@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import phone from '../../public/svg/phone_white.svg';
 import loc from '../../public/svg/location.svg';
 import globus from '../../public/svg/globus.svg';
@@ -15,8 +15,28 @@ import ProductNav from './ProductNavication';
 // import WhyNav from './whyNavication';
 import OfferNav from './offersNavication';
 import WhyNav from './whyNavication';
+import AksesuaresNav from './AksesuaresNavication';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRecoilState } from 'recoil';
+import { MenuState } from './recoil/Atom';
+
 const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
+    const NavbarData = [
+        {
+            id: 1,
+        },
+    ];
+
+    const [_, setMenu] = useRecoilState(MenuState);
+
     const router = useRouter();
+
+    // const active = useSelector((state) => state.global.value);
+
+    // console.log(active);
+
+    // const dispatch = useDispatch();
+    const [active, setactive] = useState(activeIndex);
     return (
         <header className="border-b border-[#EFEFEF]">
             {/* Top section */}
@@ -98,12 +118,14 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
             {/* Bottom section with navigation */}
             <div className="py-[18px] flex justify-center border-b border-solid border-gray-200 bg-[#ffffff] text-black">
                 <div className="px-[60px] mx-auto flex w-full items-center justify-between gap-5 lg:flex-row flex-col-reverse md:px-5">
-                    <ul className="flex gap-5 flex-row text-nowrap flex-wrap">
+                    <ul className="flex gap-5 flex-row text-nowrap flex-wrap relative">
                         <ProductNav
-                            activeIndex={activeIndex}
+                            activeIndex={active}
                             productIndex={productIndex}
+                            setactive={(par) => setactive(par)}
                         />
-                        <li>
+                        <AksesuaresNav activeIndex={active} />
+                        {/* <li>
                             <p
                                 className={`text-[14px] font-normal cursor-pointer ${
                                     activeIndex === 2
@@ -113,12 +135,12 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                             >
                                 Aksesuarlar
                             </p>
-                        </li>
+                        </li> */}
                         <OfferNav
-                            activeIndex={activeIndex}
+                            activeIndex={active}
                             offerindex={offerindex}
                         />
-                        <WhyNav activeIndex={activeIndex} whyindex={whyindex} />
+                        <WhyNav activeIndex={active} whyindex={whyindex} />
                         {/* <li>
                             <p
                                 className={`text-[14px] font-normal cursor-pointer ${

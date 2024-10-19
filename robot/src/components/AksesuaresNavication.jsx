@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -6,14 +7,29 @@ import { MenuState } from './recoil/Atom';
 const productItems = [
     { name: 'Endirimli məhsullar' },
     { name: 'Endirimli aksessuarlar' },
+    { name: 'Endirimli məhsullar' },
+    { name: 'Endirimli aksessuarlar' },
+    { name: 'Endirimli məhsullar' },
 ];
 const imges = [
     'https://s3-alpha-sig.figma.com/img/07df/fa2c/9fb38a84b066a8d2bf593f2c08b3f3ce?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deD~jMvHdQ0VbAzihVISVBcylO5Al9ywUdGHga7uzxK1N1xGlZnmvAabJdGGPohOy8ysATLJWdgI~38h2gmzzJCvcsXaPrxUGeq5t66hMwKuIS93GLOB~TPX3mjtMrxxEv6B8L22lcCfUi9mOW4tv-5BV4UN15bvYPJ8OpDPivBPRZOi2PIGJapb2hL5e7wlyCkRyw1sc74vE8QE~DXmO47sRr5xTNPMGzXBS3AMxC9VER4hRrU4n1vcSfHGhFk9HGL5-jxQ8qskPHPUxYpY7TB7OL53Ecwmf47LynjK8uWnaXmLkkrno7JLTS64Z2G25jdy1cMNAF14qxPini0Bag__',
     'https://s3-alpha-sig.figma.com/img/4c72/adec/1c7cde4bb71c634c96c8301bd98f61d2?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q4raCtqobDw06a9azFoqkupY3RNzlEq37bkaLRSh8b37Y9byH-Hdhs0XbenLER7joddUoWJgEwiDX07n2R2hyjuaWsYCLmUV4T0gXwOCLduVwhD2yx~jpWKiDKQvN9Eq-FqbAwfVCpzVllwbEHT~-DtNEsuQTGk33QrbjSqPUQ0JWByoQi1Z33yb0hSrAS2SNEiQT9j~LttH6MIH5bg94F0EJtizExe792P1V1dUre9YnUy5Is-nxD57WO~F5zh5sDUnwnNwu-nw3Hr6~FlY7g~2dr7fXForS4p6~atNDiGlnxsU09UeOYn6BVCAZ2hS~xp3Fbc8GZNbN9myrscF2A__',
+    'https://s3-alpha-sig.figma.com/img/07df/fa2c/9fb38a84b066a8d2bf593f2c08b3f3ce?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deD~jMvHdQ0VbAzihVISVBcylO5Al9ywUdGHga7uzxK1N1xGlZnmvAabJdGGPohOy8ysATLJWdgI~38h2gmzzJCvcsXaPrxUGeq5t66hMwKuIS93GLOB~TPX3mjtMrxxEv6B8L22lcCfUi9mOW4tv-5BV4UN15bvYPJ8OpDPivBPRZOi2PIGJapb2hL5e7wlyCkRyw1sc74vE8QE~DXmO47sRr5xTNPMGzXBS3AMxC9VER4hRrU4n1vcSfHGhFk9HGL5-jxQ8qskPHPUxYpY7TB7OL53Ecwmf47LynjK8uWnaXmLkkrno7JLTS64Z2G25jdy1cMNAF14qxPini0Bag__',
+    'https://s3-alpha-sig.figma.com/img/4c72/adec/1c7cde4bb71c634c96c8301bd98f61d2?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q4raCtqobDw06a9azFoqkupY3RNzlEq37bkaLRSh8b37Y9byH-Hdhs0XbenLER7joddUoWJgEwiDX07n2R2hyjuaWsYCLmUV4T0gXwOCLduVwhD2yx~jpWKiDKQvN9Eq-FqbAwfVCpzVllwbEHT~-DtNEsuQTGk33QrbjSqPUQ0JWByoQi1Z33yb0hSrAS2SNEiQT9j~LttH6MIH5bg94F0EJtizExe792P1V1dUre9YnUy5Is-nxD57WO~F5zh5sDUnwnNwu-nw3Hr6~FlY7g~2dr7fXForS4p6~atNDiGlnxsU09UeOYn6BVCAZ2hS~xp3Fbc8GZNbN9myrscF2A__',
+    'https://s3-alpha-sig.figma.com/img/4c72/adec/1c7cde4bb71c634c96c8301bd98f61d2?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q4raCtqobDw06a9azFoqkupY3RNzlEq37bkaLRSh8b37Y9byH-Hdhs0XbenLER7joddUoWJgEwiDX07n2R2hyjuaWsYCLmUV4T0gXwOCLduVwhD2yx~jpWKiDKQvN9Eq-FqbAwfVCpzVllwbEHT~-DtNEsuQTGk33QrbjSqPUQ0JWByoQi1Z33yb0hSrAS2SNEiQT9j~LttH6MIH5bg94F0EJtizExe792P1V1dUre9YnUy5Is-nxD57WO~F5zh5sDUnwnNwu-nw3Hr6~FlY7g~2dr7fXForS4p6~atNDiGlnxsU09UeOYn6BVCAZ2hS~xp3Fbc8GZNbN9myrscF2A__',
 ];
 
-function OfferNavigation({ offerindex }) {
-    const [activeindex, setactiveindex] = useState(offerindex);
+function Navigation({ aksesuaresindex }) {
+    const [activeindex, setactiveindex] = useState(aksesuaresindex);
+
+    const [menu, setMenu] = useRecoilState(MenuState);
+
+    const handleDropdown = (id) => {
+        setMenu(() => ({
+            [id]: true,
+        }));
+    };
+
     const router = useRouter();
     return (
         <nav className="overflow-hidden pl-7 bg-white border-t border-gray-600 max-w-[723px] max-md:pl-5">
@@ -28,25 +44,21 @@ function OfferNavigation({ offerindex }) {
                                         setactiveindex(index);
                                         switch (index) {
                                             case 0:
-                                                router.push(
-                                                    '/products/SaleProduct'
-                                                );
+                                                router.push('/aksesuares');
                                                 break;
                                             case 1:
-                                                router.push(
-                                                    '/aksesuares/saleAksesuares'
-                                                );
+                                                router.push('/aksesuares');
                                                 break;
                                             case 2:
-                                                router.push('/products');
+                                                router.push('/aksesuares');
                                                 break;
                                             case 3:
-                                                router.push('/products/paket');
+                                                router.push('/aksesuares');
                                                 break;
                                         }
                                     }}
                                     className={`gap-2.5 self-stretch cursor-pointer ${
-                                        index === offerindex
+                                        index === aksesuaresindex
                                             ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
                                             : ''
                                     }`}
@@ -67,7 +79,7 @@ function OfferNavigation({ offerindex }) {
                     <div className="flex overflow-hidden flex-col justify-center items-center self-stretch px-5 m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
                         <img
                             loading="lazy"
-                            src={imges[offerindex ? offerindex : 0]}
+                            src={imges[aksesuaresindex ? aksesuaresindex : 0]}
                             className="object-contain aspect-square w-[120px]"
                             alt="Product"
                         />
@@ -105,7 +117,7 @@ function OfferNavigation({ offerindex }) {
     );
 }
 
-const OfferNav = ({ activeIndex, offerindex }) => {
+const AksesuaresNav = ({ activeIndex, aksesuaresindex }) => {
     const [isopen, setisopen] = useState(false);
     const [menu, setMenu] = useRecoilState(MenuState);
 
@@ -121,26 +133,26 @@ const OfferNav = ({ activeIndex, offerindex }) => {
                 //     router.push('/products');
                 // }}
                 className={`text-[14px] font-normal cursor-pointer ${
-                    activeIndex === 3 ? 'text-[#447355]' : 'text-black'
+                    activeIndex === 2 ? 'text-[#447355]' : 'text-black'
                 }`}
                 onClick={() =>
                     setMenu({
                         prodctbar: false,
-                        aksesuaresbar: false,
+                        aksesuaresbar: !menu.aksesuaresbar,
                         whybar: false,
-                        offerbar: !menu.offerbar,
+                        offerbar: false,
                     })
                 }
             >
-                Fürsətlər və təkliflər
+                Aksesuarlar{' '}
             </p>
             <div
                 className=" absolute top-[50px] z-30 left-0"
-                style={!menu.offerbar ? { display: 'none' } : {}}
+                style={!menu.aksesuaresbar ? { display: 'none' } : {}}
             >
-                <OfferNavigation offerindex={offerindex} />
+                <Navigation aksesuaresindex={aksesuaresindex} />
             </div>
         </li>
     );
 };
-export default OfferNav;
+export default AksesuaresNav;

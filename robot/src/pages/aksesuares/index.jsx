@@ -10,20 +10,68 @@ import React, { useState } from 'react';
 
 export default function index() {
     const [searchQuery, setSearchQuery] = useState('');
+    const accessories = [
+        {
+            id: 1,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/7ddc08e5bd0ef9acfc8e820f59ee306485176226ad4345706fe6d8f82adfebdc?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 2,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/56cd3bc182d1332007afd4b610464b4c49e3e85ae5ff0b35d1ba635fd21e456d?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 3,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/f60310f91161fefb913d93a1d8df8bdfc240d7bb560dee1dd69c12a03acaf825?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 4,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/ebc7c9689703decacabb263d72ecef947a9ee1b441d4892f9b3ed082621f655c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 5,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/98cbb732917ce624d1a9df99d1ed653c8ebb397790a289da47bd263eef5a6153?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 6,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/ebc7c9689703decacabb263d72ecef947a9ee1b441d4892f9b3ed082621f655c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+        {
+            id: 7,
+            imageSrc:
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/637b8a51edd4a50002e7e2e99fc2a73bd82e88e1e27efda87dbf65db42c85a13?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            name: 'Serianın adı',
+        },
+    ];
+    function AccessoryCard({ imageSrc, name }) {
+        return (
+            <article className="flex flex-col self-stretch my-auto w-[166px]">
+                <img
+                    loading="lazy"
+                    src={imageSrc}
+                    alt={`${name} accessory`}
+                    className="object-contain self-center max-w-full rounded-3xl aspect-square w-[148px]"
+                />
+                <h3 className="mt-3">{name}</h3>
+            </article>
+        );
+    }
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
-
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        // Implement search functionality here
-        console.log('Search submitted:', searchQuery);
-    };
     return (
         <div>
             <Header activeIndex={1} productIndex={2} />
-            <section className="w-full lg:px-[60px] px-[30px] py-5">
+            {/* <section className="w-full lg:px-[60px] px-[30px] py-5">
                 <div className=" rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full  min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
                         loading="lazy"
@@ -63,6 +111,26 @@ export default function index() {
                                 />
                             </button>
                         </form>
+                    </div>
+                </div>
+            </section> */}
+            <section className="flex flex-col mt-[48px]">
+                <h1 className="text-5xl font-semibold text-center text-green-950 max-md:max-w-full max-md:text-4xl">
+                    Roomba akssesuarlar
+                </h1>
+                <div className="flex overflow-hidden flex-col justify-center px-10 py-7 mt-10 w-full rounded-3xl bg-[#8E98B8] max-md:px-5 max-md:max-w-full">
+                    <div className="flex flex-col w-full max-md:max-w-full">
+                        <h2 className="text-lg font-semibold text-[#BCC5E3] max-md:max-w-full">
+                            Robotunuz üçün hissələri və aksesuarları tapın
+                        </h2>
+                        <div className="flex flex-wrap gap-5 items-center justify-center mt-5 w-full text-base font-medium text-center text-white max-md:max-w-full">
+                            {accessories.map((accessory) => (
+                                <AccessoryCard
+                                    key={accessory.id}
+                                    {...accessory}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -119,19 +187,8 @@ export default function index() {
                         imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                     />
                 </div>
+
                 <div className="flex flex-row flex-wrap justify-between mt-7">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
-                    <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />

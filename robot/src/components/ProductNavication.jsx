@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { MenuState } from './recoil/Atom';
 
 const productItems = [
     { name: 'Roomba Robot Vacuums' },
@@ -106,29 +108,35 @@ function ProductNavigation({ productIndex }) {
     );
 }
 
-const ProductNav = ({ activeIndex, productIndex }) => {
+const ProductNav = ({ activeIndex, productIndex, activebar }) => {
     const [isopen, setisopen] = useState(false);
+    const [menu, setMenu] = useRecoilState(MenuState);
+
     return (
         <li
-            className="relative "
+            className=" "
 
             // onMouseLeave={() => setisopen(false)}
             // onMouseEnter={() => setisopen(true)}
         >
             <p
-                // onClick={() => {
-                //     router.push('/products');
-                // }}
                 className={`text-[14px] font-normal cursor-pointer ${
                     activeIndex === 1 ? 'text-[#447355]' : 'text-black'
                 }`}
-                onClick={() => setisopen((prew) => !prew)}
+                onClick={() =>
+                    setMenu({
+                        prodctbar: !menu.prodctbar,
+                        aksesuaresbar: false,
+                        offerbar: false,
+                        whybar: false,
+                    })
+                }
             >
                 Məhsullar
             </p>
             <div
-                className=" absolute top-[50px] z-30"
-                style={!isopen ? { display: 'none' } : {}}
+                className=" absolute top-[50px] z-30 left-0"
+                style={!menu.prodctbar ? { display: 'none' } : {}}
             >
                 <ProductNavigation productIndex={productIndex} />
             </div>

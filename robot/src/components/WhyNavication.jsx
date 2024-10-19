@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { MenuState } from './recoil/Atom';
 
 const productItems = [
     { name: 'İRobot OS' },
@@ -105,9 +107,11 @@ function WhyNavigation({ whyindex }) {
 
 const WhyNav = ({ activeIndex, whyindex }) => {
     const [isopen, setisopen] = useState(false);
+    const [menu, setMenu] = useRecoilState(MenuState);
+
     return (
         <li
-            className="relative "
+            className=" "
 
             // onMouseLeave={() => setisopen(false)}
             // onMouseEnter={() => setisopen(true)}
@@ -119,13 +123,20 @@ const WhyNav = ({ activeIndex, whyindex }) => {
                 className={`text-[14px] font-normal cursor-pointer ${
                     activeIndex === 4 ? 'text-[#447355]' : 'text-black'
                 }`}
-                onClick={() => setisopen((prew) => !prew)}
+                onClick={() =>
+                    setMenu({
+                        prodctbar: false,
+                        aksesuaresbar: false,
+                        whybar: !menu.whybar,
+                        offerbar: false,
+                    })
+                }
             >
                 Niyə İrobot?
             </p>
             <div
-                className=" absolute top-[50px] z-30"
-                style={!isopen ? { display: 'none' } : {}}
+                className=" absolute top-[50px] z-30 left-0"
+                style={!menu.whybar ? { display: 'none' } : {}}
             >
                 <WhyNavigation whyindex={whyindex} />
             </div>
