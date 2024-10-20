@@ -1,9 +1,11 @@
+import Green_to_green from '@/components/btns/green_to_green';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import HelpCard from '@/components/HelpCard';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
 import ProductCategories from '@/components/ProductCategorys';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function category() {
@@ -52,6 +54,13 @@ export default function category() {
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
         },
     ];
+    const router = useRouter();
+    const scrollToElement = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
     return (
         <div>
             {' '}
@@ -74,11 +83,21 @@ export default function category() {
                         <h1 className="flex-1 text-5xl font-semibold text-green-950 max-md:text-4xl">
                             Roomba Robot Vacuums
                         </h1>
-                        <button className="gap-2.5 self-start px-7 py-3.5 mt-7 text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
-                            Müqayisə et
-                        </button>
+                        <div>
+                            <Green_to_green
+                                action={() => router.push('/products/compare')}
+                            >
+                                Müqayisə et
+                            </Green_to_green>
+                        </div>
+                        {/* <button className="gap-2.5 self-start px-7 py-3.5 mt-7 text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
+                           
+                        </button> */}
                     </div>
-                    <div className="flex flex-col items-center mt-16 w-[50px] max-md:mt-10 animate-bounce">
+                    <div
+                        className="flex flex-col items-center mt-16 w-[50px] max-md:mt-10 animate-bounce"
+                        onClick={() => scrollToElement('vakumus')}
+                    >
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/28271d8b28a86de88dc412579eda58a62e2a42ef9b71127030f85d3001fde1b9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -126,7 +145,10 @@ export default function category() {
                     </div>
                 </section>
                 <section className="w-full lg:px-[60px] px-[30px] mt-[100px]">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center">
+                    <h2
+                        className="text-[#447355] text-[40px] font-semibold text-center"
+                        id="vakumus"
+                    >
                         2 si 1-də Robot tozsoranlar
                     </h2>
                     <video
@@ -140,13 +162,13 @@ export default function category() {
                         width="600"
                         src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/a465/a8ac/-bbd3-400c-89be-40c710fb772c?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LCeWRiy1X9BNBKMG~AsutH4yMdOqZ-6Nt1R1Yu~~U4yKMLHdJyrJoHMDoCmmGH0dz~VhQ2p1y08gy3ckg13kb8FhBrdQHWgWMyPoYCWRL-lbYFuGdo0lM86YpnQoox4J~ucFupWs2rY6ynZ3Ux4~aeGKx-Fx~1D75MhasKpduHTr5beg0QUmy4iYXeB6UFGKku~QdOd3XXjB7YXzEEa15yyrlzQ74JXLA9EA0YstxmqLf7kSXbJBKEYJU9lVKNvRSbDmnXwhm~5GwZuy4SB2qS9nWQinwXgOWrwsOQIdQJ6DGVbhxUvgna2~losA7hWXRND4C0LBnNy38gMZggsmlg__"
                     ></video>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
@@ -183,16 +205,16 @@ export default function category() {
                         width="600"
                         src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
                     ></video>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
@@ -226,25 +248,27 @@ export default function category() {
                         width="600"
                         src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
                     ></video>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5 ">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5 ">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
+                            bgcolor="#EEEEEE"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                         <ProductCard_MD
+                            bgcolor="#EEEEEE"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}

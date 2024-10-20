@@ -34,7 +34,7 @@ const FilterPrice = ({
     onMinPriceChange,
     onMaxPriceChange,
 }) => (
-    <div className="flex overflow-hidden gap-3 self-stretch px-5 py-4 my-auto whitespace-nowrap bg-[#ECF1EA] rounded-3xl min-w-[240px] text-black text-opacity-60 w-[321px]">
+    <div className="flex overflow-hidden gap-3 self-stretch px-5 py-4 my-auto whitespace-nowrap bg-[#ECF1EA] rounded-3xl min-w-[240px] text-black text-opacity-60 w-[321px] ">
         <div className="flex flex-col">
             <label htmlFor="min-price" className="self-start text-sm">
                 Qiymət

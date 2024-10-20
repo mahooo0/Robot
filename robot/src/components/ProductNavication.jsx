@@ -21,9 +21,9 @@ function ProductNavigation({ productIndex }) {
     const [activeindex, setactiveindex] = useState(productIndex);
     const router = useRouter();
     return (
-        <nav className="overflow-hidden pl-7 bg-white border-t border-gray-600 max-w-[723px] max-md:pl-5">
+        <nav className="overflow-hidden  bg-white border-t border-gray-600 max-w-[723px]">
             <div className="flex gap-5 max-md:flex-col">
-                <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full">
+                <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full pl-7  max-md:pl-5">
                     <ul className="flex flex-col items-start self-stretch my-auto w-full text-base font-medium text-black text-opacity-80 max-md:mt-10 gap-[14px]">
                         {productItems.map((item, index) => (
                             <div>
@@ -109,9 +109,23 @@ function ProductNavigation({ productIndex }) {
 }
 
 const ProductNav = ({ activeIndex, productIndex, activebar }) => {
-    const [isopen, setisopen] = useState(false);
     const [menu, setMenu] = useRecoilState(MenuState);
+    const router = useRouter();
+    useEffect(() => {
+        const handleRouteChange = () => {
+            setMenu((prevMenu) => ({
+                ...prevMenu,
+                prodctbar: false, // Close the product menu
+            }));
+        };
 
+        router.events.on('routeChangeStart', handleRouteChange);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange);
+        };
+    }, [router.events, setMenu]);
     return (
         <li
             className=" "
@@ -135,7 +149,7 @@ const ProductNav = ({ activeIndex, productIndex, activebar }) => {
                 Məhsullar
             </p>
             <div
-                className=" absolute top-[50px] z-30 left-0"
+                className=" absolute  z-30 left-[0] top-[100%]"
                 style={!menu.prodctbar ? { display: 'none' } : {}}
             >
                 <ProductNavigation productIndex={productIndex} />

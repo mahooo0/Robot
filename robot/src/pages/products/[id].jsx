@@ -20,7 +20,7 @@ export default function id() {
                     <ProductImages />
                     <BuyProduct />
                 </section>
-                <section className="w-full flex justify-center px-[60px] ">
+                <section className="w-full flex justify-center lg:px-[60px] px-[30px] ">
                     <FeaturesSection />
                 </section>
                 <ProductDetails />

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 
@@ -20,9 +20,9 @@ function WhyNavigation({ whyindex }) {
     const [activeindex, setactiveindex] = useState(whyindex);
     const router = useRouter();
     return (
-        <nav className="overflow-hidden pl-7 bg-white border-t border-gray-600 max-w-[723px] max-md:pl-5">
+        <nav className="overflow-hidden bg-white border-t border-gray-600 max-w-[723px] ">
             <div className="flex gap-5 max-md:flex-col">
-                <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full">
+                <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full max-md:pl-5  pl-7">
                     <ul className="flex flex-col items-start self-stretch my-auto w-full text-base font-medium text-black text-opacity-80 max-md:mt-10 gap-[14px]">
                         {productItems.map((item, index) => (
                             <div>
@@ -108,7 +108,22 @@ function WhyNavigation({ whyindex }) {
 const WhyNav = ({ activeIndex, whyindex }) => {
     const [isopen, setisopen] = useState(false);
     const [menu, setMenu] = useRecoilState(MenuState);
+    const router = useRouter();
+    useEffect(() => {
+        const handleRouteChange = () => {
+            setMenu((prevMenu) => ({
+                ...prevMenu,
+                whybar: false, // Close the product menu
+            }));
+        };
 
+        router.events.on('routeChangeStart', handleRouteChange);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange);
+        };
+    }, [router.events, setMenu]);
     return (
         <li
             className=" "
@@ -135,7 +150,7 @@ const WhyNav = ({ activeIndex, whyindex }) => {
                 Niyə İrobot?
             </p>
             <div
-                className=" absolute top-[50px] z-30 left-0"
+                className=" absolute top-[100%] z-30 left-0"
                 style={!menu.whybar ? { display: 'none' } : {}}
             >
                 <WhyNavigation whyindex={whyindex} />

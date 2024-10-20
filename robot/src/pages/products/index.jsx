@@ -37,7 +37,7 @@ export default function index() {
                         </h1>
                         <form
                             onSubmit={handleSearchSubmit}
-                            className="flex overflow-hidden flex-wrap gap-5 justify-between self-center py-1 pr-1 pl-5 mt-7 max-w-full text-base whitespace-nowrap border border-solid bg-white bg-opacity-80 border-white border-opacity-20 rounded-[100px] text-black text-opacity-60 w-[505px]"
+                            className="flex overflow-hidden flex-nowrap gap-5 justify-between self-center py-1 pr-1 pl-5 mt-7 max-w-full text-base whitespace-nowrap border border-solid bg-white bg-opacity-80 border-white border-opacity-20 rounded-[100px] text-black text-opacity-60 w-[505px]"
                         >
                             <label htmlFor="searchInput" className="sr-only">
                                 Search
@@ -48,7 +48,7 @@ export default function index() {
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                                 placeholder="Axtar"
-                                className="my-auto bg-transparent border-none outline-none flex-grow"
+                                className="my-auto bg-transparent w-full border-none outline-none flex-grow"
                             />
                             <button
                                 type="submit"
@@ -90,18 +90,18 @@ export default function index() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
                     <ProductCard_MD
                         // desc={'Free Shipping on All Robot Orders'}
                         title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
@@ -119,18 +119,18 @@ export default function index() {
                         imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                     />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />

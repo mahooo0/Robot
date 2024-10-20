@@ -3,6 +3,7 @@ import Green_to_green from './btns/green_to_green';
 
 function BuyProduct() {
     const [selectedColor, setSelectedColor] = useState('Qara');
+    const [isliked, setIsliked] = useState(false);
 
     const colors = [
         {
@@ -79,7 +80,7 @@ function BuyProduct() {
                     Stokda var
                 </div>
 
-                <div className="flex gap-4 items-center self-stretch mt-6 w-full font-medium">
+                <div className="flex gap-4 items-center self-stretch mt-6 w-full font-medium flex-wrap">
                     <div className="flex gap-2 items-center self-stretch my-auto text-base whitespace-nowrap text-green-950">
                         <img
                             loading="lazy"
@@ -89,7 +90,7 @@ function BuyProduct() {
                         />
                         <span className="self-stretch my-auto">4.6</span>
                     </div>
-                    <button className="gap-2.5 self-stretch p-0.5 my-auto text-sm text-gray-600 border-b border-solid border-b-gray-600">
+                    <button className="gap-2.5 text-nowrap self-stretch p-0.5 my-auto text-sm text-gray-600 border-b border-solid border-b-gray-600">
                         Rəylərə bax
                     </button>
                 </div>
@@ -100,12 +101,16 @@ function BuyProduct() {
                     Səbətə əlavə et
                 </Green_to_green>
 
-                <button aria-label="Add to favorites">
+                <button
+                    aria-label="Add to favorites"
+                    className="bg-[#E7F0E4] w-[52px] h-[52px] rounded-full flex justify-center items-center   "
+                    onClick={() => setIsliked((prew) => !prew)}
+                >
                     <img
                         loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/4859b1da4f31208985107585278929c19d44d5b4ca351ecce3beb5420ef81896?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        src={isliked ? '/svg/heartRed.svg' : '/svg/heart.svg'}
                         alt="Favorite icon"
-                        className="object-contain shrink-0 self-stretch my-auto aspect-square w-[52px]"
+                        className="object-contain shrink-0 self-stretch my-auto aspect-square w-[22px]"
                     />
                 </button>
             </div>

@@ -1,19 +1,36 @@
+import Link from 'next/link';
 import React from 'react';
 
 function Footer() {
     const productLinks = [
-        { text: 'Məhsulları müqayisə et', opacity: '90' },
-        { text: 'Hansı məhsul mənə uyğundur?', opacity: '80' },
-        { text: 'Braava Robot Mops', opacity: '90' },
-        { text: 'İrobot Paket məhsullar', opacity: '90' },
-        { text: 'Roomba Robot Vacuums', opacity: '90' },
+        {
+            text: 'Məhsulları müqayisə et',
+            opacity: '90',
+            page: '/products/compare',
+        },
+        {
+            text: 'Hansı məhsul mənə uyğundur?',
+            page: '/user/help',
+            opacity: '80',
+        },
+        { text: 'Braava Robot Mops', page: '/products/mop', opacity: '90' },
+        {
+            text: 'İrobot Paket məhsullar',
+            page: '/products/paket',
+            opacity: '90',
+        },
+        {
+            text: 'Roomba Robot Vacuums',
+            page: '/products/vakumus',
+            opacity: '90',
+        },
     ];
 
     const supportLinks = [
-        'Bizimlə əlaqə',
-        'Sifarişi izlə',
-        'Qaydalar və şərtlər',
-        'Geri qaytarmalar',
+        { text: 'Bizimlə əlaqə', page: '/contact' },
+        { text: 'Sifarişi izlə', page: '/user/orders' },
+        { text: 'Qaydalar və şərtlər', page: '#' },
+        { text: 'Geri qaytarmalar', page: '#' },
     ];
 
     const socialIcons = [
@@ -61,9 +78,12 @@ function Footer() {
                                         key={index}
                                         className={`mt-4 first:mt-0 text-white text-opacity-${link.opacity}`}
                                     >
-                                        <a href="#" className="hover:underline">
+                                        <Link
+                                            href={`${link.page}`}
+                                            className="hover:underline"
+                                        >
                                             {link.text}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -75,9 +95,12 @@ function Footer() {
                             <ul className="flex flex-col mt-5 max-w-full text-sm text-white text-opacity-90 w-[134px]">
                                 {supportLinks.map((link, index) => (
                                     <li key={index} className="mt-4 first:mt-0">
-                                        <a href="#" className="hover:underline">
-                                            {link}
-                                        </a>
+                                        <Link
+                                            href={`${link.page}`}
+                                            className="hover:underline"
+                                        >
+                                            {link.text}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -88,7 +111,7 @@ function Footer() {
                             iRobot'tan en son teklifler, yeni ürünler ve daha
                             fazlası için e-posta adresinizi aşağıya girin.
                         </p>
-                        <form className="flex overflow-hidden gap-5 justify-between py-1.5 pr-1.5 pl-4 mt-5 w-full border border-solid bg-white bg-opacity-0 border-white border-opacity-10 rounded-[100px] max-md:max-w-full flex-wrap">
+                        <form className="flex overflow-hidden gap-5 justify-between py-1.5 pr-1.5 pl-4 mt-5 w-full border border-solid bg-white bg-opacity-0 border-white border-opacity-10 rounded-[100px] max-md:max-w-full flex-nowrap">
                             <label htmlFor="email" className="sr-only">
                                 Email
                             </label>
@@ -103,12 +126,12 @@ function Footer() {
                                     type="email"
                                     id="email"
                                     placeholder="Email"
-                                    className="bg-transparent border-none text-white text-opacity-60 focus:outline-none"
+                                    className="bg-transparent border-none text-white text-opacity-60 focus:outline-none w-full"
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="gap-2.5 self-stretch px-6 py-3 text-sm font-medium text-white bg-green-400 rounded-[100px] max-md:px-5"
+                                className="gap-2.5 self-stretch px-6 py-3 text-sm font-medium text-white bg-green-400 rounded-[100px] max-md:px-5 text-nowrap"
                             >
                                 Abunə ol
                             </button>

@@ -15,6 +15,7 @@ import SalesSwipper from '@/components/sales.swipper.jsx';
 import ProductBundle from '@/components/Product_bundle';
 import Footer from '@/components/Footer';
 import White_to_green from '@/components/btns/white_to_green';
+import { useRouter } from 'next/router';
 // import ProductBundle from '@/components/ProductBundle';
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -28,6 +29,7 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+    const router = useRouter();
     return (
         <div className="text-[#132A1B]">
             <Header activeIndex={0} />
@@ -54,7 +56,9 @@ export default function Home() {
                     <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
                         Yeni Məhsullar
                     </h3>
-                    <Green_to_green>Yeni məhsullar</Green_to_green>
+                    <Green_to_green action={() => router.push('/products')}>
+                        Yeni məhsullar
+                    </Green_to_green>
                 </div>
                 <div className="flex lg:flex-row flex-col gap-5 lg:px-[60px] px-[30px] mt-10">
                     <ProductCardNew />
@@ -112,7 +116,11 @@ export default function Home() {
                             </h2>
                         </div>
                         <div className="mt-[28px]">
-                            <White_to_green>Məhsula bax</White_to_green>
+                            <White_to_green
+                                action={() => router.push('products/id')}
+                            >
+                                Məhsula bax
+                            </White_to_green>
                         </div>
                     </div>
                 </div>
@@ -122,7 +130,11 @@ export default function Home() {
                     <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
                         Paket məhsullar{' '}
                     </h3>
-                    <Green_to_green>Bütün məhsullar</Green_to_green>
+                    <Green_to_green
+                        action={() => router.push('/products/paket')}
+                    >
+                        Bütün məhsullar
+                    </Green_to_green>
                 </div>
                 <ProductBundle />
                 <section className="overflow-hidden self-stretch pt-10 mt-24 w-full bg-neutral-950 max-md:mt-10 max-md:max-w-full">
@@ -146,7 +158,12 @@ export default function Home() {
                                         endirimli məhsullardan ilk sən yararlan.
                                     </p>
                                 </div>
-                                <Green_to_green classNAME="mt-[32px]">
+                                <Green_to_green
+                                    classNAME="mt-[32px]"
+                                    action={() =>
+                                        router.push('/user/login_register')
+                                    }
+                                >
                                     Qeydiyyatdan keç
                                 </Green_to_green>
                                 {/* <button
@@ -173,7 +190,10 @@ export default function Home() {
                     <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
                         Robot süpürgələr{' '}
                     </h3>
-                    <button className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]">
+                    <button
+                        className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]"
+                        onClick={() => router.push('/products')}
+                    >
                         <p>Bütün məhsullar </p>
                         <img src="/svg/Strelka_green.svg" />
                     </button>
@@ -218,7 +238,10 @@ export default function Home() {
                     <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
                         Robot tozsoranlar{' '}
                     </h3>
-                    <button className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]">
+                    <button
+                        className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]"
+                        onClick={() => router.push('/products')}
+                    >
                         <p>Bütün məhsullar </p>
                         <img src="/svg/Strelka_green.svg" />
                     </button>
@@ -248,7 +271,11 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="mt-7">
-                        <Green_to_green>Aksesuarlara bax</Green_to_green>
+                        <Green_to_green
+                            action={() => router.push('/aksesuares')}
+                        >
+                            Aksesuarlara bax
+                        </Green_to_green>
                     </div>
                 </div>
             </section>

@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 
-export default function Product_Card_aute() {
+export default function Product_Card_aute({ bgcolor = '#EEEEEE' }) {
     const [isliked, setIsliked] = useState(false);
     const [ison, setIson] = useState(false);
 
     return (
         <div
-            className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px] mr-[20px] relative"
+            className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px]  relative"
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}
         >
-            <div className=" relative  ">
+            <div
+                className={` relative   rounded-2xl  `}
+                style={{ background: bgcolor }}
+            >
                 <img
                     loading="lazy"
-                    src="/svg/ph.svg"
+                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dopZyaHyVF41U9VNR2lf127xh9845fd2CEmN0q4Ylsr0zWg8NQn5HOLbFq3NQtPS3o1H9n0TWn1FVlopKz9EAVOJw3PfDezjWfdWpup4OrOUjcrH078tI-bvnpEWuSHf~UFG9EHplEUvTlyqJeIm8pAzzekFRMBP21kvg8ecs5-BDTuJy4G3-zBf03tmfmzw~tRGfU8VkP5gePpR~Jt6tkYyxth1-sCAS6R-1Y1-bs6VhApmzvxWGpDeN0j5-GEWsFDf7WNvNZajlSCc73jJGWOA1Fhkhf7ERkqGMpCBRdnAPfzQnLX~Es7xaM1RVWX4zgt6u1LtgQI3Uws3w72Stw__"
                     alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                     className="object-cover w-full rounded-3xl aspect-[1.24]"
                 />

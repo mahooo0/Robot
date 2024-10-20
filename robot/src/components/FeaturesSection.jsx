@@ -51,7 +51,7 @@ const FeaturesSection = () => {
     ];
 
     return (
-        <section className="flex overflow-hidden flex-col justify-center items-center self-center px-20 py-16 mt-24 w-full text-[#447355] bg-[#ECF1EA] rounded-3xl  max-md:px-5 max-md:mt-10 max-md:max-w-full">
+        <section className="flex overflow-hidden flex-col justify-center items-center self-center lg:px-20 md:px-[60px] px-[30px] py-16 mt-24 w-full text-[#447355] bg-[#ECF1EA] rounded-3xl  max-md:px-5 max-md:mt-10 max-md:max-w-full">
             <div className="flex flex-col max-w-full w-[972px]">
                 <h2 className="text-3xl font-semibold text-center max-md:max-w-full">
                     Əsas xüsusiyyətləri

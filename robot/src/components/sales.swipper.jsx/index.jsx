@@ -46,20 +46,30 @@ export default function SalesSwipper() {
         <div className="lg:pl-[60px] px-[30px] mt-10">
             <Swiper
                 ref={swiperRef}
-                slidesPerView={slidesPerView}
-                breakpoints={{
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                    },
-                }}
+                slidesPerView={'auto'}
+                spaceBetween={20}
+                // breakpoints={{
+                //     640: {
+                //         slidesPerView: 2,
+                //     },
+                //     768: {
+                //         slidesPerView: 2,
+                //     },
+                //     1024: {
+                //         slidesPerView: 4,
+                //     },
+                // }}
             >
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
+                    <ProductCardSm />
+                </SwiperSlide>
+                <SwiperSlide className="!w-fit">
+                    <ProductCardSm />
+                </SwiperSlide>
+                <SwiperSlide className="!w-fit">
+                    <ProductCardSm />
+                </SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
                 <SwiperSlide>
