@@ -146,7 +146,7 @@ function ContactSection() {
             }}
         >
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className="flex gap-5 max-md:flex-col relative z-30">
+            <div className="flex gap-5 max-md:flex-col relative z-20">
                 <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                     <div className="flex flex-col text-white max-md:mt-10 max-md:max-w-full">
                         <h1 className="text-4xl font-semibold max-md:max-w-full">

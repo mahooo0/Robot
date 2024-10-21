@@ -22,7 +22,7 @@ const cartItems = [
 function ShoppingCart() {
     return (
         <main className="flex  gap-5 justify-between items-start mt-10 lg:flex-row  flex-col ">
-            <section className="flex flex-col max-md:max-w-full lg:w-[75%] w-full border-r-2 pr-[40px] border-black border-opacity-10 ">
+            <section className="flex flex-col max-md:max-w-full lg:w-[75%] w-full lg:border-r-2 md:border-r-2  border-none pr-[40px] border-black border-opacity-10 ">
                 {cartItems.map((item) => (
                     <React.Fragment key={item.id}>
                         <CartItem item={item} />

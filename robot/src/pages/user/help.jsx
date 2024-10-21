@@ -253,9 +253,10 @@ export default function Index() {
                                 What does your space look like?
                             </h1>
                             <img
+                                key={progress}
                                 loading="lazy"
                                 src={
-                                    progress === 0
+                                    progress < 1
                                         ? '/image/divan1.png'
                                         : `/image/divan${progress}.png`
                                 }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 const PersonalInfo = () => {
-    const [fullName, setFullName] = useState('İlahə Nəzərova');
-    const [email, setEmail] = useState('Email@gmail.com');
-    const [phone, setPhone] = useState('+994 00 000 00 00');
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
 
     return (
         <section className="flex overflow-hidden flex-col justify-center p-10 w-full rounded-3xl bg-stone-100 max-md:px-5 max-md:max-w-full">
@@ -12,6 +12,7 @@ const PersonalInfo = () => {
             </h2>
             <div className="flex flex-col mt-6 w-full text-base text-black max-md:max-w-full">
                 <input
+                    placeholder="İlahə Nəzərova"
                     type="text"
                     className="overflow-hidden px-5 py-4 w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] max-md:max-w-full"
                     value={fullName}
@@ -20,15 +21,17 @@ const PersonalInfo = () => {
                 />
                 <div className="flex flex-wrap gap-5 items-center mt-5 max-md:max-w-full">
                     <input
+                        placeholder="Email@gmail.com"
                         type="email"
-                        className="overflow-hidden self-stretch px-5 py-4 my-auto whitespace-nowrap bg-white border border-solid border-black border-opacity-10 min-w-[240px] rounded-[100px] w-[341px]"
+                        className="overflow-hidden  self-stretch px-5 py-4 my-auto whitespace-nowrap bg-white border border-solid border-black border-opacity-10 min-w-[240px] rounded-[100px] lg:w-[341px] w-full"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         aria-label="Email Address"
                     />
                     <input
+                        placeholder="+994 00 000 00 00"
                         type="tel"
-                        className="overflow-hidden self-stretch px-5 py-4 my-auto bg-white border border-solid border-black border-opacity-10 min-w-[240px] rounded-[100px] w-[341px]"
+                        className="overflow-hidden self-stretch px-5 py-4 my-auto bg-white border border-solid border-black border-opacity-10 min-w-[240px] rounded-[100px] lg:w-[341px] w-full"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         aria-label="Phone Number"
@@ -43,7 +46,7 @@ const DeliveryOption = ({ icon, label, isSelected, onChange }) => (
     <div
         className={`flex gap-3 items-center self-stretch px-10 py-4 my-auto bg-white ${
             isSelected ? 'border border-green-400 border-solid' : ''
-        } min-w-[240px] rounded-[100px] max-md:px-5 cursor-pointer`}
+        } min-w-[220px] rounded-[100px] max-md:px-5 cursor-pointer`}
         onClick={onChange}
         role="radio"
         aria-checked={isSelected}
@@ -55,7 +58,7 @@ const DeliveryOption = ({ icon, label, isSelected, onChange }) => (
                 alt=""
                 className="object-contain shrink-0 self-stretch my-auto w-7 rounded aspect-square"
             />
-            <div className="self-stretch my-auto">{label}</div>
+            <div className="self-stretch my-auto text-nowrap">{label}</div>
         </div>
         {isSelected ? (
             <img

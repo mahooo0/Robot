@@ -2,14 +2,14 @@ import React from 'react';
 import Green_to_green from './btns/green_to_green';
 
 const SectionTitle = ({ title }) => (
-    <h2 className="text-4xl font-semibold text-center text-gray-600 max-md:max-w-full">
+    <h2 className="text-4xl font-semibold text-center text-[#447355] max-md:max-w-full">
         {title}
     </h2>
 );
 
 const FeatureCard = ({ id, title, description }) => (
     <div className="flex flex-col grow shrink self-stretch my-auto min-w-[240px] w-[488px] max-md:max-w-full">
-        <div className="text-4xl font-semibold text-stone-200 max-md:max-w-full">
+        <div className="text-4xl font-semibold text-[#E7F0E4] max-md:max-w-full">
             {id}
         </div>
         <div className="flex flex-col mt-3 w-full max-md:max-w-full">
@@ -104,7 +104,7 @@ const featureData = [
 function IRobotOSInfo() {
     return (
         <main className="flex overflow-hidden flex-col px-16 py-24 mt-24 w-full bg-[#F1F5F0] max-md:px-5 max-md:mt-10 max-md:max-w-full">
-            <h1 className="self-center text-4xl font-semibold text-center text-green-950 max-md:max-w-full">
+            <h1 className="self-center text-4xl font-semibold text-center text-black max-md:max-w-full">
                 iRobot OS haqqında məlumat
             </h1>
             <section className="flex flex-col mt-12 max-md:mt-10 max-md:max-w-full">

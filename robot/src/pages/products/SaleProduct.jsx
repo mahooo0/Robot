@@ -36,6 +36,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Testdən keç',
+            page: '/user/help',
         },
         {
             imageSrc:
@@ -44,6 +45,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Bizimlə əlaqə',
+            page: '/contact',
         },
         {
             imageSrc:
@@ -110,13 +112,13 @@ export default function Paket() {
                         </div>
                     </div>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
@@ -186,7 +188,7 @@ export default function Paket() {
                         </div>
                     </div>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />

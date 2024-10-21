@@ -2,7 +2,9 @@ import FAQSection from '@/components/Faq';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React from 'react';
-
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 const buttons = [
     {
         src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/0e8fd20df3ae33ad2036a6de5c41a3bbcb0d95ebaf928e9297351167e2b90675?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
@@ -31,11 +33,19 @@ const Control = () => {
             />
         </div>
     );
+    useEffect(() => {
+        AOS.init({
+            duration: 600, // animation duration in milliseconds
+            easing: 'ease-in-out', // animation easing
+            // whether animation should happen only once
+            offset: 100,
+        });
+    }, []);
 
     return (
         <div>
             <Header activeIndex={4} whyindex={2} />
-            <main>
+            <main className=" overflow-hidden">
                 <section className="flex relative flex-col justify-center items-start px-16 py-20 w-full min-h-[500px] max-md:px-5 max-md:max-w-full">
                     <img
                         loading="lazy"
@@ -57,13 +67,15 @@ const Control = () => {
                         </div>
                         <div className="flex gap-2.5 items-center self-start mt-12 max-md:mt-10 flex-wrap">
                             {buttons.map((button, index) => (
-                                <img
-                                    key={index}
-                                    loading="lazy"
-                                    src={button.src}
-                                    alt={button.alt}
-                                    className="object-contain shrink-0 self-stretch my-auto aspect-[3.46] w-[204px]"
-                                />
+                                <a href="#">
+                                    <img
+                                        key={index}
+                                        loading="lazy"
+                                        src={button.src}
+                                        alt={button.alt}
+                                        className="object-contain shrink-0 self-stretch my-auto aspect-[3.46] w-[204px]"
+                                    />
+                                </a>
                             ))}
                         </div>
                     </section>
@@ -99,7 +111,10 @@ const Control = () => {
                 </section>
                 {/* Additional sections with renderSection */}
                 <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                    <div
+                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
+                        data-aos="fade-right"
+                    >
                         <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
                             İstədiyiniz şəkildə təmizləyin
                         </h2>
@@ -110,7 +125,10 @@ const Control = () => {
                             üçün xəritələrinizi fərdiləşdirə bilərsiniz.
                         </p>
                     </div>
-                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                    <div
+                        data-aos="fade-left"
+                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
+                    >
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -120,7 +138,10 @@ const Control = () => {
                     </div>
                 </section>
                 <section className="flex flex-row-reverse flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                    <div
+                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
+                        data-aos="fade-left"
+                    >
                         <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
                             İstədiyiniz şəkildə təmizləyin
                         </h2>
@@ -131,7 +152,10 @@ const Control = () => {
                             üçün xəritələrinizi fərdiləşdirə bilərsiniz.
                         </p>
                     </div>
-                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                    <div
+                        data-aos="fade-right"
+                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
+                    >
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -141,7 +165,10 @@ const Control = () => {
                     </div>
                 </section>
                 <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
+                    <div
+                        data-aos="fade-right"
+                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
+                    >
                         <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
                             İstədiyiniz şəkildə təmizləyin
                         </h2>
@@ -152,7 +179,10 @@ const Control = () => {
                             üçün xəritələrinizi fərdiləşdirə bilərsiniz.
                         </p>
                     </div>
-                    <div className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full">
+                    <div
+                        data-aos="fade-left"
+                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
+                    >
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -181,21 +211,36 @@ const Control = () => {
                 </section>
 
                 <FAQSection Title={'Tez-tez verilən suallar'} />
-                <section className="flex relative flex-col justify-center items-start px-16 py-64 w-full min-h-[800px] max-md:px-5 max-md:py-24 max-md:max-w-full mt-[100px] flex-wrap">
+                <section className="flex relative flex-col justify-center items-start px-16 py-64 w-full min-h-[800px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/1d435b1e2cfba66a9f2118ba0357118d694f66efcdf1dedf77aff001ce578240?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        alt="Background"
-                        className="object-fit absolute inset-0 size-full"
+                        alt=""
+                        className="object-cover absolute inset-0 size-full"
                     />
-                    <div className="flex relative flex-col mb-0 max-w-full w-[571px] max-md:mb-2.5">
-                        <h1 className="text-5xl font-semibold max-md:max-w-full max-md:text-4xl">
-                            Təmizliyinizə kömək etmək üçün buradayıq!
+                    <div className="flex relative flex-col mb-0 max-w-full w-[713px] max-md:mb-2.5">
+                        <h1 className="text-4xl font-semibold text-green-950 max-md:max-w-full">
+                            Robotlarınızın təmizliyinə nəzarət etmək üçün iRobot
+                            Home Proqramını yükləyin
                         </h1>
-                        <p className="mt-3 text-base max-md:max-w-full">
-                            Evinizin təmizliyini daha da asanlaşdırmaq üçün
-                            iRobot ilə bir çox xüsusi xidmətlərdən yararlanın!
-                        </p>
+                        <div className="flex gap-2.5 items-center self-start mt-12 max-md:mt-10">
+                            <a href="#">
+                                <img
+                                    loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/35e332e583c02e31964a20847a93183f06e9f16265b972557cea88db62cb3282?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                    alt="Download on the App Store"
+                                    className="object-cover shrink-0 self-stretch my-auto aspect-[3.46] w-[204px]"
+                                />
+                            </a>
+                            <a href="#">
+                                <img
+                                    loading="lazy"
+                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/384dec7c977891ca12aeeebc9eb14692b16aec493d138ec6c029edf172bc44db?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                    alt="Download on the App Store"
+                                    className="object-contain shrink-0 self-stretch my-auto aspect-[3.46] w-[204px]"
+                                />
+                            </a>
+                        </div>
                     </div>
                 </section>
             </main>

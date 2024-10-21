@@ -36,13 +36,15 @@ export default function compare() {
                         <section className="flex flex-col self-start">
                             <button
                                 onClick={handleToggle}
-                                className="flex overflow-hidden justify-between items-center p-1.5 max-w-full bg-white rounded-[100px] w-[106px] max-md:pr-5"
+                                className={`flex justify-between items-center p-1.5 max-w-full rounded-[100px] w-[106px] ${
+                                    isToggled ? 'bg-green-700' : 'bg-white'
+                                }`}
                             >
                                 <span
-                                    className={`flex shrink-0 w-11 h-11 bg-stone-300 rounded-[100px] transition-transform duration-300 ${
+                                    className={`flex shrink-0 w-11 h-11 rounded-[100px] transition-transform duration-300 ${
                                         isToggled
-                                            ? 'translate-x-[49px]'
-                                            : 'translate-x-0'
+                                            ? 'bg-white translate-x-[49px]'
+                                            : 'bg-stone-300 translate-x-0'
                                     }`}
                                     aria-hidden="true"
                                 />

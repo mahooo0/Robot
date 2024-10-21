@@ -5,8 +5,14 @@ import HelpCard from '@/components/HelpCard';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
 import ProductCategories from '@/components/ProductCategorys';
+import { useRouter } from 'next/router';
 import React from 'react';
-
+const scrollToElement = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+};
 export default function Paket() {
     const robotTypes = [
         {
@@ -36,6 +42,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Testdən keç',
+            page: '/user/help',
         },
         {
             imageSrc:
@@ -44,6 +51,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Bizimlə əlaqə',
+            page: '/contact',
         },
         {
             imageSrc:
@@ -53,6 +61,7 @@ export default function Paket() {
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
         },
     ];
+    const router = useRouter();
     return (
         <div>
             {' '}
@@ -80,11 +89,18 @@ export default function Paket() {
                             alın və daha ucuz qiymətə təmizlik etmək arzusunda
                             olan komandanı əldə edin
                         </p>
-                        <button className="gap-2.5 self-start px-7 py-3.5 mt-7 text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
-                            Müqayisə et
-                        </button>
+                        <div className="mt-[28px]">
+                            <Green_to_green
+                                action={() => router.push('/products/compare')}
+                            >
+                                Müqayisə et
+                            </Green_to_green>
+                        </div>
                     </div>
-                    <div className="flex flex-col items-center mt-16 w-[50px] max-md:mt-10 animate-bounce">
+                    <div
+                        className="flex flex-col items-center mt-16 w-[50px] max-md:mt-10 animate-bounce"
+                        onClick={() => scrollToElement('strong')}
+                    >
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/28271d8b28a86de88dc412579eda58a62e2a42ef9b71127030f85d3001fde1b9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -99,18 +115,21 @@ export default function Paket() {
                         />
                     </div>
                 </section>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    className="w-full lg:px-[60px] px-[30px] mt-[100px]"
+                    id="strong"
+                >
                     <h2 className="text-[#447355] text-[40px] font-semibold text-center">
                         Ən güclü təmizlik üçün{' '}
                     </h2>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
@@ -137,16 +156,16 @@ export default function Paket() {
                         Döşəmə təmizliyinə son qoymaq üçün birləşdirildi{' '}
                     </h2>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
@@ -171,13 +190,13 @@ export default function Paket() {
                         qənaət edin{' '}
                     </h2>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
@@ -222,7 +241,13 @@ export default function Paket() {
                             </p>
                         </div>
                         <div className="mt-7">
-                            <Green_to_green>Aksesuarlara bax</Green_to_green>
+                            <Green_to_green
+                                action={() => {
+                                    router.push('/aksesuares');
+                                }}
+                            >
+                                Aksesuarlara bax
+                            </Green_to_green>
                         </div>
                     </div>
                 </section>

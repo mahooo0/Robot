@@ -68,7 +68,7 @@ const CompareSwipper2 = () => {
                                         />
                                     ))}
                                 </div>
-                                <button className="flex overflow-hidden flex-col justify-center px-16 py-2.5 mt-5 w-full text-sm font-medium text-center text-white bg-gray-600 rounded-[100px] max-md:px-5">
+                                <button className="flex overflow-hidden flex-col justify-center px-16 py-2.5 mt-5 w-full text-sm font-medium text-center text-white bg-[#447355] rounded-[100px] max-md:px-5">
                                     <div className="flex gap-2 items-center">
                                         <img
                                             loading="lazy"

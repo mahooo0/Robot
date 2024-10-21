@@ -2,7 +2,15 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import HelpCard from '@/components/HelpCard';
 import React from 'react';
-
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+const scrollToElement = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+};
 export default function index() {
     const helpData = [
         {
@@ -12,6 +20,7 @@ export default function index() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Testdən keç',
+            page: '/user/help',
         },
         {
             imageSrc:
@@ -20,6 +29,7 @@ export default function index() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Bizimlə əlaqə',
+            page: '/contact',
         },
         {
             imageSrc:
@@ -29,10 +39,18 @@ export default function index() {
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
         },
     ];
+    useEffect(() => {
+        AOS.init({
+            duration: 600, // animation duration in milliseconds
+            easing: 'ease-in-out', // animation easing
+            // whether animation should happen only once
+            offset: 100,
+        });
+    }, []);
     return (
         <div>
             <Header activeIndex={4} whyindex={3} />
-            <main>
+            <main className=" overflow-hidden">
                 <section className="flex relative flex-col items-center px-20 pt-32 pb-7 w-full min-h-[500px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img
                         loading="lazy"
@@ -41,7 +59,7 @@ export default function index() {
                         className="object-cover absolute inset-0 size-full"
                     />
                     <div className="flex relative flex-col max-w-full w-[722px]">
-                        <section className="flex flex-col items-start w-full text-center text-white max-md:max-w-full">
+                        <div className="flex flex-col items-start w-full text-center text-white max-md:max-w-full">
                             <h1 className="text-5xl font-semibold max-md:max-w-full max-md:text-4xl">
                                 Robot döşəmə təmizləyicisi alarkən soruşulacaq
                                 10 sual
@@ -52,8 +70,11 @@ export default function index() {
                                 yaratmaq üçün qabaqcıl texnologiyanı
                                 birləşdirir.
                             </p>
-                        </section>
-                        <div className="flex flex-col items-center self-center mt-12 w-[50px] max-md:mt-10 animate-bounce">
+                        </div>
+                        <div
+                            className="flex flex-col items-center self-center mt-12 w-[50px] max-md:mt-10 animate-bounce"
+                            onClick={() => scrollToElement('question1')}
+                        >
                             <img
                                 loading="lazy"
                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/428aeee1a17a1210b9014598063ed4ec9d3505180e3fdb2380f827efdeb8bb72?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -69,7 +90,11 @@ export default function index() {
                         </div>
                     </div>
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                    id="question1"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             1. Evim nə qədər dağınıqdır?
@@ -120,7 +145,10 @@ export default function index() {
                         />
                     </div>
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             2. Evim nə qədər dağınıqdır?
@@ -163,7 +191,10 @@ export default function index() {
                         </div>
                     </div>{' '}
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             3. Evim nə qədər dağınıqdır?
@@ -221,7 +252,10 @@ export default function index() {
                         </div>
                     </div>
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             4. Evim nə qədər dağınıqdır?
@@ -271,7 +305,10 @@ export default function index() {
                         </h2>
                         <div className=" w-full flex justify-center flex-col">
                             <div className="flex flex-wrap gap-10 items-center lg:justify-between justify-center w-full max-md:max-w-full mt-[40px]">
-                                <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full">
+                                <div
+                                    data-aos="fade-right"
+                                    className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full"
+                                >
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/302d2443e4b5a5f04d781e65cd380f0b039b2cb8a763dbae4d3e48b88f74ed1f?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -279,7 +316,10 @@ export default function index() {
                                         className="object-contain w-full aspect-[0.89] max-md:max-w-full"
                                     />
                                 </div>
-                                <p className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full">
+                                <p
+                                    data-aos="fade-left"
+                                    className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full"
+                                >
                                     Let's not beat about the bush. The last
                                     thing you want is an RFC that can't
                                     distinguish between a pile of poop or a pile
@@ -295,7 +335,10 @@ export default function index() {
                                 </p>
                             </div>
                             <div className="flex flex-wrap-reverse gap-10 items-center lg:justify-between justify-center w-full max-md:max-w-full mt-[40px]">
-                                <p className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full">
+                                <p
+                                    data-aos="fade-right"
+                                    className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full"
+                                >
                                     Let's not beat about the bush. The last
                                     thing you want is an RFC that can't
                                     distinguish between a pile of poop or a pile
@@ -309,7 +352,10 @@ export default function index() {
                                     related objects and, engineered specifically
                                     for homes with pets.
                                 </p>
-                                <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full">
+                                <div
+                                    data-aos="fade-left"
+                                    className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full"
+                                >
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/302d2443e4b5a5f04d781e65cd380f0b039b2cb8a763dbae4d3e48b88f74ed1f?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -321,7 +367,10 @@ export default function index() {
                         </div>
                     </div>{' '}
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             6. Evim nə qədər dağınıqdır?
@@ -362,26 +411,23 @@ export default function index() {
                                 saytında ölçüləri yoxlayın.
                             </p>
                         </div>
-                    </div>{' '}
-                </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
-                    <div className="flex flex-col w-full max-md:max-w-full items-center">
-                        <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
-                            6. Evim nə qədər dağınıqdır?
-                        </h2>
                         <div className="flex flex-row gap-[20px] mt-[37px]">
                             <img
                                 className="w-1/2 rounded-2xl"
-                                src="https://s3-alpha-sig.figma.com/img/91c3/b742/7936ddae771fb2aa60e0f50cc354c692?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fi-QveevG79lpVmvfMSjVzFsQrNAPwli~h3Qcfva5bMUOfVBFIE5pPguVun4hB4VdfyZkysbEu6yqISZp1tCGm-yVe9ZCEH6zNvp6Rh071TSMAiY5VHwuSncMmUtIz0ljMkiST0Cu2eXemhIeYVcrxReQuq-wgag8pHoaYcus8GXC24MUOZEE3g2MGfanek1zpaiylj1-tHYLkRqfqgXS-mZc~sHXXVoqQhccxOFJx0tlB-YaeLvQtGk0GCsJNeChtGFRuJlNqoon8sSbNbcZ6ZmbqX0qOpLOzXcZqtG1N-OVFws383Tw0ToiOzO~-X5Gy0uuBuJfHJA5yHF1I8jyg__"
+                                src="https://s3-alpha-sig.figma.com/img/f486/18da/eaa5645dd240d91482037d920395d5a8?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UQrDkqPu3mW9TkL~nMqbBwWfydPWv3sgSPd3wP34JigLRIUc9-eb9yEyjYQKm2qhTZBER3ggJx4Ghtdm41b7tP7UCmO-qUIhXHuCwjqWM0qvCGgKAo2rih2ASupp1GBPaP2rI-rQtLN7ZURYD4vzEcC-98DnZuVGo0eHt02kZMUr41QqAlCSWpx8bMQ~4pDxfy1F45tm2AAeDZjhXXHanK7eoH1fontFiQA0LTyaew2vWhEv-yd9d78DVhkBNzer7F1TsOUdjLUW2EYErM13rrNN-6KD1jiyJSMOKubzOvgRjNsug3HVus6sjsfSHe6YCFEjUkgRWqYhuXHnv6LPYA__"
                             />
                             <img
                                 className="w-1/2 rounded-2xl"
-                                src="https://s3-alpha-sig.figma.com/img/91c3/b742/7936ddae771fb2aa60e0f50cc354c692?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fi-QveevG79lpVmvfMSjVzFsQrNAPwli~h3Qcfva5bMUOfVBFIE5pPguVun4hB4VdfyZkysbEu6yqISZp1tCGm-yVe9ZCEH6zNvp6Rh071TSMAiY5VHwuSncMmUtIz0ljMkiST0Cu2eXemhIeYVcrxReQuq-wgag8pHoaYcus8GXC24MUOZEE3g2MGfanek1zpaiylj1-tHYLkRqfqgXS-mZc~sHXXVoqQhccxOFJx0tlB-YaeLvQtGk0GCsJNeChtGFRuJlNqoon8sSbNbcZ6ZmbqX0qOpLOzXcZqtG1N-OVFws383Tw0ToiOzO~-X5Gy0uuBuJfHJA5yHF1I8jyg__"
+                                src="https://s3-alpha-sig.figma.com/img/f486/18da/eaa5645dd240d91482037d920395d5a8?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UQrDkqPu3mW9TkL~nMqbBwWfydPWv3sgSPd3wP34JigLRIUc9-eb9yEyjYQKm2qhTZBER3ggJx4Ghtdm41b7tP7UCmO-qUIhXHuCwjqWM0qvCGgKAo2rih2ASupp1GBPaP2rI-rQtLN7ZURYD4vzEcC-98DnZuVGo0eHt02kZMUr41QqAlCSWpx8bMQ~4pDxfy1F45tm2AAeDZjhXXHanK7eoH1fontFiQA0LTyaew2vWhEv-yd9d78DVhkBNzer7F1TsOUdjLUW2EYErM13rrNN-6KD1jiyJSMOKubzOvgRjNsug3HVus6sjsfSHe6YCFEjUkgRWqYhuXHnv6LPYA__"
                             />
                         </div>
                     </div>{' '}
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             7. Evim nə qədər dağınıqdır?
@@ -424,19 +470,58 @@ export default function index() {
                         </div>
                     </div>{' '}
                 </section>
-                <section className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]">
+                <section
+                    data-aos="fade-up"
+                    className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full items-center">
                         <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                             8. Evim nə qədər dağınıqdır?
                         </h2>
+                        <div className="mt-5 text-base text-black text-opacity-80 max-md:max-w-full max-w-[1320px]">
+                            <p className="mb-4 ">
+                                Təmiz və səliqəlisinizsə, yaxşı bir giriş
+                                səviyyəli cihaz dərin təmizləmələr arasında
+                                qırıntıları və tozu təmizləyəcək. Ancaq ev
+                                heyvanlarınız, ailəniz və ya müntəzəm
+                                ziyarətçiləriniz varsa, ev heyvanları və ya
+                                mətbəx fəlakətlərini idarə edən dərin təmizləmə
+                                və ovma parametrləri olan RFC axtarın. Əgər siz
+                                2-si 1-də (yaş və quru təmizləmə robotu)
+                                alırsanız, xalçalarınıza və ya kilimlərinizə
+                                artıq və çirkli su damcılamayan birini
+                                seçdiyinizə əmin olun.
+                            </p>
+                            <p className="mb-4">
+                                Detallara diqqət hər şeydir. Və çox məşğul evlər
+                                və ailələr üçün robot işi yerinə yetirmək və ya
+                                hər hansı əlavə iş görmək üçün göndərilməmişdən
+                                əvvəl təmizləmək məcburiyyətində deyilsiniz.
+                                Yaxşı bir RFC xoşbəxtliklə mebel altında sürüşür
+                                və bəzən hətta vasvası insanların unutduğu
+                                yerlərə gedir. Məsələn, çarpayının altında,
+                                otaqların kənarlarında və ya tozlu künclərdə. O,
+                                həmçinin təmizlik səyahətinə davam etməzdən
+                                əvvəl təsadüfi qarışıqlıqların qarşısını almaq
+                                üçün qabaqcıl obyekt aşkarlama texnologiyasına
+                                sahib olacaq.
+                            </p>
+                            <p className="mb-4">
+                                Həmçinin dok stansiyaları üçün kifayət qədər yer
+                                olduğundan əmin olun. Bəzi modellərdə doldurma,
+                                su çənləri və tullantı qutuları üçün geniş yer
+                                var. Həmişə istehsalçının və ya satıcının
+                                saytında ölçüləri yoxlayın.
+                            </p>
+                        </div>
                         <div className="flex flex-row gap-[20px] mt-[37px]">
                             <img
                                 className="w-1/2 rounded-2xl"
-                                src="https://s3-alpha-sig.figma.com/img/91c3/b742/7936ddae771fb2aa60e0f50cc354c692?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fi-QveevG79lpVmvfMSjVzFsQrNAPwli~h3Qcfva5bMUOfVBFIE5pPguVun4hB4VdfyZkysbEu6yqISZp1tCGm-yVe9ZCEH6zNvp6Rh071TSMAiY5VHwuSncMmUtIz0ljMkiST0Cu2eXemhIeYVcrxReQuq-wgag8pHoaYcus8GXC24MUOZEE3g2MGfanek1zpaiylj1-tHYLkRqfqgXS-mZc~sHXXVoqQhccxOFJx0tlB-YaeLvQtGk0GCsJNeChtGFRuJlNqoon8sSbNbcZ6ZmbqX0qOpLOzXcZqtG1N-OVFws383Tw0ToiOzO~-X5Gy0uuBuJfHJA5yHF1I8jyg__"
+                                src="https://s3-alpha-sig.figma.com/img/f486/18da/eaa5645dd240d91482037d920395d5a8?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UQrDkqPu3mW9TkL~nMqbBwWfydPWv3sgSPd3wP34JigLRIUc9-eb9yEyjYQKm2qhTZBER3ggJx4Ghtdm41b7tP7UCmO-qUIhXHuCwjqWM0qvCGgKAo2rih2ASupp1GBPaP2rI-rQtLN7ZURYD4vzEcC-98DnZuVGo0eHt02kZMUr41QqAlCSWpx8bMQ~4pDxfy1F45tm2AAeDZjhXXHanK7eoH1fontFiQA0LTyaew2vWhEv-yd9d78DVhkBNzer7F1TsOUdjLUW2EYErM13rrNN-6KD1jiyJSMOKubzOvgRjNsug3HVus6sjsfSHe6YCFEjUkgRWqYhuXHnv6LPYA__"
                             />
                             <img
                                 className="w-1/2 rounded-2xl"
-                                src="https://s3-alpha-sig.figma.com/img/91c3/b742/7936ddae771fb2aa60e0f50cc354c692?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fi-QveevG79lpVmvfMSjVzFsQrNAPwli~h3Qcfva5bMUOfVBFIE5pPguVun4hB4VdfyZkysbEu6yqISZp1tCGm-yVe9ZCEH6zNvp6Rh071TSMAiY5VHwuSncMmUtIz0ljMkiST0Cu2eXemhIeYVcrxReQuq-wgag8pHoaYcus8GXC24MUOZEE3g2MGfanek1zpaiylj1-tHYLkRqfqgXS-mZc~sHXXVoqQhccxOFJx0tlB-YaeLvQtGk0GCsJNeChtGFRuJlNqoon8sSbNbcZ6ZmbqX0qOpLOzXcZqtG1N-OVFws383Tw0ToiOzO~-X5Gy0uuBuJfHJA5yHF1I8jyg__"
+                                src="https://s3-alpha-sig.figma.com/img/f486/18da/eaa5645dd240d91482037d920395d5a8?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UQrDkqPu3mW9TkL~nMqbBwWfydPWv3sgSPd3wP34JigLRIUc9-eb9yEyjYQKm2qhTZBER3ggJx4Ghtdm41b7tP7UCmO-qUIhXHuCwjqWM0qvCGgKAo2rih2ASupp1GBPaP2rI-rQtLN7ZURYD4vzEcC-98DnZuVGo0eHt02kZMUr41QqAlCSWpx8bMQ~4pDxfy1F45tm2AAeDZjhXXHanK7eoH1fontFiQA0LTyaew2vWhEv-yd9d78DVhkBNzer7F1TsOUdjLUW2EYErM13rrNN-6KD1jiyJSMOKubzOvgRjNsug3HVus6sjsfSHe6YCFEjUkgRWqYhuXHnv6LPYA__"
                             />
                         </div>
                     </div>{' '}
@@ -448,7 +533,10 @@ export default function index() {
                         </h2>
                         <div className=" w-full flex justify-center flex-col">
                             <div className="flex flex-wrap gap-10 items-center lg:justify-between justify-center w-full max-md:max-w-full mt-[40px]">
-                                <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full">
+                                <div
+                                    data-aos="fade-right"
+                                    className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full"
+                                >
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/302d2443e4b5a5f04d781e65cd380f0b039b2cb8a763dbae4d3e48b88f74ed1f?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -456,7 +544,10 @@ export default function index() {
                                         className="object-contain w-full aspect-[0.89] max-md:max-w-full"
                                     />
                                 </div>
-                                <p className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full">
+                                <p
+                                    data-aos="fade-left"
+                                    className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full"
+                                >
                                     Let's not beat about the bush. The last
                                     thing you want is an RFC that can't
                                     distinguish between a pile of poop or a pile
@@ -472,7 +563,10 @@ export default function index() {
                                 </p>
                             </div>
                             <div className="flex flex-wrap-reverse gap-10 items-center lg:justify-between justify-center w-full max-md:max-w-full mt-[40px]">
-                                <p className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full">
+                                <p
+                                    data-aos="fade-right"
+                                    className="self-stretch my-auto text-base text-black text-opacity-80 w-[642px] max-md:max-w-full"
+                                >
                                     Let's not beat about the bush. The last
                                     thing you want is an RFC that can't
                                     distinguish between a pile of poop or a pile
@@ -486,7 +580,10 @@ export default function index() {
                                     related objects and, engineered specifically
                                     for homes with pets.
                                 </p>
-                                <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full">
+                                <div
+                                    data-aos="fade-left"
+                                    className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[558px] max-md:max-w-full"
+                                >
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/302d2443e4b5a5f04d781e65cd380f0b039b2cb8a763dbae4d3e48b88f74ed1f?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -498,7 +595,10 @@ export default function index() {
                         </div>
                     </div>{' '}
                 </section>
-                <section className="flex flex-col self-stretch mt-24 w-full max-md:mt-10 max-md:max-w-full">
+                <section
+                    data-aos="fade"
+                    className="flex flex-col self-stretch mt-24 w-full max-md:mt-10 max-md:max-w-full"
+                >
                     <h2 className="text-4xl font-semibold text-center text-black max-md:max-w-full">
                         10. Will it protect my privacy?
                     </h2>

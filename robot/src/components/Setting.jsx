@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Green_to_green from './btns/green_to_green';
 
 const Settings = () => {
     const [show, setshow] = useState(false);
@@ -42,7 +43,7 @@ const Settings = () => {
                 className="flex flex-col mt-7 w-full text-base max-md:max-w-full"
             >
                 <div className="flex flex-wrap gap-5 items-center w-full text-black text-opacity-90 max-md:max-w-full">
-                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[240px] w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] w-[401px] max-md:max-w-full">
                         <input
                             type="text"
                             name="fullName"
@@ -53,7 +54,7 @@ const Settings = () => {
                             aria-label="Ad və soyad"
                         />
                     </div>
-                    <div className="flex flex-col grow shrink self-stretch my-auto whitespace-nowrap min-w-[240px] w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto whitespace-nowrap min-w-[220px] w-[401px] max-md:max-w-full">
                         <input
                             type="email"
                             name="email"
@@ -66,7 +67,7 @@ const Settings = () => {
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-5 items-center mt-5 w-full max-md:max-w-full">
-                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[240px] text-black text-opacity-90 w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] text-black text-opacity-90 w-[401px] max-md:max-w-full">
                         <input
                             type="tel"
                             name="phone"
@@ -77,7 +78,7 @@ const Settings = () => {
                             aria-label="Telefon nömrəsi"
                         />
                     </div>
-                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[240px] text-black text-opacity-60 w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] text-black text-opacity-60 w-[401px] max-md:max-w-full">
                         <input
                             type="password"
                             name="currentPassword"
@@ -90,7 +91,7 @@ const Settings = () => {
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-5 items-center mt-5 w-full text-black text-opacity-60 max-md:max-w-full">
-                    <div className="flex flex-col grow shrink self-stretch my-auto whitespace-nowrap min-w-[240px] w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto whitespace-nowrap min-w-[220px] w-[401px] max-md:max-w-full">
                         <input
                             type="password"
                             name="newPassword"
@@ -101,7 +102,7 @@ const Settings = () => {
                             aria-label="Yeni şifrə"
                         />
                     </div>
-                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[240px] w-[401px] max-md:max-w-full">
+                    <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] w-[401px] max-md:max-w-full">
                         <input
                             type="password"
                             name="confirmPassword"
@@ -113,12 +114,11 @@ const Settings = () => {
                         />
                     </div>
                 </div>
-                <button
-                    type="submit"
-                    className="gap-2.5 self-end px-7 py-3.5 mt-7 text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5"
-                >
-                    Yadda saxla
-                </button>
+                <div className="self-end ">
+                    <Green_to_green classNAME=" mt-7">
+                        Yadda saxla
+                    </Green_to_green>
+                </div>
             </form>
             <div
                 style={!show ? { display: 'none' } : {}}

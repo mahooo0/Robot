@@ -118,7 +118,7 @@ export default function index() {
                 <h1 className="text-5xl font-semibold text-center text-green-950 max-md:max-w-full max-md:text-4xl">
                     Roomba akssesuarlar
                 </h1>
-                <div className="flex overflow-hidden flex-col justify-center px-10 py-7 mt-10 w-full rounded-3xl bg-[#8E98B8] max-md:px-5 max-md:max-w-full">
+                <div className=" mx-5 flex overflow-hidden flex-col justify-center px-10 py-7 mt-10 w-[97%] rounded-3xl bg-[#8E98B8] max-md:px-5 ">
                     <div className="flex flex-col w-full max-md:max-w-full">
                         <h2 className="text-lg font-semibold text-[#BCC5E3] max-md:max-w-full">
                             Robotunuz üçün hissələri və aksesuarları tapın
@@ -158,13 +158,13 @@ export default function index() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />
@@ -188,7 +188,7 @@ export default function index() {
                     />
                 </div>
 
-                <div className="flex flex-row flex-wrap justify-between mt-7">
+                <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                     <Product_Card_aute />
                     <Product_Card_aute />
                     <Product_Card_aute />

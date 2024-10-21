@@ -1,6 +1,9 @@
 import React from 'react';
+import Green_to_green from '../btns/green_to_green';
+import { useRouter } from 'next/router';
 
 function OrderSummary() {
+    const router = useRouter();
     return (
         <section className="flex flex-col justify-center px-6 py-7 rounded-3xl bg-stone-50 max-md:px-5 lg:w-[25%] w-full h-fit">
             <div className="flex flex-col">
@@ -45,9 +48,15 @@ function OrderSummary() {
                             </div>
                         </div>
                     </div>
-                    <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
+                    <Green_to_green
+                        classNAME="mt-[28px]"
+                        action={() => router.push('/basked/offer')}
+                    >
                         Sifariş et
-                    </button>
+                    </Green_to_green>
+                    {/* <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
+                      
+                    </button> */}
                 </div>
             </div>
         </section>

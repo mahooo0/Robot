@@ -15,19 +15,19 @@ const Orders = () => {
     ];
 
     return (
-        <main className="flex w-full overflow-hidden flex-col px-10 py-12 bg-stone-100 max-md:px-5">
-            <header className="flex flex-wrap gap-5 justify-between w-full text-green-950 max-md:max-w-full">
+        <div className="flex w-full  flex-col px-10 py-12 bg-stone-100 max-md:px-5 h-fit">
+            <div className="flex flex-wrap gap-5 justify-between w-full text-green-950 max-md:max-w-full">
                 <h1 className="text-3xl font-semibold text-center">
                     Sifarişlərim
                 </h1>
-                <nav className="flex gap-3 items-center text-sm font-medium max-md:max-w-full">
+                <nav className="flex gap-3 items-center text-sm font-medium max-md:max-w-full flex-wrap">
                     {filterOptions.map((option) => (
                         <button
                             key={option}
                             onClick={() => setActiveFilter(option)}
                             className={`gap-2.5 self-stretch px-6 py-3 my-auto whitespace-nowrap rounded-[100px] max-md:px-5 ${
                                 option === activeFilter
-                                    ? 'text-white bg-green-400 border border-green-400'
+                                    ? 'text-white bg-[#69BE56] border border-[#69BE56]'
                                     : 'border border-solid border-black border-opacity-20'
                             }`}
                         >
@@ -35,20 +35,20 @@ const Orders = () => {
                         </button>
                     ))}
                 </nav>
-            </header>
+            </div>
             <section className="flex mt-10 max-md:pr-5">
                 <div className="flex z-10 flex-col mr-0 w-full text-sm max-md:max-w-full">
                     {orders.map((order, index) => (
                         <React.Fragment key={index}>
-                            <article className="flex flex-wrap gap-5 justify-between items-center px-px mt-5 w-full max-md:max-w-full">
-                                <div className="flex gap-3 items-center self-stretch">
+                            <div className="flex flex-wrap gap-5 justify-between items-center px-px mt-5 w-full max-md:max-w-full">
+                                <div className="flex gap-3 items-center self-stretch flex-wrap">
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/06940f87445837d47f49f1dae8c7427f864ea9511078dcc618dc797f009c6687?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                                         alt="Product"
                                         className="object-contain shrink-0 self-stretch my-auto rounded-3xl aspect-[1.12] w-[134px]"
                                     />
-                                    <div className="flex flex-col self-stretch my-auto w-56">
+                                    <div className="flex flex-col self-stretch my-auto max-w-56">
                                         <div className="flex flex-col w-full">
                                             <time className="text-black text-opacity-60">
                                                 24 sentyabr 2024
@@ -87,7 +87,7 @@ const Orders = () => {
                                         className="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
                                     />
                                 </button>
-                            </article>
+                            </div>
                             {index < orders.length - 1 && (
                                 <div className="mt-5 w-full border border-solid border-black border-opacity-10 min-h-[1px] max-md:max-w-full" />
                             )}
@@ -95,7 +95,7 @@ const Orders = () => {
                     ))}
                 </div>
             </section>
-        </main>
+        </div>
     );
 };
 

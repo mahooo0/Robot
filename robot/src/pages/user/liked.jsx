@@ -16,10 +16,10 @@ export default function index() {
                     <h3 className="text-[28px] font-semibold m-[40px]">
                         Bəyəndiklərim
                     </h3>
-                    <div className="flex flex-row justify-between w-full px-[50px] flex-wrap">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row justify-between w-full px-[50px] flex-wrap gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
                 </div>
             </div>

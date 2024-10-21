@@ -16,6 +16,7 @@ export default function whyUs() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Testdən keç',
+            page: '/user/help',
         },
         {
             imageSrc:
@@ -24,6 +25,7 @@ export default function whyUs() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Bizimlə əlaqə',
+            page: '/contact',
         },
         {
             imageSrc:

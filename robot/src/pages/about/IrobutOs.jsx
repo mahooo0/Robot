@@ -13,14 +13,14 @@ export default function IrobutOs() {
             {' '}
             <Header activeIndex={4} whyindex={0} />
             <main>
-                <section className="w-full flex justify-center">
+                <section className="w-full flex justify-center px-[20px]">
                     <IROSComponent />
                 </section>
-                <section className="w-full flex justify-center">
+                <section className="w-full flex justify-center px-[20px]">
                     <IRobotOSAdvantage />
                 </section>
                 <IRobotOSInfo />
-                <section className="w-full flex justify-center">
+                <section className="w-full flex justify-center px-5">
                     <ProductFeatures />
                 </section>
                 <FAQSection

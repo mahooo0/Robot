@@ -9,7 +9,7 @@ function IROSComponent() {
     ];
 
     return (
-        <main className="self-center mt-5 w-full max-w-[1400px] max-md:max-w-full">
+        <section className="self-center mt-5 w-full max-w-[1400px] max-md:max-w-full">
             <div className="flex gap-5 max-md:flex-col">
                 <section className="flex flex-col w-[42%] max-md:ml-0 max-md:w-full">
                     <div className="flex overflow-hidden flex-col px-10 pt-12 pb-7 mx-auto w-full text-white rounded-3xl bg-[#87A28E] max-md:px-5 max-md:mt-5 max-md:max-w-full">
@@ -44,11 +44,11 @@ function IROSComponent() {
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/fbce62d62c09351b0c64aaee82a3f39df60c9cf78c32ee852452cc86e4b88ab9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         alt="iRobot OS interface demonstration"
-                        className="object-contain grow w-full rounded-3xl aspect-[1.78] max-md:mt-5 max-md:max-w-full"
+                        className="object-cover grow w-full rounded-3xl aspect-[1.78] max-md:mt-5 max-md:max-w-full"
                     />
                 </section>
             </div>
-        </main>
+        </section>
     );
 }
 

@@ -38,21 +38,21 @@ function UserAside({ active }) {
 
     return (
         <main className="flex overflow-hidden flex-col grow px-5 pt-5 w-full text-base bg-[#F1F5F0] h-[100%] max-md:pb-24 max-md:mt-3">
-            <header className="flex flex-col self-center max-w-full font-medium text-black w-[122px]">
+            <div className="flex flex-col self-center max-w-full font-medium text-black w-[122px]">
                 <img
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/d1f1b628a1bdffc4af6dbbde03769db38732ca0c0a134eb6b33fe35ac9df3eb1?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                     alt="İlaha Nazarova's profile picture"
                     className="object-contain self-center w-20 aspect-square rounded-[100px]"
                 />
-                <h1 className="mt-3">İlaha Nazarova</h1>
-            </header>
+                <h1 className="mt-3 text-center">İlaha Nazarova</h1>
+            </div>
             <hr className="mt-4 w-full border border-solid border-black border-opacity-10" />
-            <nav className="flex flex-col mt-4 w-full whitespace-nowrap text-green-950">
+            <div className="flex flex-col mt-4 w-full whitespace-nowrap text-green-950 justify-center items-center">
                 {menuItems.map((item, index) => (
                     <div
                         key={index}
-                        className={`flex overflow-hidden flex-col justify-center p-1 ${
+                        className={`flex w-fit overflow-hidden flex-col justify-center p-1 ${
                             index === active ? 'bg-[#87A28E]' : 'bg-white'
                         } rounded-3xl ${
                             index === active
@@ -70,13 +70,13 @@ function UserAside({ active }) {
                                 alt=""
                                 className="object-contain shrink-0 self-stretch my-auto w-12 rounded-3xl aspect-square"
                             />
-                            <div className="self-stretch my-auto w-[182px]">
+                            <div className="self-stretch my-auto w-[182px] lg:block  hidden">
                                 {item.text}
                             </div>
                         </div>
                     </div>
                 ))}
-            </nav>
+            </div>
         </main>
     );
 }

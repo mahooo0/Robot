@@ -191,7 +191,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                 </div>
             </div>
             <div
-                className="w-fit absolute top-[132px] z-[99999999999999999999999999] right-0"
+                className="w-fit absolute top-[100%] z-[99999999999999999999999999] right-0"
                 style={
                     show_Like_modal ? { display: 'block' } : { display: 'none' }
                 }
@@ -199,7 +199,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                 <LikedDrop show_Like_modal={(par) => setshow_shop_modal(par)} />
             </div>
             <div
-                className="w-fit absolute top-[132px] z-[99999999999999999999999999] right-0"
+                className="w-fit absolute top-[100%] z-[99999999999999999999999999] right-0"
                 style={
                     show_shop_modal ? { display: 'block' } : { display: 'none' }
                 }

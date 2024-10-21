@@ -3,15 +3,15 @@ import React from 'react';
 function CartItem({ item }) {
     return (
         <div className="flex flex-wrap gap-5 justify-between w-full max-md:max-w-full mt-[36px]">
-            <div className="flex items-start max-md:max-w-full">
+            <div className="flex items-start max-md:max-w-full ">
                 <div className="flex flex-wrap gap-3 items-center self-end p-3 mt-2 -mr-6 rounded-3xl bg-stone-50">
                     <img
                         loading="lazy"
                         src={item.image}
                         alt={item.name}
-                        className="object-contain shrink-0 self-stretch my-auto rounded-3xl aspect-[1.19] w-[167px]"
+                        className="object-contain shrink-0 self-stretch my-auto rounded-3xl aspect-[1.19] max-w-[167px]"
                     />
-                    <div className="flex flex-col self-stretch my-auto w-[233px]">
+                    <div className="flex flex-col self-stretch my-auto max-w-[233px]">
                         <div className="flex flex-col w-full">
                             <div className="text-base text-green-950 text-wrap">
                                 {item.name}

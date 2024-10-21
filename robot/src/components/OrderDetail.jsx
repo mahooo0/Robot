@@ -41,12 +41,12 @@ function OrderDetails() {
 
     return (
         <main className="flex overflow-hidden flex-col py-16 bg-stone-100 w-full">
-            <button className="gap-2.5 self-end px-6 py-3 mr-14 text-sm font-medium text-rose-600 border border-solid border-rose-600 border-opacity-20 rounded-[100px] max-md:px-5 max-md:mr-2.5">
+            <button className="gap-2.5 self-end px-6 py-3 mr-14 text-sm font-medium text-rose-600 hover:text-white hover:bg-rose-600 border border-solid border-rose-600 border-opacity-20 rounded-[100px] max-md:px-5 max-md:mr-2.5">
                 Sifarişi ləğv et
             </button>
             <div className="flex flex-col items-start px-10 mt-14 w-full max-md:px-5 max-md:mt-10 max-md:max-w-full">
                 <section className="w-full flex flex-col items-center">
-                    <div className="flex flex-wrap gap-2 items-center">
+                    <div className="flex flex-nowrap gap-2 items-center">
                         {statusSteps.map((step, index) => (
                             <React.Fragment key={index}>
                                 <div
@@ -58,7 +58,7 @@ function OrderDetails() {
                                 />
                                 {index < statusSteps.length - 1 && (
                                     <div
-                                        className={`flex shrink-0 self-stretch my-auto h-[3px] min-w-[240px] rounded-[100px] w-[280px] ${
+                                        className={`flex shrink-0 self-stretch my-auto h-[3px]  rounded-[100px] lg:w-[280px] md:w-[200px] sm:w-[120px] w-[40px] ${
                                             step.status === 'pending'
                                                 ? 'bg-neutral-200'
                                                 : 'bg-neutral-400'
@@ -124,7 +124,7 @@ function OrderDetails() {
                             </div>
                         </div>
                     </div>
-                    <button className="flex gap-2.5 justify-center items-center px-7 py-3.5 my-auto text-base font-medium text-center text-white rounded-xl border border-solid bg-neutral-400 border-neutral-100 max-md:px-5">
+                    <button className="flex gap-2.5 justify-center items-center px-7 py-3.5 my-auto text-base font-medium text-center text-white rounded-xl border border-solid bg-[#87A28E] border-neutral-100 max-md:px-5">
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/f94626f29baa40253df5d994693071ebb35e01a27694c2109f8aa983ec4265d5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -144,7 +144,7 @@ function OrderDetails() {
                         {products.map((product) => (
                             <div
                                 key={product.id}
-                                className="flex gap-3 items-center self-stretch p-5 my-auto rounded-3xl bg-white bg-opacity-40 min-w-[240px]"
+                                className="flex gap-3 items-center self-stretch p-5 my-auto rounded-3xl bg-white bg-opacity-40 min-w-[240px] flex-wrap"
                             >
                                 <img
                                     loading="lazy"
@@ -169,7 +169,8 @@ function OrderDetails() {
                                             />
                                         </div>
                                     </div>
-                                    <button className="gap-2.5 self-stretch px-5 py-3 mt-6 text-sm font-medium text-white bg-green-400 border border-green-400 border-solid rounded-[100px]">
+
+                                    <button className="gap-2.5 self-stretch px-5 py-3 mt-6 text-sm font-medium text-white bg-[#69BE56] border border-[#69BE56] border-solid rounded-[100px]">
                                         Məhsulu dəyərləndir
                                     </button>
                                 </div>
@@ -178,7 +179,7 @@ function OrderDetails() {
                     </div>
                 </section>
                 <section className="flex flex-col self-stretch mt-16 w-full max-md:mt-10 max-md:max-w-full">
-                    <div className="flex overflow-hidden gap-5 justify-between items-center px-5 py-4 w-full text-base text-center text-black bg-white max-md:max-w-full">
+                    <div className="flex overflow-hidden gap-5 justify-between  flex-wrap items-center px-5 py-4 w-full text-base text-center text-black bg-white max-md:max-w-full">
                         <div className="self-stretch my-auto">
                             Çatdırılma məlumatları:
                         </div>
@@ -208,7 +209,7 @@ function OrderDetails() {
                                             mənzi 45
                                         </div>
                                     </div>
-                                    <button className="flex gap-2 items-center self-start py-0.5 mt-5 text-sm font-medium text-green-400 border-b border-solid border-b-green-400">
+                                    <button className="flex gap-2 items-center self-start py-0.5 mt-5 text-sm font-medium text-[#69BE56] border-b border-solid border-b-[#69BE56]">
                                         <span className="self-stretch my-auto">
                                             Ünvan məlumatların dəyiş
                                         </span>
@@ -245,7 +246,7 @@ function OrderDetails() {
                                         <div className="self-stretch my-auto text-sm text-black text-opacity-60">
                                             Ümumi məbləğ:
                                         </div>
-                                        <div className="self-stretch my-auto text-lg font-semibold text-center text-green-400">
+                                        <div className="self-stretch my-auto text-lg font-semibold text-center text-[#69BE56]">
                                             410 AZN
                                         </div>
                                     </div>
