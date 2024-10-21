@@ -1,50 +1,27 @@
-import Green_to_green from '@/components/btns/green_to_green';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import HelpCard from '@/components/HelpCard';
-import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
-import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
-import ProductCategories from '@/components/ProductCategorys';
 import React from 'react';
-
-export default function Paket() {
-    const robotTypes = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/d258d7a5af1b6527c4c63161762a541f86e82ae2ed23425d29760922bd583eb5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: '2-si 1-də robot tozsoranlar',
-            description: 'Vacuum and mop simultaneously',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/fe2d3e37a64e26833f8bf586cca7314530934d538572bc8b25aa9dce2187338c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Dəyişdirilə bilən və silinən robot tozsoranlar',
-            description: 'Vacuum or mop with a swap of a bin',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/e1ff51fcc7ee45f5c2421292e9eb061261a04bdc1180048ffed48106cac16421?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Robot tozsoranlar',
-            description: 'Powerful and advanced hands free cleaning',
-        },
-    ];
-    function AccessoryCard({ imageSrc, title }) {
-        return (
-            <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[380px]">
-                <div className="flex overflow-hidden flex-col justify-center items-center px-3 w-full rounded-3xl aspect-square bg-zinc-100">
-                    <img
-                        loading="lazy"
-                        src={imageSrc}
-                        alt={`${title} accessory`}
-                        className="object-contain w-full rounded-3xl aspect-square"
-                    />
-                </div>
-                <h2 className="mt-5 text-xl font-semibold text-center underline text-green-950">
-                    <span className="underline">{title}</span>
-                </h2>
+import Header from '@/components/Header';
+import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
+import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
+import HelpCard from '@/components/HelpCard';
+import Footer from '@/components/Footer';
+function AccessoryCard({ imageSrc, title }) {
+    return (
+        <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[380px]">
+            <div className="flex overflow-hidden flex-col justify-center items-center px-3 w-full rounded-3xl aspect-square bg-zinc-100">
+                <img
+                    loading="lazy"
+                    src={imageSrc}
+                    alt={`${title} accessory`}
+                    className="object-contain w-full rounded-3xl aspect-square"
+                />
             </div>
-        );
-    }
+            <h2 className="mt-5 text-xl font-semibold text-center underline text-green-950">
+                <span className="underline">{title}</span>
+            </h2>
+        </div>
+    );
+}
+export default function SaleAksesuares() {
     const helpData = [
         {
             imageSrc:
@@ -53,6 +30,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Testdən keç',
+            page: '/user/help',
         },
         {
             imageSrc:
@@ -61,6 +39,7 @@ export default function Paket() {
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
             linkText: 'Bizimlə əlaqə',
+            page: '/contact',
         },
         {
             imageSrc:
@@ -92,7 +71,6 @@ export default function Paket() {
             {' '}
             <Header activeIndex={3} offerindex={0} />
             <main>
-                {' '}
                 <h2 className=" text-[48px] font-semibold text-center  mt-[40px] ">
                     Endirimli aksesuarlar
                 </h2>
@@ -168,7 +146,7 @@ export default function Paket() {
                             ))}
                         </div>
                     </div>
-                </section>{' '}
+                </section>
             </main>
             <Footer />
         </div>

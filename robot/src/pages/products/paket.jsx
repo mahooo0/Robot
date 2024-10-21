@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import HelpCard from '@/components/HelpCard';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
-import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
+import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCategories from '@/components/ProductCategorys';
 import { useRouter } from 'next/router';
 import React from 'react';

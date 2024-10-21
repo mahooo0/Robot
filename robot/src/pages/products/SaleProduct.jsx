@@ -1,33 +1,29 @@
-import Green_to_green from '@/components/btns/green_to_green';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import HelpCard from '@/components/HelpCard';
-import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
-import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
-import ProductCategories from '@/components/ProductCategorys';
 import React from 'react';
+import Header from '@/components/Header';
+import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
+import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
+import HelpCard from '@/components/HelpCard';
+import Footer from '@/components/Footer';
 
-export default function Paket() {
-    const robotTypes = [
+export default function SaleAksesuares() {
+    const accessoryData = [
         {
             imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/d258d7a5af1b6527c4c63161762a541f86e82ae2ed23425d29760922bd583eb5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: '2-si 1-də robot tozsoranlar',
-            description: 'Vacuum and mop simultaneously',
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/0d8f03a61e4345f187388eb23d0f4f97f47976994676c02240e9890a9ac3cd31?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            title: 'Roomba® Accessories',
         },
         {
             imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/fe2d3e37a64e26833f8bf586cca7314530934d538572bc8b25aa9dce2187338c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Dəyişdirilə bilən və silinən robot tozsoranlar',
-            description: 'Vacuum or mop with a swap of a bin',
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/e1b6748103a06a36633e2adb9193144275307484f932a29bb070efb3334caf74?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            title: 'Braava® Accessories',
         },
         {
             imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/e1ff51fcc7ee45f5c2421292e9eb061261a04bdc1180048ffed48106cac16421?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Robot tozsoranlar',
-            description: 'Powerful and advanced hands free cleaning',
+                'https://cdn.builder.io/api/v1/image/assets/TEMP/e27fff2cdec8d80ff2a97f7eaa489d4a547a7cfd8a4ed6adf95f5eaffc2b0b68?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            title: 'Roomba Combo® Accessories',
         },
     ];
+
     const helpData = [
         {
             imageSrc:
@@ -55,84 +51,62 @@ export default function Paket() {
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
         },
     ];
+
+    function AccessoryCard({ imageSrc, title }) {
+        return (
+            <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[380px]">
+                <div className="flex overflow-hidden flex-col justify-center items-center px-3 w-full rounded-3xl aspect-square bg-zinc-100">
+                    <img
+                        loading="lazy"
+                        src={imageSrc}
+                        alt={`${title} accessory`}
+                        className="object-contain w-full rounded-3xl aspect-square"
+                    />
+                </div>
+                <h2 className="mt-5 text-xl font-semibold text-center underline text-green-950">
+                    {title}
+                </h2>
+            </div>
+        );
+    }
+
     return (
         <div>
-            {' '}
             <Header activeIndex={3} offerindex={0} />
             <main>
-                {' '}
-                <h2 className="text-[#447355] text-[48px] font-semibold text-center  mt-[40px] ">
-                    Ən son təkliflərimizi satın alın!
+                <h2 className="text-[48px] font-semibold text-center mt-[40px]">
+                    Endirimli aksesuarlar
                 </h2>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px]">
-                    <div className="flex overflow-hidden flex-col rounded-3xl">
-                        <div className="flex relative flex-col justify-center items-start px-16 py-36 w-full min-h-[500px] max-md:px-5 max-md:py-24 max-md:max-w-full">
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/30ac7dca8cac70c81d2a2b76d8348a8fc43464158543b52ae0dfebec18e95514?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                alt=""
-                                className="object-cover absolute inset-0 size-full"
-                            />
-                            <div className="flex relative flex-col mb-0 max-w-full w-[632px] max-md:mb-2.5">
-                                <div className="flex flex-col w-full max-md:max-w-full">
-                                    <div className="flex gap-3 items-center self-start p-3 text-center whitespace-nowrap rounded-lg bg-white bg-opacity-10 text-white text-opacity-90">
-                                        <div className="flex gap-1 items-center self-stretch my-auto text-base font-medium">
-                                            <div className="self-stretch my-auto">
-                                                250
-                                            </div>
-                                            <img
-                                                loading="lazy"
-                                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/43137e5c7694df430fd38df9b4fe9bc5011ffda5389f80be936fa84043d7adfd?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                                alt=""
-                                                className="object-contain shrink-0 self-stretch my-auto w-3 aspect-square"
-                                            />
-                                        </div>
-                                        <div className="self-stretch my-auto text-sm">
-                                            Qənaət
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col mt-5 w-full font-semibold max-md:max-w-full">
-                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl">
-                                            Roomba Combo® j9+ now
-                                        </h1>
-                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-green-400 rounded-lg">
-                                            <div className="self-stretch my-auto">
-                                                300
-                                            </div>
-                                            <img
-                                                loading="lazy"
-                                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d6c76cdb1075d3c17072e071aa7352e0ee9c478db97e08495a72cf654bd52bcf?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                                alt=""
-                                                className="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <section className="flex flex-wrap gap-5 items-center self-center mt-10 max-md:max-w-full justify-center">
+                    {accessoryData.map((accessory, index) => (
+                        <AccessoryCard
+                            key={index}
+                            imageSrc={accessory.imageSrc}
+                            title={accessory.title}
+                        />
+                    ))}
+                </section>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                {/* Product Card Section */}
+                <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#ECF3EA] py-[100px]">
+                    <h2 className="text-[48px] font-semibold text-center mt-[40px] text-[#447355]">
+                        20% Endirim
+                    </h2>
+                    <div className="flex flex-row flex-wrap justify-between mt-7">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
-                            bgcolor="#EEEEEE"
+                            bgcolor="#FFFFFF"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
                             imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                         />
                         <ProductCard_MD
-                            bgcolor="#EEEEEE"
+                            bgcolor="#FFFFFF"
                             desc={'Free Shipping on All Robot Orders'}
                             title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                             price={300}
@@ -140,83 +114,9 @@ export default function Paket() {
                         />
                     </div>
                 </section>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px]">
-                    <div className="flex overflow-hidden flex-col rounded-3xl">
-                        <div className="flex relative flex-col justify-center items-start px-16 py-36 w-full min-h-[500px] max-md:px-5 max-md:py-24 max-md:max-w-full">
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/30ac7dca8cac70c81d2a2b76d8348a8fc43464158543b52ae0dfebec18e95514?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                alt=""
-                                className="object-cover absolute inset-0 size-full"
-                            />
-                            <div className="flex relative flex-col mb-0 max-w-full w-[632px] max-md:mb-2.5">
-                                <div className="flex flex-col w-full max-md:max-w-full">
-                                    <div className="flex gap-3 items-center self-start p-3 text-center whitespace-nowrap rounded-lg bg-white bg-opacity-10 text-white text-opacity-90">
-                                        <div className="flex gap-1 items-center self-stretch my-auto text-base font-medium">
-                                            <div className="self-stretch my-auto">
-                                                250
-                                            </div>
-                                            <img
-                                                loading="lazy"
-                                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/43137e5c7694df430fd38df9b4fe9bc5011ffda5389f80be936fa84043d7adfd?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                                alt=""
-                                                className="object-contain shrink-0 self-stretch my-auto w-3 aspect-square"
-                                            />
-                                        </div>
-                                        <div className="self-stretch my-auto text-sm">
-                                            Qənaət
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col mt-5 w-full font-semibold max-md:max-w-full">
-                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl">
-                                            Roomba Combo® j9+ now
-                                        </h1>
-                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-green-400 rounded-lg">
-                                            <div className="self-stretch my-auto">
-                                                300
-                                            </div>
-                                            <img
-                                                loading="lazy"
-                                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d6c76cdb1075d3c17072e071aa7352e0ee9c478db97e08495a72cf654bd52bcf?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                                alt=""
-                                                className="object-contain shrink-0 self-stretch my-auto w-5 aspect-square"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    {/* <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div> */}
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <ProductCard_MD
-                            bgcolor="#EEEEEE"
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                        <ProductCard_MD
-                            bgcolor="#EEEEEE"
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                    </div>
-                </section>
-                <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full my-[100px] ">
+                {/* Help Section */}
+                <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full my-[100px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
                         <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full">
                             Seçim etməkdə kömək edək!
@@ -227,7 +127,7 @@ export default function Paket() {
                             ))}
                         </div>
                     </div>
-                </section>{' '}
+                </section>
             </main>
             <Footer />
         </div>

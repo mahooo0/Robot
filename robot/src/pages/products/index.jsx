@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import NavigationBar from '@/components/Navication_bar';
 import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
-import { ProductCard_MD } from '@/components/ProductCards/Product_lg_card';
+import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
 import React, { useState } from 'react';
 
