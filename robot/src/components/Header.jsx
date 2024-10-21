@@ -13,11 +13,12 @@ import { useRouter } from 'next/router';
 import ProductNav from './ProductNavication';
 import AksesuaresNav from './AksesuaresNavication';
 import OfferNav from './offersNavication';
-import WhyNav from './whyNavication';
+// import WhyNav from './whyNavication';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 import LikedDrop from './LikedDRopDown';
 import ShopDrop from './LshopDRopDown';
+import WhyNav from './WhyNavication';
 
 const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const [_, setMenu] = useRecoilState(MenuState);
