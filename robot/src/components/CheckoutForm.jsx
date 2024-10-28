@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import KreditPOpUP from './KreditPopUp';
 
 const PersonalInfo = () => {
     const [fullName, setFullName] = useState('');
@@ -214,16 +215,16 @@ const PaymentType = () => {
                         isSelected={selectedPayment === 'online'}
                         onChange={() => setSelectedPayment('online')}
                     />
-                    <div>
-                        <PaymentOption
-                            icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a32a107c46e265516d4671cf353ef70a561fe879c4b02e34543c7628a8962265?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            label="Hissə-hissə al"
-                            isSelected={selectedPayment === 'kredit'}
-                            onChange={() => setSelectedPayment('kredit')}
-                        />
-                    </div>
+
+                    <PaymentOption
+                        icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a32a107c46e265516d4671cf353ef70a561fe879c4b02e34543c7628a8962265?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        label="Hissə-hissə al"
+                        isSelected={selectedPayment === 'kredit'}
+                        onChange={() => setSelectedPayment('kredit')}
+                    />
                 </div>
             </div>
+            <KreditPOpUP show={selectedPayment === 'kredit'} />
         </section>
     );
 };
