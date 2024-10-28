@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Green_to_green from './btns/green_to_green';
+import { InstallmentPayment } from './mouthly_period';
+import Green_to_none from './btns/green_to_none';
 
 function BuyProduct() {
     const [selectedColor, setSelectedColor] = useState('Qara');
@@ -49,7 +51,7 @@ function BuyProduct() {
                         className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
                     />
                 </div>
-
+                <InstallmentPayment />
                 <div className="flex flex-col mt-6 max-w-full w-[251px]">
                     <p className="text-sm text-black text-opacity-60">
                         Rəng: {selectedColor}
@@ -96,11 +98,12 @@ function BuyProduct() {
                 </div>
             </section>
 
-            <div className="flex flex-wrap gap-2 items-center mt-10 w-full text-base font-medium text-white max-md:max-w-full">
-                <Green_to_green classNAME="w-[90%]">
+            <div className="flex lg:flex-row flex-col  gap-2 items-center mt-10 w-full text-base font-medium text-white max-md:max-w-full">
+                {' '}
+                <Green_to_green classNAME="w-1/2">
                     Səbətə əlavə et
                 </Green_to_green>
-
+                <Green_to_none classNAME="w-1/2">İndi al</Green_to_none>
                 <button
                     aria-label="Add to favorites"
                     className="bg-[#E7F0E4] w-[52px] h-[52px] rounded-full flex justify-center items-center   "

@@ -5,6 +5,7 @@ import FAQSection from '@/components/Faq';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import Productacsesuares from '@/components/ProductAcsesuares';
 import ProductDetails from '@/components/ProductDetails';
 import ProductImages from '@/components/ProductImages';
 import SalesSwipper from '@/components/sales.swipper.jsx';
@@ -24,6 +25,7 @@ export default function id() {
                     <FeaturesSection />
                 </section>
                 <ProductDetails />
+                <Productacsesuares />
                 <FAQSection Title={'Məhsul haqqında tez-tez verilən suallar'} />
                 <section className="flex justify-center w-full pt-[100px] flex-col items-center bg-[#F5F5F5]">
                     <CustomerReviews />

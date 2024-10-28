@@ -126,6 +126,10 @@ const DeliveryType = () => {
                             placeholder="Çatdırılacaq ünvan"
                             aria-label="Çatdırılacaq ünvan"
                         />
+                        <textarea
+                            placeholder="Əlavə məlumat"
+                            className="overflow-hidden px-5 py-4 mt-5 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[20px] text-black text-opacity-60 w-[702px] h-[155px]"
+                        ></textarea>
                     </div>
                 ) : (
                     <div className="mt-[28px]">
@@ -141,6 +145,11 @@ const DeliveryType = () => {
                             </select> */}
                             Bakı şəhər, Yasamal rayon, Ə.Əhmədov 81A
                         </div>
+
+                        <textarea
+                            placeholder="Əlavə məlumat"
+                            className="overflow-hidden px-5 py-4 mt-5 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[20px] text-black text-opacity-60 w-[702px] h-[155px]"
+                        ></textarea>
                     </div>
                 )}
             </div>
@@ -205,6 +214,14 @@ const PaymentType = () => {
                         isSelected={selectedPayment === 'online'}
                         onChange={() => setSelectedPayment('online')}
                     />
+                    <div>
+                        <PaymentOption
+                            icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a32a107c46e265516d4671cf353ef70a561fe879c4b02e34543c7628a8962265?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            label="Hissə-hissə al"
+                            isSelected={selectedPayment === 'kredit'}
+                            onChange={() => setSelectedPayment('kredit')}
+                        />
+                    </div>
                 </div>
             </div>
         </section>

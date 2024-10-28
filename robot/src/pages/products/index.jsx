@@ -66,80 +66,69 @@ export default function index() {
                     </div>
                 </div>
             </section>
-            <FilterComponent />
-            <section className=" lg:px-[60px] px-[30px] mt-[60px]">
-                <div className="w-full flex justify-between items-center flex-wrap">
-                    <p className="text-[16px] font-normal text-opacity-60">
-                        200 Məhsul
-                    </p>
-                    <div className="flex flex-row gap-3 items-center flex-wrap">
+            <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
+                <FilterComponent />
+                <section className=" lg:px-[60px] px-[30px] mt-[60px]">
+                    <div className="w-full flex justify-between items-center flex-wrap">
                         <p className="text-[16px] font-normal text-opacity-60">
-                            Sırala{' '}
+                            200 Məhsul
                         </p>
-                        <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px] ">
-                            <select
-                                name=""
-                                id=""
-                                className=" bg-[#ECF1EA]  w-full"
-                            >
-                                <option value="">option1</option>
-                                <option value="">option2</option>
-                                <option value="">option3</option>
-                                <option value="">option4</option>
-                            </select>
+                        <div className="flex flex-row gap-3 items-center flex-wrap">
+                            <p className="text-[16px] font-normal text-opacity-60">
+                                Sırala{' '}
+                            </p>
+                            <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px] ">
+                                <select
+                                    name=""
+                                    id=""
+                                    className=" bg-[#ECF1EA]  w-full"
+                                >
+                                    <option value="">option1</option>
+                                    <option value="">option2</option>
+                                    <option value="">option3</option>
+                                    <option value="">option4</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
-                    <ProductCard_MD
-                        // desc={'Free Shipping on All Robot Orders'}
-                        title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                        price={300}
-                        bgcolor={'#EEEEEE'}
-                        isLarge={true}
-                        imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                    />
-                    <ProductCard_MD
-                        // desc={'Free Shipping on All Robot Orders'}
-                        title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                        price={300}
-                        bgcolor={'#EEEEEE'}
-                        isLarge={true}
-                        imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                    />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-                <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                    <Product_Card_aute />
-                </div>
-            </section>
-            <div className="flex justify-center mt-[48px] mb-[100px]">
-                <NavigationBar />
+                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                </section>
             </div>
+
+            {/* <div className="flex justify-center mt-[48px] mb-[100px]">
+                <NavigationBar />
+            </div> */}
 
             <Footer />
         </div>

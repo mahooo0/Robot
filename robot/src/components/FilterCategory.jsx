@@ -87,19 +87,43 @@ const FilterComponent = () => {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
             onChange: (e) => setAccessories(e.target.value),
         },
+        {
+            label: 'Rəng',
+            value: accessories,
+            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            onChange: (e) => setAccessories(e.target.value),
+        },
+        {
+            label: 'Otağın sahəsi',
+            value: accessories,
+            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            onChange: (e) => setAccessories(e.target.value),
+        },
+        {
+            label: 'Tozsoranın növü',
+            value: accessories,
+            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
+            onChange: (e) => setAccessories(e.target.value),
+        },
     ];
 
     return (
-        <section className="flex flex-wrap gap-3 items-center mt-10 w-full justify-between lg:px-[60px] px-[30px]">
-            {categories.map((categoryItem, index) => (
-                <FilterCategory key={index} {...categoryItem} />
-            ))}
+        <section className="flex flex-col gap-3 items-center mt-10 w-fit justify-between lg:px-[60px] md:px-[30px] px-0 h-fit">
+            <article className="w-full flex justify-between px-[20px] items-center">
+                <h6 className="text-[20px] font-medium">Filter</h6>
+                <p className=" text-[14px] text-[#337FFF] font-normal">
+                    Təmizlə
+                </p>
+            </article>
             <FilterPrice
                 minPrice={minPrice}
                 maxPrice={maxPrice}
                 onMinPriceChange={(e) => setMinPrice(e.target.value)}
                 onMaxPriceChange={(e) => setMaxPrice(e.target.value)}
             />
+            {categories.map((categoryItem, index) => (
+                <FilterCategory key={index} {...categoryItem} />
+            ))}
         </section>
     );
 };
