@@ -9,9 +9,11 @@ import Productacsesuares from '@/components/ProductAcsesuares';
 import ProductDetails from '@/components/ProductDetails';
 import ProductImages from '@/components/ProductImages';
 import SalesSwipper from '@/components/sales.swipper.jsx';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function id() {
+    const router = useRouter();
     return (
         <div>
             {' '}
@@ -37,7 +39,9 @@ export default function id() {
                             məhsullar
                         </h3>
                         <button className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]">
-                            <p>Bütün məhsullar </p>
+                            <p onClick={() => router.push(`/products`)}>
+                                Bütün məhsullar{' '}
+                            </p>
                             <img src="/svg/Strelka_green.svg" />
                         </button>
                     </div>

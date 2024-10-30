@@ -95,7 +95,7 @@ function FAQSection({ Title }) {
 
     return (
         <section className="flex flex-wrap gap-10 justify-between items-start max-md:max-w-full bg-[#ECF3EA] lg:px-[60px] px-[30px] py-[100px]">
-            <h2 className="text-4xl font-semibold w-[364px] text-[#132A1B]">
+            <h2 className="text-[40px] font-semibold w-[364px] text-[#132A1B]">
                 {Title}
             </h2>
             <div className="flex flex-col text-base font-medium text-center text-black min-w-[240px] w-[795px] max-md:max-w-full">

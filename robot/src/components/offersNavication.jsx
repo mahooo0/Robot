@@ -31,17 +31,15 @@ function OfferNavigation({ offerindex }) {
                                                 router.push(
                                                     '/products/SaleProduct'
                                                 );
+                                                console.log('0');
+
                                                 break;
                                             case 1:
                                                 router.push(
                                                     '/aksesuares/saleAksesuares'
                                                 );
-                                                break;
-                                            case 2:
-                                                router.push('/products');
-                                                break;
-                                            case 3:
-                                                router.push('/products/paket');
+                                                console.log('0');
+
                                                 break;
                                         }
                                     }}

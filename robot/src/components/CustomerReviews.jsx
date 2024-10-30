@@ -7,7 +7,7 @@ const StarRating = ({ rating }) => {
                 <img
                     key={star}
                     loading="lazy"
-                    src={`/svg/star.svg`}
+                    src={`/svg/Black_star.svg`}
                     alt={star <= rating ? 'Filled star' : 'Empty star'}
                     className="object-contain shrink-0 self-stretch my-auto w-7 aspect-square"
                 />

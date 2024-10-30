@@ -55,7 +55,9 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE' }) {
                 </div>
             </div>
             <div
-                className="bg-white w-[44px] h-[44px] rounded-full flex justify-center items-center  absolute top-3 right-3 "
+                className={`${(bgcolor = '#EEEEEE'
+                    ? 'bg-[#F6F6F6]'
+                    : 'bg-white')} w-[44px] h-[44px] rounded-full flex justify-center items-center  absolute top-3 right-3 `}
                 onClick={() => setIsliked((prew) => !prew)}
             >
                 <img src={isliked ? '/svg/heartRed.svg' : '/svg/heart.svg'} />

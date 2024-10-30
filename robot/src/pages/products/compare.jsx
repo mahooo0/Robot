@@ -28,7 +28,7 @@ export default function compare() {
                     <Green_to_none isactive={true}>Robot süpürgə</Green_to_none>
                 </div>
                 <CompareSwipperUpper />
-                <h2 className=" text-[36px] font-semibold max-w-[446px] mt-[103px]">
+                <h2 className=" text-[36px] font-semibold  mt-[103px] lg:text-left text-center w-full lg:pl-[310px] pl-0">
                     Seçilən məhsullar
                 </h2>
                 <div className="w-full flex flex-row relative  mt-7 ">
@@ -37,7 +37,7 @@ export default function compare() {
                             <button
                                 onClick={handleToggle}
                                 className={`flex justify-between items-center p-1.5 max-w-full rounded-[100px] w-[106px] ${
-                                    isToggled ? 'bg-green-700' : 'bg-white'
+                                    isToggled ? 'bg-[#447355]' : 'bg-white'
                                 }`}
                             >
                                 <span

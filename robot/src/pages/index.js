@@ -137,53 +137,53 @@ export default function Home() {
                     </Green_to_green>
                 </div>
                 <ProductBundle />
-                <section className="overflow-hidden self-stretch pt-10 mt-24 w-full bg-neutral-950 max-md:mt-10 max-md:max-w-full">
-                    <div className="flex gap-5 max-md:flex-col">
-                        <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full items-center">
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3e52665f3563440d2efba3081a0e3f10439e0c9c3dcfd0c800dbcc15c93e98e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                alt="Special offer illustration"
-                                className="object-contain grow shrink-0 max-w-full aspect-[1.06] w-[343px] max-md:mt-10"
-                            />
-                        </div>
-                        <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-                            <div className="flex flex-col justify-center items-center self-stretch my-auto w-full text-white max-md:mt-10">
-                                <div className="flex flex-col items-center max-w-full text-center w-[376px]">
-                                    <h2 className="text-4xl font-semibold">
-                                        Xüsusi təkliflər üçün qeydiyyatdan keç!
-                                    </h2>
-                                    <p className="mt-2 text-base">
-                                        Qeydiyyatdan keç, xüsusi təkliflər və
-                                        endirimli məhsullardan ilk sən yararlan.
-                                    </p>
-                                </div>
-                                <Green_to_green
-                                    classNAME="mt-[32px]"
-                                    action={() =>
-                                        router.push('/user/login_register')
-                                    }
-                                >
-                                    Qeydiyyatdan keç
-                                </Green_to_green>
-                                {/* <button
+            </section>
+            <section className="overflow-hidden self-stretch pt-10 mt-24 w-full bg-neutral-950 max-md:mt-10 max-md:max-w-full">
+                <div className="flex gap-5 max-md:flex-col">
+                    <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full items-center">
+                        <img
+                            loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3e52665f3563440d2efba3081a0e3f10439e0c9c3dcfd0c800dbcc15c93e98e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            alt="Special offer illustration"
+                            className="object-contain grow shrink-0 max-w-full aspect-[1.06] w-[343px] max-md:mt-10"
+                        />
+                    </div>
+                    <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
+                        <div className="flex flex-col justify-center items-center self-stretch my-auto w-full text-white max-md:mt-10">
+                            <div className="flex flex-col items-center max-w-full text-center w-[376px]">
+                                <h2 className="text-4xl font-semibold">
+                                    Xüsusi təkliflər üçün qeydiyyatdan keç!
+                                </h2>
+                                <p className="mt-2 text-base">
+                                    Qeydiyyatdan keç, xüsusi təkliflər və
+                                    endirimli məhsullardan ilk sən yararlan.
+                                </p>
+                            </div>
+                            <Green_to_green
+                                classNAME="mt-[32px]"
+                                action={() =>
+                                    router.push('/user/login_register')
+                                }
+                            >
+                                Qeydiyyatdan keç
+                            </Green_to_green>
+                            {/* <button
                                     className="gap-2.5 self-stretch px-7 py-3.5 mt-8 text-base font-medium bg-green-400 rounded-[100px] max-md:px-5"
                                     aria-label="Qeydiyyatdan keç"
                                 >
                                     Qeydiyyatdan keç
                                 </button> */}
-                            </div>
-                        </div>
-                        <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full justify-center items-center">
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d104362fd87d9e2d7ee1680cf4e2d0d133880abf7d9f60ccc19d0b963515dd14?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                alt="Special offer promotion"
-                                className="object-contain grow shrink-0 mt-2 max-w-full aspect-[0.97] w-[303px] max-md:mt-10"
-                            />
                         </div>
                     </div>
-                </section>
+                    <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full justify-center items-center">
+                        <img
+                            loading="lazy"
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d104362fd87d9e2d7ee1680cf4e2d0d133880abf7d9f60ccc19d0b963515dd14?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            alt="Special offer promotion"
+                            className="object-contain grow shrink-0 mt-2 max-w-full aspect-[0.97] w-[303px] max-md:mt-10"
+                        />
+                    </div>
+                </div>
             </section>
             <section>
                 <div className="flex justify-between items-center lg:px-[60px] px-[30px] mt-[104px] flex-wrap gap-4">

@@ -68,7 +68,7 @@ function ProductFeatures() {
             <h2 className="text-center text-[40px] font-semibold text-[#132A1B] ml-8 max-md:max-w-full mt-[100px]">
                 Məhsulların xüsusiyyətləri
             </h2>
-            <div className="flex gap-5 max-md:flex-col">
+            <div className="flex lg:gap-5 gap-0 max-md:flex-col">
                 <div className="flex flex-col w-[26%] max-md:ml-0 max-md:w-full">
                     <div className="flex flex-col self-stretch my-auto w-full text-base text-right text-green-950 max-md:mt-10">
                         {leftFeatures.map((feature, index) => (
@@ -77,15 +77,13 @@ function ProductFeatures() {
                                 text={feature.text}
                                 imageSrc={feature.imageSrc}
                                 imageAlt=""
-                                className={
-                                    index === leftFeatures.length - 1 ? '' : ''
-                                }
+                                className={`lg:flex-row-reverse flex-row`}
                             />
                         ))}
                     </div>
                 </div>
-                <div className="flex flex-col ml-5 w-[52%] max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col grow text-4xl font-semibold text-center text-green-950 max-md:mt-7 max-md:max-w-full">
+                <div className="lg:flex hidden flex-col ml-5 w-[52%] max-md:ml-0 max-md:w-full">
+                    <div className=" flex flex-col grow text-4xl font-semibold text-center text-green-950 max-md:mt-7 max-md:max-w-full ">
                         <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/86a9cd7979e78391560d810c5b0d687174e080030483a72033d81ab886916fa8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -95,7 +93,7 @@ function ProductFeatures() {
                     </div>
                 </div>
                 <div className="flex flex-col ml-5 w-[22%] max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col self-stretch my-auto w-full text-base text-green-950 max-md:mt-10">
+                    <div className="flex flex-col self-stretch my-auto w-full text-base text-green-950 ">
                         {rightFeatures.map((feature, index) => (
                             <FeatureItem
                                 key={index}

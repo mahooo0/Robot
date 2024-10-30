@@ -184,8 +184,8 @@ export default function Paket() {
                         />
                     </div>
                 </section>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[100px]">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center ">
+                <section className="w-full lg:px-[60px] px-[30px] mt-[100px]  ">
+                    <h2 className="text-[#447355] text-[40px] font-semibold text-center max-w-[985px]  self-center mx-auto">
                         Eksklüziv robot və aksesuar paketləri ilə daha çox
                         qənaət edin{' '}
                     </h2>

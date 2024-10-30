@@ -18,7 +18,7 @@ export default function HelpCard({
                     className="object-contain max-w-full aspect-square rounded-[100px] w-[100px]"
                 />
                 <div className="flex flex-col mt-5 w-full">
-                    <h3 className="text-lg font-semibold text-gray-600">
+                    <h3 className="text-lg font-semibold text-[#447355]">
                         {title}
                     </h3>
                     <p className="mt-3 text-sm text-black text-opacity-80">

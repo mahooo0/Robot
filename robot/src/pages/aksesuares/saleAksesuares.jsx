@@ -69,7 +69,7 @@ export default function SaleAksesuares() {
     return (
         <div>
             {' '}
-            <Header activeIndex={3} offerindex={0} />
+            <Header activeIndex={3} offerindex={1} />
             <main>
                 <h2 className=" text-[48px] font-semibold text-center  mt-[40px] ">
                     Endirimli aksesuarlar
@@ -87,10 +87,10 @@ export default function SaleAksesuares() {
                     <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
                         20% Endirim{' '}
                     </h2>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
+                        <Product_Card_aute bgcolor="#FFFFFF" />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
@@ -113,7 +113,7 @@ export default function SaleAksesuares() {
                     <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
                         20% Endirim{' '}
                     </h2>
-                    <div className="flex flex-row flex-wrap justify-between mt-7">
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
                         <Product_Card_aute />
                         <Product_Card_aute />

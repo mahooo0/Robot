@@ -47,7 +47,7 @@ function ProductCategories() {
     return (
         <section
             onClick={() => router.push('/aksesuares')}
-            className="flex flex-wrap gap-3 items-center self-center mt-24 text-base font-medium text-center text-green-950 max-md:mt-10 max-md:max-w-full w-full justify-around"
+            className="flex flex-wrap gap-3 items-center self-center mt-24 text-base font-medium text-center text-green-950 max-md:mt-10 max-md:max-w-full w-full justify-center"
         >
             {categories.map((category, index) => (
                 <ProductCategory

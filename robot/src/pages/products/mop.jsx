@@ -81,14 +81,13 @@ export default function Paket() {
                         height: '100%', // Sets the height to fill the parent container
                     }}
                 >
-                    <div className="flex flex-col max-w-full min-h-[226px] w-[404px]">
+                    <div className="flex flex-col max-w-full min-h-[226px] w-[504px]">
                         <h1 className="flex-1 text-5xl font-semibold text-green-950 max-md:text-4xl">
-                            Özləri üçün əla. Birlikdə daha yaxşı
+                            Ən yaxşı robot mop
                         </h1>
                         <p className="text-[16px] font-normal mt-3">
-                            Robot tozsoranınızı və süpürgənizi bir paket kimi
-                            alın və daha ucuz qiymətə təmizlik etmək arzusunda
-                            olan komandanı əldə edin
+                            Precision Jet Spray loosens dirt and sticky messes
+                            without any effort from you.
                         </p>
                         <div className="mt-7">
                             <Green_to_green

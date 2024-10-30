@@ -39,7 +39,7 @@ function AdvantageItem({ image, text }) {
 
 function AdvantagesSection() {
     return (
-        <section className="flex overflow-hidden flex-col justify-center items-center px-20 py-24 font-semibold text-white rounded-3xl bg-[#8E98B8] max-md:px-5">
+        <section className="flex overflow-hidden flex-col justify-center items-center py-[26px]  font-semibold text-white rounded-3xl bg-[#8E98B8] max-md:px-5 lg:h-[556p] h-fit">
             <div className="flex flex-col w-full max-w-[1025px] max-md:max-w-full">
                 <h2 className="text-4xl text-center max-md:max-w-full">
                     Üstünlüklərimiz

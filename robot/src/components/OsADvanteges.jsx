@@ -39,7 +39,7 @@ function FeatureCard({ imageSrc, title, description }) {
                 <h2 className="text-lg font-medium text-black max-md:max-w-full">
                     {title}
                 </h2>
-                <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                <p className="mt-3 text-base font-normal text-black text-opacity-80 max-md:max-w-full">
                     {description}
                 </p>
             </div>

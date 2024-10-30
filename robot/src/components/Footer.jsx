@@ -131,7 +131,7 @@ function Footer() {
                             </div>
                             <button
                                 type="submit"
-                                className="gap-2.5 self-stretch px-6 py-3 text-sm font-medium text-white bg-green-400 rounded-[100px] max-md:px-5 text-nowrap"
+                                className="gap-2.5 self-stretch px-6 py-3 text-sm font-medium text-white bg-[#69BE56] rounded-[100px] max-md:px-5 text-nowrap"
                             >
                                 Abunə ol
                             </button>

@@ -34,7 +34,7 @@ export default function Productacsesuares() {
                 Məhsul setinə daxildir:
             </h4>
             <div
-                className="flex flex-wrap gap-5 items-center  max-md:max-w-full justify-center w-full mt-[20px]"
+                className="flex flex-wrap gap-5 items-center  max-md:max-w-full justify-between px-[60px]  w-full mt-[20px]"
                 aria-label="Product Grid"
             >
                 {products.map((product) => (

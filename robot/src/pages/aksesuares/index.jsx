@@ -1,3 +1,4 @@
+import FilterAcsesuares from '@/components/Filteracsesuares';
 import FilterComponent from '@/components/FilterCategory';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
@@ -134,7 +135,7 @@ export default function index() {
                     </div>
                 </div>
             </section>
-            <FilterComponent />
+            <FilterAcsesuares />
             <section className=" lg:px-[60px] px-[30px] mt-[60px]">
                 <div className="w-full flex justify-between items-center flex-wrap">
                     <p className="text-[16px] font-normal text-opacity-60">

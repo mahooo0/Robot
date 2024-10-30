@@ -31,6 +31,8 @@ export default function whyUs() {
             imageSrc:
                 'https://cdn.builder.io/api/v1/image/assets/TEMP/79161b1f02d51e9a189b3e58d236194f37f61ff45fdcf797e0654e2adb59b400?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
             title: 'Mağazamıza yaxınlaş',
+            linkText: 'Testdən keç',
+            page: '/products/compare',
             description:
                 'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
         },
@@ -42,11 +44,11 @@ export default function whyUs() {
                 <section className="w-full flex justify-center">
                     <IROSComponent />
                 </section>
-                <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px]">
+                <h2 className="self-center text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full mt-[60px] ">
+                    Seçim etməkdə kömək edək!
+                </h2>
+                <section className="flex overflow-hidden flex-col justify-center px-[60px] py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[48px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full">
-                            Seçim etməkdə kömək edək!
-                        </h2>
                         <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
                             {helpData.map((item, index) => (
                                 <HelpCard key={index} {...item} />

@@ -68,7 +68,7 @@ export default function index() {
             </section>
             <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
                 <FilterComponent />
-                <section className=" lg:px-[60px] px-[30px] mt-[60px]">
+                <section className=" lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
                     <div className="w-full flex justify-between items-center flex-wrap">
                         <p className="text-[16px] font-normal text-opacity-60">
                             200 Məhsul

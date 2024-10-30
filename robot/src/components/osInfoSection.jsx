@@ -48,8 +48,8 @@ const HeroSection = ({
     imageAlt,
 }) => (
     <div className="flex flex-col mt-12 w-full max-md:mt-10 max-md:max-w-full">
-        <div className="flex flex-wrap gap-5 justify-center items-center w-full max-md:max-w-full">
-            <div className="flex overflow-hidden flex-col justify-center self-stretch px-10 pt-10 pb-48 my-auto rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-[539px] w-full max-md:px-5 max-md:pb-24 max-md:max-w-full">
+        <div className="flex flex-wrap gap-5 lg:justify-between  justify-center items-center w-full max-md:max-w-full lg:h-[502px] h-fit">
+            <div className="flex overflow-hidden flex-col justify-center  px-10 pt-10   rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-[539px] w-full max-md:px-5 pb-4   !h-full">
                 <div className="flex flex-col w-full max-md:max-w-full">
                     <div className="flex flex-col w-full max-md:max-w-full">
                         <h2 className="text-4xl font-semibold text-[#87A28E] max-md:max-w-full">
@@ -68,7 +68,7 @@ const HeroSection = ({
                 loading="lazy"
                 src={imageSrc}
                 alt={imageAlt}
-                className="object-contain self-stretch my-auto rounded-3xl aspect-[1.52] min-w-[240px] lg:w-[761px] w-full max-md:max-w-full"
+                className=" self-stretch  object-cover rounded-3xl aspect-[1.52] min-w-[240px] lg:w-[761px] w-full max-md:max-w-full h-[100%]"
             />
         </div>
     </div>
