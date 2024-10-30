@@ -44,7 +44,10 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
 
     return (
         <>
-            <header className="lg:fixed block top-0 w-[100%] z-[999999999999999999999999999999]">
+            <header
+                className="lg:fixed block top-0 w-[100%] z-[999999999999999999999999999999]"
+                style={{ zIndex: 9999999999999999999999999999 }}
+            >
                 <div className="border-b border-[#EFEFEF] relative">
                     {/* Top section */}
                     <div className="flex justify-center bg-blue_gray-400 text-[14px] text-white font-normal">
