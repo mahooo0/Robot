@@ -7,11 +7,11 @@ const Orders = () => {
     const filterOptions = ['Hamısı', 'Aktiv', 'Bitmiş', 'Ləğv edilən'];
 
     const orders = [
-        { status: 'Sifariş edildi', statusColor: 'text-gray-600' },
-        { status: 'Hazırlanır', statusColor: 'text-gray-600' },
-        { status: 'Kuryerə verildi', statusColor: 'text-gray-600' },
-        { status: 'Çatdırıldı', statusColor: 'text-gray-600' },
-        { status: 'Ləğv edildi', statusColor: 'text-rose-600' },
+        { status: 'Sifariş edildi', statusColor: 'text-[#87A28E]' },
+        { status: 'Hazırlanır', statusColor: 'text-[#87A28E]' },
+        { status: 'Kuryerə verildi', statusColor: 'text-[#87A28E]' },
+        { status: 'Çatdırıldı', statusColor: 'text-[#87A28E]' },
+        { status: 'Ləğv edildi', statusColor: 'text-[#EA1235]' },
     ];
 
     return (
@@ -59,7 +59,7 @@ const Orders = () => {
                                             </h2>
                                             {order.status ===
                                                 'Sifariş edildi' && (
-                                                <p className="mt-2 text-xs text-gray-600">
+                                                <p className="mt-2 text-xs text-[#87A28E]">
                                                     3 məhsul
                                                 </p>
                                             )}
@@ -75,7 +75,7 @@ const Orders = () => {
                                     onClick={() =>
                                         router.push('/user/orders/id')
                                     }
-                                    className="flex gap-2 items-center self-stretch py-0.5 my-auto font-medium text-green-400 border-b border-solid border-b-green-400"
+                                    className="flex gap-2 items-center self-stretch py-0.5 my-auto font-medium text-[#69BE56] border-b border-solid border-b-green-400"
                                 >
                                     <span className="self-stretch my-auto">
                                         Ətraflı

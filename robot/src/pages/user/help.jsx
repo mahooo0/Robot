@@ -38,7 +38,7 @@ export default function Index() {
                         </div>
                     </div>
                 </div>
-                <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 text-base font-medium bg-white rounded-[100px] text-green-950 max-md:px-5">
+                <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 text-base font-medium bg-white hover:bg-[#69BE56] duration-300 hover:text-white rounded-[100px] text-green-950 max-md:px-5">
                     Səbətə əlavə et
                 </button>
                 <button className="gap-2.5 self-stretch px-7 py-3.5 mt-3 text-base font-medium border border-white border-solid rounded-[100px] max-md:px-5">
@@ -286,6 +286,7 @@ export default function Index() {
                                 </div>
                                 <nav className="flex flex-wrap gap-5 justify-between items-center self-stretch mt-40 w-full max-md:mt-10 max-md:max-w-full">
                                     <button
+                                        onClick={() => setvariant(1)}
                                         aria-label="Previous"
                                         className="focus:outline-none"
                                     >
@@ -397,10 +398,11 @@ export default function Index() {
                             </div>
                             <nav className="flex flex-wrap gap-5 justify-between items-center mt-28 w-full max-md:mt-10 max-md:max-w-full">
                                 <img
+                                    onClick={() => setvariant(2)}
                                     loading="lazy"
                                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/12d77e2a034eb24f7a27b250efa3512ddc513566abd95dd0feacda9f734fb2a9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
                                     alt=""
-                                    className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
+                                    className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square cursor-pointer"
                                 />
                                 <div className="flex gap-3 items-center self-stretch my-auto">
                                     {' '}

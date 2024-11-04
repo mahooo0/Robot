@@ -99,7 +99,10 @@ function Navigation({ aksesuaresindex }) {
                                 >
                                     Məhsulu müqayisə et
                                 </li>
-                                <li className="mt-4">
+                                <li
+                                    className="mt-4"
+                                    onClick={() => router.push('/user/help')}
+                                >
                                     Hansı məhsul mənə uyğundur?
                                 </li>
                                 <li

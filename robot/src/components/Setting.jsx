@@ -33,7 +33,7 @@ const Settings = () => {
                 </h1>
                 <nav
                     onClick={() => setshow(true)}
-                    className="gap-2 self-stretch py-0.5 my-auto text-base font-medium text-[#447355] border-b border-solid cursor-pointer border-b-[#447355]"
+                    className="gap-2 self-stretch py-0.5 my-auto text-base font-medium text-[#447355]  border-b border-solid cursor-pointer border-b-[#447355]"
                 >
                     Email adresini dəyiş
                 </nav>

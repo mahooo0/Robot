@@ -253,7 +253,7 @@ export default function Paket() {
                 </section>
                 <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full">
+                        <h2 className="self-center text-4xl font-semibold text-center !w-[100%] text-[#132A1B] ">
                             Seçim etməkdə kömək edək!
                         </h2>
                         <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">

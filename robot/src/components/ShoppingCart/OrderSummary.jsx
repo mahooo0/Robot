@@ -75,7 +75,7 @@ function OrderSummary() {
                     <div className="flex flex-col mt-5 w-full">
                         <div className="flex flex-col w-full">
                             <div className="flex flex-col w-full text-sm">
-                                <div className="flex gap-10 items-center">
+                                <div className="flex gap-10 items-center justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
                                         Məbləğ:
                                     </div>
@@ -83,7 +83,7 @@ function OrderSummary() {
                                         250 AZN
                                     </div>
                                 </div>
-                                <div className="flex gap-10 items-center mt-4 w-full">
+                                <div className="flex gap-10 items-center mt-4 w-full justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
                                         Çatdırılma:
                                     </div>
@@ -91,7 +91,7 @@ function OrderSummary() {
                                         5 AZN
                                     </div>
                                 </div>
-                                <div className="flex gap-10 items-center mt-4">
+                                <div className="flex gap-10 items-center mt-4 justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
                                         Endirim
                                     </div>
@@ -101,7 +101,7 @@ function OrderSummary() {
                                 </div>
                             </div>
                             <hr className="mt-3 w-full border border-solid border-zinc-300" />
-                            <div className="flex gap-10 items-center mt-3 text-base">
+                            <div className="flex gap-10 items-center mt-3 text-base justify-between">
                                 <div className="self-stretch my-auto font-medium text-black text-opacity-80">
                                     Cəmi məbləğ:
                                 </div>

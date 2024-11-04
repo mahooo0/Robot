@@ -41,11 +41,53 @@ function OrderDetails() {
 
     return (
         <main className="flex overflow-hidden flex-col py-16 bg-stone-100 w-full">
+            <div className="w-full px-[40px] h-[100px] flex flex-col gap-5">
+                <button className="flex flex-row gap-2">
+                    <svg
+                        width="20"
+                        height="21"
+                        viewBox="0 0 20 21"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g clip-path="url(#clip0_117_4347)">
+                            <path
+                                d="M7.5013 12.1667L4.16797 8.83333L7.5013 5.5"
+                                stroke="black"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M4.16797 8.83334H13.3346C14.2187 8.83334 15.0665 9.18453 15.6917 9.80965C16.3168 10.4348 16.668 11.2826 16.668 12.1667C16.668 13.0507 16.3168 13.8986 15.6917 14.5237C15.0665 15.1488 14.2187 15.5 13.3346 15.5H12.5013"
+                                stroke="black"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_117_4347">
+                                <rect
+                                    width="20"
+                                    height="20"
+                                    fill="white"
+                                    transform="translate(0 0.5)"
+                                />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <p>Gery</p>
+                </button>
+                <h1 className="text-[28px] font-semibold">
+                    Sifarişimin detalları
+                </h1>
+            </div>
             <button className="gap-2.5 self-end px-6 py-3 mr-14 text-sm font-medium text-rose-600 hover:text-white hover:bg-rose-600 border border-solid border-rose-600 border-opacity-20 rounded-[100px] max-md:px-5 max-md:mr-2.5">
                 Sifarişi ləğv et
             </button>
             <div className="flex flex-col items-start px-10 mt-14 w-full max-md:px-5 max-md:mt-10 max-md:max-w-full">
-                <section className="w-full flex flex-col items-center">
+                <section className="w-fit flex flex-col items-center">
                     <div className="flex flex-nowrap gap-2 items-center">
                         {statusSteps.map((step, index) => (
                             <React.Fragment key={index}>

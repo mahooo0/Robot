@@ -62,7 +62,7 @@ export default function SaleProduct() {
             <main>
                 {' '}
                 <div className="w-full flex justify-center">
-                    <h2 className="text-[#447355] text-[48px] font-semibold text-center  mt-[40px] max-w-[587px]  ">
+                    <h2 className="text-[#132A1B] text-[48px] font-semibold text-center  mt-[40px] max-w-[587px]  ">
                         Ən son təkliflərimizi satın alın!
                     </h2>
                 </div>
@@ -94,10 +94,10 @@ export default function SaleProduct() {
                                         </div>
                                     </div>
                                     <div className="flex flex-col mt-5 w-full font-semibold max-md:max-w-full">
-                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl">
+                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl leading-[72px]">
                                             Roomba Combo® j9+ now
                                         </h1>
-                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-green-400 rounded-lg">
+                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-[#69BE56] rounded-lg">
                                             <div className="self-stretch my-auto">
                                                 300
                                             </div>
@@ -115,15 +115,15 @@ export default function SaleProduct() {
                     </div>
 
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
                     </div>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <ProductCard_MD
@@ -170,10 +170,10 @@ export default function SaleProduct() {
                                         </div>
                                     </div>
                                     <div className="flex flex-col mt-5 w-full font-semibold max-md:max-w-full">
-                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl">
+                                        <h1 className="text-5xl text-white max-md:max-w-full max-md:text-4xl leading-[72px]">
                                             Roomba Combo® j9+ now
                                         </h1>
-                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-green-400 rounded-lg">
+                                        <div className="flex gap-1 items-center self-start px-3 py-1.5 mt-6 text-2xl text-center text-white whitespace-nowrap bg-[#69BE56] rounded-lg">
                                             <div className="self-stretch my-auto">
                                                 300
                                             </div>
@@ -191,13 +191,13 @@ export default function SaleProduct() {
                     </div>
 
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
+                        <Product_Card_aute issale={true} />
                     </div>
                     {/* <div className="flex flex-row flex-wrap justify-between mt-7">
-                        <Product_Card_aute />
+                        <Product_Card_aute issale={true} />
                         <Product_Card_aute />
                         <Product_Card_aute />
                     </div> */}
@@ -220,7 +220,7 @@ export default function SaleProduct() {
                 </section>
                 <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full my-[100px] ">
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full">
+                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full w-full ">
                             Seçim etməkdə kömək edək!
                         </h2>
                         <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">

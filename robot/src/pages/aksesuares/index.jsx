@@ -71,7 +71,7 @@ export default function index() {
 
     return (
         <div>
-            <Header activeIndex={1} productIndex={2} />
+            <Header activeIndex={2} productIndex={2} />
             {/* <section className="w-full lg:px-[60px] px-[30px] py-5">
                 <div className=" rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full  min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
