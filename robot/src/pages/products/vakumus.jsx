@@ -73,7 +73,7 @@ export default function category() {
                     className="flex overflow-hidden flex-col items-start px-16 pt-24 pb-7 w-full max-md:px-5 max-md:max-w-full"
                     style={{
                         backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/1eef/cebc/325df84941b7a72afd9fef7abe155873?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LOsq6kVhw~AN8UW5~Ru-4P0X48FJp26RZMk5loCFXANbCbonKAOezcbilhjId30NaG2Tlsjl24yFJxMsGZuCXvK~qzTjRzDUYB~w1psweaC-bR-h3GLCyQqYRihfR1GJGnivsi38p1ViHSPRAtNyZ-bSJgj9J~ai3bFXBU1T4xF6E7SqyDXfwfMhHCOKmsqzTEro3BIIV6E2qz8j7YXJJNT0afes67SBSDFwlx6xYOCZjVKh9MRdovPco~sKrTcyfTUQDd~XJOCpbQ3hH41ZkDzvcLVYoV06PyknGpIe7yspUdYSuPzQSI0xckR5zTwyEGr8gYJOeK53URK61qlOsg__)',
+                            'url("https://s3-alpha-sig.figma.com/img/1eef/cebc/325df84941b7a72afd9fef7abe155873?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=WilPHOLACEovM5IPJtFsgr6Q58juqvL0Yyn8BWKgpYEsZaoRB8oq7phUIrO3O0mHt0S0hRfsTqdooiePIOyZOmPLlQ08Sv6ItGZ7T4XxHzjD3Vhhfet3zncYoiyf40z~Nf8C89kvGDJc2F1g2vVN5F88Pm6eQI7CiJqPJrhmrfxA27x8R2CS57nvQdE-7lOG6sP1c-klwGwpHQIwuq8flY1Su5MR8vYCwEDUJSRIJN8DQdJ2K5PsbkN5Df8f-hLS3mBmDjeE~~43aqeypaqI5qtH4skQes4a3Sja0bZQnh9RGMsZEK8vRskM1S9Rlyt8qIO-iHuX6ccuDz~Oda~Quw__")',
                         backgroundSize: 'cover', // This makes the image cover the entire div
                         backgroundPosition: 'center', // Centers the image
                         backgroundRepeat: 'no-repeat', // Prevents the image from repeating
@@ -162,7 +162,7 @@ export default function category() {
                         loop
                         controlsList="nodownload"
                         width="600"
-                        src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/a465/a8ac/-bbd3-400c-89be-40c710fb772c?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LCeWRiy1X9BNBKMG~AsutH4yMdOqZ-6Nt1R1Yu~~U4yKMLHdJyrJoHMDoCmmGH0dz~VhQ2p1y08gy3ckg13kb8FhBrdQHWgWMyPoYCWRL-lbYFuGdo0lM86YpnQoox4J~ucFupWs2rY6ynZ3Ux4~aeGKx-Fx~1D75MhasKpduHTr5beg0QUmy4iYXeB6UFGKku~QdOd3XXjB7YXzEEa15yyrlzQ74JXLA9EA0YstxmqLf7kSXbJBKEYJU9lVKNvRSbDmnXwhm~5GwZuy4SB2qS9nWQinwXgOWrwsOQIdQJ6DGVbhxUvgna2~losA7hWXRND4C0LBnNy38gMZggsmlg__"
+                        src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/a465/a8ac/-bbd3-400c-89be-40c710fb772c?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EPHDZuHUl37NSQfEFlN66kd5ajwqteggRiG3STU5jFJe80XVTOHWo1kCCmmc~D~xoyZjy2O-c4u6uVvnwuP12V8bzq8APAvq4WDFYmYGtVeKXjbym~NuvwpR6qHxjUyJiveqSBBaTUIvmMv31-ykBXDg2xpVQceOdINwLBSeeE-Rbo9gLflqz9MAwU-n-L0APf5NSlc61xqttXTjyQ88KEKPQhaejaVlbvEX1ImfSQ4EogUOS0QEjxFU9tSRH9XXW4xsF3dGIB9JaRvHlJF2idWvViJd1PUZYcYMiHIPS7Zq5d-o8n2DMUssZCLY0Fzv4Yb7ohat5CurQwg3pHkugA__"
                     ></video>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute />
@@ -205,7 +205,7 @@ export default function category() {
                         loop
                         controlsList="nodownload"
                         width="600"
-                        src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
+                        src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/5013/ce66/-60a4-46ce-a172-0e0be0967377?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=l0gYp1ZUptmVgAI1bkng~XJz7aYcOzVEmn9Bj5fwFhA0yEwTmYyHWA~ihm8Z3pmtJz69PGk~4OI8dma7YG64Bt5Glw9ycSzQSzvj8qX-J46tx4oWWgP4exaSd0KYKUKefaKcNxdik-F7zEOvb377BX8x7xQXg00evkOGbPUDfafWUNl9ngRDLtuo5FwrYf9eS8Tr0~JhvkaZE5hBom0hpFpBir7thnLeDvaS6nucIFyKSt4Pg67oWB0fEmka0yFpl5sMe4Wtv08kJhiFn-MrAGRivYRhu3zSA3WOMcgQJfBOOc7-3zDO4hZ2ZLAIQk9s6B5uNNQ3qFpvQUAMlRKGww__"
                     ></video>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
                         <Product_Card_aute bgcolor="#FFFFFF" />
@@ -248,7 +248,7 @@ export default function category() {
                         loop
                         controlsList="nodownload"
                         width="600"
-                        src="https://mts.caratcons.az/uploads/heros/92992459.mp4"
+                        src="https://s3-figma-videos-production-sig.figma.com/video/1133314765284192593/TEAM/e048/9237/-063f-49d3-a1c4-916639a88b0e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gqG1ablpa8UUjpSlPtDjjZWQ~6dU1RyHKEgEWNUmBNENIgtrEOKMdrgncRDXx-v-i7v~fS8YqX5Te5slSNDJQBC95PEphCT8lr24G7MJDhOT073zoj7SMHUfodZ1Nr1q7CX-F9LocenqQ-zQ~UTSU2k8jQj5gykhn4JqikGke5QN-nrArg-rRxi3TrmgGVwACI4PZBNuKWnkGiAeAucOMNghfR4472u5hB0kd5Pim8rv6CMo7EK5tVXWJjhTz-hgKEgmO85q0lWwveBiou1E5Do-EomRzz4lF7DDtQLlWZ3W~KYLtd0sHgKWoq8JfjzQUbG6441Q00OQM3OxdlIibw__"
                     ></video>
                     <div className="flex flex-row flex-wrap justify-between mt-7 gap-5 ">
                         <Product_Card_aute />

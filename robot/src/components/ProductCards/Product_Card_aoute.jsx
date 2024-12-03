@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 export default function Product_Card_aute({
@@ -6,9 +7,10 @@ export default function Product_Card_aute({
 }) {
     const [isliked, setIsliked] = useState(false);
     const [ison, setIson] = useState(false);
-
+    const router = useRouter();
     return (
         <div
+            onClick={() => router.push('/products/id')}
             className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px]  relative"
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}
@@ -19,7 +21,7 @@ export default function Product_Card_aute({
             >
                 <img
                     loading="lazy"
-                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dopZyaHyVF41U9VNR2lf127xh9845fd2CEmN0q4Ylsr0zWg8NQn5HOLbFq3NQtPS3o1H9n0TWn1FVlopKz9EAVOJw3PfDezjWfdWpup4OrOUjcrH078tI-bvnpEWuSHf~UFG9EHplEUvTlyqJeIm8pAzzekFRMBP21kvg8ecs5-BDTuJy4G3-zBf03tmfmzw~tRGfU8VkP5gePpR~Jt6tkYyxth1-sCAS6R-1Y1-bs6VhApmzvxWGpDeN0j5-GEWsFDf7WNvNZajlSCc73jJGWOA1Fhkhf7ERkqGMpCBRdnAPfzQnLX~Es7xaM1RVWX4zgt6u1LtgQI3Uws3w72Stw__"
+                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0RyGo8EKjkOurF5BZo~tcdPdKpcDy7OSbRtBz2QlDNDO50Hqtsdmzjq8Pa4j8ZvUCyXK2bbEzgkqcnV6q08pECi83cWjNhQI04IQomJlKAjTh1I7cfosI~SUJuNtVQj6jIUDo33wIr30JPaGSI-a~rtNjhuOJrnI8YcRI6Z7ys~QXkNdcxDY55HmwOQhC6kS0FEkWeVSXji-iJN9Vz64Lar4BGsSe9eQLEJpVxcHL~aDJkOruTsYNj3fI2u8DUt~hkai1geh8q680w07uZWSWOlwS28az70qiYvJ0c3p~sKr1AUkVLeu0jQjflkLx~cTHcUgAwuNdYIUcBDNCa~0Q__"
                     alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                     className="object-cover w-full rounded-3xl aspect-[1.24]"
                 />

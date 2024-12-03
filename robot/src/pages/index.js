@@ -43,7 +43,7 @@ export default function Home() {
                     loop
                     controlsList="nodownload"
                     width="600"
-                    src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/24fe/37d5/-68ca-4f7c-b9c4-18adc1ca0a2f?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OeLkLhfr-JOvYzl-sCAabeDDk3ZyVvp9Bpcc9oEDyVJ3j7a6n2tsamtdTl9-eQkkium3tTe7MC5htKqcMRAguD6ufuFm5hdQoW9oiU~ITWFHz2gwsCPfSdCVy8EKq-0w8xksMGi65Q95j-~i5YV41IwvOjP72tHd5e2ldM6WQ33YLVPEPg7JTqOAiJ6n831YqdFs04y-QXXcKVisCHOYEJz4WnMGCSpx5~KS2LVqvHgUXgc8ncRckk9SgNckLKCCvXxnzGX7xRVIDBF7HR1QjXOvDdPnva-Wrpn3wJwH3cnt6yVMbyDOTfOzgeBAv0AOmsINLyTM8RSAcZiAb22APw__"
+                    src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/24fe/37d5/-68ca-4f7c-b9c4-18adc1ca0a2f?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Gux79KNOZQAc7Igptv2EWVkRux3S676SxERu6OBjQbqpYkjL9e9G-SEFw~QlOxRKVsGixbKxkluSVcKpOcELoJw-5XEtCEZfiIAsrYAHLcoUYTyel65EX-AycZYAUihBTOdj5QdHjTFv6HCJ-MDlmBoDRoBY-KrKFo8RYhBHMPPmWaf~EbZHZXVhLNmV94fck2~GzBN3SLaAz~zGIfjfJnmtrPXlP0JuuEOfNtGh4TqS59clV~cBJhLtvkFu5lasdtbgVOCS69YRXRIZ4xYYyVGn4WbKJJbMkIi2bnPG6k-qDf1P2WGcGRpG6UuZVCK4iGQtR6Jyaz6RBRKXxH7kMA__"
                 ></video>
                 <Hero_Swipper />
             </section>
@@ -88,7 +88,7 @@ export default function Home() {
                 <div
                     style={{
                         backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/ea8c/d6bf/9c48576ee287164253abe4ca60f991ee?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BSwR5kON9eEBRuUU2Jb3jeUnByFQHTkxU22RMNb0tWdmhKZdH5v45OfKoryIrQNHIGxbyGMpISB9p4EusSGv~JeaL7k-LdXXT~l8nSnAztXZOLh39YWNvWL6Cl6EGJ1NV8qZ4fmYFXmaqGQPgb~AdrWMaw41cmcAaAO8nZgZXReGHYfOm9AF9bKcjw3fZNROuxTdIzuXcYNOzZeZWTvHphXRdLtDKpKVpWx~BuoxrGYPGM2qJOn3rRfSJ2GO7BLIlpO30ke1zzwhT5AZjFjVGy~fAz2wCAyN5zAB3OAz-T2IK1q6ig85x0myZTVUf-nTTAZSCmqM33aD8T7g2Adt4g__)',
+                            'url("https://s3-alpha-sig.figma.com/img/ea8c/d6bf/9c48576ee287164253abe4ca60f991ee?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GmaOSlLaUsADOm3QC5g2bn0OH4JFEuEQgwg-Cr7YPsPqmQE7g9rGGDRvKOWe27jnbM0v0VY~~pQVTYa0QT0E9geziNMnDwLmqNl-GvDSayUhZKqeDbwIXc4uC2GAp23HFHpMqc4oqx2m5HXWpvXmkD1D10VpyNV9cJn6BxuNOL4MU1NWto28PICPimr1pqxoAx8gBYk4jwDDMMINlRIbjZfn-M5RrIVKzXoSPSNxzSPtw2Ww-itawBLnHpl2HPzP0AlYeqllM-~bGte-4g5DcbUhGwJYvXZYU1qFDnWiv2OKuBScQNZ2k5p9RrOJl9zoP1v1ZpYg9a2R9HdnRVeBxw__")',
                     }}
                     className="flex overflow-hidden flex-col items-start pt-10 pr-20 pb-28 pl-10 mt-24 max-w-full rounded-3xl w-full  max-md:px-5 max-md:pb-24 max-md:mt-10"
                 >
@@ -143,7 +143,7 @@ export default function Home() {
                     <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full items-center">
                         <img
                             loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3e52665f3563440d2efba3081a0e3f10439e0c9c3dcfd0c800dbcc15c93e98e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0RyGo8EKjkOurF5BZo~tcdPdKpcDy7OSbRtBz2QlDNDO50Hqtsdmzjq8Pa4j8ZvUCyXK2bbEzgkqcnV6q08pECi83cWjNhQI04IQomJlKAjTh1I7cfosI~SUJuNtVQj6jIUDo33wIr30JPaGSI-a~rtNjhuOJrnI8YcRI6Z7ys~QXkNdcxDY55HmwOQhC6kS0FEkWeVSXji-iJN9Vz64Lar4BGsSe9eQLEJpVxcHL~aDJkOruTsYNj3fI2u8DUt~hkai1geh8q680w07uZWSWOlwS28az70qiYvJ0c3p~sKr1AUkVLeu0jQjflkLx~cTHcUgAwuNdYIUcBDNCa~0Q__"
                             alt="Special offer illustration"
                             className="object-contain grow shrink-0 max-w-full aspect-[1.06] w-[343px] max-md:mt-10"
                         />
@@ -178,7 +178,7 @@ export default function Home() {
                     <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full justify-center items-center">
                         <img
                             loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d104362fd87d9e2d7ee1680cf4e2d0d133880abf7d9f60ccc19d0b963515dd14?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                            src="https://s3-alpha-sig.figma.com/img/8f06/bda5/d6bb2e0cbb668f78f4572a4272c6d283?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NR4fBS0LYA2zb-FuV16A58E~JOj5ZCzOi8wvr6pSAJv~RLSFzAbeFojywLTUq5F17nTAYo3AClosB4yoaBY3X64ib0uRdCjc71OMXyldfBBvmk-J1lgCGpkV-r77j6sZUo5lRweQ2dF4xtLL2co0wapY0tf3-ER9pAQm1fcfBLBhRN5BNPw-zSfyDnpvQHE9Iq7-Hd-JTcD~a8cL77PM9j8Kr9Me~a~Siit1PCrxrVRKKWLBDtiBt8YaN6xseyCcfpqMCRZ9mm-LBSt-nGrg-kgTJvjm-PZ07ofltA9I2Bst9V6aZCfTfeA5cqbZMSrdmH87x61LLKflhhvq8r3yGQ__"
                             alt="Special offer promotion"
                             className="object-contain grow shrink-0 mt-2 max-w-full aspect-[0.97] w-[303px] max-md:mt-10"
                         />
@@ -228,7 +228,7 @@ export default function Home() {
                             loop
                             controlsList="nodownload"
                             width="600"
-                            src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/16c4/4039/-50d9-45aa-a451-9f953bc0289c?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XJ35KmTy7wLKjxq8k1RAxUKWLIK6~B9vAdh-4uWd2I44l4QfIjkopMj8jwgay95HSN6dJ71-MgoTiECKw4O-KkAmt-PTwLfabA5qNQR5Wg5~dogXlWVeVdvsdttWELLxTjUnr9jyIzMYlbSUqAdfHX-ghDAi5ETYTgHH66FYaes-GXRwipNoioBavf5z0EZVSnwCyIYDDqoGylKpK6vD4pGFTMKm9mxOyFgFTJEET4ZAA3PdIryEQwlkzXwqSTOGMhusE8MVeOAXtCGcDkcpRzOp8Uf1QJiIXBgAWSvE8Nfl45nespIgGh-DdMtWQYj~6dy3XTJAwvaLe0T1NWx4Ng__"
+                            src="https://s3-figma-videos-production-sig.figma.com/video/1213020028553192391/TEAM/16c4/4039/-50d9-45aa-a451-9f953bc0289c?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jtZgK8gWmKO7G5aUq0t-NrB4qU~jaaHGpRIddJWhIQvE3or1yd2CdnUoVRn3mU9iN8zhPy~DLs4HX6~rtC4wy~LrQi9NfJHb~qfZXxS-ZJswTsq4XajWXcAQSsizwEKaF9qyi6psbElxOucq0kuV1wiIl1K1nsiQR6cuJN6R0k~tpfHWUBFtlJOscVEgRAyGw0sjdT4HZYPXgm~VK7SOEck~YGeofjIQLCV4MODcX1~cMmccJqGqHybJTcSOYQcNKq685T5DQN-spfq-TzjYweHXKqIQky0o3nxztXEKixlN0C6rTD8xdJpuixRdeCHnNSZqPLcaeJOE86HGeE-qbw__"
                         ></video>
                     </dic>
                 </div>
@@ -251,7 +251,7 @@ export default function Home() {
             <section
                 style={{
                     backgroundImage:
-                        'url(https://s3-alpha-sig.figma.com/img/b00d/4a63/56b9a3f4d4b1da6394cc94353b1189ab?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nXCvaOlTTD5SjFeCq4m0k8JDO~DA9UlHJk2Pw4Vw2YNeb9PEKssCPfdpwoDzpfQ2KaC4mzcK4LaC~dDAwFghRJOiKEjhfLXsLuzeaToBhWRAs-GvFpakbF2diwn0AzB~1h5fmU-40sWVfy4w3nqBevWXYN51bZ8YVQcGPzFW-YoJNVxmYW6A491Fnn30s4vp-JhrBT5~KC2t6LHZcQNcQgSwn7jVw8sGjmfwFmGc9iI56i4N2B14gYD-t~7GjmzUb9NXuS2vxzy-KJwfX6fopdSb~JZjDENAcAaAFDJgUTfV91~1ygxrmexHmpamDFWKO3Yi9us8axHPLo2XzrC1GQ__)',
+                        'url("https://s3-alpha-sig.figma.com/img/b00d/4a63/56b9a3f4d4b1da6394cc94353b1189ab?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=na0P27kZjClw-c7dZ~53jkiOiBn1P9F~xPxinhPehqyFP--h7PBGEsXKTeaPBO27pyXjNe4gQfm7oCPdCDZ4XYjG~PEMnrOh6osKELIZSkYxP3wYZy4kZfQQDO4XKgKoEZ7r7100XQubK8mDTLpdFDJ2NNAQffQ99dSiLgms-sOrvLtVD20mPLbpa6mPlnrqXYkEo9CAHFlt3ApILAgl-EFRggHQGAb0gPeviswocQaq5k~ACvwJnECqlw6mG0eajor6jH4aAXw4wqi2z0TSHNLR9vYbZXlq~PkCIS-nlDh195YcUwXTuyPDJUE2lKCl-QUdBnZuRzG1eBPY6GHHVA__")',
                     backgroundSize: 'cover', // This makes the image cover the entire div
                     backgroundPosition: 'center', // Centers the image
                     backgroundRepeat: 'no-repeat', // Prevents the image from repeating

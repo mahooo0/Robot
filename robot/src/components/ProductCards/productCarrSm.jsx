@@ -35,7 +35,7 @@ function ProductCardSm() {
                 </div>
                 <img
                     onClick={() => router.push('/products/id')}
-                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cJTCUiZRdP4cY4Er4P6uXpOzZNn2gbhkHwts6PzYBMnXK~qM3xpyjBPKQe1-7UfHjSwKILykLaNtwLfQghxoogxZGqHMdeEuCyBQM8RQopi254d8T-56CwQZ1MuzASazAsl9FFFlC2SHd03gNg5eQpDQpIPRBnoCxaEIhdNWgUFBbghSWiwemMIIhqLT93w89M1DPPxDebQv1RCu3cLV435nb1CKdw9RfBK6ihzM8bmJMV2vynSqsOBog7bo63wwZ9asEvQinKAfvNT8O~t6YZiFYa1FSwopyvnmrSNnF8Tja2C5gsw~CBQUH2Tc62HHNnFDgxAB2ugJhhIjrVR1qw__"
+                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0RyGo8EKjkOurF5BZo~tcdPdKpcDy7OSbRtBz2QlDNDO50Hqtsdmzjq8Pa4j8ZvUCyXK2bbEzgkqcnV6q08pECi83cWjNhQI04IQomJlKAjTh1I7cfosI~SUJuNtVQj6jIUDo33wIr30JPaGSI-a~rtNjhuOJrnI8YcRI6Z7ys~QXkNdcxDY55HmwOQhC6kS0FEkWeVSXji-iJN9Vz64Lar4BGsSe9eQLEJpVxcHL~aDJkOruTsYNj3fI2u8DUt~hkai1geh8q680w07uZWSWOlwS28az70qiYvJ0c3p~sKr1AUkVLeu0jQjflkLx~cTHcUgAwuNdYIUcBDNCa~0Q__"
                 />
                 <div className="absolute w-full h-[60px] bottom-0 flex justify-center overflow-hidden">
                     <button

@@ -72,19 +72,22 @@ export default function SalesSwipper() {
                 <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide className="!w-fit">
+                    <ProductCardSm />
+                </SwiperSlide>
+                <SwiperSlide className="!w-fit">
                     <ProductCardSm />
                 </SwiperSlide>
             </Swiper>
