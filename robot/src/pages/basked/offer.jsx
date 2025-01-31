@@ -15,7 +15,7 @@ export default function Index() {
                 </h1>
                 <div className="flex flex-col md:flex-row justify-between flex-wrap w-full gap-5 mt-[40px]">
                     <CheckoutForm />
-                    <OrderSummary />
+                    <OrderSummary isConfrim={true} />
                 </div>
             </main>
             <Footer />

@@ -19,11 +19,11 @@ const cartItems = [
     },
 ];
 
-function ShoppingCart() {
+function ShoppingCart({ basked }) {
     return (
         <main className="flex  gap-5 justify-between items-start mt-10 lg:flex-row  flex-col ">
             <section className="flex flex-col max-md:max-w-full lg:w-[75%] w-full lg:border-r-2 md:border-r-2  border-none pr-[40px] border-black border-opacity-10 ">
-                {cartItems.map((item) => (
+                {basked?.basket_items.map((item) => (
                     <React.Fragment key={item.id}>
                         <CartItem item={item} />
                         <hr className="shrink-0 mt-7 h-px border border-solid border-black border-opacity-10 max-md:max-w-full" />
@@ -31,7 +31,7 @@ function ShoppingCart() {
                 ))}
             </section>
             {/* <div className="shrink-0 self-stretch w-px border border-solid border-black border-opacity-10 h-[480px]" /> */}
-            <OrderSummary />
+            <OrderSummary basked={basked} />
         </main>
     );
 }

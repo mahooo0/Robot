@@ -131,7 +131,9 @@ const contactInfoData = [
     },
 ];
 
-function ContactSection() {
+function ContactSection({ contact_items, translates }) {
+    console.log('contact_items', contact_items);
+
     return (
         <div
             className="self-center p-16 mt-16 w-full  max-md:px-5 max-md:mt-10 max-md:max-w-full relative rounded-[20px] overflow-hidden"
@@ -150,14 +152,14 @@ function ContactSection() {
                 <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                     <div className="flex flex-col text-white max-md:mt-10 max-md:max-w-full">
                         <h1 className="text-4xl font-semibold max-md:max-w-full">
-                            Bizimlə əlaqə
+                            {translates?.Bizimlə_əlaqə}
                         </h1>
                         <div className="flex flex-col mt-7 w-full text-base max-md:max-w-full gap-3">
-                            {contactInfoData.map((info, index) => (
+                            {contact_items.map((info, index) => (
                                 <ContactInfo
                                     key={index}
                                     icon={info.icon}
-                                    text={info.text}
+                                    text={info.value}
                                 />
                             ))}
                         </div>

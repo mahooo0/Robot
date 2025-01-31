@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
+import { ROUTES } from '@/Helpers/Routes';
 
 const productItems = [
     { name: 'Endirimli məhsullar' },
@@ -23,14 +24,14 @@ function Navigation({ aksesuaresindex }) {
     const [activeindex, setactiveindex] = useState(aksesuaresindex);
 
     const [menu, setMenu] = useRecoilState(MenuState);
-
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
     const handleDropdown = (id) => {
         setMenu(() => ({
             [id]: true,
         }));
     };
 
-    const router = useRouter();
     return (
         <nav className="overflow-hidden  bg-white border-t border-gray-600 max-w-[723px] ">
             <div className="flex gap-5 max-md:flex-col">
@@ -106,7 +107,11 @@ function Navigation({ aksesuaresindex }) {
                                     Hansı məhsul mənə uyğundur?
                                 </li>
                                 <li
-                                    onClick={() => router.push('/products')}
+                                    onClick={() =>
+                                        router.push(
+                                            `/${lang}/${ROUTES.product[lang]}`
+                                        )
+                                    }
                                     className="mt-4"
                                 >
                                     Bütün məhsullar

@@ -3,7 +3,7 @@ import Settings from '@/components/Setting';
 import UserAside from '@/components/UserAside';
 import React from 'react';
 
-export default function index() {
+export default function Setting() {
     return (
         <div className="h-[100vh] w-full bg-[F1F5F0]   relative">
             <Header activeIndex={0} />

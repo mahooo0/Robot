@@ -1,17 +1,94 @@
+import { ROUTES } from '@/Helpers/Routes';
+import GETRequest from '@/services/QueryREq';
+import { axiosInstance } from '@/services/Requests';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function Product_Card_aute({
     bgcolor = '#EEEEEE',
     issale = false,
+    data,
 }) {
     const [isliked, setIsliked] = useState(false);
+    const [includes, setincludes] = useState(false);
     const [ison, setIson] = useState(false);
     const router = useRouter();
+    const { lang = 'az' } = router.query;
+
+    const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
+    const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
+        lang,
+    ]);
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
+    console.log('basked', basked);
+    const checkLikedProducts = () => {
+        if (favorites?.some((item) => item.product.id === data?.id)) {
+            setIsliked(true);
+        } else {
+            setIsliked(false);
+        }
+    };
+    const queryClient = useQueryClient();
+    useEffect(() => {
+        // Initial check on render
+        checkLikedProducts();
+    }, [favorites]);
+    useEffect(() => {
+        if (basked?.basket_items.find((item) => item.product.id === data.id)) {
+            console.log('include');
+            setincludes(true);
+        }
+        basked?.basket_items;
+        // // Initial check on render
+        // // checkLikedProducts();
+
+        console.log('BAAAA', basked?.basket_items, data.id);
+    }, [basked]);
+    const addToBasket = async (Data) => {
+        const response = await axiosInstance
+            .post(
+                '/basket_items',
+                {
+                    product_id: Data.product_id,
+                    quantity: Data.quantity,
+                    price: Data.price,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${Data.token}`,
+                    },
+                }
+            )
+            .then(() => {
+                toast.success('sucses');
+                queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+            })
+            .catch(() => {
+                toast.error('eror');
+            });
+        // return response.data;
+    };
+    // const mutation = useMutation({
+    //     mutationFn: addToBasket,
+    //     onSuccess: () => {
+    //         toast.success('Məhsul səbətə əlavə edildi');
+    //         setBtnLoadin(false);
+    //         // setRefetchBaskedState((prev) => !prev);
+    //         queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+    //     },
+    //     onError: (error) => {
+    //         toast.error('Xəta baş verdi');
+    //         console.error(error);
+    //     },
+    // });
     return (
         <div
-            onClick={() => router.push('/products/id')}
-            className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px]  relative"
+            className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px]  relative cursor-pointer"
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}
         >
@@ -20,40 +97,77 @@ export default function Product_Card_aute({
                 style={{ background: bgcolor }}
             >
                 <img
+                    onClick={() => router.push('/products/id')}
                     loading="lazy"
-                    src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0RyGo8EKjkOurF5BZo~tcdPdKpcDy7OSbRtBz2QlDNDO50Hqtsdmzjq8Pa4j8ZvUCyXK2bbEzgkqcnV6q08pECi83cWjNhQI04IQomJlKAjTh1I7cfosI~SUJuNtVQj6jIUDo33wIr30JPaGSI-a~rtNjhuOJrnI8YcRI6Z7ys~QXkNdcxDY55HmwOQhC6kS0FEkWeVSXji-iJN9Vz64Lar4BGsSe9eQLEJpVxcHL~aDJkOruTsYNj3fI2u8DUt~hkai1geh8q680w07uZWSWOlwS28az70qiYvJ0c3p~sKr1AUkVLeu0jQjflkLx~cTHcUgAwuNdYIUcBDNCa~0Q__"
+                    src={data.image}
                     alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                     className="object-cover w-full rounded-3xl aspect-[1.24]"
                 />
                 <div className="absolute w-full h-[60px] bottom-0 flex justify-center overflow-hidden">
                     <button
-                        className={`flex flex-row justify-center items-center h-[44px] w-[90%] bg-[#447355] text-white rounded-[100px]  transition duration-300  ${
+                        onClick={async () => {
+                            if (!includes) {
+                                const userStr =
+                                    localStorage.getItem('user-info');
+                                if (userStr) {
+                                    const user = JSON.parse(userStr);
+
+                                    await addToBasket({
+                                        product_id: data.id,
+                                        quantity: 1,
+                                        price: +data.discounted_price,
+                                        token: user.token,
+                                    });
+                                } else {
+                                    router.push(
+                                        `/${lang}/${ROUTES.login[lang]}`
+                                    );
+                                }
+                            }
+                        }}
+                        className={`flex flex-row justify-center items-center h-[44px] gap-2 w-[90%] bg-[#447355] text-white rounded-[100px]  transition duration-300  ${
                             ison ? ' ' : ' translate-y-20'
                         }`}
                     >
-                        <img src="/svg/shop.svg" />
-                        Səbətə əlavə et
+                        {!includes ? (
+                            <>
+                                <img src="/svg/shop.svg" />
+                                Səbətə əlavə et
+                            </>
+                        ) : (
+                            <>
+                                {' '}
+                                <img
+                                    src="/svg/ok.svg"
+                                    className="w-[25px] aspect-square"
+                                />
+                                sebete eleve olunub
+                            </>
+                        )}
                     </button>
                 </div>
             </div>
 
-            <div className="flex flex-col mt-3 w-full">
+            <div
+                className="flex flex-col mt-3 w-full"
+                onClick={() => router.push('/products/id')}
+            >
                 <div className="flex flex-col w-full">
                     <h2 className="w-full text-base font-medium text-black">
-                        Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash
-                        Dock
+                        {data.title}
                     </h2>
-                    <p className="mt-2 text-sm text-black text-opacity-60">
-                        Free Shipping on All Robot Orders
-                    </p>
+                    <div
+                        className="mt-2 text-sm text-black text-opacity-60"
+                        dangerouslySetInnerHTML={{ __html: data.description }}
+                    />
                 </div>
                 <div className="flex justify-between items-center mt-3 w-full text-xl font-semibold text-center text-gray-600 whitespace-nowrap">
                     <div className="flex gap-1 items-center self-stretch my-auto">
                         <div className="flex flex-row gap-2 ">
-                            {issale && (
+                            {data.price === data.discounted_price || (
                                 <div className="line-through flex flex-row">
                                     <span className="self-stretch my-auto flex flex-row gap-1 items-center text-[#B9B8B8]">
-                                        300
+                                        {data.price}{' '}
                                         <svg
                                             width="18"
                                             height="16"
@@ -69,7 +183,10 @@ export default function Product_Card_aute({
                                     </span>
                                 </div>
                             )}
-                            <span className="self-stretch my-auto">300</span>{' '}
+                            <span className="self-stretch my-auto">
+                                {' '}
+                                {data.discounted_price}
+                            </span>{' '}
                         </div>
 
                         <img
@@ -85,7 +202,46 @@ export default function Product_Card_aute({
                 className={`${(bgcolor = '#EEEEEE'
                     ? 'bg-[#F6F6F6]'
                     : 'bg-white')} w-[44px] h-[44px] rounded-full flex justify-center items-center  absolute top-3 right-3 `}
-                onClick={() => setIsliked((prew) => !prew)}
+                onClick={async () => {
+                    const userStr = localStorage.getItem('user-info');
+                    if (userStr) {
+                        const User = JSON.parse(userStr);
+                        console.log('User', User);
+
+                        if (User) {
+                            axiosInstance
+                                .post(
+                                    '/favorites/toggleFavorite',
+                                    { product_id: data.id },
+                                    {
+                                        headers: {
+                                            Authorization: `Bearer ${User.token}`,
+                                            Accept: 'application/json',
+                                        },
+                                    }
+                                )
+                                .then(() => {
+                                    // toast.success(
+                                    //     'Product is sucsesfully aded to favorites'
+                                    // );
+                                    if (isliked) {
+                                        setIsliked(false);
+                                    } else {
+                                        setIsliked(true);
+                                    }
+                                    queryClient.invalidateQueries({
+                                        queryKey: ['favorites'],
+                                    });
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                        }
+                    } else {
+                        router.push(`/${lang}/${ROUTES.login[lang]}`);
+                        // navigate();
+                    }
+                }}
             >
                 <img src={isliked ? '/svg/heartRed.svg' : '/svg/heart.svg'} />
             </div>

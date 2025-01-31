@@ -1,4 +1,6 @@
+import { ROUTES } from '@/Helpers/Routes';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 function Footer() {
@@ -25,9 +27,11 @@ function Footer() {
             opacity: '90',
         },
     ];
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
 
     const supportLinks = [
-        { text: 'Bizimlə əlaqə', page: '/contact' },
+        { text: 'Bizimlə əlaqə', page: `/${lang}/${ROUTES.cotact[lang]}` },
         { text: 'Sifarişi izlə', page: '/user/orders' },
         { text: 'Qaydalar və şərtlər', page: '#' },
         { text: 'Geri qaytarmalar', page: '#' },

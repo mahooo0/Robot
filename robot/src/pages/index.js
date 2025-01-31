@@ -28,7 +28,7 @@ const geistMono = localFont({
     weight: '100 900',
 });
 
-export default function Home() {
+export default function Home({}) {
     const router = useRouter();
     return (
         <div className="text-[#132A1B]">

@@ -2,14 +2,43 @@ import FilterComponent from '@/components/FilterCategory';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import NavigationBar from '@/components/Navication_bar';
+import ProductPagination from '@/components/Pagination';
 import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-export default function index() {
+// Chunk Array Function
+function chunkArray(arr) {
+    const result = [];
+    let index = 0;
+
+    // Pattern for chunk sizes: [3, 3, 2, 2, 3, 3, 2]
+    const chunkSizes = [3, 3, 2, 2, 3, 3, 2];
+
+    for (const size of chunkSizes) {
+        if (index >= arr?.length) break; // Stop if we've processed all elements
+        result.push(arr?.slice(index, index + size)); // Add a chunk of the specified size
+        index += size; // Move the index forward
+    }
+
+    return result;
+}
+
+export default function Product() {
     const [searchQuery, setSearchQuery] = useState('');
+    const router = useRouter();
+    const [page, setpage] = useState(1);
+    const { lang = 'az' } = router.query;
+    const { data: products, isLoading: ProductLoading } = GETRequest(
+        `/products?page=${page}`,
+        'products',
+        [lang, page]
+    );
+    console.log('products', products);
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
@@ -20,11 +49,15 @@ export default function index() {
         // Implement search functionality here
         console.log('Search submitted:', searchQuery);
     };
+
+    // Chunk the products array
+    const chunkedProducts = chunkArray(products?.data || []);
+
     return (
         <div>
             <Header activeIndex={1} productIndex={2} />
             <section className="w-full lg:px-[60px] px-[30px] py-5">
-                <div className=" rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full  min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
+                <div className="rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/63a73b9b37a8a74a1090d1e82286b001915b6d04b87406cc3f6b3dc4ef3916df?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -68,7 +101,7 @@ export default function index() {
             </section>
             <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
                 <FilterComponent />
-                <section className=" lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
+                <section className="lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
                     <div className="w-full flex justify-between items-center flex-wrap">
                         <p className="text-[16px] font-normal text-opacity-60">
                             200 Məhsul
@@ -77,11 +110,11 @@ export default function index() {
                             <p className="text-[16px] font-normal text-opacity-60">
                                 Sırala{' '}
                             </p>
-                            <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px] ">
+                            <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px]">
                                 <select
                                     name=""
                                     id=""
-                                    className=" bg-[#ECF1EA]  w-full"
+                                    className="bg-[#ECF1EA] w-full"
                                 >
                                     <option value="">option1</option>
                                     <option value="">option2</option>
@@ -91,44 +124,57 @@ export default function index() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7 ">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7  gap-5 ">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
+
+                    {/* Render chunked products */}
+                    {!ProductLoading ? (
+                        chunkedProducts.map((chunk, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-row flex-wrap justify-between gap-5 mt-7"
+                            >
+                                {chunk.map((prod) => (
+                                    <Product_Card_aute
+                                        key={prod.id}
+                                        data={prod}
+                                    />
+                                ))}
+                            </div>
+                        ))
+                    ) : (
+                        <>
+                            <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
+                                {Array.from({ length: 10 }).map(() => (
+                                    <div className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px] relative">
+                                        <div className="relative rounded-2xl bg-gray-200 animate-pulse">
+                                            <div className="w-full rounded-3xl aspect-[1.24] bg-gray-300"></div>
+                                        </div>
+
+                                        <div className="flex flex-col mt-3 w-full">
+                                            <div className="flex flex-col w-full">
+                                                <div className="w-full h-6 bg-gray-200 rounded animate-pulse"></div>
+                                                <div className="mt-2 h-4 bg-gray-200 rounded animate-pulse"></div>
+                                            </div>
+                                            <div className="flex justify-between items-center mt-3 w-full">
+                                                <div className="flex gap-1 items-center self-stretch my-auto">
+                                                    <div className="h-6 w-20 bg-gray-200 rounded animate-pulse"></div>
+                                                    <div className="h-6 w-6 bg-gray-200 rounded-full animate-pulse"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="w-[44px] h-[44px] rounded-full bg-gray-200 flex justify-center items-center absolute top-3 right-3 animate-pulse"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                    <ProductPagination
+                        currentPage={page}
+                        onPageChange={(i) => setpage(i)}
+                        totalPages={products?.meta?.total}
+                    />
                 </section>
             </div>
-
-            {/* <div className="flex justify-center mt-[48px] mb-[100px]">
-                <NavigationBar />
-            </div> */}
 
             <Footer />
         </div>

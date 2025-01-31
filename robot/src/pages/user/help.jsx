@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 
 import React, { useState } from 'react';
 
-export default function Index() {
+export default function Test() {
     const [variat, setvariant] = useState(0);
     const [selectedOption, setSelectedOption] = useState(0);
     const [progress, setProgress] = useState(0);

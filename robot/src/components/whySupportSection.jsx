@@ -45,23 +45,24 @@ function SupportCard({ imageSrc, title, description }) {
     );
 }
 
-function SupportSection() {
+function SupportSection({ supports, title, description }) {
+    console.log('supports', supports);
+
     return (
         <section className="flex flex-col items-center">
             <header className="flex flex-col max-w-full text-center w-[395px]">
                 <h2 className="text-4xl font-semibold text-green-950">
-                    Etibarlı dəstək
+                    {title}{' '}
                 </h2>
                 <p className="mt-5 text-sm text-black text-opacity-80">
-                    Biz əla xidmətlə dəstəklənən etibarlı robotlar istehsal
-                    edirik; Bu, iRobotun vədidir.
+                    {description}
                 </p>
             </header>
             <div className="flex flex-wrap justify-center gap-10 items-center mt-12 max-md:mt-10 max-md:max-w-full">
-                {supportData.map((item, index) => (
+                {supports.map((item, index) => (
                     <SupportCard
                         key={index}
-                        imageSrc={item.imageSrc}
+                        imageSrc={item.image}
                         title={item.title}
                         description={item.description}
                     />

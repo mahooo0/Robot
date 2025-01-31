@@ -37,3 +37,31 @@ input[type='range']::-ms-thumb {
     border-radius: 50%;
     appearance: none;
 }
+.div-iframe iframe {
+    width: 100%;
+}
+
+.div-iframe {
+    overflow: hidden;
+
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.srollbar {
+}
+.srollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.srollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.srollbar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.srollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

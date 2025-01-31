@@ -37,19 +37,19 @@ function AdvantageItem({ image, text }) {
     );
 }
 
-function AdvantagesSection() {
+function AdvantagesSection({ title, advantages }) {
     return (
         <section className="flex overflow-hidden flex-col justify-center items-center py-[26px]  font-semibold text-white rounded-3xl bg-[#8E98B8] max-md:px-5 lg:h-[556p] h-fit">
             <div className="flex flex-col w-full max-w-[1025px] max-md:max-w-full">
                 <h2 className="text-4xl text-center max-md:max-w-full">
-                    Üstünlüklərimiz
+                    {title}
                 </h2>
                 <div className="flex flex-wrap gap-12 justify-center items-start self-center mt-12 w-full text-lg max-w-[1061px] max-md:mt-10 max-md:max-w-full">
                     {advantages.map((advantage, index) => (
                         <AdvantageItem
                             key={index}
-                            image={advantage.image}
-                            text={advantage.text}
+                            image={advantage.icon}
+                            text={advantage.title}
                         />
                     ))}
                 </div>

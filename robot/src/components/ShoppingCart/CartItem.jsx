@@ -1,24 +1,86 @@
+import { axiosInstance } from '@/services/Requests';
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 function CartItem({ item }) {
+    const queryClient = useQueryClient();
+
+    const updateQuantity = async (id, change) => {
+        // setItems((prevItems) =>
+        //     prevItems.map((item) =>
+        //         item.id === id
+        //             ? {
+        //                   ...item,
+        //                   quantity: Math.max(1, (item.quantity || 1) + change),
+        //               }
+        //             : item
+        //     )
+        // );
+        const userStr = localStorage.getItem('user-info');
+        const user = JSON.parse(userStr);
+        await axiosInstance
+            .put(
+                `/basket_items/${id}`,
+                {
+                    price: change.price,
+                    quantity: change.quantity,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                }
+            )
+            .then(() => {
+                toast.success('Basket successfully updated');
+                queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+            })
+            .catch((error) => {
+                console.log('Basket Error ', error);
+            });
+    };
+
+    const removeItem = async (id) => {
+        // setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        const userStr = localStorage.getItem('user-info');
+        const user = JSON.parse(userStr);
+        await axiosInstance
+            .delete(
+                `/basket_items/${id}`,
+
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                }
+            )
+            .then(() => {
+                toast.success('Basket item deleted ');
+                queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+            })
+            .catch((error) => {
+                console.log('Basket Error ', error);
+            });
+    };
     return (
         <div className="flex flex-wrap gap-5 justify-between w-full max-md:max-w-full mt-[36px]">
             <div className="flex items-start max-md:max-w-full ">
                 <div className="flex flex-wrap gap-3 items-center self-end p-3 mt-2 -mr-6 rounded-3xl bg-stone-50">
                     <img
                         loading="lazy"
-                        src={item.image}
-                        alt={item.name}
-                        className="object-contain shrink-0 self-stretch my-auto rounded-3xl aspect-[1.19] max-w-[167px]"
+                        src={item.product.image}
+                        alt={item.product.image}
+                        className="object-cover shrink-0 self-stretch my-auto rounded-3xl aspect-[1.19] max-w-[167px]"
                     />
                     <div className="flex flex-col self-stretch my-auto max-w-[233px]">
                         <div className="flex flex-col w-full">
                             <div className="text-base text-green-950 text-wrap">
-                                {item.name}
+                                {item.product.title}
                             </div>
                             <div className="flex gap-1 items-center self-start mt-2 text-lg font-semibold text-center text-gray-600 whitespace-nowrap">
                                 <div className="self-stretch my-auto">
-                                    {item.price}
+                                    {item.product.price}
                                 </div>
                                 <img
                                     loading="lazy"
@@ -31,6 +93,7 @@ function CartItem({ item }) {
                     </div>
                 </div>
                 <button
+                    onClick={() => removeItem(item.id)}
                     aria-label="Remove item"
                     className="bg-transparent border-none cursor-pointer"
                 >
@@ -44,6 +107,13 @@ function CartItem({ item }) {
             </div>
             <div className="flex gap-1 items-center my-auto text-base font-semibold text-white whitespace-nowrap">
                 <button
+                    disabled={item.quantity === 1}
+                    onClick={() =>
+                        updateQuantity(item.id, {
+                            price: item.product.discounted_price,
+                            quantity: item.quantity - 1,
+                        })
+                    }
                     aria-label="Decrease quantity"
                     className="bg-transparent border-none cursor-pointer"
                 >
@@ -58,6 +128,12 @@ function CartItem({ item }) {
                     {item.quantity}
                 </div>
                 <button
+                    onClick={() =>
+                        updateQuantity(item.id, {
+                            price: item.product.discounted_price,
+                            quantity: item.quantity + 1,
+                        })
+                    }
                     aria-label="Increase quantity"
                     className="bg-transparent border-none cursor-pointer"
                 >

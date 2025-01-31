@@ -5,9 +5,11 @@ import IROSComponent from '@/components/OsHero';
 import ProductCategories from '@/components/ProductCategorys';
 import AdvantagesSection from '@/components/whyAdvanteges';
 import SupportSection from '@/components/whySupportSection';
+import { ROUTES } from '@/Helpers/Routes';
 import React from 'react';
 
-export default function whyUs() {
+export default function WhyUs({ data, lang }) {
+    const { choices, translates, supports, advantages } = data;
     const helpData = [
         {
             imageSrc:
@@ -45,22 +47,63 @@ export default function whyUs() {
                     <IROSComponent />
                 </section>
                 <h2 className="self-center text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full mt-[60px] ">
-                    Seçim etməkdə kömək edək!
+                    {translates.Seçim_etməkdə}
                 </h2>
                 <section className="flex overflow-hidden flex-col justify-center px-[60px] py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[48px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
                         <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
-                            {helpData.map((item, index) => (
-                                <HelpCard key={index} {...item} />
-                            ))}
+                            {choices.map((item, index) => {
+                                if (index === 0) {
+                                    return (
+                                        <HelpCard
+                                            key={index}
+                                            title={item.title}
+                                            description={item.description}
+                                            imageSrc={item.icon}
+                                            linkText={
+                                                data.translates.Testdən_keç
+                                            }
+                                            page={`/${lang}/${ROUTES.test[lang]}`}
+                                        />
+                                    );
+                                } else if (index === 1) {
+                                    return (
+                                        <HelpCard
+                                            key={index}
+                                            title={item.title}
+                                            description={item.description}
+                                            imageSrc={item.icon}
+                                            linkText={
+                                                data.translates.Bizimlə_əlaqə
+                                            }
+                                            page={`/${lang}/${ROUTES.cotact[lang]}`}
+                                        />
+                                    );
+                                }
+                                return (
+                                    <HelpCard
+                                        key={index}
+                                        title={item.title}
+                                        description={item.description}
+                                        imageSrc={item.icon}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
                 <section className="py-[100px]">
-                    <SupportSection />
+                    <SupportSection
+                        supports={supports}
+                        title={translates?.SupportSectionTitle}
+                        description={translates?.SupportSectionDesc}
+                    />
                 </section>
                 <section className="pt-[100px] lg:px-[60px] px-[30px]">
-                    <AdvantagesSection />
+                    <AdvantagesSection
+                        advantages={advantages}
+                        title={translates?.AdvantagesSectionTitle}
+                    />
                 </section>
                 <section className="my-[100px] lg:px-[145px] ">
                     <h2 className="text-[40px] font-semibold text-center text-[#447355] ">

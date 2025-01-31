@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
+import { ROUTES } from '@/Helpers/Routes';
 
 const productItems = [
     { name: 'İRobot OS' },
@@ -19,6 +20,8 @@ const imges = [
 function WhyNavigation({ whyindex }) {
     const [activeindex, setactiveindex] = useState(whyindex);
     const router = useRouter();
+    const { lang = 'az' } = router.query;
+
     return (
         <nav className="overflow-hidden bg-white border-t border-gray-600 max-w-[723px] ">
             <div className="flex gap-5 max-md:flex-col">
@@ -35,13 +38,19 @@ function WhyNavigation({ whyindex }) {
                                                 router.push('/about/IrobutOs');
                                                 break;
                                             case 1:
-                                                router.push('/about/whyUs');
+                                                router.push(
+                                                    `/${lang}/${ROUTES.whyUs[lang]}`
+                                                );
                                                 break;
                                             case 2:
-                                                router.push('/about/controll');
+                                                router.push(
+                                                    `/${lang}/${ROUTES.mobileApp[lang]}`
+                                                );
                                                 break;
                                             case 3:
-                                                router.push('/about');
+                                                router.push(
+                                                    `/${lang}/${ROUTES.buyersGuide[lang]}`
+                                                );
                                                 break;
                                         }
                                     }}

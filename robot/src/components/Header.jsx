@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import phone from '../../public/svg/phone_white.svg';
 import loc from '../../public/svg/location.svg';
 import globus from '../../public/svg/globus.svg';
@@ -15,19 +15,52 @@ import AksesuaresNav from './AksesuaresNavication';
 import OfferNav from './offersNavication';
 // import WhyNav from './whyNavication';
 import { useRecoilState } from 'recoil';
-import { MenuState } from './recoil/Atom';
-import LikedDrop from './LikedDRopDown';
-import ShopDrop from './LshopDRopDown';
+import { languageState, MenuState } from './recoil/Atom';
+import LikedDrop from '../components/LikedDRopDown';
+// import ShopDrop from './LshopDRopDown';
 import WhyNav from './WhyNavication';
+import {
+    HandleChangeUrlByLang,
+    ROUTES,
+    updateLangAndRoute,
+} from '@/Helpers/Routes';
 
 const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const [_, setMenu] = useRecoilState(MenuState);
+
+    // const [language, setlanguage] = useRecoilState(languageState);
     const [show_Like_modal, setshow_Like_modal] = useState(false);
     const [show_shop_modal, setshow_shop_modal] = useState(false);
     const router = useRouter();
     const [active, setactive] = useState(activeIndex);
-
+    const { lang = 'az' } = router.query;
+    const likeBtnRef = useRef();
+    const likeDivRef = useRef();
     // Close modal on route change
+    useEffect(() => {
+        const handleOutsideClicked = (e) => {
+            if (
+                likeDivRef?.current &&
+                !likeDivRef?.current.contains(e.target) &&
+                likeBtnRef?.current &&
+                !likeBtnRef?.current.contains(e.target)
+            ) {
+                // console.log('outsideClick');
+                setshow_shop_modal(false);
+                // enableScrolling();
+            } else {
+                console.log('insideClick');
+            }
+        };
+
+        // Add the event listener when the component mounts
+        document.addEventListener('mousedown', handleOutsideClicked);
+
+        // Cleanup: Remove the event listener when the component unmounts
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClicked);
+        };
+    }, [likeDivRef.current, likeBtnRef.current]);
     useEffect(() => {
         const handleRouteChange = () => {
             setshow_Like_modal(false);
@@ -41,6 +74,21 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
             router.events.off('routeChangeStart', handleRouteChange);
         };
     }, [router.events]);
+    const HandleChangeUrlByLang = (Lang) => {
+        const { lang = 'az', page, slug } = router.query;
+
+        if (lang === undefined || page === undefined) {
+            router.push(`/${Lang}${window.location.search}`);
+            return;
+        }
+        let path = `/${lang}/${page}`;
+        if (slug) {
+            path += `/${slug}`;
+        }
+        const queryParams = window.location.search; // Get the current query string
+        const RoutePath = updateLangAndRoute(path, Lang) + queryParams;
+        router.push(RoutePath); // Navigate to the new path
+    };
 
     return (
         <>
@@ -92,20 +140,28 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                     />
                                     <select
                                         className="text-[14px] font-normal text-white bg-[#87A28E] border-none rounded p-1 w-fit cursor-pointer focus:outline-none"
-                                        defaultValue="Azərbaycan"
+                                        defaultValue={lang}
+                                        onChange={
+                                            (e) =>
+                                                HandleChangeUrlByLang(
+                                                    e.target.value
+                                                )
+                                            // setlanguage(e.target.value)
+                                        }
                                     >
-                                        <option value="Azərbaycan">
-                                            Azərbaycan
-                                        </option>
-                                        <option value="Option 2">
-                                            Option 2
-                                        </option>
-                                        <option value="Option 3">
-                                            Option 3
-                                        </option>
+                                        <option value="az">Azərbaycan</option>
+                                        <option value="ru">Русский</option>
+                                        <option value="en">English</option>
                                     </select>
                                 </div>
-                                <div className="flex w-fit items-center justify-center gap-2">
+                                <div
+                                    className="flex w-fit items-center justify-center gap-2 cursor-pointer"
+                                    onClick={() =>
+                                        router.push(
+                                            `/${lang}/${ROUTES.login[lang]}`
+                                        )
+                                    }
+                                >
                                     <div className="w-[36px] h-[36px] bg-[#F9F9F933] bg-opacity-20 flex justify-center items-center rounded-full">
                                         <Image
                                             src={person}
@@ -115,12 +171,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                             className="w-[20px] h-[20px]"
                                         />
                                     </div>
-                                    <p
-                                        className="text-[14px] font-normal !text-white-a700 text-nowrap"
-                                        onClick={() =>
-                                            router.push('/user/login_register')
-                                        }
-                                    >
+                                    <p className="text-[14px] font-normal !text-white-a700 text-nowrap">
                                         Şəxsi kabinet
                                     </p>
                                 </div>
@@ -177,11 +228,24 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                     </div>
                                 </label>
 
-                                <div
-                                    className="rounded-[50%] h-[36px] w-[36px] flex items-center justify-center bg-[#F6F6F6]"
-                                    onClick={() =>
-                                        setshow_Like_modal((prev) => !prev)
-                                    }
+                                <button
+                                    className="rounded-[50%] h-[36px] w-[36px] flex items-center justify-center bg-[#F6F6F6] cursor-pointer"
+                                    onClick={() => {
+                                        // setshow_Like_modal((prev) => !prev);
+                                        // setshow_shop_modal(false);
+                                        const userStr =
+                                            localStorage.getItem('user-info');
+                                        const User = JSON.parse(userStr);
+                                        if (User) {
+                                            router.push(
+                                                `/${lang}/${ROUTES.liked[lang]}`
+                                            );
+                                        } else {
+                                            router.push(
+                                                `/${lang}/${ROUTES.login[lang]}`
+                                            );
+                                        }
+                                    }}
                                 >
                                     <Image
                                         src={heart}
@@ -190,13 +254,23 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                         height={20}
                                         className="w-[20px] h-[20px]"
                                     />
-                                </div>
+                                </button>
 
                                 <div
-                                    className="rounded-[50%] h-[36px] w-[36px] flex items-center justify-center bg-[#F6F6F6]"
-                                    onClick={() =>
-                                        setshow_shop_modal((prev) => !prev)
-                                    }
+                                    ref={likeBtnRef}
+                                    className="rounded-[50%] h-[36px] w-[36px] flex items-center justify-center bg-[#F6F6F6] cursor-pointer"
+                                    onClick={() => {
+                                        const userStr =
+                                            localStorage.getItem('user-info');
+                                        const User = JSON.parse(userStr);
+                                        if (User) {
+                                            setshow_shop_modal((prev) => !prev);
+                                        } else {
+                                            router.push(
+                                                `/${lang}/${ROUTES.login[lang]}`
+                                            );
+                                        }
+                                    }}
                                 >
                                     <Image
                                         src={karzina}
@@ -210,31 +284,23 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                         </div>
                     </div>
                     <div
-                        className="w-fit absolute top-[100%] z-[99999999999999999999999999] right-0"
-                        style={
-                            show_Like_modal
-                                ? { display: 'block' }
-                                : { display: 'none' }
-                        }
-                    >
-                        <LikedDrop
-                            show_Like_modal={(par) => setshow_shop_modal(par)}
-                        />
-                    </div>
-                    <div
-                        className="w-fit absolute top-[100%] z-[99999999999999999999999999] right-0"
                         style={
                             show_shop_modal
-                                ? { display: 'block' }
-                                : { display: 'none' }
+                                ? { opacity: 100, zIndex: 40 }
+                                : { opacity: 0, display: 'none' }
                         }
+                        className="top-[100%] bg-black bg-opacity-50 backdrop-blur-sm w-[100vw] h-[100vh] duration-300 inset-0"
                     >
-                        <ShopDrop
-                            setshow_shop_modal={(par) =>
-                                setshow_shop_modal(par)
-                            }
-                        />
+                        <div
+                            className="w-fit absolute top-3 z-40 right-[30px]"
+                            ref={likeDivRef}
+                        >
+                            <LikedDrop
+                            // show_Like_modal={(par) => setshow_shop_modal(par)}
+                            />
+                        </div>
                     </div>
+                    <div></div>
                 </div>
             </header>
             <div className="border-b border-[#EFEFEF] relative  opacity-0 lg:block  hidden">
@@ -281,16 +347,21 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                 />
                                 <select
                                     className="text-[14px] font-normal text-white bg-[#87A28E] border-none rounded p-1 w-fit cursor-pointer focus:outline-none"
-                                    defaultValue="Azərbaycan"
+                                    defaultValue="az"
                                 >
-                                    <option value="Azərbaycan">
-                                        Azərbaycan
-                                    </option>
-                                    <option value="Option 2">Option 2</option>
-                                    <option value="Option 3">Option 3</option>
+                                    <option value="az">Azərbaycan</option>
+                                    <option value="ru">Русский</option>
+                                    <option value="en">English</option>
                                 </select>
                             </div>
-                            <div className="flex w-fit items-center justify-center gap-2">
+                            <div
+                                className="flex w-fit items-center justify-center gap-2 cursor-pointer"
+                                onClick={() =>
+                                    router.push(
+                                        `/${lang}/${ROUTES.login[lang]}`
+                                    )
+                                }
+                            >
                                 <div className="w-[36px] h-[36px] bg-[#F9F9F933] bg-opacity-20 flex justify-center items-center rounded-full">
                                     <Image
                                         src={person}
@@ -300,12 +371,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                         className="w-[20px] h-[20px]"
                                     />
                                 </div>
-                                <p
-                                    className="text-[14px] font-normal !text-white-a700 text-nowrap"
-                                    onClick={() =>
-                                        router.push('/user/login_register')
-                                    }
-                                >
+                                <p className="text-[14px] font-normal !text-white-a700 text-nowrap">
                                     Şəxsi kabinet
                                 </p>
                             </div>
@@ -401,18 +467,6 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                 >
                     <LikedDrop
                         show_Like_modal={(par) => setshow_shop_modal(par)}
-                    />
-                </div>
-                <div
-                    className="w-fit absolute top-[100%] z-[99999999999999999999999999] right-0"
-                    style={
-                        show_shop_modal
-                            ? { display: 'block' }
-                            : { display: 'none' }
-                    }
-                >
-                    <ShopDrop
-                        setshow_shop_modal={(par) => setshow_shop_modal(par)}
                     />
                 </div>
             </div>

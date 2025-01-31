@@ -86,7 +86,7 @@ function FAQItem({ question, imageSrc, description, isOpen, onClick }) {
     );
 }
 
-function FAQSection({ Title }) {
+function FAQSection({ Title, data }) {
     const [openIndex, setOpenIndex] = useState(null);
 
     const handleToggle = (index) => {
@@ -99,11 +99,13 @@ function FAQSection({ Title }) {
                 {Title}
             </h2>
             <div className="flex flex-col text-base font-medium text-center text-black min-w-[240px] w-[795px] max-md:max-w-full">
-                {faqData.map((item, index) => (
+                {data.map((item, index) => (
                     <div key={index} className={index > 0 ? 'mt-3' : ''}>
                         <FAQItem
-                            question={item.question}
-                            imageSrc={item.imageSrc}
+                            question={item.title}
+                            imageSrc={
+                                'https://cdn.builder.io/api/v1/image/assets/TEMP/f3018e0d82ce8532fdc458e04c471e9a28ad6663730796c2f665f38d7be4059a?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2'
+                            }
                             description={item.description}
                             isOpen={openIndex === index}
                             onClick={() => handleToggle(index)}

@@ -9,7 +9,7 @@ import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
 import React, { useState } from 'react';
 
-export default function index() {
+export default function Aksesuares() {
     const [searchQuery, setSearchQuery] = useState('');
     const accessories = [
         {

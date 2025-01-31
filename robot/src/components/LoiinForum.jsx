@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { axiosInstance } from '@/services/Requests';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { ROUTES } from '@/Helpers/Routes';
 
 function LoginForum() {
     const [isLogin, setIsLogin] = useState(true);
+    const [Loading, setLoading] = useState(false);
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
 
     const toggleView = (view) => {
         setIsLogin(view === 'login');
@@ -26,8 +33,67 @@ function LoginForum() {
               }),
     });
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         console.log('Form values:', values);
+        setLoading(true);
+        if (isLogin) {
+            try {
+                setLoading(true); // Set loading to true before making the request
+
+                // Use toast.promise to handle the loading, success, and error states
+                try {
+                    const response = await axiosInstance.post('/login', {
+                        password: values.password,
+                        email: values.email,
+                    });
+                    localStorage.setItem(
+                        'user-info',
+                        JSON.stringify(response.data)
+                    );
+                    toast.success('Successfully logged in!');
+                    router.push(`/${lang}/${ROUTES.settings[lang]}`);
+                } catch (error) {
+                    toast.error(error.response.data.message);
+                }
+
+                // If the request is successful, update the state
+                setLoading(false);
+            } catch (error) {
+                // Handle any additional error logic here (if needed)
+                setLoading(false);
+            }
+            console.log('login');
+        } else {
+            try {
+                setLoading(true); // Set loading to true before making the request
+
+                // Use toast.promise to handle the loading, success, and error states
+                try {
+                    const response = await axiosInstance.post('/register', {
+                        name: values.name,
+                        phone: values.phone,
+                        email: values.email,
+                        password: values.password,
+                    });
+                    toast.success('Successfully registered!');
+                } catch (error) {
+                    toast.error(error.response.data.error);
+                }
+
+                // If the request is successful, update the state
+                setLoading(false);
+                setIsLogin(true);
+                // Reset form values on successful registration
+                values.email = '';
+                values.password = '';
+                values.name = '';
+                values.phone = '';
+            } catch (error) {
+                // Handle any additional error logic here (if needed)
+                setLoading(false);
+            }
+            console.log('register');
+        }
         // Add form submission logic here
     };
 

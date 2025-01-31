@@ -1,6 +1,7 @@
 import React from 'react';
 import Green_to_green from '../btns/green_to_green';
 import { useRouter } from 'next/router';
+import GETRequest from '@/services/QueryREq';
 
 const products = [
     {
@@ -63,50 +64,54 @@ function ProductCardKredit() {
         </section>
     );
 }
-function OrderSummary() {
+function OrderSummary({ isConfrim, basked }) {
     const router = useRouter();
+    const { lang = 'az' } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     return (
         <div className="lg:w-[25%] w-full">
             <section className="flex flex-col justify-center px-6 py-7 rounded-3xl bg-stone-50 max-md:px-5  h-fit">
                 <div className="flex flex-col">
                     <h2 className="text-lg font-medium text-black">
-                        Ümumi sifariş
+                        {translates?.Ümumi_sifariş}
                     </h2>
                     <div className="flex flex-col mt-5 w-full">
                         <div className="flex flex-col w-full">
                             <div className="flex flex-col w-full text-sm">
                                 <div className="flex gap-10 items-center justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
-                                        Məbləğ:
+                                        {translates?.Məbləğ}:
                                     </div>
                                     <div className="self-stretch my-auto font-medium text-green-950">
-                                        250 AZN
+                                        {basked?.total_price} AZN
                                     </div>
                                 </div>
                                 <div className="flex gap-10 items-center mt-4 w-full justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
-                                        Çatdırılma:
+                                        {translates?.Çatdırılma}:
                                     </div>
                                     <div className="self-stretch my-auto font-medium text-green-950">
-                                        5 AZN
+                                        {basked?.delivered_price} AZN
                                     </div>
                                 </div>
                                 <div className="flex gap-10 items-center mt-4 justify-between">
                                     <div className="self-stretch my-auto text-black text-opacity-60">
-                                        Endirim
+                                        {translates?.Endirim}
                                     </div>
                                     <div className="self-stretch my-auto font-semibold text-rose-600">
-                                        5 AZN
+                                        {basked?.discount} AZN
                                     </div>
                                 </div>
                             </div>
                             <hr className="mt-3 w-full border border-solid border-zinc-300" />
                             <div className="flex gap-10 items-center mt-3 text-base justify-between">
                                 <div className="self-stretch my-auto font-medium text-black text-opacity-80">
-                                    Cəmi məbləğ:
+                                    {translates?.Cəmi_məbləğ}:
                                 </div>
                                 <div className="self-stretch my-auto font-semibold text-green-400">
-                                    260 AZN
+                                    {basked?.final_price} AZN
                                 </div>
                             </div>
                         </div>
@@ -114,7 +119,7 @@ function OrderSummary() {
                             classNAME="mt-[28px]"
                             action={() => router.push('/basked/offer')}
                         >
-                            Sifariş et
+                            {translates?.Sifariş_et}
                         </Green_to_green>
                         {/* <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
                       
@@ -122,7 +127,7 @@ function OrderSummary() {
                     </div>
                 </div>
             </section>
-            <ProductCardKredit />
+            {isConfrim && <ProductCardKredit />}{' '}
         </div>
     );
 }

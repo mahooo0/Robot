@@ -9,7 +9,10 @@ export const MenuState = atom({
         whybar: false,
     },
 });
-
+export const languageState = atom({
+    key: 'languagestatekey',
+    default: 'az',
+});
 // export const MenuStateTwo = atom({
 //     key: 'menustatekeytwo',
 //     default: [],

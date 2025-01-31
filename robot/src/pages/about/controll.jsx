@@ -16,7 +16,16 @@ const buttons = [
     },
 ];
 
-const Control = () => {
+const Mobile_aplication = ({ data }) => {
+    const {
+        app_hero,
+        app_content,
+        instructions,
+        translates,
+        magical_word,
+        app_faqs,
+    } = data;
+
     const renderSection = (title, description, imgSrc) => (
         <div className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full">
             <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
@@ -49,20 +58,17 @@ const Control = () => {
                 <section className="flex relative flex-col justify-center items-start px-16 py-20 w-full min-h-[500px] max-md:px-5 max-md:max-w-full">
                     <img
                         loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/9a5fe28f4678356f36a81b7f4486886ed385879db823a15227c95cb257f371d7?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        src={app_hero.image}
                         alt="Background"
                         className="object-cover absolute inset-0 size-full"
                     />
                     <section className="flex relative flex-col max-w-full w-[565px]">
                         <div className="flex flex-col w-full text-green-950 max-md:max-w-full">
                             <h1 className="text-5xl font-semibold max-md:max-w-full max-md:text-4xl">
-                                Komanda mərkəzinizə xoş gəlmisiniz!
+                                {app_hero.title}{' '}
                             </h1>
                             <p className="mt-3 text-base max-md:max-w-full">
-                                iRobot OS birbaşa iRobot Home Tətbiqindən idarə
-                                edə biləcəyiniz fərdi təmizləmə təcrübəsi
-                                yaratmaq üçün qabaqcıl texnologiyanı
-                                birləşdirir.
+                                {app_hero.description}{' '}
                             </p>
                         </div>
                         <div className="flex gap-2.5 items-center self-start mt-12 max-md:mt-10 flex-wrap">
@@ -85,24 +91,17 @@ const Control = () => {
                         <div className="flex overflow-hidden flex-col self-stretch px-10 pt-10 pb-44 rounded-3xl bg-[#8E98B8] min-w-[240px] lg:w-[539px] w-full max-md:px-5 max-md:pb-24 max-md:max-w-full">
                             <div className="flex flex-col max-md:max-w-full">
                                 <h2 className="text-4xl font-semibold text-[#E4E9F8] max-md:max-w-full">
-                                    Evinizin nə qədər təmiz və ya çirkli
-                                    olduğunu yoxlayın!
+                                    {app_content.title}
                                 </h2>
                                 <p className="mt-3 text-base text-[#E4E9F8] max-md:max-w-full">
-                                    Dirt Detective ilə ətraflı ev təmizliyi
-                                    xəritəsi üçün iRobot Home Tətbiqinizi
-                                    yoxlayın. iRobot ƏS keçmiş təmizliklər,
-                                    çirklənmə hadisələri və döşəmə növləri
-                                    əsasında otaqdan-otağa təmizlik vəziyyətini
-                                    izləyir, beləliklə j9 robotunuz növbəti
-                                    çirkin prioritetin nə olduğunu bilir.
+                                    {app_content.description}
                                 </p>
                             </div>
                         </div>
                         <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] lg:w-[761px] w-full max-md:max-w-full">
                             <img
                                 loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/492579a8d3015c33456582a3277ffbc53f1796a5c81c09818be7951bb2c52209?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                src={app_content.image}
                                 alt="Home cleaning robot illustration"
                                 className="w-full aspect-[1.52] max-md:max-w-full h-[502px] object-cover"
                             />
@@ -110,33 +109,69 @@ const Control = () => {
                     </div>
                 </section>
                 {/* Additional sections with renderSection */}
-                <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div
-                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
-                        data-aos="fade-right"
-                    >
-                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
-                            İstədiyiniz şəkildə təmizləyin
-                        </h2>
-                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
-                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
-                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
-                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
-                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
-                        </p>
-                    </div>
-                    <div
-                        data-aos="fade-left"
-                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
-                    >
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            alt="iRobot Home App interface showing customizable cleaning map"
-                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
-                        />
-                    </div>
+                <section className="flex justify-center items-center mt-[100px]">
+                    <h2 className="text-[40px] font-semibold text-center max-w-[540px] mx-[40px] leading-[60px]">
+                        {translates.Güç_düğmesine}
+                    </h2>
                 </section>
+                {instructions.map((instruction, i) => {
+                    if (i % 2 === 1) {
+                        return (
+                            <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
+                                <div
+                                    className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
+                                    data-aos="fade-right"
+                                >
+                                    <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
+                                        {instruction.title}{' '}
+                                    </h2>
+                                    <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                                        {instruction.description}{' '}
+                                    </p>
+                                </div>
+                                <div
+                                    data-aos="fade-left"
+                                    className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
+                                >
+                                    <img
+                                        loading="lazy"
+                                        src={instruction.image}
+                                        alt="iRobot Home App interface showing customizable cleaning map"
+                                        className="object-contain w-full aspect-[0.56] max-md:max-w-full"
+                                    />
+                                </div>
+                            </section>
+                        );
+                    } else {
+                        return (
+                            <section className="flex flex-row-reverse flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
+                                <div
+                                    className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
+                                    data-aos="fade-right"
+                                >
+                                    <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
+                                        {instruction.title}{' '}
+                                    </h2>
+                                    <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
+                                        {instruction.description}{' '}
+                                    </p>
+                                </div>
+                                <div
+                                    data-aos="fade-left"
+                                    className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
+                                >
+                                    <img
+                                        loading="lazy"
+                                        src={instruction.image}
+                                        alt="iRobot Home App interface showing customizable cleaning map"
+                                        className="object-contain w-full aspect-[0.56] max-md:max-w-full"
+                                    />
+                                </div>
+                            </section>
+                        );
+                    }
+                })}
+                {/* 
                 <section className="flex flex-row-reverse flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
                     <div
                         className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
@@ -190,27 +225,25 @@ const Control = () => {
                             className="object-contain w-full aspect-[0.56] max-md:max-w-full"
                         />
                     </div>
-                </section>
+                </section>*/}
                 <section className="relative flex flex-col justify-center items-start px-16 py-56 w-full min-h-[656px] max-md:px-5 max-md:py-24 max-md:max-w-full mt-[100px] text-white">
                     <img
                         loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/fa21b64a100a9623a0e67d900319f1f67ba944e575ae337ae8776bb20b472a76?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        src={magical_word.image}
                         alt="Background"
                         className="object-cover absolute inset-0 size-full"
                     />
                     <div className="flex relative flex-col mb-0 max-w-full w-[571px] max-md:mb-2.5">
                         <h1 className="text-5xl font-semibold max-md:max-w-full max-md:text-4xl">
-                            Sadəcə sehirli sözü deyin!
+                            {magical_word.title}{' '}
                         </h1>
                         <p className="mt-3 text-base max-md:max-w-full">
-                            iRobot Home Tətbiqində səsli köməkçinizə ¹ qısa
-                            yollar əlavə etməklə səs əmri ilə təmizlənməyə
-                            nəzarət edin.
+                            {magical_word.description} \
                         </p>
                     </div>
                 </section>
 
-                <FAQSection Title={'Tez-tez verilən suallar'} />
+                <FAQSection Title={'Tez-tez verilən suallar'} data={app_faqs} />
                 <section className="flex relative flex-col justify-center items-start px-16 py-64 w-full min-h-[800px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                     <img
                         loading="lazy"
@@ -249,4 +282,4 @@ const Control = () => {
     );
 };
 
-export default Control;
+export default Mobile_aplication;
