@@ -99,7 +99,7 @@ function FAQSection({ Title, data }) {
                 {Title}
             </h2>
             <div className="flex flex-col text-base font-medium text-center text-black min-w-[240px] w-[795px] max-md:max-w-full">
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                     <div key={index} className={index > 0 ? 'mt-3' : ''}>
                         <FAQItem
                             question={item.title}

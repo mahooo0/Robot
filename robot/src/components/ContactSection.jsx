@@ -155,7 +155,7 @@ function ContactSection({ contact_items, translates }) {
                             {translates?.Bizimlə_əlaqə}
                         </h1>
                         <div className="flex flex-col mt-7 w-full text-base max-md:max-w-full gap-3">
-                            {contact_items.map((info, index) => (
+                            {contact_items?.map((info, index) => (
                                 <ContactInfo
                                     key={index}
                                     icon={info.icon}

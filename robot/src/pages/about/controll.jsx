@@ -5,6 +5,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import {
+    getApp_content,
+    getApp_faqs,
+    getApp_hero,
+    getInstructions,
+    getMagical_word,
+    getTranslates,
+} from '@/services/Requests';
 const buttons = [
     {
         src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/0e8fd20df3ae33ad2036a6de5c41a3bbcb0d95ebaf928e9297351167e2b90675?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
@@ -281,5 +289,27 @@ const Mobile_aplication = ({ data }) => {
         </div>
     );
 };
+export async function getServerSideProps(context) {
+    const { lang = 'az' } = context.params;
+    const app_hero = await getApp_hero(lang);
+    const app_content = await getApp_content(lang);
+    const translates = await getTranslates(lang);
+    const instructions = await getInstructions(lang);
+    const magical_word = await getMagical_word(lang);
+    const app_faqs = await getApp_faqs(lang);
+
+    return {
+        props: {
+            data: {
+                app_hero,
+                app_content,
+                translates,
+                instructions,
+                magical_word,
+                app_faqs,
+            }, // Data will be available in the BuyersGuide component as a
+        },
+    };
+}
 
 export default Mobile_aplication;

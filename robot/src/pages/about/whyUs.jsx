@@ -6,6 +6,12 @@ import ProductCategories from '@/components/ProductCategorys';
 import AdvantagesSection from '@/components/whyAdvanteges';
 import SupportSection from '@/components/whySupportSection';
 import { ROUTES } from '@/Helpers/Routes';
+import {
+    getAdvantages,
+    getChoices,
+    getSupports,
+    getTranslates,
+} from '@/services/Requests';
 import React from 'react';
 
 export default function WhyUs({ data, lang }) {
@@ -115,4 +121,21 @@ export default function WhyUs({ data, lang }) {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang = 'az' } = context.params;
+    const choices = await getChoices(lang);
+    const supports = await getSupports(lang);
+    const translates = await getTranslates(lang);
+    const advantages = await getAdvantages(lang);
+    return {
+        props: {
+            data: {
+                choices,
+                translates,
+                supports,
+                advantages,
+            }, // Data will be available in the BuyersGuide component as a
+        },
+    };
 }

@@ -38,7 +38,7 @@ export default function Product_Card_aute({
         checkLikedProducts();
     }, [favorites]);
     useEffect(() => {
-        if (basked?.basket_items.find((item) => item.product.id === data.id)) {
+        if (basked?.basket_items.find((item) => item.product.id === data?.id)) {
             console.log('include');
             setincludes(true);
         }
@@ -46,7 +46,7 @@ export default function Product_Card_aute({
         // // Initial check on render
         // // checkLikedProducts();
 
-        console.log('BAAAA', basked?.basket_items, data.id);
+        console.log('BAAAA', basked?.basket_items, data?.id);
     }, [basked]);
     const addToBasket = async (Data) => {
         const response = await axiosInstance
@@ -99,7 +99,7 @@ export default function Product_Card_aute({
                 <img
                     onClick={() => router.push('/products/id')}
                     loading="lazy"
-                    src={data.image}
+                    src={data?.image}
                     alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
                     className="object-cover w-full rounded-3xl aspect-[1.24]"
                 />
@@ -113,9 +113,9 @@ export default function Product_Card_aute({
                                     const user = JSON.parse(userStr);
 
                                     await addToBasket({
-                                        product_id: data.id,
+                                        product_id: data?.id,
                                         quantity: 1,
-                                        price: +data.discounted_price,
+                                        price: +data?.discounted_price,
                                         token: user.token,
                                     });
                                 } else {
@@ -154,20 +154,20 @@ export default function Product_Card_aute({
             >
                 <div className="flex flex-col w-full">
                     <h2 className="w-full text-base font-medium text-black">
-                        {data.title}
+                        {data?.title}
                     </h2>
                     <div
                         className="mt-2 text-sm text-black text-opacity-60"
-                        dangerouslySetInnerHTML={{ __html: data.description }}
+                        dangerouslySetInnerHTML={{ __html: data?.description }}
                     />
                 </div>
                 <div className="flex justify-between items-center mt-3 w-full text-xl font-semibold text-center text-gray-600 whitespace-nowrap">
                     <div className="flex gap-1 items-center self-stretch my-auto">
                         <div className="flex flex-row gap-2 ">
-                            {data.price === data.discounted_price || (
+                            {data?.price === data?.discounted_price || (
                                 <div className="line-through flex flex-row">
                                     <span className="self-stretch my-auto flex flex-row gap-1 items-center text-[#B9B8B8]">
-                                        {data.price}{' '}
+                                        {data?.price}{' '}
                                         <svg
                                             width="18"
                                             height="16"
@@ -185,7 +185,7 @@ export default function Product_Card_aute({
                             )}
                             <span className="self-stretch my-auto">
                                 {' '}
-                                {data.discounted_price}
+                                {data?.discounted_price}
                             </span>{' '}
                         </div>
 
@@ -212,7 +212,7 @@ export default function Product_Card_aute({
                             axiosInstance
                                 .post(
                                     '/favorites/toggleFavorite',
-                                    { product_id: data.id },
+                                    { product_id: data?.id },
                                     {
                                         headers: {
                                             Authorization: `Bearer ${User.token}`,

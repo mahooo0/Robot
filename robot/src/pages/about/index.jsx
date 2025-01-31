@@ -7,7 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
-import { getQuestions } from '@/services/Requests';
+import { getChoices, getQuestions, getTranslates } from '@/services/Requests';
 import { useRecoilState } from 'recoil';
 import { languageState } from '@/components/recoil/Atom';
 import { ROUTES } from '@/Helpers/Routes';
@@ -619,4 +619,19 @@ export default function BuyersGuide({ data, lang }) {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang = 'az' } = context.params;
+    const questions = await getQuestions(lang);
+    const choices = await getChoices(lang);
+    const translates = await getTranslates(lang);
+    return {
+        props: {
+            data: {
+                questions,
+                choices,
+                translates,
+            }, // Data will be available in the BuyersGuide component as a
+        },
+    };
 }
