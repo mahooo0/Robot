@@ -54,7 +54,7 @@ const RatingBar = ({ rating, reviewCount, maxWidth }) => {
     );
 };
 
-const CustomerReviews = () => {
+const CustomerReviews = ({ product }) => {
     const ratingData = [
         { rating: 5, reviewCount: 4, maxWidth: 137 },
         { rating: 4, reviewCount: 3, maxWidth: 109 },
@@ -89,6 +89,10 @@ const CustomerReviews = () => {
             alt: 'Customer review image 6',
         },
     ];
+    function parsePercentage(input) {
+        const match = input.match(/(\d+)% \((\d+)\)/);
+        return match ? [parseInt(match[1]), parseInt(match[2])] : null;
+    }
 
     return (
         <section className="flex flex-col self-center max-w-full w-[630px]">
@@ -100,17 +104,25 @@ const CustomerReviews = () => {
                     <div className="flex gap-3 items-center self-center">
                         <div className="flex gap-3 items-center self-stretch my-auto min-w-[240px]">
                             <div className="flex gap-3 items-center self-stretch my-auto">
-                                <StarRating rating={4.5} />
+                                <StarRating rating={product?.avg_star} />
                             </div>
                             <div className="self-stretch my-auto text-base font-medium text-black text-opacity-60">
-                                4.5 <span className="text-black">(12 rəy)</span>
+                                {product?.avg_star}{' '}
+                                <span className="text-black">
+                                    ({product?.comments.length} rəy)
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div className="flex gap-10 items-start mt-7 w-full">
                         <div className="flex flex-col flex-1 shrink w-full basis-0 min-w-[240px]">
-                            {ratingData.map((data, index) => (
-                                <RatingBar key={index} {...data} />
+                            {product?.rating_summary.map((data, index) => (
+                                <RatingBar
+                                    key={index}
+                                    rating={parsePercentage(data)[0]}
+                                    reviewCount={parsePercentage(data)[1]}
+                                    maxWidth={`${parsePercentage(data)[1]}%`}
+                                />
                             ))}
                         </div>
                     </div>

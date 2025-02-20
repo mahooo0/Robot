@@ -23,21 +23,21 @@ const thumbnailImages = [
     },
 ];
 
-function ProductImages() {
+function ProductImages({ product }) {
     const [imgid, setimgid] = useState(0);
     return (
         <section className="flex flex-col lg:w-1/2 w-full max-md:mt-10 max-md:max-w-full">
             <div className="flex overflow-hidden flex-col w-full rounded-3xl border border-solid border-zinc-100 max-md:max-w-full">
                 <img
                     loading="lazy"
-                    src={thumbnailImages[imgid].src}
+                    src={product?.sliders[imgid].image}
                     alt="Main gallery image"
                     className="object-cover w-full aspect-[1.23] max-md:max-w-full"
                 />
             </div>
             <div className="flex flex-wrap gap-3.5 items-center self-start mt-2 max-md:max-w-full">
                 <div className="flex flex-wrap gap-3 items-center self-stretch my-auto min-w-[240px] max-md:max-w-full">
-                    {thumbnailImages.map((image, index) => (
+                    {product?.sliders.map((image, index) => (
                         <div
                             className={` rounded-xl ${
                                 index === imgid ? 'border border-[#69BE56]' : ''
@@ -47,7 +47,7 @@ function ProductImages() {
                                 onClick={() => setimgid(index)}
                                 key={index}
                                 loading="lazy"
-                                src={image.src}
+                                src={image.image}
                                 alt={image.alt}
                                 className="object-cover shrink-0 self-stretch my-auto rounded-xl aspect-square w-[100px]"
                             />
@@ -57,7 +57,7 @@ function ProductImages() {
                         <img
                             onClick={() =>
                                 setimgid((prew) =>
-                                    prew + 1 < thumbnailImages.length
+                                    prew + 1 < product?.sliders.length
                                         ? prew + 1
                                         : 0
                                 )

@@ -1,7 +1,9 @@
 import { ROUTES } from '@/Helpers/Routes';
+import GETRequest from '@/services/QueryREq';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
 
 function Footer() {
     const productLinks = [
@@ -29,6 +31,8 @@ function Footer() {
     ];
     const router = useRouter();
     const { lang = 'az' } = router.query;
+    const { data } = GETRequest('/socials', 'socials', [lang]);
+    console.log('data', data);
 
     const supportLinks = [
         { text: 'Bizimlə əlaqə', page: `/${lang}/${ROUTES.cotact[lang]}` },
@@ -78,9 +82,11 @@ function Footer() {
                             </h2>
                             <ul className="flex flex-col mt-5 max-w-full text-sm text-white w-[218px]">
                                 {productLinks.map((link, index) => (
-                                    <li
+                                    <motion.li
                                         key={index}
                                         className={`mt-4 first:mt-0 text-white text-opacity-${link.opacity}`}
+                                        whileHover={{ scale: 1.1 }}
+                                        transition={{ duration: 0.3 }}
                                     >
                                         <Link
                                             href={`${link.page}`}
@@ -88,7 +94,7 @@ function Footer() {
                                         >
                                             {link.text}
                                         </Link>
-                                    </li>
+                                    </motion.li>
                                 ))}
                             </ul>
                         </nav>
@@ -98,14 +104,19 @@ function Footer() {
                             </h2>
                             <ul className="flex flex-col mt-5 max-w-full text-sm text-white text-opacity-90 w-[134px]">
                                 {supportLinks.map((link, index) => (
-                                    <li key={index} className="mt-4 first:mt-0">
+                                    <motion.li
+                                        key={index}
+                                        className="mt-4 first:mt-0"
+                                        whileHover={{ scale: 1.1 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
                                         <Link
                                             href={`${link.page}`}
                                             className="hover:underline"
                                         >
                                             {link.text}
                                         </Link>
-                                    </li>
+                                    </motion.li>
                                 ))}
                             </ul>
                         </nav>
@@ -143,19 +154,21 @@ function Footer() {
                     </section>
                 </div>
                 <div className="flex gap-4 items-center self-end mt-7">
-                    {socialIcons.map((icon, index) => (
-                        <a
-                            href="#"
+                    {data?.map((icon, index) => (
+                        <motion.div
                             key={index}
-                            className="focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                            whileHover={{ scale: 1.2 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            <img
-                                loading="lazy"
-                                src={icon.src}
-                                alt={icon.alt}
-                                className="object-contain shrink-0 self-stretch my-auto w-10 rounded-lg aspect-square"
-                            />
-                        </a>
+                            <Link href={icon.link}>
+                                <img
+                                    loading="lazy"
+                                    src={icon.icon}
+                                    alt={icon.title}
+                                    className="object-contain shrink-0 self-stretch my-auto w-10 rounded-lg aspect-square"
+                                />
+                            </Link>
+                        </motion.div>
                     ))}
                 </div>
             </div>

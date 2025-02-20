@@ -5,7 +5,7 @@ import ShoppingCart from '@/components/ShoppingCart';
 import OrderSummary from '@/components/ShoppingCart/OrderSummary';
 import React from 'react';
 
-export default function Index() {
+export default function Order() {
     return (
         <div>
             <Header activeIndex={0} />

@@ -5,6 +5,16 @@ import HelpCard from '@/components/HelpCard';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCategories from '@/components/ProductCategorys';
+import HelpSection from '@/components/sections/Help-Section';
+import AcsesuaresSection from '@/components/sections/Home-acsesuares';
+import VakumusHeroRight from '@/components/sections/Vakumus/heroRight';
+import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
+import {
+    get_Products_By_Param,
+    getChoices,
+    getSection,
+    getTranslates,
+} from '@/services/Requests';
 import { useRouter } from 'next/router';
 import React from 'react';
 const scrollToElement = (id) => {
@@ -13,7 +23,15 @@ const scrollToElement = (id) => {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 };
-export default function Paket() {
+export default function Paket({
+    Vakumus_Hero,
+    Translates,
+    ProductBundle1,
+    ProductBundle2,
+    ProductBundle3,
+    Home_acsesuares,
+    choices,
+}) {
     const robotTypes = [
         {
             imageSrc:
@@ -62,99 +80,72 @@ export default function Paket() {
         },
     ];
     const router = useRouter();
-
     return (
         <div>
             {' '}
-            <Header activeIndex={1} productIndex={1} />
+            <Header activeIndex={1} productIndex={3} />
             <main>
                 {' '}
-                <section
-                    className="flex overflow-hidden flex-col items-start px-16 pt-24 pb-7 w-full max-md:px-5 max-md:max-w-full"
-                    style={{
-                        backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/42f2/dca5/f123173f15914af2bf267decfc316dd0?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QB52-iINlwWMSEwIwJ8ykPsuW4S0SP7cUYbKfcYmvbeFJLAr9NkvgsMfREQIS8DhyzgX5FieDrZ4aAeFUCXu-1YAOcwUBFQ-GVTEnBOKCkKvUcel1iASwJ~tA3PS8DXG17h2kzzbbsdMNztvonIk~rqY-ytnCLWckb0yGwU1k~BbvMVRujDm3Tn2DdAiElnPZf~52AVjwTkSLBdA4OpOYm-6vxbLOomYxQBpG-xq9l3eYYCPVOM2pgFSHbnaGIDvnN0z6RYrap7atmNyTt-moxnvxnkuWCwWMbzxelicnpsPKT5p7e58JM3k8JLZLnRQuOJJALbnHxdAqUnZ0WuYiw__)',
-                        backgroundSize: 'cover', // This makes the image cover the entire div
-                        backgroundPosition: 'center', // Centers the image
-                        backgroundRepeat: 'no-repeat', // Prevents the image from repeating
-                        width: '100%', // Sets the width to fill the parent container
-                        height: '100%', // Sets the height to fill the parent container
-                    }}
-                >
-                    <div className="flex flex-col max-w-full min-h-[226px] w-[504px]">
-                        <h1 className="flex-1 text-5xl font-semibold text-green-950 max-md:text-4xl">
-                            Ən yaxşı robot mop
-                        </h1>
-                        <p className="text-[16px] font-normal mt-3">
-                            Precision Jet Spray loosens dirt and sticky messes
-                            without any effort from you.
-                        </p>
-                        <div className="mt-7">
-                            <Green_to_green
-                                action={() => router.push('/products/compare')}
-                            >
-                                {' '}
-                                Müqayisə et
-                            </Green_to_green>
-                        </div>
-                    </div>
-                    <div
-                        className="flex flex-col items-center mt-16 w-[50px] max-md:mt-10 animate-bounce"
-                        onClick={() => scrollToElement('clean')}
-                    >
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/28271d8b28a86de88dc412579eda58a62e2a42ef9b71127030f85d3001fde1b9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            alt="Roomba vacuum cleaner"
-                            className="object-contain w-full aspect-square"
-                        />
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1896a0c6cb827c87623a0963e92bd5903a565448674710f1b4c5940f05f8425?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            alt="Roomba accessory"
-                            className="object-contain mt-2.5 aspect-square w-[26px]"
-                        />
-                    </div>
-                </section>
-                <section
-                    className="w-full lg:px-[60px] px-[30px] mt-[100px]"
-                    id="clean"
-                >
+                <VakumusHeroRight
+                    Vakumus_Hero={Vakumus_Hero}
+                    Translates={Translates}
+                />
+                <section className="w-full  mt-[100px]" id="vakumus">
                     <h2 className="text-[#447355] text-[40px] font-semibold text-center">
-                        Ən güclü təmizlik üçün{' '}
+                        {Translates?.Ən_güclü_təmizlik}{' '}
+                    </h2>
+                    <ProductBundle ProductBundle1={ProductBundle1.data} />
+
+                    {/* <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                        <Product_Card_aute />
+                    </div>
+                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
+                        <ProductCard_MD
+                            desc={'Free Shipping on All Robot Orders'}
+                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
+                            price={300}
+                            bgcolor="#EEEEEE"
+                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        />
+                        <ProductCard_MD
+                            desc={'Free Shipping on All Robot Orders'}
+                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
+                            price={300}
+                            bgcolor="#EEEEEE"
+                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        />
+                    </div> */}
+                </section>
+                <section className="w-full mt-[100px] bg-[#ECF3EA] py-[100px]">
+                    <h2 className="text-[#447355] text-[40px] font-semibold text-center ">
+                        {Translates?.Döşəmə_təmizliyinə}
                     </h2>
 
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <ProductCard_MD
-                            bgcolor="#EEEEEE"
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                        <ProductCard_MD
-                            bgcolor="#EEEEEE"
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                    </div>
+                    <ProductBundle ProductBundle1={ProductBundle2.data} />
                 </section>
-                <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px]">
+                <section className="w-full mt-[100px]  ">
+                    <h2 className="text-[#447355] text-[40px] font-semibold text-center max-w-[985px]  self-center mx-auto">
+                        {Translates?.Eksklüziv_robot_və}
+                    </h2>
+
+                    <ProductBundle ProductBundle1={ProductBundle3.data} />
+                </section>
+                <AcsesuaresSection
+                    Home_acsesuares={Home_acsesuares}
+                    Translates={Translates}
+                />{' '}
+                <HelpSection helpData={choices} translates={Translates} />
+                {/* <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full w-full text-center">
+                        <h2 className="self-center text-4xl font-semibold text-center !w-[100%] text-[#132A1B] ">
                             Seçim etməkdə kömək edək!
                         </h2>
                         <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
@@ -163,7 +154,7 @@ export default function Paket() {
                             ))}
                         </div>
                     </div>
-                </section>{' '}
+                </section>{' '} */}
                 <section className="my-[100px] lg:px-[145px] ">
                     <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
                         Digər kateqoriyalar
@@ -174,4 +165,67 @@ export default function Paket() {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+        const Vakumus_HeroResponse = await fetch(
+            `${baseUrl}/section?type=Bundles_Hero`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+        const Home_acsesuaresResponse = await fetch(
+            `${baseUrl}/section?type=Home_acsesuares`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+        const Home_acsesuares = await Home_acsesuaresResponse.json();
+
+        const Vakumus_Hero = await Vakumus_HeroResponse.json();
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const Translates = await TranslatesResponse.json();
+
+        const ProductBundle1Response = await fetch(`${baseUrl}/products`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const ProductBundle1 = await ProductBundle1Response.json();
+
+        const ProductBundle2Response = await fetch(`${baseUrl}/products`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const ProductBundle2 = await ProductBundle2Response.json();
+
+        const ProductBundle3Response = await fetch(`${baseUrl}/products`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const ProductBundle3 = await ProductBundle3Response.json();
+
+        const choicesResponse = await fetch(`${baseUrl}/choices`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const choices = await choicesResponse.json();
+
+        return {
+            props: {
+                Translates,
+                Vakumus_Hero,
+                ProductBundle1,
+                ProductBundle2,
+                ProductBundle3,
+                choices,
+                Home_acsesuares,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

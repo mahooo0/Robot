@@ -51,7 +51,7 @@ function LoginForum() {
                         JSON.stringify(response.data)
                     );
                     toast.success('Successfully logged in!');
-                    router.push(`/${lang}/${ROUTES.settings[lang]}`);
+                    router.push(`/${lang}/user`);
                 } catch (error) {
                     toast.error(error.response.data.message);
                 }

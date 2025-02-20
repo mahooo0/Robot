@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const features = [
     {
@@ -33,28 +36,59 @@ const features = [
     },
 ];
 
-function FeatureList() {
+function FeatureList({ Advantages }) {
     return (
-        <section className="flex overflow-hidden flex-col justify-center self-center px-11 py-7 mt-5 w-full text-base rounded-3xl bg-[#ECF3EA] max-w-[1600px] text-green-950 max-md:px-5 max-md:max-w-full">
-            <div className="flex flex-wrap gap-10 items-center max-md:max-w-full justify-center">
-                {features.map((feature, index) => (
-                    <div
+        <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of section is in view
+            variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                        staggerChildren: 0.2,
+                        duration: 0.6,
+                        ease: 'easeOut',
+                    },
+                },
+            }}
+            className="flex overflow-hidden flex-col justify-center self-center px-11 py-7 mt-5 w-full text-base rounded-3xl bg-[#ECF3EA] max-w-[1600px] text-green-950 max-md:px-5 max-md:max-w-full"
+        >
+            <motion.div className="flex flex-wrap gap-10 items-center max-md:max-w-full justify-center">
+                {Advantages.map((feature, index) => (
+                    <motion.div
                         key={index}
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 },
+                        }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
                         className="flex gap-2 items-center self-stretch my-auto"
                     >
-                        <img
-                            loading="lazy"
-                            src={feature.imageSrc}
-                            alt={feature.altText}
+                        <motion.img
+                            src={feature.icon}
+                            alt={feature.icon}
                             className="object-contain shrink-0 self-stretch my-auto w-14 aspect-square rounded-[100px]"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5, ease: 'easeOut' }}
+                            viewport={{ once: true }}
                         />
-                        <p className="self-stretch my-auto">
-                            {feature.description}
-                        </p>
-                    </div>
+                        <motion.p
+                            className="self-stretch my-auto"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, ease: 'easeOut' }}
+                            viewport={{ once: true }}
+                        >
+                            {feature.title}
+                        </motion.p>
+                    </motion.div>
                 ))}
-            </div>
-        </section>
+            </motion.div>
+        </motion.section>
     );
 }
 

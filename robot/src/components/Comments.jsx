@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CommentsSection = () => {
+const CommentsSection = ({ product }) => {
     const [sortOrder, setSortOrder] = useState('newest');
 
     const reviewData = [
@@ -66,7 +66,7 @@ const CommentsSection = () => {
         <section className="flex flex-col w-full max-md:max-w-full mt-10 px-[60px]">
             <header className="flex flex-wrap gap-10 justify-between items-center w-full max-md:max-w-full">
                 <p className="gap-3 self-stretch my-auto text-sm text-black">
-                    440 rəy
+                    {product?.comments.length} rəy
                 </p>
                 <div className="flex gap-4 items-center self-stretch my-auto min-w-[240px] flex-wrap">
                     <label
@@ -89,37 +89,57 @@ const CommentsSection = () => {
                 </div>
             </header>
             <main className="flex flex-col mt-7 w-full max-md:max-w-full pb-[100px]">
-                {sortedReviews.map((review) => (
+                {product?.comments.map((review) => (
                     <article
                         key={review.id}
                         className="flex overflow-hidden flex-col justify-center p-7 mt-3 max-w-full bg-white rounded-3xl w-full max-md:px-5"
                     >
                         <div className="flex flex-col w-full max-md:max-w-full">
-                            <header className="flex gap-3 items-center self-start text-sm text-black">
+                            <article className="flex gap-3 items-center self-start text-sm text-black">
                                 <img
                                     loading="lazy"
-                                    src={review.avatarSrc}
+                                    src={
+                                        'https://cdn.builder.io/api/v1/image/assets/TEMP/a5540671aa70313d23346b763636f4f483f2787cbfffaa12eefa61b058a9f85d?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2'
+                                    }
                                     alt={`${review.name}'s avatar`}
                                     className="object-contain shrink-0 self-stretch my-auto aspect-square rounded-[100px] w-[60px]"
                                 />
                                 <div className="flex flex-col justify-center self-stretch my-auto w-[120px]">
-                                    <img
+                                    <div className="flex flex-row gap-1">
+                                        {Array.from({
+                                            length: review.star,
+                                        }).map(() => (
+                                            <svg
+                                                width="20"
+                                                height="19"
+                                                viewBox="0 0 20 19"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M9.04894 1.42705C9.3483 0.505741 10.6517 0.50574 10.9511 1.42705L12.4697 6.10081C12.6035 6.51284 12.9875 6.7918 13.4207 6.7918H18.335C19.3037 6.7918 19.7065 8.03141 18.9228 8.60081L14.947 11.4894C14.5966 11.744 14.4499 12.1954 14.5838 12.6074L16.1024 17.2812C16.4017 18.2025 15.3472 18.9686 14.5635 18.3992L10.5878 15.5106C10.2373 15.256 9.7627 15.256 9.41221 15.5106L5.43648 18.3992C4.65276 18.9686 3.59828 18.2025 3.89763 17.2812L5.41623 12.6074C5.55011 12.1954 5.40345 11.744 5.05296 11.4894L1.07722 8.60081C0.293507 8.03141 0.696283 6.7918 1.66501 6.7918H6.57929C7.01252 6.7918 7.39647 6.51284 7.53035 6.10081L9.04894 1.42705Z"
+                                                    fill="#FABD21"
+                                                />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                    {/* <img
                                         loading="lazy"
                                         src={review.ratingSrc}
                                         alt="User rating"
                                         className="object-contain max-w-full aspect-[5] w-[120px]"
-                                    />
+                                    /> */}
                                     <p className="self-start mt-1">
-                                        {review.name}
+                                        {review.customer.name}
                                     </p>
                                 </div>
-                            </header>
+                            </article>
                             <div className="flex flex-col mt-5 w-full max-md:max-w-full">
                                 <time className="text-sm text-black text-opacity-60 max-md:max-w-full">
                                     {review.date}
                                 </time>
                                 <p className="mt-2 text-base text-black text-opacity-80 max-md:max-w-full">
-                                    {review.content}
+                                    {review.comment}
                                 </p>
                             </div>
                         </div>

@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import ProductCategory from './ProductCategory';
 import { useRouter } from 'next/router';
-// import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const categories = [
     {
@@ -47,24 +49,47 @@ const categories = [
         page: `/products`,
     },
 ];
+
 function ProductCategories() {
     const router = useRouter();
 
     return (
-        <section
-            // onClick={() => router.push('/aksesuares')}
+        <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }} // Triggers animation when 20% of section is in view
+            variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                        staggerChildren: 0.2,
+                        duration: 0.6,
+                        ease: 'easeOut',
+                    },
+                },
+            }}
             className="flex flex-wrap gap-3 items-center self-center mt-24 text-base font-medium text-center text-green-950 max-md:mt-10 max-md:max-w-full w-full justify-center"
         >
             {categories.map((category, index) => (
-                <ProductCategory
-                    page={category.page}
+                <motion.div
                     key={index}
-                    imageSrc={category.imageSrc}
-                    altText={category.altText}
-                    categoryName={category.categoryName}
-                />
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
+                    <ProductCategory
+                        page={category.page}
+                        imageSrc={category.imageSrc}
+                        altText={category.altText}
+                        categoryName={category.categoryName}
+                    />
+                </motion.div>
             ))}
-        </section>
+        </motion.section>
     );
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Green_to_green from '../btns/green_to_green';
 import { useRouter } from 'next/router';
 import GETRequest from '@/services/QueryREq';
+import { ROUTES } from '@/Helpers/Routes';
 
 const products = [
     {
@@ -19,54 +20,63 @@ const products = [
 ];
 
 function ProductCardKredit() {
-    return (
-        <section className="flex flex-col rounded-3xl w-full mt-[20px]">
-            <div className="flex flex-col justify-center p-6 w-full rounded-3xl bg-stone-50">
-                <div className="flex flex-col items-start">
-                    {products.map((product, index) => (
-                        <React.Fragment key={index}>
-                            <article className="flex flex-col mt-5 w-full max-w-[247px]">
-                                <div className="flex gap-1 items-center self-start">
-                                    <p className="self-stretch my-auto text-xs text-black text-opacity-60">
-                                        3 ay:
-                                    </p>
-                                    <div className="flex gap-0.5 items-center self-stretch my-auto text-sm font-semibold text-center text-gray-600 whitespace-nowrap">
-                                        <span className="self-stretch my-auto">
-                                            {product.price}
-                                        </span>
+    const router = useRouter();
+
+    const { lang = 'az' } = router.query;
+    const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
+        lang,
+    ]);
+    console.log('ProductCardKredit', basked);
+    if (basked?.basket_items[0].is_credit)
+        return (
+            <section className="flex flex-col rounded-3xl w-full mt-[20px]">
+                <div className="flex flex-col justify-center p-6 w-full rounded-3xl bg-stone-50">
+                    <div className="flex flex-col items-start">
+                        {basked?.basket_items.map((product, index) => (
+                            <React.Fragment key={index}>
+                                <article className="flex flex-col mt-5 w-full max-w-[247px]">
+                                    <div className="flex gap-1 items-center self-start">
+                                        <p className="self-stretch my-auto text-xs text-black text-opacity-60">
+                                            {product.month} ay:
+                                        </p>
+                                        <div className="flex gap-0.5 items-center self-stretch my-auto text-sm font-semibold text-center text-gray-600 whitespace-nowrap">
+                                            <span className="self-stretch my-auto">
+                                                {product.price}
+                                            </span>
+                                            <img
+                                                loading="lazy"
+                                                src="https://cdn.builder.io/api/v1/image/assets/c6f3c7bb740649e5a32c147b3037a1c2/b5643bd5de60b263692fc31cdd24617b356d55a160f3a40cab6730bf8c59c929?apiKey=c6f3c7bb740649e5a32c147b3037a1c2&"
+                                                alt=""
+                                                className="object-cover shrink-0 self-stretch my-auto w-3 aspect-square"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-3 items-center mt-2 w-full text-xs text-green-950">
                                         <img
                                             loading="lazy"
-                                            src="https://cdn.builder.io/api/v1/image/assets/c6f3c7bb740649e5a32c147b3037a1c2/b5643bd5de60b263692fc31cdd24617b356d55a160f3a40cab6730bf8c59c929?apiKey=c6f3c7bb740649e5a32c147b3037a1c2&"
-                                            alt=""
-                                            className="object-contain shrink-0 self-stretch my-auto w-3 aspect-square"
+                                            src={product.product.image}
+                                            alt={product.product.productName}
+                                            className="object-cover shrink-0 self-stretch my-auto rounded-xl aspect-[1.2] w-[83px]"
                                         />
+                                        <p className="self-stretch my-auto w-[152px]">
+                                            {product.product.title}
+                                        </p>
                                     </div>
-                                </div>
-                                <div className="flex gap-3 items-center mt-2 w-full text-xs text-green-950">
-                                    <img
-                                        loading="lazy"
-                                        src={product.imageUrl}
-                                        alt={product.productName}
-                                        className="object-contain shrink-0 self-stretch my-auto rounded-xl aspect-[1.2] w-[83px]"
-                                    />
-                                    <p className="self-stretch my-auto w-[152px]">
-                                        {product.productName}
-                                    </p>
-                                </div>
-                            </article>
-                            {index < products.length - 1 && (
-                                <div className="self-stretch mt-5 w-full border border-solid border-zinc-300 min-h-[1px]" />
-                            )}
-                        </React.Fragment>
-                    ))}
+                                </article>
+                                {index < products.length - 1 && (
+                                    <div className="self-stretch mt-5 w-full border border-solid border-zinc-300 min-h-[1px]" />
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </section>
-    );
+            </section>
+        );
 }
 function OrderSummary({ isConfrim, basked }) {
     const router = useRouter();
     const { lang = 'az' } = router.query;
+
     const { data: translates } = GETRequest(`/translates`, 'translates', [
         lang,
     ]);
@@ -117,7 +127,9 @@ function OrderSummary({ isConfrim, basked }) {
                         </div>
                         <Green_to_green
                             classNAME="mt-[28px]"
-                            action={() => router.push('/basked/offer')}
+                            action={() =>
+                                router.push(`/${lang}/${ROUTES.order[lang]}`)
+                            }
                         >
                             {translates?.Sifariş_et}
                         </Green_to_green>

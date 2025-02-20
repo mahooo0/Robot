@@ -1,26 +1,30 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
 
 import React, { useState } from 'react';
 
-export default function Test() {
+export default function Help({ data }) {
     const [variat, setvariant] = useState(0);
     const [selectedOption, setSelectedOption] = useState(0);
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(1);
     const [floor, setfloor] = useState(1);
-    console.log(floor);
+    const router = useRouter();
 
+    const { translates } = data || {};
+    // console.log('translates', translates);
     const handleProgressChange = (event) => {
         setProgress(event.target.value);
     };
-    const ProductCard = ({ imageSrc, title, price, currencySymbol }) => {
+    const ProductCard = ({ image, img_alt, title, price }) => {
         return (
             <article className="flex overflow-hidden flex-col grow shrink self-stretch px-6 pt-6 pb-10 my-auto rounded-3xl bg-[#87A28E] min-w-[240px] w-[315px] max-md:px-5">
                 <img
                     loading="lazy"
-                    src={imageSrc}
-                    alt={title}
-                    className="object-contain w-full aspect-[1.56]"
+                    src={image}
+                    alt={img_alt}
+                    className="object-cover w-full aspect-[1.56]"
                 />
                 <div className="flex flex-col mt-4 w-full">
                     <h3 className="w-full text-base font-medium">{title}</h3>
@@ -31,18 +35,20 @@ export default function Test() {
                             </span>
                             <img
                                 loading="lazy"
-                                src={currencySymbol}
+                                src={
+                                    'https://cdn.builder.io/api/v1/image/assets/TEMP/ff22683343fb044fc9eeee40fd8fa6c77af21b3d8a6b19bd891e9f47d001e6b1?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2'
+                                }
                                 alt=""
-                                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[18px]"
+                                className="object-cover shrink-0 self-stretch my-auto aspect-square w-[18px]"
                             />
                         </div>
                     </div>
                 </div>
                 <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 text-base font-medium bg-white hover:bg-[#69BE56] duration-300 hover:text-white rounded-[100px] text-green-950 max-md:px-5">
-                    Səbətə əlavə et
+                    {translates?.Səbətə_əlavə_et}
                 </button>
                 <button className="gap-2.5 self-stretch px-7 py-3.5 mt-3 text-base font-medium border border-white border-solid rounded-[100px] max-md:px-5">
-                    Məhsula bax
+                    {translates?.Məhsula_bax}
                 </button>
             </article>
         );
@@ -73,6 +79,19 @@ export default function Test() {
                 'https://cdn.builder.io/api/v1/image/assets/TEMP/1f64d911509a7a5129a68fe20293824c84f314a27499ac89342581f50541fb08?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
         },
     ];
+    const { lang = 'az' } = router.query;
+    console.log('selectedOption', selectedOption);
+    console.log('progress', progress);
+    console.log('floor', floor);
+    const { data: chooseProducts } = GETRequest(
+        `/chooseProducts?mn === 0
+                ? 'animals'
+                : selectedOption === 2
+                ? 'parent'
+                : 'children'ess_coming=${selectedOption}&floor_home=${floor}&level_clutter=${progress}`,
+        'chooseProducts',
+        [lang, selectedOption, floor, progress]
+    );
     switch (variat) {
         case 0:
             return (
@@ -83,20 +102,17 @@ export default function Test() {
                         <div className="flex flex-col max-w-full w-[794px]">
                             <div className="flex flex-col w-full text-center text-white max-md:max-w-full">
                                 <h1 className="text-5xl font-semibold max-md:max-w-full max-md:text-4xl">
-                                    Məhsulu seçməkdə kömək et!
+                                    {translates?.Məhsulu_seçməkdə}
                                 </h1>
                                 <p className="self-center mt-3 text-base max-md:max-w-full">
-                                    Eviniz də sizin kimi unikaldır və onu təmiz
-                                    saxlamaq üçün bizdə tozsoranlar və moplar
-                                    var. Hansı məhsulların sizə uyğun olduğunu
-                                    öyrənmək üçün bu testdən keçin!
+                                    {translates?.Eviniz_də_sizin}
                                 </p>
                             </div>
                             <button
                                 onClick={() => setvariant(1)}
                                 className="gap-2.5 self-center px-12 py-5 mt-12 text-xl font-medium bg-white rounded-[100px] text-green-950 max-md:px-5 max-md:mt-10"
                             >
-                                İndi başla
+                                {translates?.İndi_başla}
                             </button>
                         </div>
                     </section>
@@ -110,7 +126,7 @@ export default function Test() {
                     <main className="flex overflow-hidden flex-col items-center px-20 pt-20 pb-14 rounded-3xl bg-slate-600 max-md:px-5 m-5">
                         <div className="flex flex-col max-w-full w-[737px] justify-center">
                             <h1 className="self-start text-4xl font-semibold text-center text-white max-md:max-w-full w-full ">
-                                Where's the mess coming from?
+                                {translates?.mess_coming}
                             </h1>
                             <section className="flex flex-col pl-4 mt-7 w-full max-md:max-w-full">
                                 <div className="w-full max-md:max-w-full">
@@ -164,7 +180,7 @@ export default function Test() {
                                                     : 'text-white'
                                             } lg:absolute md:absolute block top-0  left-0 px-[34px] py-[14px] bg-none rounded-[100px] border border-white border-opacity-20  text-[16px] font-medium `}
                                         >
-                                            Valideynlər
+                                            {translates?.Valideynlər}
                                         </button>
                                         <button
                                             onClick={() => setSelectedOption(1)}
@@ -174,7 +190,7 @@ export default function Test() {
                                                     : 'text-white'
                                             } lg:absolute md:absolute block bottom-0  left-0 px-[34px] py-[14px] bg-none rounded-[100px] border border-white border-opacity-20  text-[16px] font-medium `}
                                         >
-                                            Uşaqlar
+                                            {translates?.Uşaqlar}
                                         </button>
                                         <button
                                             onClick={() => setSelectedOption(0)}
@@ -184,7 +200,7 @@ export default function Test() {
                                                     : 'text-white'
                                             } lg:absolute md:absolute block bottom-0  right-0 px-[34px] py-[14px] bg-none rounded-[100px] border border-white border-opacity-20  text-[16px] font-medium `}
                                         >
-                                            Ev heyvanları
+                                            {translates?.Ev_heyvanları}
                                         </button>
 
                                         <div className="flex flex-col ml-5 w-[61%] max-md:ml-0 max-md:w-full">
@@ -209,7 +225,7 @@ export default function Test() {
                                         onClick={() => setvariant(2)}
                                     >
                                         <span className="self-stretch my-auto">
-                                            Davam et
+                                            {translates?.Davam_et}
                                         </span>
                                         <img
                                             loading="lazy"
@@ -250,7 +266,7 @@ export default function Test() {
                     <main className="flex overflow-hidden flex-col items-center px-20 pt-20 pb-14 rounded-3xl bg-slate-600 max-md:px-5 m-5">
                         <div className="flex flex-col max-w-full w-[800px]">
                             <h1 className="self-center text-4xl font-semibold text-center text-white max-md:max-w-full">
-                                What does your space look like?
+                                {translates?.your_space_look}
                             </h1>
                             <img
                                 key={progress}
@@ -261,25 +277,27 @@ export default function Test() {
                                         : `/image/divan${progress}.png`
                                 }
                                 alt="Illustration of a space"
-                                className="object-contain mt-16 w-full aspect-[3.33] max-md:mt-10 max-md:max-w-full"
+                                className="object-cover mt-16 w-full aspect-[3.33] max-md:mt-10 max-md:max-w-full"
                             />
                             <section className="flex flex-col items-start self-end mt-24 mr-12 max-w-full w-[617px] max-md:mt-10 max-md:mr-2.5">
                                 <div className="flex gap-5 justify-between ml-10 max-w-full text-lg font-medium text-white w-[448px]">
-                                    <span>Az dağınıq</span>
-                                    <span>Çox dağınıq</span>
+                                    <span>{translates?.Az_dağınıq}</span>
+                                    <span>{translates?.Çox_dağınıq}</span>
                                 </div>
                                 <div className="flex mt-2.5 ml-10 max-w-full w-[448px]">
                                     <input
                                         type="range"
-                                        min="0"
+                                        min="1"
                                         max="3"
                                         value={progress}
                                         onChange={handleProgressChange}
                                         className="w-full h-3 bg-gray-400 rounded-full appearance-none cursor-pointer accent-blue-400"
                                         style={{
                                             background: `linear-gradient(to right, #A8B4FF ${
-                                                progress * 33.33
-                                            }%, #808999 ${progress * 33.33}%)`,
+                                                (progress - 1) * 50
+                                            }%, #808999 ${
+                                                (progress - 1) * 50
+                                            }%)`,
                                         }}
                                         aria-label="Space messiness level"
                                     />
@@ -314,7 +332,7 @@ export default function Test() {
                                         onClick={() => setvariant(3)}
                                     >
                                         <span className="self-stretch my-auto">
-                                            Davam et
+                                            {translates?.Davam_et}
                                         </span>
                                         <img
                                             loading="lazy"
@@ -338,7 +356,7 @@ export default function Test() {
                         <section className="flex flex-col ml-11 max-w-full w-[617px]">
                             <div className="flex flex-col ml-11 max-w-full text-white w-[443px]">
                                 <h1 className="text-4xl font-semibold text-center max-md:max-w-full">
-                                    Let's meet your home!
+                                    {translates?.meet_your}
                                 </h1>
                                 <img
                                     loading="lazy"
@@ -359,7 +377,7 @@ export default function Test() {
                                             1
                                         </div>
                                         <div className="mt-3 text-sm text-center">
-                                            Mərtəbə
+                                            {translates?.Mərtəbə}
                                         </div>
                                     </div>
                                     <div className="flex flex-col w-20">
@@ -375,7 +393,7 @@ export default function Test() {
                                             2
                                         </div>
                                         <div className="mt-3 text-sm text-center">
-                                            Mərtəbə
+                                            {translates?.Mərtəbə}
                                         </div>
                                     </div>
                                     <div className="flex flex-col w-20">
@@ -391,7 +409,7 @@ export default function Test() {
                                             3
                                         </div>
                                         <div className="mt-3 text-sm text-center">
-                                            Mərtəbə
+                                            {translates?.Mərtəbə}
                                         </div>
                                     </div>
                                 </div>
@@ -415,7 +433,7 @@ export default function Test() {
                                     onClick={() => setvariant(4)}
                                 >
                                     <span className="self-stretch my-auto">
-                                        Davam et
+                                        {translates?.Davam_et}
                                     </span>
                                     <img
                                         loading="lazy"
@@ -431,16 +449,18 @@ export default function Test() {
                 </div>
             );
         case 4:
+            console.log('chooseProducts', chooseProducts);
+
             return (
                 <div>
                     <Header activeIndex={0} />
                     <main className="w-full flex justify-center mt-[48px] mb-[100px]">
                         <section className="flex flex-col max-w-[985px]">
                             <h2 className="text-5xl font-semibold text-center text-green-950 max-md:max-w-full max-md:text-4xl">
-                                Sizə ən uyğun məhsul!
+                                {translates?.uyğun_məhsul}
                             </h2>
                             <div className="flex flex-wrap gap-5 items-center mt-12 w-full text-white max-md:mt-10 max-md:max-w-full">
-                                {products.map((product, index) => (
+                                {chooseProducts?.map((product, index) => (
                                     <ProductCard key={index} {...product} />
                                 ))}
                             </div>

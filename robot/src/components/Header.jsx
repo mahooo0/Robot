@@ -18,12 +18,15 @@ import { useRecoilState } from 'recoil';
 import { languageState, MenuState } from './recoil/Atom';
 import LikedDrop from '../components/LikedDRopDown';
 // import ShopDrop from './LshopDRopDown';
+import { motion } from 'framer-motion';
+
 import WhyNav from './WhyNavication';
 import {
     HandleChangeUrlByLang,
     ROUTES,
     updateLangAndRoute,
 } from '@/Helpers/Routes';
+import GETRequest from '@/services/QueryREq';
 
 const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const [_, setMenu] = useRecoilState(MenuState);
@@ -31,8 +34,8 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     // const [language, setlanguage] = useRecoilState(languageState);
     const [show_Like_modal, setshow_Like_modal] = useState(false);
     const [show_shop_modal, setshow_shop_modal] = useState(false);
-    const router = useRouter();
     const [active, setactive] = useState(activeIndex);
+    const router = useRouter();
     const { lang = 'az' } = router.query;
     const likeBtnRef = useRef();
     const likeDivRef = useRef();
@@ -77,28 +80,42 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const HandleChangeUrlByLang = (Lang) => {
         const { lang = 'az', page, slug } = router.query;
 
-        if (lang === undefined || page === undefined) {
-            router.push(`/${Lang}${window.location.search}`);
-            return;
-        }
-        let path = `/${lang}/${page}`;
-        if (slug) {
-            path += `/${slug}`;
-        }
-        const queryParams = window.location.search; // Get the current query string
-        const RoutePath = updateLangAndRoute(path, Lang) + queryParams;
+        // Extract the pathname without query parameters
+        const pathParts = router.pathname.split('/').filter(Boolean);
+        const RoutePath = `/${Lang}/${pathParts.slice(1).join('/')}`;
+        // if (lang === undefined || page === undefined) {
+        //     router.push(`/${Lang}${window.location.search}`);
+        //     return;
+        // }
+        // let path = `/${lang}/${page}`;
+        // if (slug) {
+        //     path += `/${slug}`;
+        // }
+        // const queryParams = window.location.search; // Get the current query string
+        // const RoutePath = updateLangAndRoute(path, Lang) + queryParams;
         router.push(RoutePath); // Navigate to the new path
     };
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
 
     return (
         <>
-            <header
+            <motion.header
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="lg:fixed block top-0 w-[100%] z-[999999999999999999999999999999]"
                 style={{ zIndex: 150 }}
             >
                 <div className="border-b border-[#EFEFEF] relative">
                     {/* Top section */}
-                    <div className="flex justify-center bg-blue_gray-400 text-[14px] text-white font-normal">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="flex justify-center bg-blue_gray-400 text-[14px] text-white font-normal"
+                    >
                         <div className="!px-[60px] flex w-full justify-between gap-5 items-center md:flex-row lg:flex-row flex-col md:px-5 bg-[#87A28E] min-h-[52px] h-fit">
                             <div className="lg:w-[32%] w-full flex lg:justify-between justify-center items-center gap-5 md:w-full lg:flex-row flex-col">
                                 {/* Contact info */}
@@ -156,11 +173,18 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                 </div>
                                 <div
                                     className="flex w-fit items-center justify-center gap-2 cursor-pointer"
-                                    onClick={() =>
-                                        router.push(
-                                            `/${lang}/${ROUTES.login[lang]}`
-                                        )
-                                    }
+                                    onClick={() => {
+                                        const userStr =
+                                            localStorage.getItem('user-info');
+                                        const User = JSON.parse(userStr);
+                                        if (User) {
+                                            router.push(`/${lang}/user`);
+                                        } else {
+                                            router.push(
+                                                `/${lang}/login_register`
+                                            );
+                                        }
+                                    }}
                                 >
                                     <div className="w-[36px] h-[36px] bg-[#F9F9F933] bg-opacity-20 flex justify-center items-center rounded-full">
                                         <Image
@@ -172,15 +196,19 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                         />
                                     </div>
                                     <p className="text-[14px] font-normal !text-white-a700 text-nowrap">
-                                        Şəxsi kabinet
+                                        {translates?.Şəxsi_kabinet}
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Bottom section with navigation */}
-                    <div className="py-[18px] flex justify-center border-b border-solid border-gray-200 bg-[#ffffff] text-black relative">
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        className="py-[18px] flex justify-center border-b border-solid border-gray-200 bg-[#ffffff] text-black relative"
+                    >
+                        {/* Bottom section with navigation */}\{' '}
                         <div className="!px-[60px] mx-auto flex w-full items-center justify-between gap-5 lg:flex-row flex-col-reverse md:px-5">
                             <ul className="flex gap-5 flex-row text-nowrap flex-wrap ">
                                 <ProductNav
@@ -282,7 +310,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                     <div
                         style={
                             show_shop_modal
@@ -302,7 +330,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                     </div>
                     <div></div>
                 </div>
-            </header>
+            </motion.header>
             <div className="border-b border-[#EFEFEF] relative  opacity-0 lg:block  hidden">
                 {/* Top section */}
                 <div className="flex justify-center bg-blue_gray-400 text-[14px] text-white font-normal">

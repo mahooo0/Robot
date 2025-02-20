@@ -46,7 +46,7 @@ export default function Product_Card_aute({
         // // Initial check on render
         // // checkLikedProducts();
 
-        console.log('BAAAA', basked?.basket_items, data?.id);
+        console.log('BAAAA', data);
     }, [basked]);
     const addToBasket = async (Data) => {
         const response = await axiosInstance
@@ -97,7 +97,13 @@ export default function Product_Card_aute({
                 style={{ background: bgcolor }}
             >
                 <img
-                    onClick={() => router.push('/products/id')}
+                    onClick={() => {
+                        router.push(`/${lang}/products/${data?.slug[lang]}`);
+                        localStorage.setItem(
+                            'slug',
+                            JSON.stringify(data?.slug)
+                        );
+                    }}
                     loading="lazy"
                     src={data?.image}
                     alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"

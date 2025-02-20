@@ -3,7 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ProductCardSm from '../ProductCards/productCarrSm';
 import strelka from '../../../public/svg/Strelka_black.svg';
-export default function SalesSwipper() {
+export default function SalesSwipper({ data }) {
+    console.log('data', data);
+
     const [slidesPerView, setSlidesPerView] = useState(4); // Default value
 
     const updateSlidesPerView = () => {
@@ -43,7 +45,7 @@ export default function SalesSwipper() {
         }
     };
     return (
-        <div className="lg:pl-[60px] px-[30px] mt-10">
+        <div className="lg:pl-[60px] pl-[30px] mt-10">
             <Swiper
                 ref={swiperRef}
                 slidesPerView={'auto'}
@@ -60,38 +62,13 @@ export default function SalesSwipper() {
                 //     },
                 // }}
             >
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
-                <SwiperSlide className="!w-fit">
-                    <ProductCardSm />
-                </SwiperSlide>
+                {data?.map((item) => (
+                    <SwiperSlide className="!w-fit">
+                        <ProductCardSm data={item} />
+                    </SwiperSlide>
+                ))}
             </Swiper>
-            <div>
+            <div className="lg:pr-[60px] pr-[30px]">
                 <div className="flex gap-3 items-center self-end justify-end mt-5">
                     <button
                         onClick={handlePrev}

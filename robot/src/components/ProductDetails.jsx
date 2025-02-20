@@ -27,7 +27,7 @@ const productData = [
     },
 ];
 
-function ProductDetails() {
+function ProductDetails({ product }) {
     return (
         <main className="flex overflow-hidden flex-col justify-center px-16 py-24 mt-5 w-full bg-neutral-100 max-md:px-5 max-md:max-w-full">
             <section className="flex flex-col max-md:max-w-full">
@@ -36,12 +36,12 @@ function ProductDetails() {
                 </h1>
                 <div className="flex overflow-hidden flex-col justify-center p-10 mt-10 w-full bg-white rounded-3xl max-md:px-5 max-md:max-w-full">
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        {productData.map((product, index) => (
+                        {product?.product_details.map((product, index) => (
                             <React.Fragment key={index}>
                                 <div className="flex flex-wrap gap-10 justify-between items-center mt-7 w-full max-md:max-w-full">
                                     <div className="flex flex-col justify-center self-stretch my-auto min-w-[240px] w-[905px] max-md:max-w-full">
                                         <div className="text-4xl text-gray-600 text-opacity-40">
-                                            {product.number}
+                                            {index + 1}
                                         </div>
                                         <div className="flex flex-col mt-5 max-w-full w-[905px]">
                                             <h2 className="text-xl font-semibold text-black max-md:max-w-full">
@@ -55,13 +55,14 @@ function ProductDetails() {
                                     <div className="flex overflow-hidden flex-col self-stretch my-auto rounded-3xl min-w-[240px] w-[275px]">
                                         <img
                                             loading="lazy"
-                                            src={product.imageSrc}
+                                            src={product.image}
                                             alt=""
-                                            className="object-contain w-full aspect-[1.24]"
+                                            className="object-cover w-full aspect-[1.24]"
                                         />
                                     </div>
                                 </div>
-                                {index < productData.length - 1 && (
+                                {index <
+                                    product?.product_details?.length - 1 && (
                                     <div className="mt-7 w-full border border-solid border-black border-opacity-10 min-h-[1px] max-md:max-w-full" />
                                 )}
                             </React.Fragment>

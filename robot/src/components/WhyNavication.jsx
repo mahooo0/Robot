@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 import { ROUTES } from '@/Helpers/Routes';
+import { motion } from 'framer-motion';
+import GETRequest from '@/services/QueryREq';
 
 const productItems = [
     { name: 'İRobot OS' },
@@ -21,55 +23,110 @@ function WhyNavigation({ whyindex }) {
     const [activeindex, setactiveindex] = useState(whyindex);
     const router = useRouter();
     const { lang = 'az' } = router.query;
-
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     return (
-        <nav className="overflow-hidden bg-white border-t border-gray-600 max-w-[723px] ">
+        <motion.nav
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="overflow-hidden bg-white border-t border-gray-600 max-w-[723px] "
+        >
             <div className="flex gap-5 max-md:flex-col">
                 <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full max-md:pl-5  pl-7">
                     <ul className="flex flex-col items-start self-stretch my-auto w-full text-base font-medium text-black text-opacity-80 max-md:mt-10 gap-[14px]">
-                        {productItems.map((item, index) => (
-                            <div>
-                                <li
-                                    key={index}
-                                    onClick={() => {
-                                        setactiveindex(index);
-                                        switch (index) {
-                                            case 0:
-                                                router.push('/about/IrobutOs');
-                                                break;
-                                            case 1:
-                                                router.push(
-                                                    `/${lang}/${ROUTES.whyUs[lang]}`
-                                                );
-                                                break;
-                                            case 2:
-                                                router.push(
-                                                    `/${lang}/${ROUTES.mobileApp[lang]}`
-                                                );
-                                                break;
-                                            case 3:
-                                                router.push(
-                                                    `/${lang}/${ROUTES.buyersGuide[lang]}`
-                                                );
-                                                break;
-                                        }
-                                    }}
-                                    className={`gap-2.5 self-stretch cursor-pointer ${
-                                        index === whyindex
-                                            ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
-                                            : ''
-                                    }`}
-                                >
-                                    {item.name}
-                                </li>
-                                <img
-                                    loading="lazy"
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/acb6b3e7b956d8e5b04cdb13ca7d6f493152cc982d81f63d71168e374f96caf3?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                    className="object-contain mt-[14px] aspect-[16.39] w-[31px]"
-                                    alt=""
-                                />
-                            </div>
-                        ))}
+                        <div>
+                            <li
+                                onClick={() => {
+                                    setactiveindex(0);
+                                    router.push('/about/IrobutOs');
+                                }}
+                                className={`gap-2.5 self-stretch cursor-pointer ${
+                                    0 === whyindex
+                                        ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
+                                        : ''
+                                }`}
+                            >
+                                {translates?.İRobot_OS}
+                            </li>
+                            <img
+                                loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/acb6b3e7b956d8e5b04cdb13ca7d6f493152cc982d81f63d71168e374f96caf3?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                className="object-contain mt-[14px] aspect-[16.39] w-[31px]"
+                                alt=""
+                            />
+                        </div>
+                        <div>
+                            <li
+                                onClick={() => {
+                                    setactiveindex(1);
+                                    router.push(
+                                        `/${lang}/${ROUTES.whyUs[lang]}`
+                                    );
+                                }}
+                                className={`gap-2.5 self-stretch cursor-pointer ${
+                                    1 === whyindex
+                                        ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
+                                        : ''
+                                }`}
+                            >
+                                {translates?.Niyə_İrobot}
+                            </li>
+                            <img
+                                loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/acb6b3e7b956d8e5b04cdb13ca7d6f493152cc982d81f63d71168e374f96caf3?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                className="object-contain mt-[14px] aspect-[16.39] w-[31px]"
+                                alt=""
+                            />
+                        </div>
+                        <div>
+                            <li
+                                onClick={() => {
+                                    setactiveindex(2);
+                                    router.push(
+                                        `/${lang}/${ROUTES.mobileApp[lang]}`
+                                    );
+                                }}
+                                className={`gap-2.5 self-stretch cursor-pointer ${
+                                    2 === whyindex
+                                        ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
+                                        : ''
+                                }`}
+                            >
+                                {translates?.İRobot_mobil_tətbiqi}
+                            </li>
+                            <img
+                                loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/acb6b3e7b956d8e5b04cdb13ca7d6f493152cc982d81f63d71168e374f96caf3?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                className="object-contain mt-[14px] aspect-[16.39] w-[31px]"
+                                alt=""
+                            />
+                        </div>
+                        <div>
+                            <li
+                                onClick={() => {
+                                    setactiveindex(3);
+                                    router.push(
+                                        `/${lang}/${ROUTES.buyersGuide[lang]}`
+                                    );
+                                }}
+                                className={`gap-2.5 self-stretch cursor-pointer ${
+                                    3 === whyindex
+                                        ? 'text-[#69BE56] border-b border-solid border-b-[#69BE56]'
+                                        : ''
+                                }`}
+                            >
+                                {' '}
+                                {translates?.Buyers_Guide}
+                            </li>
+                            <img
+                                loading="lazy"
+                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/acb6b3e7b956d8e5b04cdb13ca7d6f493152cc982d81f63d71168e374f96caf3?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                                className="object-contain mt-[14px] aspect-[16.39] w-[31px]"
+                                alt=""
+                            />
+                        </div>
                     </ul>
                 </section>
                 <div className="flex flex-col ml-5 w-[26%] max-md:ml-0 max-md:w-full">
@@ -82,38 +139,65 @@ function WhyNavigation({ whyindex }) {
                         />
                     </div>
                 </div>
-                <aside className="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full">
+                <motion.aside
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                    className="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full"
+                >
                     <div className="flex overflow-hidden flex-col grow px-5 pt-7 pb-16 w-full text-white bg-[#8E98B8] max-md:mt-9">
                         <div className="flex flex-col">
                             <h2 className="text-base font-semibold">
-                                Keçidlər
+                                {translates?.Keçidlər}
                             </h2>
-                            <ul className="flex flex-col mt-5 max-w-full text-sm w-[218px]  cursor-pointer">
-                                <li
+                            <ul className="flex flex-col mt-5 max-w-full text-sm w-[218px] cursor-pointer">
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="hover:underline"
                                     onClick={() =>
                                         router.push('/products/compare')
                                     }
                                 >
-                                    Məhsulu müqayisə et
-                                </li>
-                                <li
-                                    className="mt-4"
-                                    onClick={() => router.push('/user/help')}
+                                    {translates?.Məhsulu_müqayisə_et}
+                                </motion.li>
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="mt-4 hover:underline"
+                                    onClick={() =>
+                                        router.push(
+                                            `/${lang}/${ROUTES.help[lang]}`
+                                        )
+                                    }
                                 >
-                                    Hansı məhsul mənə uyğundur?
-                                </li>
-                                <li
-                                    onClick={() => router.push('/products')}
-                                    className="mt-4"
+                                    {translates?.Hansı_məhsul_mənə_uyğundur}
+                                </motion.li>
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="mt-4 hover:underline"
+                                    onClick={() =>
+                                        router.push(`/${lang}/products`)
+                                    }
                                 >
-                                    Bütün məhsullar
-                                </li>
+                                    {translates?.Bütün_məhsullar}
+                                </motion.li>
                             </ul>
                         </div>
                     </div>
-                </aside>
+                </motion.aside>
             </div>
-        </nav>
+        </motion.nav>
     );
 }
 
@@ -136,9 +220,13 @@ const WhyNav = ({ activeIndex, whyindex }) => {
             router.events.off('routeChangeStart', handleRouteChange);
         };
     }, [router.events, setMenu]);
+    const { lang = 'az' } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     return (
         <li
-            className=" "
+            className=" relative"
 
             // onMouseLeave={() => setisopen(false)}
             // onMouseEnter={() => setisopen(true)}
@@ -159,14 +247,21 @@ const WhyNav = ({ activeIndex, whyindex }) => {
                     })
                 }
             >
-                Niyə İrobot?
+                {translates?.Niyə_İrobot}
             </p>
-            <div
-                className=" absolute top-[100%] z-30 left-0"
-                style={!menu.whybar ? { display: 'none' } : {}}
+            <motion.div
+                className="absolute z-30 left-0 top-[50px] bg-white shadow-md rounded-md overflow-hidden"
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{
+                    opacity: menu.whybar ? 1 : 0,
+                    y: menu.whybar ? 0 : -10,
+                    scale: menu.whybar ? 1 : 0.95,
+                }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-                <WhyNavigation whyindex={whyindex} />
-            </div>
+                {menu.whybar && <WhyNavigation whyindex={whyindex} />}
+            </motion.div>
         </li>
     );
 };

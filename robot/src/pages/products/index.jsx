@@ -7,7 +7,9 @@ import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
+import ProductHero from '@/components/sections/Product-hero';
 import GETRequest from '@/services/QueryREq';
+import { getSection, getTranslates } from '@/services/Requests';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -28,8 +30,7 @@ function chunkArray(arr) {
     return result;
 }
 
-export default function Product() {
-    const [searchQuery, setSearchQuery] = useState('');
+export default function Product({ Product_Hero, Translates }) {
     const router = useRouter();
     const [page, setpage] = useState(1);
     const { lang = 'az' } = router.query;
@@ -38,17 +39,7 @@ export default function Product() {
         'products',
         [lang, page]
     );
-    console.log('products', products);
-
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
-
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        // Implement search functionality here
-        console.log('Search submitted:', searchQuery);
-    };
+    console.log('Product_Hero', Product_Hero);
 
     // Chunk the products array
     const chunkedProducts = chunkArray(products?.data || []);
@@ -56,49 +47,7 @@ export default function Product() {
     return (
         <div>
             <Header activeIndex={1} productIndex={2} />
-            <section className="w-full lg:px-[60px] px-[30px] py-5">
-                <div className="rounded-[20px] overflow-hidden flex relative flex-col justify-center items-center px-20 py-28 mt-5 w-full min-h-[440px] max-md:px-5 max-md:py-24 max-md:max-w-full">
-                    <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/63a73b9b37a8a74a1090d1e82286b001915b6d04b87406cc3f6b3dc4ef3916df?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        alt="Background"
-                        className="object-cover absolute inset-0 size-full"
-                    />
-                    <div className="flex relative flex-col mb-0 max-w-full w-[631px] max-md:mb-2.5">
-                        <h1 className="text-5xl font-semibold text-center text-white max-md:max-w-full max-md:text-4xl">
-                            Axtardığınız bütün ev robotları!
-                        </h1>
-                        <form
-                            onSubmit={handleSearchSubmit}
-                            className="flex overflow-hidden flex-nowrap gap-5 justify-between self-center py-1 pr-1 pl-5 mt-7 max-w-full text-base whitespace-nowrap border border-solid bg-white bg-opacity-80 border-white border-opacity-20 rounded-[100px] text-black text-opacity-60 w-[505px]"
-                        >
-                            <label htmlFor="searchInput" className="sr-only">
-                                Search
-                            </label>
-                            <input
-                                type="text"
-                                id="searchInput"
-                                value={searchQuery}
-                                onChange={handleSearchChange}
-                                placeholder="Axtar"
-                                className="my-auto bg-transparent w-full border-none outline-none flex-grow"
-                            />
-                            <button
-                                type="submit"
-                                aria-label="Search"
-                                className="flex items-center justify-center w-12 h-12"
-                            >
-                                <img
-                                    loading="lazy"
-                                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c0d99b161e97a7dcc0fb884f8ea9546725030c9eca6eb0e2997a2102e324987?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                                    alt=""
-                                    className="object-contain shrink-0 w-full h-full"
-                                />
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </section>
+            <ProductHero Product_Hero={Product_Hero} Translates={Translates} />
             <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
                 <FilterComponent />
                 <section className="lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
@@ -179,4 +128,20 @@ export default function Product() {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    // Fetch data from an API or perform other server-side operations
+    const { lang = 'az' } = context.params;
+    try {
+        const Product_Hero = await getSection(lang, 'Product_Hero');
+
+        const Translates = await getTranslates(lang);
+
+        return { props: { Translates, Product_Hero } };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
+
+    // Pass data to the page via props
 }

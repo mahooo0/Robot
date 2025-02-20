@@ -231,11 +231,13 @@ const PaymentType = () => {
 
 const CheckoutForm = () => {
     return (
-        <form className="flex flex-col w-full max-w-[782px] max-md:px-4">
-            <PersonalInfo />
-            <DeliveryType />
-            <PaymentType />
-        </form>
+        <>
+            <div className="flex flex-col w-full max-w-[782px] max-md:px-4">
+                <PersonalInfo />
+                <DeliveryType />
+                <PaymentType />
+            </div>
+        </>
     );
 };
 

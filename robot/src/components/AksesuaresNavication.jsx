@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 import { ROUTES } from '@/Helpers/Routes';
+import { motion } from 'framer-motion';
+import GETRequest from '@/services/QueryREq';
 
 const productItems = [
     { name: 'Endirimli məhsullar' },
@@ -26,6 +28,9 @@ function Navigation({ aksesuaresindex }) {
     const [menu, setMenu] = useRecoilState(MenuState);
     const router = useRouter();
     const { lang = 'az' } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     const handleDropdown = (id) => {
         setMenu(() => ({
             [id]: true,
@@ -33,9 +38,26 @@ function Navigation({ aksesuaresindex }) {
     };
 
     return (
-        <nav className="overflow-hidden  bg-white border-t border-gray-600 max-w-[723px] ">
+        <motion.nav
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="overflow-hidden  bg-white border-t border-gray-600 max-w-[723px] "
+        >
             <div className="flex gap-5 max-md:flex-col">
-                <section className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full max-md:pl-5 pl-7">
+                <motion.section
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { staggerChildren: 0.1 },
+                        },
+                    }}
+                    className="flex flex-col w-[32%] max-md:ml-0 max-md:w-full max-md:pl-5 pl-7"
+                >
                     <ul className="flex flex-col items-start self-stretch my-auto w-full text-base font-medium text-black text-opacity-80 max-md:mt-10 gap-[14px]">
                         {productItems.map((item, index) => (
                             <div>
@@ -75,7 +97,7 @@ function Navigation({ aksesuaresindex }) {
                             </div>
                         ))}
                     </ul>
-                </section>
+                </motion.section>
                 <div className="flex flex-col ml-5 w-[26%] max-md:ml-0 max-md:w-full">
                     <div className="flex overflow-hidden flex-col justify-center items-center self-stretch px-5 m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
                         <img
@@ -86,42 +108,61 @@ function Navigation({ aksesuaresindex }) {
                         />
                     </div>
                 </div>
-                <aside className="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full">
+                <motion.aside
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                    className="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full"
+                >
                     <div className="flex overflow-hidden flex-col grow px-5 pt-7 pb-16 w-full text-white bg-[#8E98B8] max-md:mt-9">
                         <div className="flex flex-col">
                             <h2 className="text-base font-semibold">
-                                Keçidlər
+                                {translates?.Keçidlər}
                             </h2>
-                            <ul className="flex flex-col mt-5 max-w-full text-sm w-[218px]  cursor-pointer">
-                                <li
+                            <ul className="flex flex-col mt-5 max-w-full text-sm w-[218px] cursor-pointer">
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="hover:underline"
                                     onClick={() =>
                                         router.push('/products/compare')
                                     }
                                 >
-                                    Məhsulu müqayisə et
-                                </li>
-                                <li
-                                    className="mt-4"
+                                    {translates?.Məhsulu_müqayisə_et}
+                                </motion.li>
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="mt-4 hover:underline"
                                     onClick={() => router.push('/user/help')}
                                 >
-                                    Hansı məhsul mənə uyğundur?
-                                </li>
-                                <li
+                                    {translates?.Hansı_məhsul_mənə_uyğundur}
+                                </motion.li>
+                                <motion.li
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 300,
+                                    }}
+                                    className="mt-4 hover:underline"
                                     onClick={() =>
-                                        router.push(
-                                            `/${lang}/${ROUTES.product[lang]}`
-                                        )
+                                        router.push(`/${lang}/products`)
                                     }
-                                    className="mt-4"
                                 >
-                                    Bütün məhsullar
-                                </li>
+                                    {translates?.Bütün_məhsullar}
+                                </motion.li>
                             </ul>
                         </div>
                     </div>
-                </aside>
+                </motion.aside>
             </div>
-        </nav>
+        </motion.nav>
     );
 }
 
@@ -144,9 +185,13 @@ const AksesuaresNav = ({ activeIndex, aksesuaresindex }) => {
             router.events.off('routeChangeStart', handleRouteChange);
         };
     }, [router.events, setMenu]);
+    const { lang = 'az' } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     return (
         <li
-            className=" "
+            className="relative "
 
             // onMouseLeave={() => setisopen(false)}
             // onMouseEnter={() => setisopen(true)}
@@ -167,14 +212,23 @@ const AksesuaresNav = ({ activeIndex, aksesuaresindex }) => {
                     })
                 }
             >
-                Aksesuarlar{' '}
+                {translates?.Aksesuarlar}{' '}
             </p>
-            <div
-                className=" absolute top-[100%] z-30 left-0"
-                style={!menu.aksesuaresbar ? { display: 'none' } : {}}
+            <motion.div
+                className="absolute z-30 left-0 top-[50px] bg-white shadow-md rounded-md overflow-hidden"
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{
+                    opacity: menu.aksesuaresbar ? 1 : 0,
+                    y: menu.aksesuaresbar ? 0 : -10,
+                    scale: menu.aksesuaresbar ? 1 : 0.95,
+                }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-                <Navigation aksesuaresindex={aksesuaresindex} />
-            </div>
+                {menu.aksesuaresbar && (
+                    <Navigation aksesuaresindex={aksesuaresindex} />
+                )}
+            </motion.div>
         </li>
     );
 };

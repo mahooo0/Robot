@@ -37,9 +37,9 @@ export const ROUTES = {
         ru: 'voyti',
     },
     product: {
-        az: 'mehsular',
+        az: 'products',
         en: 'products',
-        ru: 'producti',
+        ru: 'products',
     },
     liked: {
         az: 'beyenilmis-mehsular',
@@ -55,6 +55,16 @@ export const ROUTES = {
         az: 'istifadeci-sebet',
         en: 'user-basked',
         ru: 'nastroyka-korzina',
+    },
+    order: {
+        az: 'sifarish',
+        en: 'order',
+        ru: 'zakaz',
+    },
+    help: {
+        az: 'secmeye-komek',
+        en: 'help-to-choose',
+        ru: 'pomosh-v-viborax',
     },
 };
 
@@ -73,17 +83,15 @@ export function updateLangAndRoute(url, newLang) {
 
     // Translate the route if it matches any route key in ROUTES
     if (urlParts.length > 1) {
-        const currentRoute = urlParts[1];
-        console.log('currentRoute', currentRoute);
-
-        // Check if the current route matches any key in ROUTES
-        const routeKey = Object.keys(ROUTES).find((key) =>
-            Object.values(ROUTES[key]).includes(currentRoute)
-        );
-
-        if (routeKey) {
-            urlParts[1] = ROUTES[routeKey][newLang]; // Translate the route to the new language
-        }
+        // const currentRoute = urlParts[1];
+        // console.log('currentRoute', currentRoute);
+        // // Check if the current route matches any key in ROUTES
+        // const routeKey = Object.keys(ROUTES).find((key) =>
+        //     Object.values(ROUTES[key]).includes(currentRoute)
+        // );
+        // if (routeKey) {
+        //     urlParts[1] = ROUTES[routeKey][newLang]; // Translate the route to the new language
+        // }
     }
 
     // If there's an ID segment, it should remain untouched

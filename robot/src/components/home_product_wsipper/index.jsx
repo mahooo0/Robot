@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ProductDisplay from './Product_card_swipper';
 import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Hero_Swipper = () => {
     const swiperRef = useRef(null);
@@ -19,7 +20,12 @@ const Hero_Swipper = () => {
     };
 
     return (
-        <div className="overflow-hidden lg:h-[540px] h-full lg:w-[40%] w-full relative">
+        <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+            className="overflow-hidden lg:h-[540px] h-full lg:w-[40%] w-full relative"
+        >
             <Swiper
                 className="h-full"
                 ref={swiperRef}
@@ -53,7 +59,7 @@ const Hero_Swipper = () => {
                     />
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 };
 

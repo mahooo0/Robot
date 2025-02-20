@@ -22,7 +22,7 @@ const FeatureList = ({ features }) => (
     </div>
 );
 
-const FeaturesSection = () => {
+const FeaturesSection = ({ product }) => {
     const featureGroups = [
         [
             {
@@ -57,8 +57,9 @@ const FeaturesSection = () => {
                     Əsas xüsusiyyətləri
                 </h2>
                 <div className="flex flex-wrap gap-10 items-center mt-10 w-full text-lg font-medium max-md:max-w-full">
-                    {featureGroups.map((group, index) => (
-                        <FeatureList key={index} features={group} />
+                    {product?.product_features.map((group, index) => (
+                        // <FeatureList key={index} features={group} />
+                        <FeatureItem iconSrc={group.image} text={group.title} />
                     ))}
                 </div>
             </div>

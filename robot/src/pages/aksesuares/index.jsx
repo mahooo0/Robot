@@ -136,7 +136,7 @@ export default function Aksesuares() {
                 </div>
             </section>
             <FilterAcsesuares />
-            <section className=" lg:px-[60px] px-[30px] mt-[60px]">
+            {/* <section className=" lg:px-[60px] px-[30px] mt-[60px]">
                 <div className="w-full flex justify-between items-center flex-wrap">
                     <p className="text-[16px] font-normal text-opacity-60">
                         200 Məhsul
@@ -194,7 +194,7 @@ export default function Aksesuares() {
                     <Product_Card_aute />
                     <Product_Card_aute />
                 </div>
-            </section>
+            </section> */}
             <div className="flex justify-center mt-[48px] mb-[100px]">
                 <NavigationBar />
             </div>

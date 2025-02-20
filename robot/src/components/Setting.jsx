@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Green_to_green from './btns/green_to_green';
+import toast from 'react-hot-toast';
+import { axiosInstance } from '@/services/Requests';
 
 const Settings = () => {
     const [show, setshow] = useState(false);
+    const [User, setUSer] = useState(null);
+    const [isConfrim, setisConfrim] = useState(false);
+    const [Email, setEmail] = useState(null);
+    const [Code, setCode] = useState(null);
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -20,10 +26,96 @@ const Settings = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
+        if (formData.newPassword === formData.confirmPassword) {
+            await axiosInstance
+                .post(
+                    '/update',
+                    {
+                        email: User?.customer?.email,
+                        name: formData.fullName,
+                        phone: formData.phone,
+                        password: formData.currentPassword,
+                        new_password: formData.newPassword,
+                        new_password_confirmation: formData.confirmPassword,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${User.token}`,
+                        },
+                    }
+                )
+                .then(() => {
+                    toast.success('user updated sucsesfully');
+                })
+                .catch((err) => {
+                    console.log('eror', err);
+                    toast.error('some thing went wrong');
+                });
+        } else {
+            toast.error('new pasword  and confrim pasword need to match');
+        }
     };
+    const handleSubmit2 = async (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', Email);
+        if (isConfrim) {
+            await axiosInstance
+                .post(
+                    '/change-email/verify',
+                    {
+                        new_email: Email,
+                        verification_code: Code,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${User.token}`,
+                        },
+                    }
+                )
+                .then(() => {
+                    toast.success('user updated sucsesfully');
+                    setisConfrim(true);
+                    setshow(false);
+                })
+                .catch((err) => {
+                    console.log('eror', err);
+                    toast.error('some thing went wrong');
+                });
+        } else {
+            await axiosInstance
+                .post(
+                    '/change-email/request',
+                    {
+                        new_email: Email,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${User.token}`,
+                        },
+                    }
+                )
+                .then(() => {
+                    toast.success('user updated sucsesfully');
+                    setisConfrim(true);
+                })
+                .catch((err) => {
+                    console.log('eror', err);
+                    toast.error('some thing went wrong');
+                });
+        }
+    };
+    useEffect(() => {
+        const usrSte = localStorage.getItem('user-info');
+        const User = JSON.parse(usrSte);
+        console.log('User', User);
+        setUSer(User);
+    }, []);
 
     return (
         <main className="flex overflow-hidden flex-col px-10 pt-10 mx-auto w-full bg-[#F1F5F0] pb-[494px] max-md:px-5 max-md:pb-24 max-md:mt-3 max-md:max-w-full">
@@ -49,13 +141,16 @@ const Settings = () => {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
-                            placeholder="Ad və soyad"
+                            placeholder={User?.customer?.name}
                             className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]"
                             aria-label="Ad və soyad"
                         />
+                        {/* <div className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]">
+                            {User?.customer?.name}
+                        </div> */}
                     </div>
                     <div className="flex flex-col grow shrink self-stretch my-auto whitespace-nowrap min-w-[220px] w-[401px] max-md:max-w-full">
-                        <input
+                        {/* <input
                             type="email"
                             name="email"
                             value={formData.email}
@@ -63,20 +158,27 @@ const Settings = () => {
                             placeholder="Email@gmail.com"
                             className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]"
                             aria-label="Email"
-                        />
+                        /> */}
+                        <div className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]">
+                            {User?.customer?.email}
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-5 items-center mt-5 w-full max-md:max-w-full">
                     <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] text-black text-opacity-90 w-[401px] max-md:max-w-full">
                         <input
-                            type="tel"
+                            type="number"
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="+994 00 000 00 00"
                             className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]"
-                            aria-label="Telefon nömrəsi"
+                            aria-label={User?.customer?.phone}
                         />
+                        {/* <div className="overflow-hidden px-5 py-4 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] w-[501px]">
+                            {' '}
+                            {User?.customer?.phone}
+                        </div> */}
                     </div>
                     <div className="flex flex-col grow shrink self-stretch my-auto min-w-[220px] text-black text-opacity-60 w-[401px] max-md:max-w-full">
                         <input
@@ -120,9 +222,10 @@ const Settings = () => {
                     </Green_to_green>
                 </div>
             </form>
+            {/* email changing */}
             <div
                 style={!show ? { display: 'none' } : {}}
-                className=" absolute w-full h-[100vh] bg-black bg-opacity-60 z-[500000] top-0 left-0 flex justify-center items-center"
+                className=" fixed w-full h-[100vh] bg-black bg-opacity-60 z-[500000] top-0 left-0 flex justify-center items-center"
             >
                 {' '}
                 <div className="flex overflow-hidden flex-col pt-3 w-[520px] pb-32 px-10 bg-white rounded-3xl max-md:pb-24 max-md:px-5">
@@ -138,26 +241,39 @@ const Settings = () => {
                             <h1 className="text-3xl font-medium text-black">
                                 Email adresini dəyiş!
                             </h1>
-                            <p className="mt-2 text-base text-black text-opacity-80">
-                                Yeni email adresini qeyd et.
-                            </p>
+                            {!isConfrim ? (
+                                <p className="mt-2 text-base text-black text-opacity-80">
+                                    Yeni email adresini qeyd et.
+                                </p>
+                            ) : (
+                                <p className="mt-2 text-base text-black text-opacity-80">
+                                    Yeni email adresinə göndərilən verfikasiya
+                                    kodunu daxil et.{' '}
+                                </p>
+                            )}
                         </header>
                         <form
-                            onSubmit={handleSubmit}
+                            onSubmit={handleSubmit2}
                             className="flex flex-col mt-10 w-full text-base max-md:max-w-full"
                         >
                             <div className="flex flex-col w-full whitespace-nowrap bg-white text-black text-opacity-60 max-md:max-w-full">
                                 <label htmlFor="emailInput" className="sr-only">
-                                    Email
+                                    {isConfrim ? 'Email' : 'Kodu daxil et'}
                                 </label>
                                 <input
                                     id="emailInput"
-                                    type="email"
+                                    type={isConfrim ? 'text' : 'email'}
                                     // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Email"
+                                    onChange={(e) => {
+                                        isConfrim
+                                            ? setCode(e.target.value)
+                                            : setEmail(e.target.value);
+                                    }}
+                                    placeholder={
+                                        !isConfrim ? 'Email' : 'Kodu daxil et'
+                                    }
                                     className="overflow-hidden px-5 py-4 w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] max-md:max-w-full"
-                                    aria-label="Email"
+                                    aria-label="emailInput"
                                     required
                                 />
                             </div>
@@ -165,7 +281,7 @@ const Settings = () => {
                                 type="submit"
                                 className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full font-medium text-white bg-green-400 rounded-[100px] max-md:px-5 max-md:max-w-full"
                             >
-                                Kod göndər
+                                {isConfrim ? 'testiq ele' : 'Kod göndər'}
                             </button>
                         </form>
                     </div>

@@ -185,3 +185,64 @@ export function getMap(lang) {
             );
         });
 }
+export function get_Products_By_Param(lang, params) {
+    return axiosInstance
+        .get(`/products${params ? params : ''}`, {
+            headers: { 'Accept-Language': lang },
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(
+                'There was a problem with the fetch operation:',
+                error
+            );
+        });
+}
+export function getProductSinle(lang, slug) {
+    return axiosInstance
+        .get(`/productSingle/${slug}`, {
+            headers: { 'Accept-Language': lang },
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(
+                'There was a problem with the fetch operation:',
+                error
+            );
+        });
+}
+
+export function getSection(lang, type) {
+    return axiosInstance
+        .get(`/section?type=${type}`, {
+            headers: { 'Accept-Language': lang },
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(
+                'There was a problem with the fetch operation:',
+                error
+            );
+        });
+}
+export function getTypesOfRobots(lang) {
+    return axiosInstance
+        .get(`/productTypes`, {
+            headers: { 'Accept-Language': lang },
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error(
+                'There was a problem with the fetch operation:',
+                error
+            );
+        });
+}

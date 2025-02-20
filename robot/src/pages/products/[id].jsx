@@ -12,26 +12,32 @@ import SalesSwipper from '@/components/sales.swipper.jsx';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function id() {
+export default function ProductSingle({ product }) {
+    console.log('product', product);
+
     const router = useRouter();
+
     return (
         <div>
             {' '}
             <Header activeIndex={0} />
             <main>
                 <section className="px-[60px] pt-[40px] flex lg:flex-row flex-col gap-10">
-                    <ProductImages />
-                    <BuyProduct />
+                    <ProductImages product={product} />
+                    <BuyProduct product={product} />
                 </section>
                 <section className="w-full flex justify-center lg:px-[60px] px-[30px] ">
-                    <FeaturesSection />
+                    <FeaturesSection product={product} />
                 </section>
-                <ProductDetails />
+                <ProductDetails product={product} />
                 <Productacsesuares />
-                <FAQSection Title={'Məhsul haqqında tez-tez verilən suallar'} />
+                <FAQSection
+                    Title={'Məhsul haqqında tez-tez verilən suallar'}
+                    data={product?.product_faqs}
+                />
                 <section className="flex justify-center w-full pt-[100px] flex-col items-center bg-[#F5F5F5]">
-                    <CustomerReviews />
-                    <CommentsSection />
+                    <CustomerReviews product={product} />
+                    <CommentsSection product={product} />
                 </section>
                 <section className="mb-[100px]">
                     <div className="flex justify-between items-center lg:px-[60px] px-[30px] mt-[104px] flex-wrap gap-4 mb-">
