@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const FilterCategory = ({ label, value, icon, onChange, options }) => (
     <motion.div
-        className="flex overflow-hidden flex-col w-full justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]"
+        className="flex overflow-hidden flex-col  justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -16,18 +16,23 @@ const FilterCategory = ({ label, value, icon, onChange, options }) => (
                 {label}
             </label>
             <motion.div
-                className="flex overflow-hidden flex-col justify-center p-3 mt-2 w-full text-base bg-white rounded-xl text-black text-opacity-90"
+                className="flex overflow-hidden flex-col justify-center mt-2 w-full text-base bg-white rounded-xl text-black text-opacity-90"
                 whileHover={{ scale: 1.05 }}
             >
                 <div className="flex gap-10 items-center">
                     <select
                         id={`${label.toLowerCase()}-select`}
-                        className="flex-grow bg-transparent outline-none"
+                        className="flex-grow bg-transparent outline-none p-3  border-transparent border-l-8 max-w-[282px]"
                         value={value}
                         onChange={onChange}
                     >
                         {options?.map((option) => (
-                            <option value={option.value}>{option.title}</option>
+                            <option
+                                className="max-w-[282px] text-wrap"
+                                value={option.value}
+                            >
+                                {option.title}
+                            </option>
                         ))}
                     </select>
                 </div>

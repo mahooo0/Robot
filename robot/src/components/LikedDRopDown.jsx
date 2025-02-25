@@ -105,7 +105,7 @@ function LikedDrop({ setshow_Like_modal }) {
                 <div
                     onClick={() => {
                         // setshow_Like_modal(false);
-                        router.push(`/${lang}/${ROUTES.basked[lang]}`);
+                        router.push(`/${lang}/basked`);
                     }}
                     className="flex gap-2 items-center py-0.5 my-auto text-sm text-[#447355] whitespace-nowrap border-b border-solid cursor-pointer border-b-[#447355]"
                 >

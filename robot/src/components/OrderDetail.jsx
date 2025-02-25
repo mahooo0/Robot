@@ -55,7 +55,10 @@ function OrderDetails() {
         `getOrderItem/${id}`,
         [lang]
     );
-    console.log('Order', Order);
+    const { data: translates } = GETRequest(`/translates`, `/translates`, [
+        lang,
+    ]);
+    console.log('translates', translates);
     const tarnslation = {};
     return (
         <main className="flex overflow-hidden flex-col py-16 bg-stone-100 w-full">
@@ -95,17 +98,17 @@ function OrderDetails() {
                             </clipPath>
                         </defs>
                     </svg>
-                    <p>Gery</p>
+                    <p>{translates?.Geri}</p>
                 </button>
                 <h1 className="text-[28px] font-semibold">
-                    Sifarişimin detalları
+                    {translates?.Sifarişimin_detalları}
                 </h1>
             </div>
             <button
                 onClick={() => setIsCanselDioalogOpen(true)}
                 className="gap-2.5 self-end px-6 py-3 mr-14 text-sm font-medium text-rose-600 hover:text-white hover:bg-rose-600 border border-solid border-rose-600 border-opacity-20 rounded-[100px] max-md:px-5 max-md:mr-2.5"
             >
-                Sifarişi ləğv et
+                {translates?.Sifarişi_ləğv_et}
             </button>
             {loading || (
                 <div className="flex flex-col items-start px-10 mt-14 w-full max-md:px-5 max-md:mt-10 max-md:max-w-full">
@@ -294,7 +297,7 @@ function OrderDetails() {
                                 />
                                 <div className="flex flex-col self-stretch my-auto">
                                     <div className="text-sm text-black text-opacity-60">
-                                        Sifariş nömrəsi:
+                                        {translates?.Sifariş_nömrəsi}:
                                     </div>
                                     <div className="mt-1 text-base text-green-950">
                                         {Order?.order_number}
@@ -304,7 +307,7 @@ function OrderDetails() {
                             <div className="shrink-0 self-stretch my-auto w-0 h-11 border border-solid border-zinc-300" />
                             <div className="flex flex-col self-stretch my-auto">
                                 <div className="text-sm text-black text-opacity-60">
-                                    Sifariş tarixi:
+                                    {translates?.Sifariş_tarixi}:
                                 </div>
                                 <div className="mt-1 text-base text-green-950">
                                     {Order?.order_date}
@@ -313,7 +316,7 @@ function OrderDetails() {
                             <div className="shrink-0 self-stretch my-auto w-0 h-11 border border-solid border-zinc-300" />
                             <div className="flex flex-col self-stretch my-auto">
                                 <div className="text-sm text-black text-opacity-60">
-                                    Məhsul sayı
+                                    {translates?.Məhsul_sayı}
                                 </div>
                                 <div className="mt-1 text-base text-green-950">
                                     {Order?.order_items_count}
@@ -328,16 +331,16 @@ function OrderDetails() {
                                 className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
                             />
                             <span className="self-stretch my-auto">
-                                Faktura yüklə
+                                {translates?.Faktura_yüklə}
                             </span>
                         </button>
                     </section>
                     <section className="flex flex-col mt-16 w-full  max-md:mt-10 max-md:max-w-full">
                         <h2 className="text-xl font-semibold text-green-950 max-md:max-w-full">
-                            Sifariş edilən məhsullar
+                            {translates?.Sifariş_edilən_məhsullar}
                         </h2>
                         <div className="flex flex-wrap gap-5 items-center mt-7 w-full ">
-                            {Order.order_items.map((product) => (
+                            {Order?.order_items.map((product) => (
                                 <div
                                     key={product.id}
                                     className="flex gap-3 items-center self-stretch p-5 my-auto rounded-3xl bg-white bg-opacity-40 min-w-[240px] flex-wrap"
@@ -375,7 +378,7 @@ function OrderDetails() {
                                             }
                                             className="gap-2.5 self-stretch px-5 py-3 mt-6 text-sm font-medium text-white bg-[#69BE56] border border-[#69BE56] border-solid rounded-[100px]"
                                         >
-                                            Məhsulu dəyərləndir
+                                            {translates?.Məhsulu_dəyərləndir}
                                         </button>
                                     </div>
                                 </div>
@@ -385,10 +388,10 @@ function OrderDetails() {
                     <section className="flex flex-col self-stretch mt-16 w-full max-md:mt-10 max-md:max-w-full">
                         <div className="flex overflow-hidden gap-5 justify-between  flex-wrap items-center px-5 py-4 w-full text-base text-center text-black bg-white max-md:max-w-full">
                             <div className="self-stretch my-auto">
-                                Çatdırılma məlumatları:
+                                {translates?.Çatdırılma_məlumatları}:
                             </div>
                             <div className="self-stretch my-auto">
-                                Ödəmə məlumatları:
+                                {translates?.Ödəmə_məlumatları}:
                             </div>
                             {Order?.payment_type !== 'cash' ? (
                                 <div className="flex gap-1 items-center self-stretch whitespace-nowrap">
@@ -413,7 +416,7 @@ function OrderDetails() {
                                         {Order?.address && (
                                             <div className="flex flex-col">
                                                 <div className="text-sm text-black text-opacity-60">
-                                                    Ünvan:
+                                                    {translates?.Ünvan}:
                                                 </div>
                                                 <div className="mt-2 text-base text-black">
                                                     {Order.address}
@@ -427,7 +430,10 @@ function OrderDetails() {
                                             className="flex gap-2 items-center self-start py-0.5 mt-5 text-sm font-medium text-[#69BE56] border-b border-solid border-b-[#69BE56]"
                                         >
                                             <span className="self-stretch my-auto">
-                                                Ünvan məlumatların dəyiş
+                                                {
+                                                    translates?.Ünvan_məlumatların_dəyiş
+                                                }
+                                                |
                                             </span>
                                             <img
                                                 loading="lazy"
@@ -442,7 +448,7 @@ function OrderDetails() {
                                     <div className="flex flex-col w-full max-md:mt-10 max-md:max-w-full">
                                         <div className="flex gap-10 justify-between items-center w-full max-md:max-w-full">
                                             <div className="self-stretch my-auto text-sm text-black text-opacity-60">
-                                                Məhsul məbləği:
+                                                {translates?.Məhsul_məbləği}:
                                             </div>
                                             <div className="self-stretch my-auto text-base text-center text-black">
                                                 {Order.final_price}
@@ -452,7 +458,8 @@ function OrderDetails() {
                                         <div className="mt-3 w-full border border-solid border-zinc-300 min-h-[1px] max-md:max-w-full" />
                                         <div className="flex gap-10 justify-between items-center mt-3 w-full max-md:max-w-full">
                                             <div className="self-stretch my-auto text-sm text-black text-opacity-60">
-                                                Çatdırılma məbləği:
+                                                {translates?.Çatdırılma_məbləği}
+                                                :
                                             </div>
                                             <div className="self-stretch my-auto text-base text-center text-black">
                                                 {Order.delivered_price}
@@ -462,7 +469,7 @@ function OrderDetails() {
                                         <div className="mt-3 w-full border border-solid border-zinc-300 min-h-[1px] max-md:max-w-full" />
                                         <div className="flex gap-10 justify-between items-center mt-3 w-full max-md:max-w-full">
                                             <div className="self-stretch my-auto text-sm text-black text-opacity-60">
-                                                Ümumi məbləğ:
+                                                {translates?.Ümumi_məbləğ}:
                                             </div>
                                             <div className="self-stretch my-auto text-lg font-semibold text-center text-[#69BE56]">
                                                 {Order.total_price}
@@ -477,14 +484,17 @@ function OrderDetails() {
                 </div>
             )}
             <RemuveOrder
+                translates={translates}
                 isOpen={isCanselDioalogOpen}
                 setIsOpen={(value) => setIsCanselDioalogOpen(value)}
             />
             <ReatingDialogg
+                translates={translates}
                 isOpen={ProductId}
                 setIsOpen={() => setProductId(null)}
             />
             <ChangeOrderAdress
+                translates={translates}
                 isOpen={IsAdressDioalogOpen}
                 setIsOpen={(value) => setIsAdressDioalogOpen(value)}
             />

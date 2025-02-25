@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function RemuveOrder({ isOpen, setIsOpen }) {
+export default function RemuveOrder({ translates, isOpen, setIsOpen }) {
     const [selectedReason, setSelectedReason] = useState('');
     const [otherReason, setOtherReason] = useState('');
 
@@ -86,12 +86,12 @@ export default function RemuveOrder({ isOpen, setIsOpen }) {
 
                 {/* Title */}
                 <h2 className="text-center text-xl font-semibold text-gray-900">
-                    Sifarişin ləğvi!
+                    {translates?.Sifarişin_ləğvi}
                 </h2>
 
                 {/* Subtitle */}
                 <p className="mt-2 text-center text-sm text-gray-600">
-                    Sifarişi ləğv etmək üçün ləğv etmə səbəbini seçin.
+                    {translates?.Sifarişi_ləğv_desc}
                 </p>
 
                 {/* Form */}
@@ -104,7 +104,7 @@ export default function RemuveOrder({ isOpen, setIsOpen }) {
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 pr-10 text-gray-900 focus:border-red-500 focus:outline-none"
                             required
                         >
-                            <option value="">Ləğv etmə səbəbin seç</option>
+                            <option value="">{translates?.Ləğv_etmə}</option>
                             {reasons.map((reason) => (
                                 <option key={reason} value={reason}>
                                     {reason}
@@ -136,7 +136,7 @@ export default function RemuveOrder({ isOpen, setIsOpen }) {
                         type="submit"
                         className="w-full rounded-lg bg-red-500 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                     >
-                        Sifarişi ləğv et
+                        {translates?.Sifarişi_ləğv_et}
                     </button>
                 </form>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ProductFilters } from './recoil/Atom';
 
-const FilterCategory = ({ label, value, icon, onChange }) => (
+const FilterCategory = ({ label, value, options, onChange }) => (
     <div className="flex overflow-hidden flex-col justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]">
         <div className="flex flex-col">
             <label
@@ -11,18 +11,27 @@ const FilterCategory = ({ label, value, icon, onChange }) => (
             >
                 {label}
             </label>
-            <div className="flex overflow-hidden flex-col justify-center p-3 mt-2 w-full text-base bg-white rounded-xl text-black text-opacity-90">
+            <div className="flex overflow-hidden flex-col justify-center  mt-2 w-full text-base bg-white rounded-xl text-black text-opacity-90">
                 <div className="flex gap-10 items-center">
                     <select
                         id={`${label.toLowerCase()}-select`}
-                        className="flex-grow bg-transparent outline-none"
+                        className="flex-grow bg-transparent outline-none p-3 border-transparent border-r-8 max-w-[282px] "
                         value={value}
                         onChange={onChange}
                     >
-                        <option value="">{value}</option>
-                        <option value="option1">Option 1</option>
+                        <option value="">Select</option>
+                        {options.map((option) => (
+                            <option
+                                className="max-w-[282px] text-wrap"
+                                value={option.id}
+                            >
+                                {option.title}
+                            </option>
+                        ))}
+
+                        {/* <option value="option1">Option 1</option>
                         <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        <option value="option3">Option 3</option> */}
                     </select>
                 </div>
             </div>
@@ -31,6 +40,7 @@ const FilterCategory = ({ label, value, icon, onChange }) => (
 );
 
 const FilterPrice = ({
+    label,
     minPrice,
     maxPrice,
     onMinPriceChange,
@@ -39,7 +49,7 @@ const FilterPrice = ({
     <div className="flex overflow-hidden gap-3 self-stretch px-5 py-4 my-auto whitespace-nowrap bg-[#ECF1EA] rounded-3xl min-w-[240px] text-black text-opacity-60 w-[321px] ">
         <div className="flex flex-col">
             <label htmlFor="min-price" className="self-start text-sm">
-                Qiymət
+                {label}
             </label>
             <input
                 type="number"
@@ -63,14 +73,18 @@ const FilterPrice = ({
     </div>
 );
 
-const FilterComponent = ({ setMinPrice }) => {
+const FilterComponent = ({
+    productCategories,
+    accessorySeries,
+    productTypes,
+}) => {
     const [category, setCategory] = useState('Robot tozsoranlar');
     const [series, setSeries] = useState('Məhsulun seriası');
     const [accessories, setAccessories] = useState('Aksesuarın növü');
     // const [minPrice, setMinPrice] = useState('');
     // const [maxPrice, setMaxPrice] = useState('');
     const [Filters, setFilters] = useRecoilState(ProductFilters);
-
+    console.log('productTypes', productTypes);
     const categories = [
         {
             label: 'Kateqoriya',
@@ -119,6 +133,7 @@ const FilterComponent = ({ setMinPrice }) => {
                 </p>
             </article>
             <FilterPrice
+                label={'Qiymət'}
                 minPrice={Filters.minPrice}
                 maxPrice={Filters.maxPrice}
                 onMinPriceChange={(e) =>
@@ -128,9 +143,44 @@ const FilterComponent = ({ setMinPrice }) => {
                     setFilters({ ...Filters, maxPrice: e.target.value })
                 }
             />
-            {categories.map((categoryItem, index) => (
+            {/* {categories.map((categoryItem, index) => (
                 <FilterCategory key={index} {...categoryItem} />
-            ))}
+            ))} */}
+            <FilterCategory
+                label={'Category'}
+                value={Filters.category}
+                options={productCategories}
+                onChange={(e) =>
+                    setFilters({ ...Filters, category: e.target.value })
+                }
+            />
+            <FilterCategory
+                label={'Seriya'}
+                value={Filters.series}
+                options={accessorySeries}
+                onChange={(e) =>
+                    setFilters({ ...Filters, series: e.target.value })
+                }
+            />
+            <FilterCategory
+                label={'Type'}
+                value={Filters.type}
+                options={productTypes}
+                onChange={(e) =>
+                    setFilters({ ...Filters, type: e.target.value })
+                }
+            />
+            <FilterPrice
+                label="room are"
+                minPrice={Filters.minArea}
+                maxPrice={Filters.maxArea}
+                onMinPriceChange={(e) =>
+                    setFilters({ ...Filters, minArea: e.target.value })
+                }
+                onMaxPriceChange={(e) =>
+                    setFilters({ ...Filters, maxArea: e.target.value })
+                }
+            />
         </section>
     );
 };

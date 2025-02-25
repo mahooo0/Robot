@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRecoilState } from 'recoil';
+import { ProductFilters } from '@/components/recoil/Atom';
 
 export default function ProductHero({ Product_Hero, Translates }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const [Filters, setFilters] = useRecoilState(ProductFilters);
 
     const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
+        const debounce = (func, delay) => {
+            let debounceTimer;
+            return function (...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
+        const debouncedSetSearchQuery = debounce((value) => {
+            // setSearchQuery(value);
+            setFilters({ ...Filters, title: value });
+        }, 300);
+
+        debouncedSetSearchQuery(event.target.value);
     };
 
     const handleSearchSubmit = (event) => {
@@ -63,7 +79,7 @@ export default function ProductHero({ Product_Hero, Translates }) {
                         <input
                             type="text"
                             id="searchInput"
-                            value={searchQuery}
+                            value={Filters.title}
                             onChange={handleSearchChange}
                             placeholder={Translates.Axtar}
                             className="my-auto bg-transparent w-full border-none outline-none flex-grow"

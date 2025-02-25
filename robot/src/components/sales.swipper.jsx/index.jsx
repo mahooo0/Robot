@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ProductCardSm from '../ProductCards/productCarrSm';
 import strelka from '../../../public/svg/Strelka_black.svg';
+import Product_Card_aute from '../ProductCards/Product_Card_aoute';
 export default function SalesSwipper({ data }) {
     console.log('data', data);
 
@@ -63,8 +64,8 @@ export default function SalesSwipper({ data }) {
                 // }}
             >
                 {data?.map((item) => (
-                    <SwiperSlide className="!w-fit">
-                        <ProductCardSm data={item} />
+                    <SwiperSlide className="!w-fit min-w-[280px]">
+                        <Product_Card_aute data={item} />
                     </SwiperSlide>
                 ))}
             </Swiper>

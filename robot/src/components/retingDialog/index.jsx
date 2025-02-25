@@ -4,7 +4,7 @@ import { axiosInstance } from '@/services/Requests';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function ReatingDialogg({ isOpen, setIsOpen }) {
+export default function ReatingDialogg({ isOpen, setIsOpen, translates }) {
     // const [isOpen, setIsOpen] = useState(true);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
@@ -80,7 +80,7 @@ export default function ReatingDialogg({ isOpen, setIsOpen }) {
 
                 {/* Title */}
                 <h2 className="text-center text-2xl font-semibold text-gray-900">
-                    Məhsulu dəyərləndir
+                    {translates?.Məhsulu_dəyərləndir}
                 </h2>
 
                 {/* Form */}
@@ -132,7 +132,7 @@ export default function ReatingDialogg({ isOpen, setIsOpen }) {
                         type="submit"
                         className="w-full rounded-full bg-green-500 px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                     >
-                        Göndər
+                        {translates?.Göndər}
                     </button>
                 </form>
             </div>

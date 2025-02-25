@@ -22,16 +22,17 @@ function UserAside({ active }) {
         },
     ];
     const router = useRouter();
+    const { lang } = router.query;
     const Router = (index) => {
         switch (index) {
             case 0:
-                router.push('/user');
+                router.push(`/${lang}/user`);
                 break;
             case 1:
-                router.push('/user/orders');
+                router.push(`/${lang}/user/orders`);
                 break;
             case 2:
-                router.push('/user/liked');
+                router.push(`/${lang}/user/liked`);
                 break;
         }
     };

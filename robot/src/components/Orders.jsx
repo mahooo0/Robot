@@ -2,10 +2,15 @@ import GETRequest from '@/services/QueryREq';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-const Orders = () => {
+const Orders = ({ Translates }) => {
     const [activeFilter, setActiveFilter] = useState('Hamısı');
     const router = useRouter();
-    const filterOptions = ['Hamısı', 'Aktiv', 'Bitmiş', 'Ləğv edilən'];
+    const filterOptions = [
+        Translates?.Hamısı,
+        Translates?.Aktiv,
+        Translates.Bitmiş,
+        Translates.Ləğv_edilən,
+    ];
     const { lang = 'az' } = router.query;
     const { data: Order } = GETRequest('getOrders', 'getOrders', [lang]);
     console.log('Order', Order);
@@ -14,7 +19,7 @@ const Orders = () => {
         <div className="flex w-full  flex-col px-10 py-12 bg-stone-100 min-h-[100vh] max-md:px-5 h-fit">
             <div className="flex flex-wrap gap-5 justify-between w-full text-green-950 max-md:max-w-full">
                 <h1 className="text-3xl font-semibold text-center">
-                    Sifarişlərim
+                    {Translates?.Sifarişlərim}
                 </h1>
                 <nav className="flex gap-3 items-center text-sm font-medium max-md:max-w-full flex-wrap">
                     {filterOptions.map((option) => (
@@ -75,7 +80,7 @@ const Orders = () => {
                                     className="flex gap-2 items-center self-stretch py-0.5 my-auto font-medium text-[#69BE56] border-b border-solid border-b-green-400"
                                 >
                                     <span className="self-stretch my-auto">
-                                        Ətraflı
+                                        {Translates.Ətraflı}
                                     </span>
                                     <img
                                         loading="lazy"

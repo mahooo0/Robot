@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function ChangeOrderAdress({ isOpen, setIsOpen }) {
+export default function ChangeOrderAdress({ translates, isOpen, setIsOpen }) {
     const [reason, setReason] = useState('');
     const [note, setNote] = useState('');
 
@@ -77,15 +77,12 @@ export default function ChangeOrderAdress({ isOpen, setIsOpen }) {
                     </svg>
                 </button>
 
-                {/* Title */}
                 <h2 className="text-center text-xl font-semibold text-gray-900">
-                    Sifarişin ləğvi!
+                    {translates?.Sifariş_ünvanını}
                 </h2>
 
-                {/* Subtitle */}
                 <p className="mt-2 text-center text-sm text-gray-600">
-                    Sifarişi ləğv etmək üçün ləğv etmə səbəbini və qeydinizi
-                    daxil edin.
+                    {translates?.Sifariş_ünvanını_dəyişdirmək}
                 </p>
 
                 {/* Form */}
@@ -97,7 +94,7 @@ export default function ChangeOrderAdress({ isOpen, setIsOpen }) {
                             value={reason}
                             onChange={(e) => setReason(e.target.value)}
                             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 focus:border-red-500 focus:outline-none"
-                            placeholder="Ləğv etmə səbəbi"
+                            placeholder={translates?.address}
                             required
                         />
                     </div>
@@ -110,7 +107,7 @@ export default function ChangeOrderAdress({ isOpen, setIsOpen }) {
                             maxLength={2000}
                             rows={4}
                             className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-red-500 focus:outline-none"
-                            placeholder="Qeydniz"
+                            placeholder={translates?.Qeydniz}
                             required
                         />
                         <div className="absolute bottom-2 right-2 text-xs text-gray-400">
@@ -123,7 +120,7 @@ export default function ChangeOrderAdress({ isOpen, setIsOpen }) {
                         type="submit"
                         className="w-full rounded-lg bg-red-500 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                     >
-                        Sifarişi ləğv et
+                        {translates?.Sifariş_ünvanını}
                     </button>
                 </form>
             </div>

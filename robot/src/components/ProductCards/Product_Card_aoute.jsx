@@ -6,11 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function Product_Card_aute({
-    bgcolor = '#EEEEEE',
-    issale = false,
-    data,
-}) {
+export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
     const [isliked, setIsliked] = useState(false);
     const [includes, setincludes] = useState(false);
     const [ison, setIson] = useState(false);
@@ -52,46 +48,48 @@ export default function Product_Card_aute({
         console.log('BAAAA', data);
     }, [basked]);
     const addToBasket = async (Data) => {
-        const response = await axiosInstance
-            .post(
-                '/basket_items',
-                {
-                    product_id: Data.product_id,
-                    quantity: Data.quantity,
-                    price: Data.price,
+        const response = await axiosInstance.post(
+            '/basket_items',
+            {
+                product_id: Data.product_id,
+                quantity: Data.quantity,
+                price: Data.price,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${Data.token}`,
                 },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${Data.token}`,
-                    },
-                }
-            )
-            .then(() => {
-                toast.success('sucses');
-                queryClient.invalidateQueries({ queryKey: ['basket_items'] });
-            })
-            .catch(() => {
-                toast.error('eror');
-            });
+            }
+        );
+        // .then(() => {
+        //     toast.success('sucses');
+        //     setincludes(true);
+        //     queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+        // })
+        // .catch(() => {
+        //     toast.error('eror');
+        // });
         // return response.data;
     };
-    // const mutation = useMutation({
-    //     mutationFn: addToBasket,
-    //     onSuccess: () => {
-    //         toast.success('Məhsul səbətə əlavə edildi');
-    //         setBtnLoadin(false);
-    //         // setRefetchBaskedState((prev) => !prev);
-    //         queryClient.invalidateQueries({ queryKey: ['basket_items'] });
-    //     },
-    //     onError: (error) => {
-    //         toast.error('Xəta baş verdi');
-    //         console.error(error);
-    //     },
-    // });
+    const mutation = useMutation({
+        mutationFn: addToBasket,
+        onSuccess: () => {
+            toast.success('Məhsul səbətə əlavə edildi');
+            // setBtnLoadin(false);
+            setincludes(true);
+            toast.success('sucses');
+            setincludes(true);
+            queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+        },
+        onError: (error) => {
+            toast.error('Xəta baş verdi');
+            console.error(error);
+        },
+    });
     return (
         <div
-            className="flex flex-col grow shrink self-stretch  pb-3 my-auto min-w-[240px] w-[252px] max-w-[700px]  relative cursor-pointer"
+            className="flex flex-col min-w-[320px] grow shrink self-stretch  pb-3 my-auto  w-[252px] max-w-[700px]  relative cursor-pointer"
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}
         >
@@ -124,13 +122,18 @@ export default function Product_Card_aute({
                                     localStorage.getItem('user-info');
                                 if (userStr) {
                                     const user = JSON.parse(userStr);
-
-                                    await addToBasket({
+                                    mutation.mutate({
                                         product_id: data?.id,
                                         quantity: 1,
                                         price: +data?.discounted_price,
                                         token: user.token,
                                     });
+                                    // await addToBasket({
+                                    //     product_id: data?.id,
+                                    //     quantity: 1,
+                                    //     price: +data?.discounted_price,
+                                    //     token: user.token,
+                                    // });
                                 } else {
                                     router.push(`/${lang}/login_register`);
                                 }

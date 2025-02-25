@@ -174,7 +174,7 @@ function OrderSummary({ isConfrim, basked }) {
                                         queryClient.invalidateQueries({
                                             queryKey: ['basket_items'],
                                         });
-                                        router.push(`/${lang}/user`);
+                                        router.push(`/${lang}/basked/sucses`);
                                     } catch (error) {
                                         toast.error(
                                             'Failed to place order. Please try again.'

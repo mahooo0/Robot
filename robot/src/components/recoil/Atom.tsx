@@ -29,6 +29,12 @@ export const ProductFilters = atom({
     default: {
         minPrice: '',
         maxPrice: '',
+        minArea: '',
+        maxArea: '',
+        category: '',
+        series: '',
+        type: '',
+        title: '',
     },
 });
 // export const MenuStateTwo = atom({
