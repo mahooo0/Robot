@@ -7,11 +7,13 @@ import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
+import { ProductFilters } from '@/components/recoil/Atom';
 import ProductHero from '@/components/sections/Product-hero';
 import GETRequest from '@/services/QueryREq';
 import { getSection, getTranslates } from '@/services/Requests';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 // Chunk Array Function
 function chunkArray(arr) {
@@ -34,12 +36,18 @@ export default function Product({ Product_Hero, Translates }) {
     const router = useRouter();
     const [page, setpage] = useState(1);
     const { lang = 'az' } = router.query;
+    const [Filters, setFilters] = useRecoilState(ProductFilters);
+
     const { data: products, isLoading: ProductLoading } = GETRequest(
-        `/products?page=${page}`,
+        `/products?page=${page}${
+            Filters.minPrice ? `&min_price=${Filters.minPrice}` : ''
+        }${Filters.maxPrice ? `&max_price=${Filters.maxPrice}` : ''}`,
         'products',
-        [lang, page]
+        [lang, page, Filters]
     );
-    console.log('Product_Hero', Product_Hero);
+    useEffect(() => {
+        console.log('Filters', Filters);
+    }, [Filters]);
 
     // Chunk the products array
     const chunkedProducts = chunkArray(products?.data || []);

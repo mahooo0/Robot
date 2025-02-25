@@ -32,7 +32,7 @@ export default function HelpSection({ helpData, translates }) {
                     viewport={{ once: true }}
                     className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full"
                 >
-                    {helpData.map((item, index) => (
+                    {helpData?.map((item, index) => (
                         <motion.div
                             key={index}
                             variants={{

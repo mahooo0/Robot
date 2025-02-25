@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { ProductFilters } from './recoil/Atom';
 
 const FilterCategory = ({ label, value, icon, onChange }) => (
     <div className="flex overflow-hidden flex-col justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]">
@@ -61,12 +63,13 @@ const FilterPrice = ({
     </div>
 );
 
-const FilterComponent = () => {
+const FilterComponent = ({ setMinPrice }) => {
     const [category, setCategory] = useState('Robot tozsoranlar');
     const [series, setSeries] = useState('Məhsulun seriası');
     const [accessories, setAccessories] = useState('Aksesuarın növü');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
+    // const [minPrice, setMinPrice] = useState('');
+    // const [maxPrice, setMaxPrice] = useState('');
+    const [Filters, setFilters] = useRecoilState(ProductFilters);
 
     const categories = [
         {
@@ -116,10 +119,14 @@ const FilterComponent = () => {
                 </p>
             </article>
             <FilterPrice
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                onMinPriceChange={(e) => setMinPrice(e.target.value)}
-                onMaxPriceChange={(e) => setMaxPrice(e.target.value)}
+                minPrice={Filters.minPrice}
+                maxPrice={Filters.maxPrice}
+                onMinPriceChange={(e) =>
+                    setFilters({ ...Filters, minPrice: e.target.value })
+                }
+                onMaxPriceChange={(e) =>
+                    setFilters({ ...Filters, maxPrice: e.target.value })
+                }
             />
             {categories.map((categoryItem, index) => (
                 <FilterCategory key={index} {...categoryItem} />

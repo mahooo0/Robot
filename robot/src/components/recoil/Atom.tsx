@@ -24,6 +24,13 @@ export const deliveryTypeState = atom({
         peymantType: 'cash',
     },
 });
+export const ProductFilters = atom({
+    key: 'ProductFilters',
+    default: {
+        minPrice: '',
+        maxPrice: '',
+    },
+});
 // export const MenuStateTwo = atom({
 //     key: 'menustatekeytwo',
 //     default: [],

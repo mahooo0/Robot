@@ -6,8 +6,15 @@ import HelpCard from '@/components/HelpCard';
 import Footer from '@/components/Footer';
 import SaleAcsesuaresHero from '@/components/sections/Help-Section/SaleAcsesuaresHero';
 import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
+import { getChoices } from '@/services/Requests';
+import HelpSection from '@/components/sections/Help-Section';
 
-export default function SaleAksesuares({ accessoryCategories, Accessoryes }) {
+export default function SaleAksesuares({
+    accessoryCategories,
+    Accessoryes,
+    choices,
+    Translates,
+}) {
     console.log('Accessoryes', Accessoryes);
 
     const helpData = [
@@ -42,7 +49,7 @@ export default function SaleAksesuares({ accessoryCategories, Accessoryes }) {
         <div>
             {' '}
             <Header activeIndex={3} offerindex={1} />
-            <main>
+            <main className="mb-[100px]">
                 <SaleAcsesuaresHero accessoryCategories={accessoryCategories} />
 
                 <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#ECF3EA] py-[100px]">
@@ -57,18 +64,7 @@ export default function SaleAksesuares({ accessoryCategories, Accessoryes }) {
                     </h2>
                     <ProductBundle ProductBundle1={Accessoryes.data} />
                 </section>
-                <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full my-[100px] ">
-                    <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-start text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full w-full">
-                            Seçim etməkdə kömək edək!
-                        </h2>
-                        <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
-                            {helpData.map((item, index) => (
-                                <HelpCard key={index} {...item} />
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                <HelpSection helpData={choices} translates={Translates} />
             </main>
             <Footer />
         </div>
@@ -111,6 +107,11 @@ export async function getServerSideProps(context) {
             }
         );
         const accessoryTypes = await accessoryTypesResponse.json();
+        const choicesResponse = await fetch(`${baseUrl}/choices`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const choices = await choicesResponse.json();
+
         return {
             props: {
                 Translates,
@@ -118,6 +119,7 @@ export async function getServerSideProps(context) {
                 accessoryCategories,
                 accessoryTypes,
                 Accessoryes,
+                choices,
             },
         };
     } catch (error) {
