@@ -67,16 +67,24 @@ function Navigation({ aksesuaresindex }) {
                                         setactiveindex(index);
                                         switch (index) {
                                             case 0:
-                                                router.push('/aksesuares');
+                                                router.push(
+                                                    `/${lang}/aksesuares/sale-aksesuares`
+                                                );
                                                 break;
                                             case 1:
-                                                router.push('/aksesuares');
+                                                router.push(
+                                                    `/${lang}/aksesuares`
+                                                );
                                                 break;
                                             case 2:
-                                                router.push('/aksesuares');
+                                                router.push(
+                                                    `/${lang}/aksesuares`
+                                                );
                                                 break;
                                             case 3:
-                                                router.push('/aksesuares');
+                                                router.push(
+                                                    `/${lang}/aksesuares`
+                                                );
                                                 break;
                                         }
                                     }}
@@ -128,7 +136,7 @@ function Navigation({ aksesuaresindex }) {
                                     }}
                                     className="hover:underline"
                                     onClick={() =>
-                                        router.push('/products/compare')
+                                        router.push(`/${lang}/products/compare`)
                                     }
                                 >
                                     {translates?.Məhsulu_müqayisə_et}
@@ -140,7 +148,9 @@ function Navigation({ aksesuaresindex }) {
                                         stiffness: 300,
                                     }}
                                     className="mt-4 hover:underline"
-                                    onClick={() => router.push('/user/help')}
+                                    onClick={() =>
+                                        router.push(`/${lang}/user/help`)
+                                    }
                                 >
                                     {translates?.Hansı_məhsul_mənə_uyğundur}
                                 </motion.li>

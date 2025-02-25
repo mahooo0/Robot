@@ -77,17 +77,19 @@ export default function ProductPagination({
             )}
 
             {/* Last Page */}
-            <button
-                onClick={() => handlePageChange(totalPages)}
-                className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium transition-colors
+            {totalPages === 1 || (
+                <button
+                    onClick={() => handlePageChange(totalPages)}
+                    className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium transition-colors
           ${
               currentPage === totalPages
                   ? 'border-2 border-green-500 text-green-500'
                   : 'border border-gray-200 text-gray-600 hover:border-gray-300'
           }`}
-            >
-                {totalPages}
-            </button>
+                >
+                    {totalPages}
+                </button>
+            )}
 
             {/* Next Button */}
             <button

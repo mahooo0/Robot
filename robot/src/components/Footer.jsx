@@ -1,42 +1,47 @@
 import { ROUTES } from '@/Helpers/Routes';
 import GETRequest from '@/services/QueryREq';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { motion } from 'framer-motion'; // Import motion from framer-motion
+import { useRouter } from 'next/router';
 
 function Footer() {
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
+
     const productLinks = [
         {
             text: 'Məhsulları müqayisə et',
             opacity: '90',
-            page: '/products/compare',
+            page: `/${lang}/products/compare`,
         },
         {
             text: 'Hansı məhsul mənə uyğundur?',
-            page: '/user/help',
+            page: `/${lang}/user/help`,
             opacity: '80',
         },
-        { text: 'Braava Robot Mops', page: '/products/mop', opacity: '90' },
+        {
+            text: 'Braava Robot Mops',
+            page: `/${lang}/products/mop`,
+            opacity: '90',
+        },
         {
             text: 'İrobot Paket məhsullar',
-            page: '/products/paket',
+            page: `/${lang}/products/bundles`,
             opacity: '90',
         },
         {
             text: 'Roomba Robot Vacuums',
-            page: '/products/vakumus',
+            page: `/${lang}/products/vakumus`,
             opacity: '90',
         },
     ];
-    const router = useRouter();
-    const { lang = 'az' } = router.query;
     const { data } = GETRequest('/socials', 'socials', [lang]);
     console.log('data', data);
 
     const supportLinks = [
-        { text: 'Bizimlə əlaqə', page: `/${lang}/${ROUTES.cotact[lang]}` },
-        { text: 'Sifarişi izlə', page: '/user/orders' },
+        { text: 'Bizimlə əlaqə', page: `/${lang}/contact` },
+        { text: 'Sifarişi izlə', page: `/${lang}/user/orders` },
         { text: 'Qaydalar və şərtlər', page: '#' },
         { text: 'Geri qaytarmalar', page: '#' },
     ];

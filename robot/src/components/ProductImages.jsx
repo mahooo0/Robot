@@ -37,7 +37,7 @@ function ProductImages({ product }) {
             </div>
             <div className="flex flex-wrap gap-3.5 items-center self-start mt-2 max-md:max-w-full">
                 <div className="flex flex-wrap gap-3 items-center self-stretch my-auto min-w-[240px] max-md:max-w-full">
-                    {product?.sliders.map((image, index) => (
+                    {product?.sliders?.map((image, index) => (
                         <div
                             className={` rounded-xl ${
                                 index === imgid ? 'border border-[#69BE56]' : ''

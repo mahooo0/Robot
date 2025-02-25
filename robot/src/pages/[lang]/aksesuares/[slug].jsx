@@ -1,3 +1,4 @@
+import BuyAcsesuares from '@/components/buyAcsesuares';
 import BuyProduct from '@/components/buyProduct';
 import CommentsSection from '@/components/Comments';
 import CustomerReviews from '@/components/CustomerReviews';
@@ -25,21 +26,9 @@ export default function ProductSingle({ product, MostSimularProducts }) {
             <main>
                 <section className="px-[60px] pt-[40px] flex lg:flex-row flex-col gap-10">
                     <ProductImages product={product} />
-                    <BuyProduct product={product} />
+                    <BuyAcsesuares product={product} />
                 </section>
-                <section className="w-full flex justify-center lg:px-[60px] px-[30px] ">
-                    <FeaturesSection product={product} />
-                </section>
-                <ProductDetails product={product} />
-                <Productacsesuares />
-                <FAQSection
-                    Title={'Məhsul haqqında tez-tez verilən suallar'}
-                    data={product?.product_faqs}
-                />
-                <section className="flex justify-center w-full pt-[100px] flex-col items-center bg-[#F5F5F5]">
-                    <CustomerReviews product={product} />
-                    <CommentsSection product={product} />
-                </section>
+
                 <section className="mb-[100px]">
                     <div className="flex justify-between items-center lg:px-[60px] px-[30px] mt-[104px] flex-wrap gap-4 mb-">
                         <h3 className="lg:text-[40px] md:text-[32px] text-[28px] font-semibold">
@@ -52,7 +41,7 @@ export default function ProductSingle({ product, MostSimularProducts }) {
                             <img src="/svg/Strelka_green.svg" />
                         </button>
                     </div>
-                    <SalesSwipper data={MostSimularProducts?.data} />
+                    <SalesSwipper data={MostSimularProducts.data} />
                 </section>
             </main>
             <Footer />
@@ -69,11 +58,11 @@ export async function getServerSideProps(context) {
     try {
         // Fetch both product and similar products in parallel
         const [product, MostSimularProducts] = await Promise.all([
-            fetch(`${baseUrl}/productSingle/${slug}`, {
+            fetch(`${baseUrl}/accessorySingle/${slug}`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
 
-            fetch(`${baseUrl}/products`, {
+            fetch(`${baseUrl}/accessories`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
         ]);

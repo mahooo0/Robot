@@ -16,6 +16,9 @@ export default function Product_Card_aute({
     const [ison, setIson] = useState(false);
     const router = useRouter();
     const { lang = 'az' } = router.query;
+    const Path = router.asPath;
+    const isAcsesuares = Path.includes('aksesuares');
+    console.log('isAcsesuares', isAcsesuares);
 
     const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
     const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
@@ -88,7 +91,7 @@ export default function Product_Card_aute({
     // });
     return (
         <div
-            className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px]  relative cursor-pointer"
+            className="flex flex-col grow shrink self-stretch  pb-3 my-auto min-w-[240px] w-[252px] max-w-[700px]  relative cursor-pointer"
             onMouseEnter={() => setIson(true)}
             onMouseLeave={() => setIson(false)}
         >
@@ -98,7 +101,11 @@ export default function Product_Card_aute({
             >
                 <img
                     onClick={() => {
-                        router.push(`/${lang}/products/${data?.slug[lang]}`);
+                        router.push(
+                            `/${lang}/${
+                                isAcsesuares ? 'aksesuares' : 'products'
+                            }/${data?.slug[lang]}`
+                        );
                         localStorage.setItem(
                             'slug',
                             JSON.stringify(data?.slug)
@@ -125,9 +132,7 @@ export default function Product_Card_aute({
                                         token: user.token,
                                     });
                                 } else {
-                                    router.push(
-                                        `/${lang}/${ROUTES.login[lang]}`
-                                    );
+                                    router.push(`/${lang}/login_register`);
                                 }
                             }
                         }}
@@ -156,7 +161,13 @@ export default function Product_Card_aute({
 
             <div
                 className="flex flex-col mt-3 w-full"
-                onClick={() => router.push('/products/id')}
+                onClick={() =>
+                    router.push(
+                        `/${lang}/${isAcsesuares ? 'aksesuares' : 'products'}/${
+                            data?.slug[lang]
+                        }`
+                    )
+                }
             >
                 <div className="flex flex-col w-full">
                     <h2 className="w-full text-base font-medium text-black">
@@ -244,7 +255,7 @@ export default function Product_Card_aute({
                                 });
                         }
                     } else {
-                        router.push(`/${lang}/${ROUTES.login[lang]}`);
+                        router.push(`/${lang}/login_register`);
                         // navigate();
                     }
                 }}

@@ -6,6 +6,7 @@ import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { ROUTES } from '@/Helpers/Routes';
+import Link from 'next/link';
 
 const cartItems = [
     {
@@ -242,7 +243,9 @@ function LikedDrop({ setshow_Like_modal }) {
                         </div>
                     </div>
                 </div>
-                <Green_to_green>{translates?.Sifariş_et}</Green_to_green>
+                <Link href={`/${lang}/basked`}>
+                    <Green_to_green>{translates?.Sifariş_et}</Green_to_green>
+                </Link>
                 {/* <button className="gap-2.5 self-stretch px-7 py-3.5 text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
                     Sifariş et
                 </button> */}

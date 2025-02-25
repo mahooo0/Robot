@@ -35,7 +35,9 @@ function OfferNavigation({ offerindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(0);
-                                    router.push('/products/SaleProduct');
+                                    router.push(
+                                        `/${lang}/products/SaleProduct`
+                                    );
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     offerindex === 0
@@ -56,7 +58,9 @@ function OfferNavigation({ offerindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(1);
-                                    router.push('/aksesuares/saleAksesuares');
+                                    router.push(
+                                        `/${lang}/aksesuares/sale-aksesuares`
+                                    );
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     offerindex === 1
@@ -106,7 +110,7 @@ function OfferNavigation({ offerindex }) {
                                     }}
                                     className="hover:underline"
                                     onClick={() =>
-                                        router.push('/products/compare')
+                                        router.push(`/${lang}/products/compare`)
                                     }
                                 >
                                     {translates?.Məhsulu_müqayisə_et}
@@ -118,7 +122,9 @@ function OfferNavigation({ offerindex }) {
                                         stiffness: 300,
                                     }}
                                     className="mt-4 hover:underline"
-                                    onClick={() => router.push('/user/help')}
+                                    onClick={() =>
+                                        router.push(`/${lang}/user/help`)
+                                    }
                                 >
                                     {translates?.Hansı_məhsul_mənə_uyğundur}
                                 </motion.li>

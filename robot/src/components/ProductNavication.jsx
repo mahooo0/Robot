@@ -126,7 +126,7 @@ function ProductNavigation({ productIndex }) {
                             <motion.li
                                 onClick={() => {
                                     setactiveindex(2);
-                                    router.push('/products');
+                                    router.push(`/${lang}/products`);
                                 }}
                                 whileHover={{
                                     scale: 1.05,
@@ -228,7 +228,7 @@ function ProductNavigation({ productIndex }) {
                                     }}
                                     className="hover:underline"
                                     onClick={() =>
-                                        router.push(`/products/compare`)
+                                        router.push(`/${lang}/products/compare`)
                                     }
                                 >
                                     {translates?.Məhsulu_müqayisə_et}
@@ -240,7 +240,9 @@ function ProductNavigation({ productIndex }) {
                                         stiffness: 300,
                                     }}
                                     className="mt-4 hover:underline"
-                                    onClick={() => router.push('/user/help')}
+                                    onClick={() =>
+                                        router.push(`/${lang}/user/help`)
+                                    }
                                 >
                                     {translates?.Hansı_məhsul_mənə_uyğundur}
                                 </motion.li>

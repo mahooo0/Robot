@@ -130,7 +130,7 @@ const CommentsSection = ({ product }) => {
                                         className="object-contain max-w-full aspect-[5] w-[120px]"
                                     /> */}
                                     <p className="self-start mt-1">
-                                        {review.customer.name}
+                                        {review.customer?.name}
                                     </p>
                                 </div>
                             </article>

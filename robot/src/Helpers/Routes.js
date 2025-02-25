@@ -1,5 +1,3 @@
-import WhyUs from '@/pages/about/whyUs';
-
 export const ROUTES = {
     aksesuares: {
         az: 'aksesuarlar',

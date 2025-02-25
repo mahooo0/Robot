@@ -40,7 +40,7 @@ function WhyNavigation({ whyindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(0);
-                                    router.push('/about/IrobutOs');
+                                    router.push(`/${lang}/about/irobut-os`);
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     0 === whyindex
@@ -61,9 +61,7 @@ function WhyNavigation({ whyindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(1);
-                                    router.push(
-                                        `/${lang}/${ROUTES.whyUs[lang]}`
-                                    );
+                                    router.push(`/${lang}/about/why-us`);
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     1 === whyindex
@@ -159,7 +157,7 @@ function WhyNavigation({ whyindex }) {
                                     }}
                                     className="hover:underline"
                                     onClick={() =>
-                                        router.push('/products/compare')
+                                        router.push(`/${lang}/products/compare`)
                                     }
                                 >
                                     {translates?.Məhsulu_müqayisə_et}
@@ -172,9 +170,7 @@ function WhyNavigation({ whyindex }) {
                                     }}
                                     className="mt-4 hover:underline"
                                     onClick={() =>
-                                        router.push(
-                                            `/${lang}/${ROUTES.help[lang]}`
-                                        )
+                                        router.push(`/${lang}/user/help`)
                                     }
                                 >
                                     {translates?.Hansı_məhsul_mənə_uyğundur}

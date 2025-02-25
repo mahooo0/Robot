@@ -1,8 +1,9 @@
 import Header from '@/components/Header';
 import Orders from '@/components/Orders';
-import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
-import Settings from '@/components/Setting';
 import UserAside from '@/components/UserAside';
+import GETRequest from '@/services/QueryREq';
+
+import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function index() {

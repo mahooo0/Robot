@@ -3,6 +3,11 @@ import Green_to_green from '../btns/green_to_green';
 import { useRouter } from 'next/router';
 import GETRequest from '@/services/QueryREq';
 import { ROUTES } from '@/Helpers/Routes';
+import { axiosInstance } from '@/services/Requests';
+import { deliveryTypeState } from '../recoil/Atom';
+import { useRecoilState } from 'recoil';
+import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 
 const products = [
     {
@@ -27,7 +32,7 @@ function ProductCardKredit() {
         lang,
     ]);
     console.log('ProductCardKredit', basked);
-    if (basked?.basket_items[0].is_credit)
+    if (basked?.basket_items[0]?.is_credit)
         return (
             <section className="flex flex-col rounded-3xl w-full mt-[20px]">
                 <div className="flex flex-col justify-center p-6 w-full rounded-3xl bg-stone-50">
@@ -76,10 +81,13 @@ function ProductCardKredit() {
 function OrderSummary({ isConfrim, basked }) {
     const router = useRouter();
     const { lang = 'az' } = router.query;
-
+    const [DeliveryTypeState, setDeliveryTypeState] =
+        useRecoilState(deliveryTypeState);
     const { data: translates } = GETRequest(`/translates`, 'translates', [
         lang,
     ]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const queryClient = useQueryClient();
     return (
         <div className="lg:w-[25%] w-full">
             <section className="flex flex-col justify-center px-6 py-7 rounded-3xl bg-stone-50 max-md:px-5  h-fit">
@@ -125,21 +133,73 @@ function OrderSummary({ isConfrim, basked }) {
                                 </div>
                             </div>
                         </div>
-                        <Green_to_green
-                            classNAME="mt-[28px]"
-                            action={() =>
-                                router.push(`/${lang}/${ROUTES.order[lang]}`)
-                            }
-                        >
-                            {translates?.Sifariş_et}
-                        </Green_to_green>
-                        {/* <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full text-base font-medium text-white bg-green-400 rounded-[100px] max-md:px-5">
-                      
-                    </button> */}
+                        {isConfrim ? (
+                            <Green_to_green
+                                classNAME="mt-[28px]"
+                                action={async () => {
+                                    setIsLoading(true);
+                                    try {
+                                        const userStr =
+                                            localStorage.getItem('user-info');
+                                        const user = JSON.parse(userStr);
+                                        await axiosInstance.post(
+                                            '/storeOrder',
+                                            {
+                                                is_deliver:
+                                                    DeliveryTypeState.delivery,
+                                                shop: DeliveryTypeState.shop,
+                                                payment_type:
+                                                    DeliveryTypeState.peymantType, // cash, online
+                                                total_price:
+                                                    basked?.total_price,
+                                                discount: basked?.discount,
+                                                delivered_price:
+                                                    basked?.delivered_price,
+                                                final_price:
+                                                    basked?.final_price,
+                                                address:
+                                                    DeliveryTypeState.address,
+                                                additional_info:
+                                                    DeliveryTypeState.message,
+                                            },
+                                            {
+                                                headers: {
+                                                    Authorization: `Bearer ${user.token}`,
+                                                },
+                                            }
+                                        );
+                                        toast.success(
+                                            'Order placed successfully!'
+                                        );
+                                        queryClient.invalidateQueries({
+                                            queryKey: ['basket_items'],
+                                        });
+                                        router.push(`/${lang}/user`);
+                                    } catch (error) {
+                                        toast.error(
+                                            'Failed to place order. Please try again.'
+                                        );
+                                    } finally {
+                                        setIsLoading(false);
+                                    }
+                                }}
+                            >
+                                {isLoading ? 'Loading...' : 'testiq'}
+                            </Green_to_green>
+                        ) : (
+                            <Green_to_green
+                                classNAME="mt-[28px]"
+                                action={() =>
+                                    router.push(`/${lang}/basked/offer`)
+                                }
+                            >
+                                {translates?.Sifariş_et}
+                            </Green_to_green>
+                        )}
                     </div>
                 </div>
             </section>
-            {isConfrim && <ProductCardKredit />}{' '}
+            {isConfrim && <ProductCardKredit />}
         </div>
     );
 }
