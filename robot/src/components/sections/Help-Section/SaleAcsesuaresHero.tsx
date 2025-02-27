@@ -16,28 +16,14 @@ function AccessoryCard({ image, title }) {
         </div>
     );
 }
-export default function SaleAcsesuaresHero({ accessoryCategories }) {
-    const accessoryData = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/0d8f03a61e4345f187388eb23d0f4f97f47976994676c02240e9890a9ac3cd31?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Roomba® Accessories',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/e1b6748103a06a36633e2adb9193144275307484f932a29bb070efb3334caf74?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Braava® Accessories',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/e27fff2cdec8d80ff2a97f7eaa489d4a547a7cfd8a4ed6adf95f5eaffc2b0b68?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Roomba Combo® Accessories',
-        },
-    ];
+export default function SaleAcsesuaresHero({
+    accessoryCategories,
+    Translates,
+}) {
     return (
         <>
             <h2 className=" text-[48px] font-semibold text-center  mt-[40px] ">
-                Endirimli aksesuarlar
+                {Translates?.Endirimli_aksesuarlar}
             </h2>
             <section className="flex flex-wrap gap-5 items-center self-center mt-10 max-md:max-w-full justify-center">
                 {accessoryCategories?.map((accessory, index) => (

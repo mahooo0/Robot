@@ -51,9 +51,11 @@ export default function Product({
             Filters.category ? `&category_id=${Filters.category}` : ''
         }${Filters.series ? `&product_serie_id=${Filters.series}` : ''}${
             Filters.type ? `&type=${Filters.type}` : ''
-        }${Filters.minArea ? `&min_area=${Filters.minArea}` : ''}${
-            Filters.maxArea ? `&max_area=${Filters.maxArea}` : ''
-        }${Filters.title ? `&title=${Filters.title}` : ''}`,
+        }${Filters.Area ? `&room_area=${Filters.Area}` : ''}${
+            Filters.title ? `&title=${Filters.title}` : ''
+        }${Filters.sort ? `&sort=${Filters.sort}` : ''}${
+            Filters.is_new ? `&sort=${Filters.is_new}` : ''
+        }`,
         'products',
         [lang, page, Filters]
     );
@@ -86,14 +88,29 @@ export default function Product({
                             </p>
                             <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px]">
                                 <select
+                                    value={Filters.sort}
                                     name=""
                                     id=""
+                                    onChange={(e) =>
+                                        setFilters({
+                                            ...Filters,
+                                            sort: e.target.value,
+                                        })
+                                    }
                                     className="bg-[#ECF1EA] w-full"
                                 >
-                                    <option value="">option1</option>
-                                    <option value="">option2</option>
-                                    <option value="">option3</option>
-                                    <option value="">option4</option>
+                                    <option value="">select</option>
+
+                                    <option value="A-Z">A-Z</option>
+                                    <option value="Z-A">Z-A</option>
+                                    <option value="expensive-cheap">
+                                        expensive-cheap
+                                    </option>
+                                    <option value="cheap-expensive">
+                                        cheap-expensive
+                                    </option>
+                                    <option value="old-new">old-new</option>
+                                    <option value="new-old">new-old</option>
                                 </select>
                             </div>
                         </div>

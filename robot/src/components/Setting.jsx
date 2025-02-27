@@ -2,13 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Green_to_green from './btns/green_to_green';
 import toast from 'react-hot-toast';
 import { axiosInstance } from '@/services/Requests';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
 
 const Settings = () => {
     const [show, setshow] = useState(false);
     const [User, setUSer] = useState(null);
     const [isConfrim, setisConfrim] = useState(false);
     const [Email, setEmail] = useState(null);
-    const [Code, setCode] = useState(null);
+    const [Code, setCode] = useState('');
+    const router = useRouter();
+    const { lang } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
+
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -103,6 +111,7 @@ const Settings = () => {
                 .then(() => {
                     toast.success('user updated sucsesfully');
                     setisConfrim(true);
+                    e.preventDefault();
                 })
                 .catch((err) => {
                     console.log('eror', err);
@@ -121,13 +130,13 @@ const Settings = () => {
         <main className="flex overflow-hidden flex-col px-10 pt-10 mx-auto w-full bg-[#F1F5F0] pb-[494px] max-md:px-5 max-md:pb-24 max-md:mt-3 max-md:max-w-full">
             <header className="flex flex-wrap gap-5 justify-between w-full max-md:max-w-full">
                 <h1 className="text-3xl font-semibold text-center text-green-950">
-                    Tənzimləmələr
+                    {translates?.Tənzimləmələr}
                 </h1>
                 <nav
                     onClick={() => setshow(true)}
                     className="gap-2 self-stretch py-0.5 my-auto text-base font-medium text-[#447355]  border-b border-solid cursor-pointer border-b-[#447355]"
                 >
-                    Email adresini dəyiş
+                    {translates?.Email_adresini_dəyiş}
                 </nav>
             </header>
             <form
@@ -218,7 +227,7 @@ const Settings = () => {
                 </div>
                 <div className="self-end ">
                     <Green_to_green classNAME=" mt-7">
-                        Yadda saxla
+                        {translates?.Yadda_saxla}
                     </Green_to_green>
                 </div>
             </form>
@@ -239,16 +248,15 @@ const Settings = () => {
                     <div className="flex flex-col mt-1 w-full max-w-[440px] max-md:max-w-full">
                         <header className="flex flex-col items-center w-full text-center max-md:max-w-full">
                             <h1 className="text-3xl font-medium text-black">
-                                Email adresini dəyiş!
+                                {translates?.Email_adresini_dəyiş}
                             </h1>
                             {!isConfrim ? (
                                 <p className="mt-2 text-base text-black text-opacity-80">
-                                    Yeni email adresini qeyd et.
+                                    {translates?.Yeni_email}
                                 </p>
                             ) : (
                                 <p className="mt-2 text-base text-black text-opacity-80">
-                                    Yeni email adresinə göndərilən verfikasiya
-                                    kodunu daxil et.{' '}
+                                    {translates?.Yeni_email_adresinə}
                                 </p>
                             )}
                         </header>
@@ -263,7 +271,7 @@ const Settings = () => {
                                 <input
                                     id="emailInput"
                                     type={isConfrim ? 'text' : 'email'}
-                                    // value={email}
+                                    value={isConfrim ? Code : Email}
                                     onChange={(e) => {
                                         isConfrim
                                             ? setCode(e.target.value)

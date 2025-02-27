@@ -76,8 +76,8 @@ export default function SaleProduct({
                         Ən son təkliflərimizi satın alın!
                     </h2>
                 </div>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px]">
-                    <div className="flex overflow-hidden flex-col rounded-3xl">
+                <section className="w-full ">
+                    <div className="flex overflow-hidden flex-col rounded-3xl lg:mx-[60px] mx-[30px] mt-[40px]">
                         <div className="flex relative flex-col justify-center items-start px-16 py-36 w-full min-h-[500px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                             <img
                                 loading="lazy"
@@ -126,8 +126,8 @@ export default function SaleProduct({
 
                     <ProductBundle ProductBundle1={ProductBundle1.data} />
                 </section>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px]">
-                    <div className="flex overflow-hidden flex-col rounded-3xl">
+                <section className="w-full ">
+                    <div className="flex overflow-hidden flex-col rounded-3xl lg:mx-[60px] mx-[30px] mt-[40px]">
                         <div className="flex relative flex-col justify-center items-start px-16 py-36 w-full min-h-[500px] max-md:px-5 max-md:py-24 max-md:max-w-full">
                             <img
                                 loading="lazy"
@@ -197,7 +197,7 @@ export async function getServerSideProps(context) {
             headers: { 'Accept-Language': lang },
         });
         const choices = await choicesResponse.json();
-        const ProductBundle1Response = await fetch(`${baseUrl}/products`, {
+        const ProductBundle1Response = await fetch(`${baseUrl}/products?`, {
             headers: { 'Accept-Language': lang },
         });
         const ProductBundle1 = await ProductBundle1Response.json();

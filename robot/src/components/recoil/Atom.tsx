@@ -29,12 +29,27 @@ export const ProductFilters = atom({
     default: {
         minPrice: '',
         maxPrice: '',
-        minArea: '',
-        maxArea: '',
+        Area: '',
         category: '',
         series: '',
         type: '',
         title: '',
+        sort: '',
+        is_new: '',
+    },
+});
+export const CompareProducts = atom({
+    key: 'CompareProducts',
+    default: [],
+});
+export const AcsesuaresFilters = atom({
+    key: 'AcsesuaresFilters',
+    default: {
+        minPrice: '',
+        maxPrice: '',
+        catgory: '',
+        series: '',
+        type: '',
     },
 });
 // export const MenuStateTwo = atom({

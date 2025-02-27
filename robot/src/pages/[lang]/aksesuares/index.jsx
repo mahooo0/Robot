@@ -8,9 +8,11 @@ import ProductBundle from '@/components/Product_bundle';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import ProductCard_MD from '@/components/ProductCards/Product_lg_card';
 import ProductCardSm from '@/components/ProductCards/productCarrSm';
+import { AcsesuaresFilters } from '@/components/recoil/Atom';
 import Acsesuares_Categories from '@/components/sections/Acsesuares/Categories';
 import GETRequest from '@/services/QueryREq';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function Aksesuares({
     Translates,
@@ -22,13 +24,20 @@ export default function Aksesuares({
     console.log('Translates', Translates);
     // console.log('Acsesuares', Acsesuares);
     const [page, setpage] = useState(1);
+    const [Filters, setFilter] = useRecoilState(AcsesuaresFilters);
 
     const { data: Acsesuares, isLoading: AcsesuaresLoading } = GETRequest(
-        `/accessories?page=${page}`,
+        `/accessories?page=${page}${
+            Filters.series ? `&accessory_serie_id=${Filters.series}` : ''
+        }${Filters.minPrice ? `&min_price=${Filters.minPrice}` : ''}${
+            Filters.catgory ? `&accessory_category_id=${Filters.catgory}` : ''
+        }${Filters.type ? `&accessory_type_id=${Filters.type}` : ''}`,
         'accessories',
-        [page]
+        [page, Filters]
     );
-    console.log('Acsesuares', Acsesuares);
+    useEffect(() => {
+        console.log('Filters', Filters);
+    }, [Filters]);
     const chunkedProducts = chunkArray(Acsesuares?.data || []);
     function chunkArray(arr) {
         const result = [];
@@ -48,10 +57,14 @@ export default function Aksesuares({
     return (
         <div>
             <Header activeIndex={2} productIndex={2} />
-            <Acsesuares_Categories AccessorySeries={AccessorySeries} />
+            <Acsesuares_Categories
+                AccessorySeries={AccessorySeries}
+                Translates={Translates}
+            />
             <FilterAcsesuares
                 accessoryCategories={accessoryCategories}
                 accessoryTypes={accessoryTypes}
+                Translates={Translates}
             />
             <div className="px-[60px]">
                 {' '}
@@ -70,7 +83,7 @@ export default function Aksesuares({
                     <>
                         <div className=" grid grid-cols-3 flex-wrap justify-between gap-5 mt-7">
                             {Array.from({ length: 10 }).map(() => (
-                                <div className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px] relative">
+                                <div className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-full relative">
                                     <div className="relative rounded-2xl bg-gray-200 animate-pulse">
                                         <div className="w-full rounded-3xl aspect-[1.24] bg-gray-300"></div>
                                     </div>

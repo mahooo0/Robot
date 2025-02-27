@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRecoilState } from 'recoil';
+import { AcsesuaresFilters } from './recoil/Atom';
 
 const FilterCategory = ({ label, value, icon, onChange, options }) => (
     <motion.div
-        className="flex overflow-hidden flex-col  justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]"
+        className="flex overflow-hidden flex-col  justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -22,10 +24,13 @@ const FilterCategory = ({ label, value, icon, onChange, options }) => (
                 <div className="flex gap-10 items-center">
                     <select
                         id={`${label.toLowerCase()}-select`}
-                        className="flex-grow bg-transparent outline-none p-3  border-transparent border-l-8 max-w-[282px]"
+                        className="flex-grow bg-transparent outline-none p-3  border-transparent border-r-8 "
                         value={value}
                         onChange={onChange}
                     >
+                        <option className="max-w-[282px] text-wrap" value={''}>
+                            Select
+                        </option>
                         {options?.map((option) => (
                             <option
                                 className="max-w-[282px] text-wrap"
@@ -81,31 +86,31 @@ const FilterPrice = ({
     </motion.div>
 );
 
-const FilterAcsesuares = ({ accessoryCategories, accessoryTypes }) => {
-    const [category, setCategory] = useState('Robot tozsoranlar');
-    const [Tipe, setTipe] = useState('Məhsulun seriası');
-    const [accessories, setAccessories] = useState('Aksesuarın növü');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
+const FilterAcsesuares = ({
+    accessoryCategories,
+    accessoryTypes,
+    Translates,
+}) => {
+    const [Filters, setFilter] = useRecoilState(AcsesuaresFilters);
 
     const categories = [
         {
-            label: 'Kateqoriya',
-            value: category,
-            onChange: (e) => setCategory(e.target.value),
+            label: Translates.Kateqoriya,
+            value: Filters.catgory,
+            onChange: (e) => setFilter({ ...Filters, catgory: e.target.value }),
             options: accessoryCategories.map((category) => ({
                 value: category.title,
                 title: category.title,
             })),
         },
         {
-            label: 'tipi',
-            value: Tipe,
+            label: Translates.tipi,
+            value: Filters.type,
             options: accessoryTypes.map((category) => ({
                 value: category.title,
                 title: category.title,
             })),
-            onChange: (e) => setTipe(e.target.value),
+            onChange: (e) => setFilter({ ...Filters, type: e.target.value }),
         },
     ];
 
@@ -117,10 +122,14 @@ const FilterAcsesuares = ({ accessoryCategories, accessoryTypes }) => {
             transition={{ duration: 0.8 }}
         >
             <FilterPrice
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                onMinPriceChange={(e) => setMinPrice(e.target.value)}
-                onMaxPriceChange={(e) => setMaxPrice(e.target.value)}
+                minPrice={Filters.minPrice}
+                maxPrice={Filters.maxPrice}
+                onMinPriceChange={(e) =>
+                    setFilter({ ...Filters, minPrice: e.target.value })
+                }
+                onMaxPriceChange={(e) =>
+                    setFilter({ ...Filters, maxPrice: e.target.value })
+                }
             />
             {categories.map((categoryItem, index) => (
                 <FilterCategory key={index} {...categoryItem} />

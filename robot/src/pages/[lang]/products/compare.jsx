@@ -3,14 +3,30 @@ import CompareSwipperUpper from '@/components/compareSwipper';
 import CompareSwipper2 from '@/components/CompareSwipper2';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import React, { useState } from 'react';
+import { CompareProducts } from '@/components/recoil/Atom';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function compare() {
     const [isToggled, setIsToggled] = useState(false);
-
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
     const handleToggle = () => {
         setIsToggled(!isToggled); // Toggle between true and false
     };
+    const [compareProducts, setCompareProducts] =
+        useRecoilState(CompareProducts);
+    const { data: products, isLoading: ProductLoading } = GETRequest(
+        `/products`,
+        'products',
+        [lang]
+    );
+    useEffect(() => {
+        console.log('compareProducts', compareProducts);
+    }, [compareProducts]);
+
     return (
         <div>
             {' '}
@@ -27,7 +43,7 @@ export default function compare() {
                     <Green_to_none>2-si 1-də məhsul</Green_to_none>
                     <Green_to_none isactive={true}>Robot süpürgə</Green_to_none>
                 </div>
-                <CompareSwipperUpper />
+                <CompareSwipperUpper products={products?.data} />
                 <h2 className=" text-[36px] font-semibold  mt-[103px] lg:text-left text-center w-full lg:pl-[310px] pl-0">
                     Seçilən məhsullar
                 </h2>

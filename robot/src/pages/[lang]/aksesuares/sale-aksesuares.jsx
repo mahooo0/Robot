@@ -50,17 +50,20 @@ export default function SaleAksesuares({
             {' '}
             <Header activeIndex={3} offerindex={1} />
             <main className="mb-[100px]">
-                <SaleAcsesuaresHero accessoryCategories={accessoryCategories} />
+                <SaleAcsesuaresHero
+                    accessoryCategories={accessoryCategories}
+                    Translates={Translates}
+                />
 
                 <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#ECF3EA] py-[100px]">
                     <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
-                        20% Endirim{' '}
+                        {Translates._Endirim}{' '}
                     </h2>
                     <ProductBundle ProductBundle1={Accessoryes.data} />
                 </section>
                 <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#FFFFFF] py-[100px]">
                     <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
-                        20% Endirim{' '}
+                        {Translates.Digər_aksesuarlar}
                     </h2>
                     <ProductBundle ProductBundle1={Accessoryes.data} />
                 </section>

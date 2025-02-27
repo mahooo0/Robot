@@ -1,17 +1,17 @@
-// import { ROUTES } from '@/Helpers/Routes';
-// import BuyersGuide from '@/pages/about';
-// import Mobile_aplication from '@/pages/about/controll';
-// import WhyUs from '@/pages/about/whyUs';
-// import Aksesuares from '@/pages/aksesuares';
-// import Basket from '@/pages/basked';
-// import Order from '@/pages/basked/offer';
-// import Contact from '@/pages/contact';
-// import Product from '@/pages/products';
-// import Setting from '@/pages/user';
-// import Help from '@/pages/user/help';
-// import Test from '@/pages/user/help';
-// import Liked from '@/pages/user/liked';
-// import Login_register from '@/pages/user/login_register';
+import { ROUTES } from '@/Helpers/Routes';
+import BuyersGuide from '@/pages/about';
+import Mobile_aplication from '@/pages/about/controll';
+import WhyUs from '@/pages/about/whyUs';
+import Aksesuares from '@/pages/aksesuares';
+import Basket from '@/pages/basked';
+import Order from '@/pages/basked/offer';
+import Contact from '@/pages/contact';
+import Product from '@/pages/products';
+import Setting from '@/pages/user';
+import Help from '@/pages/user/help';
+import Test from '@/pages/user/help';
+import Liked from '@/pages/user/liked';
+import Login_register from '@/pages/user/login_register';
 // import {
 //     getAdvantages,
 //     getApp_content,

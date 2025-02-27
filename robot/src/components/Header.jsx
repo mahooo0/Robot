@@ -40,43 +40,43 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
     const likeBtnRef = useRef();
     const likeDivRef = useRef();
     // Close modal on route change
-    useEffect(() => {
-        const handleOutsideClicked = (e) => {
-            if (
-                likeDivRef?.current &&
-                !likeDivRef?.current.contains(e.target) &&
-                likeBtnRef?.current &&
-                !likeBtnRef?.current.contains(e.target)
-            ) {
-                // console.log('outsideClick');
-                setshow_shop_modal(false);
-                // enableScrolling();
-            } else {
-                console.log('insideClick');
-            }
-        };
+    // useEffect(() => {
+    //     const handleOutsideClicked = (e) => {
+    //         if (
+    //             likeDivRef?.current &&
+    //             !likeDivRef?.current.contains(e.target) &&
+    //             likeBtnRef?.current &&
+    //             !likeBtnRef?.current.contains(e.target)
+    //         ) {
+    //             // console.log('outsideClick');
+    //             setshow_shop_modal(false);
+    //             // enableScrolling();
+    //         } else {
+    //             console.log('insideClick');
+    //         }
+    //     };
 
-        // Add the event listener when the component mounts
-        document.addEventListener('mousedown', handleOutsideClicked);
+    //     // Add the event listener when the component mounts
+    //     document.addEventListener('mousedown', handleOutsideClicked);
 
-        // Cleanup: Remove the event listener when the component unmounts
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClicked);
-        };
-    }, [likeDivRef.current, likeBtnRef.current]);
-    useEffect(() => {
-        const handleRouteChange = () => {
-            setshow_Like_modal(false);
-        };
+    //     // Cleanup: Remove the event listener when the component unmounts
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleOutsideClicked);
+    //     };
+    // }, [likeDivRef.current, likeBtnRef.current]);
+    // useEffect(() => {
+    //     const handleRouteChange = () => {
+    //         setshow_Like_modal(false);
+    //     };
 
-        // Listen for route changes
-        router.events.on('routeChangeStart', handleRouteChange);
+    //     // Listen for route changes
+    //     router.events.on('routeChangeStart', handleRouteChange);
 
-        // Clean up the event listener on unmount
-        return () => {
-            router.events.off('routeChangeStart', handleRouteChange);
-        };
-    }, [router.events]);
+    //     // Clean up the event listener on unmount
+    //     return () => {
+    //         router.events.off('routeChangeStart', handleRouteChange);
+    //     };
+    // }, [router.events]);
     const HandleChangeUrlByLang = (Lang) => {
         const { lang = 'az', page, slug } = router.query;
 

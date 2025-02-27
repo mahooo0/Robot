@@ -23,7 +23,7 @@ export default function HelpSection({ helpData, translates }) {
                 className="flex flex-col w-full max-md:max-w-full items-center"
             >
                 <h2 className="text-4xl font-semibold text-[#132A1B] max-md:max-w-full text-center">
-                    Seçim etməkdə kömək edək!
+                    {translates?.Seçim_etməkdə_kömək_edək}
                 </h2>
                 <motion.div
                     initial="hidden"

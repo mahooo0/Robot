@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 export default function SpecialOfferSection({ SpecialOffer, Translates }) {
     const router = useRouter();
+    console.log('SpecialOffer', SpecialOffer);
 
     return (
         <section className="lg:px-[60px] px-[30px]">

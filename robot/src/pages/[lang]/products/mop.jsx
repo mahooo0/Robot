@@ -128,9 +128,12 @@ export async function getServerSideProps(context) {
         });
         const Translates = await TranslatesResponse.json();
 
-        const ProductBundle1Response = await fetch(`${baseUrl}/products`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle1Response = await fetch(
+            `${baseUrl}/products?type_id=8`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle1 = await ProductBundle1Response.json();
 
         const choicesResponse = await fetch(`${baseUrl}/choices`, {

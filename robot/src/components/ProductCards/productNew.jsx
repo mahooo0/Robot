@@ -1,8 +1,14 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 function ProductCardNew({ data, Translates }) {
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
     return (
-        <article className="flex overflow-hidden flex-col grow shrink self-stretch pt-7 pl-7 my-auto rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-full  md:lg:w-full max-md:max-w-full">
+        <article
+            onClick={() => router.push(`/${lang}/products/${data.slug[lang]}`)}
+            className="flex overflow-hidden cursor-pointer flex-col grow shrink self-stretch pt-7 pl-7 my-auto rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-full  md:lg:w-full max-md:max-w-full"
+        >
             <div className="flex z-10 flex-wrap gap-5 justify-between max-w-full w-full ">
                 <div className="flex flex-col text-xl font-semibold">
                     <h2 className=" max-w-[369px]  text-white text-wrap lg:text-[20px] md:text-[16px] text-[14px]">

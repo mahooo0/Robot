@@ -32,7 +32,7 @@ export default function Paket({
     Home_acsesuares,
     choices,
 }) {
-    const router = useRouter();
+    // const router = useRouter();
     return (
         <div>
             {' '}
@@ -48,34 +48,6 @@ export default function Paket({
                         {Translates?.Ən_güclü_təmizlik}{' '}
                     </h2>
                     <ProductBundle ProductBundle1={ProductBundle1.data} />
-
-                    {/* <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                        <Product_Card_aute />
-                    </div>
-                    <div className="flex flex-row flex-wrap justify-between mt-7 gap-5">
-                        <ProductCard_MD
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            bgcolor="#EEEEEE"
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                        <ProductCard_MD
-                            desc={'Free Shipping on All Robot Orders'}
-                            title="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-                            price={300}
-                            bgcolor="#EEEEEE"
-                            imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/589a6fc8a10678a08f38e26b3e681773e5c2b98eb237cc16ab22563d23fbb54c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        />
-                    </div> */}
                 </section>
                 <section className="w-full mt-[100px] bg-[#ECF3EA] py-[100px]">
                     <h2 className="text-[#447355] text-[40px] font-semibold text-center ">
@@ -88,7 +60,6 @@ export default function Paket({
                     <h2 className="text-[#447355] text-[40px] font-semibold text-center max-w-[985px]  self-center mx-auto">
                         {Translates?.Eksklüziv_robot_və}
                     </h2>
-
                     <ProductBundle ProductBundle1={ProductBundle3.data} />
                 </section>
                 <AcsesuaresSection
@@ -96,21 +67,9 @@ export default function Paket({
                     Translates={Translates}
                 />{' '}
                 <HelpSection helpData={choices} translates={Translates} />
-                {/* <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px]">
-                    <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="self-center text-4xl font-semibold text-center !w-[100%] text-[#132A1B] ">
-                            Seçim etməkdə kömək edək!
-                        </h2>
-                        <div className="flex flex-wrap gap-10 justify-center items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
-                            {helpData.map((item, index) => (
-                                <HelpCard key={index} {...item} />
-                            ))}
-                        </div>
-                    </div>
-                </section>{' '} */}
                 <section className="my-[100px] lg:px-[145px] ">
                     <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
-                        Digər kateqoriyalar
+                        {Translates.Digər_kateqoriyalar}
                     </h2>
                     <ProductCategories />
                 </section>
@@ -146,19 +105,28 @@ export async function getServerSideProps(context) {
         });
         const Translates = await TranslatesResponse.json();
 
-        const ProductBundle1Response = await fetch(`${baseUrl}/products`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle1Response = await fetch(
+            `${baseUrl}/products?type_id=4`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle1 = await ProductBundle1Response.json();
 
-        const ProductBundle2Response = await fetch(`${baseUrl}/products`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle2Response = await fetch(
+            `${baseUrl}/products?type_id=5`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle2 = await ProductBundle2Response.json();
 
-        const ProductBundle3Response = await fetch(`${baseUrl}/products`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle3Response = await fetch(
+            `${baseUrl}/products?type_id=6`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle3 = await ProductBundle3Response.json();
 
         const choicesResponse = await fetch(`${baseUrl}/choices`, {

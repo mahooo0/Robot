@@ -2,7 +2,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-export default function Sucses() {
+export default function Sucses({ Translates }) {
     useEffect(() => {
         const duration = 6 * 1000;
         const animationEnd = Date.now() + duration;
@@ -46,6 +46,8 @@ export default function Sucses() {
 
         return () => clearInterval(interval);
     }, []);
+    console.log('Translates', Translates);
+
     return (
         <div>
             <Header />
@@ -57,19 +59,18 @@ export default function Sucses() {
                 />
                 <div c>
                     <h1 className="text-[20px] font-semibold text-center mt-[-50px]">
-                        Məhsulunuz uğurla sifariş edildi!
+                        {Translates.Məhsulunuz_uğurla}
                     </h1>
                     <p className="text-[14px] font-normal  text-center mt-2">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.
+                        {Translates.Sucses_desc}
                     </p>
                 </div>
                 <div className="flex felx-row gap-4 mt-[40px] justify-center">
                     <button className="px-[71px] py-[14px] bg-[#69BE56] text-white flex justify-between rounded-[100px]">
-                        Sifarişini izlə
+                        {Translates.Sifarişini_izlə}
                     </button>
                     <button className="px-[71px] py-[14px] border bg-[#ffffff] text-black flex justify-center items-center flex-row gap-2 rounded-[100px]">
-                        Ana səhifəyə qayıt{' '}
+                        {Translates.Ana_səhifəyə_qayıt}
                         <svg
                             width="24"
                             height="24"
@@ -105,4 +106,26 @@ export default function Sucses() {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const Translates = await TranslatesResponse.json();
+
+        return {
+            props: {
+                Translates,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

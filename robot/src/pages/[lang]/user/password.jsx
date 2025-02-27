@@ -1,12 +1,15 @@
 import Green_to_green from '@/components/btns/green_to_green';
-import Header from '@/components/Header';
-import LoginForum from '@/components/LoiinForum';
+import OTP from '@/components/Otp';
+import { axiosInstance } from '@/services/Requests';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function login_register() {
     const [sucses, setsucses] = useState('1');
+    const [Otp, setOtp] = useState('1');
     const [showPassword, setShowPassword] = useState(false);
+    const [Email, setEmail] = useState(false);
     const router = useRouter();
     const MyComponent = ({ sucses }) => {
         let content;
@@ -20,18 +23,32 @@ export default function login_register() {
                                 Şifrəni bərpası
                             </h1>
                         </div>
-                        <div>
-                            {' '}
+                        <form
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                const email = e.target.email.value;
+                                axiosInstance
+                                    .post('password-reset/request', {
+                                        email,
+                                    })
+                                    .then(() => {
+                                        setEmail(email);
+                                        // toast.success("code")
+                                        setsucses('2');
+                                    })
+                                    .catch(() => {
+                                        toast.error('some thing went wrong');
+                                    });
+                            }}
+                        >
                             <div className="overflow-hidden px-5 mt-10 py-4 min-w-[360px] w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px]">
-                                <label
-                                    className="sr-only"
-                                    // htmlFor={label.toLowerCase().replace(/\s+/g, '-')}
-                                >
+                                <label className="sr-only" htmlFor="email">
                                     Name
                                 </label>
                                 <input
-                                    type="Email"
-                                    // id={label.toLowerCase().replace(/\s+/g, '-')}
+                                    type="email"
+                                    id="email"
+                                    name="email"
                                     placeholder="Email"
                                     className="w-full bg-transparent outline-none"
                                     aria-label="Name"
@@ -39,11 +56,11 @@ export default function login_register() {
                             </div>
                             <Green_to_green
                                 classNAME="w-full mt-[28px] "
-                                action={() => setsucses('2')}
+                                type="submit"
                             >
                                 Göndər
                             </Green_to_green>
-                        </div>
+                        </form>
                     </div>
                 );
                 break;
@@ -66,6 +83,19 @@ export default function login_register() {
                 );
                 break;
             case '3':
+                content = (
+                    <OTP
+                        email={Email}
+                        onComplete={(otpcode) => {
+                            console.log('otp', otpcode);
+                            setOtp(otpcode);
+                            setsucses('4');
+                        }}
+                    />
+                    //otp here
+                );
+                break;
+            case '4':
                 content = (
                     <div className="flex justify-center items-center lg:w-1/2 md:w-1/2 w-full h-full flex-col">
                         <div className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
@@ -122,7 +152,7 @@ export default function login_register() {
                 );
                 break;
 
-            case '4':
+            case '5':
                 setTimeout(() => {
                     router.push('/user');
                 }, 1000);
@@ -178,51 +208,15 @@ export default function login_register() {
 
         return <>{content}</>;
     };
+    useEffect(() => {
+        if (sucses == '2') {
+            setTimeout(() => {
+                setsucses('3');
+            }, 300);
+        }
+    }, [sucses]);
     return (
         <div className="w-full h-[100vh] bg-[#F2F5F0] flex flex-row  relative">
-            {/* {sucses ? (
-                <div className="flex justify-center items-center lg:w-1/2 md:w-1/2 w-full h-full flex-col">
-                    <div className="flex justify-center items-center w-[140px] h-[140px] rounded-full border border-[#69BE56]">
-                        <img src="/svg/QalockaGreen.svg" />
-                    </div>
-                    <p className="w-[457px] text-[20px] font-medium text-center mt-[28px]">
-                        <a className="text-[#1661A7]">ilahanazarli@gmail.com</a>{' '}
-                        email ünvanına link göndərildi.
-                    </p>
-                </div>
-            ) : (
-                <div className="flex justify-center items-center w-1/2 h-full flex-col">
-                    <header className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
-                        <h1 className="text-4xl font-semibold text-green-950">
-                            Şifrəni bərpası
-                        </h1>
-                    </header>
-                    <div>
-                        {' '}
-                        <div className="overflow-hidden px-5 mt-10 py-4 min-w-[360px] w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px]">
-                            <label
-                                className="sr-only"
-                                // htmlFor={label.toLowerCase().replace(/\s+/g, '-')}
-                            >
-                                Name
-                            </label>
-                            <input
-                                type="Email"
-                                // id={label.toLowerCase().replace(/\s+/g, '-')}
-                                placeholder="Email"
-                                className="w-full bg-transparent outline-none"
-                                aria-label="Name"
-                            />
-                        </div>
-                        <Green_to_green
-                            classNAME="w-full mt-[28px] "
-                            action={() => setsucses(true)}
-                        >
-                            Göndər
-                        </Green_to_green>
-                    </div>
-                </div>
-            )} */}
             <MyComponent sucses={sucses} />
             <div className="lg:block md:block hidden p-5 h-full rounded-3xl overflow-hidden ">
                 <img

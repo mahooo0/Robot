@@ -1,11 +1,17 @@
 import Green_to_none from '@/components/btns/green_to_none';
 import SalesSwipper from '@/components/sales.swipper.jsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import GETRequest from '@/services/QueryREq';
 
-export default function SalesSection({ MostSaledProducts, Translates }) {
+export default function SalesSection({ Translates }) {
     // console.log('MostSaledProducts', MostSaledProducts);
-
+    const [Filter, setFilter] = useState('');
+    const { data: products, isLoading: ProductLoading } = GETRequest(
+        `/products?is_bestseller=1`,
+        'products',
+        [Filter]
+    );
     return (
         <motion.section
             initial={{ opacity: 0, y: 50 }}
@@ -36,26 +42,40 @@ export default function SalesSection({ MostSaledProducts, Translates }) {
                     }}
                     viewport={{ once: true }} // Trigger the animation only once
                 >
-                    {[
-                        'Robot Tozsoranlar',
-                        'Robot Tozsoranlar',
-                        'Robot Tozsoranlar',
-                    ].map((item, index) => (
-                        <motion.div
-                            key={index}
-                            variants={{
-                                hidden: { opacity: 0, y: 20 },
-                                visible: { opacity: 1, y: 0 },
-                            }}
-                        >
-                            <Green_to_none isactive={index === 1}>
-                                {item}
-                            </Green_to_none>
-                        </motion.div>
-                    ))}
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 },
+                        }}
+                    >
+                        <Green_to_none isactive={false}>
+                            Robot Tozsoranlar
+                        </Green_to_none>
+                    </motion.div>
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 },
+                        }}
+                    >
+                        <Green_to_none isactive={true}>
+                            Robot Tozsoranlar
+                        </Green_to_none>
+                    </motion.div>
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 },
+                        }}
+                    >
+                        <Green_to_none isactive={false}>
+                            Robot Tozsoranlar
+                        </Green_to_none>
+                    </motion.div>
                 </motion.div>
             </motion.div>
-            <SalesSwipper data={MostSaledProducts} />
+
+            <SalesSwipper data={products?.data} />
         </motion.section>
     );
 }

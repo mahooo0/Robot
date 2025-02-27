@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 const products = [
@@ -27,31 +28,39 @@ const products = [
     },
 ];
 
-export default function Productacsesuares() {
+export default function Productacsesuares({ translates, acsesuares }) {
+    console.log('acsesuares', acsesuares);
+    const routes = useRouter();
+    const { lang } = routes.query;
     return (
         <section className="pb-[100px]">
             <h4 className="text-[40px] font-semibold mt-[100px] px-[60px]">
-                Məhsul setinə daxildir:
+                {translates.Məhsul_setinə_daxildir}:
             </h4>
             <div
                 className="flex flex-wrap gap-5 items-center  max-md:max-w-full justify-between px-[60px]  w-full mt-[20px]"
                 aria-label="Product Grid"
             >
-                {products.map((product) => (
+                {acsesuares.map((product) => (
                     <div
+                        onClick={() =>
+                            routes.push(
+                                `/${lang}/aksesuares/${product.slug[lang]}`
+                            )
+                        }
                         key={product.id}
-                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[315px]"
+                        className="flex flex-col  cursor-pointer self-stretch my-auto min-w-[240px] w-[315px]"
                     >
                         <div className="flex overflow-hidden flex-col w-full rounded-3xl bg-zinc-100">
                             <img
                                 loading="lazy"
-                                src={product.imageSrc}
-                                alt={product.productName}
-                                className="object-contain w-full aspect-[1.28]"
+                                src={product.image}
+                                alt={product.img_alt}
+                                className="object-cover w-full aspect-[1.28]"
                             />
                         </div>
                         <h2 className="mt-3 w-full text-base font-medium text-black">
-                            {product.productName}
+                            {product.title}
                         </h2>
                     </div>
                 ))}

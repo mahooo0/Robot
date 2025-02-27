@@ -5,7 +5,7 @@ import Green_to_none from './btns/green_to_none';
 import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
 
-function BuyProduct({ product }) {
+function BuyProduct({ product, translates }) {
     const [selectedColor, setSelectedColor] = useState('Qara');
     const [isliked, setIsliked] = useState(false);
     const addToBasket = async (Data) => {
@@ -33,23 +33,7 @@ function BuyProduct({ product }) {
             });
         // return response.data;
     };
-    const colors = [
-        {
-            src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/df70ec6dd093c9f46f6ebebe92870926a3e6619f8a8402391f795679658ef6aa?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            alt: 'Black color option',
-            name: 'Qara',
-        },
-        {
-            src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/52c0bb8b4cb2aa7b9b4bf92996e98324b2a7481e693724900863a395b4e55053?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            alt: 'White color option',
-            name: 'Ağ',
-        },
-        {
-            src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/4fd90f4a558a2fbff94374ec23f14b1830e0504b656c5aa1d347c70851e2ab4a?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            alt: 'Gray color option',
-            name: 'Boz',
-        },
-    ];
+    console.log('product', product);
 
     return (
         <div className="flex flex-col lg:w-1/2 w-full max-md:mt-10 max-md:max-w-full">
@@ -66,7 +50,7 @@ function BuyProduct({ product }) {
                     />
 
                     <p className="mt-3 text-sm text-black text-opacity-60">
-                        Məhsulun kodu:{product?.code}
+                        {translates.Məhsulun_kodu}:{product?.code}
                     </p>
                 </div>
             </header>
@@ -86,7 +70,7 @@ function BuyProduct({ product }) {
                 <InstallmentPayment product={product} />
                 <div className="flex flex-col mt-6 max-w-full w-[251px]">
                     <p className="text-sm text-black text-opacity-60">
-                        Rəng: {selectedColor}
+                        {translates.Rəng}: {selectedColor}
                     </p>
                     <div className="flex gap-2 items-center mt-3 w-full">
                         {product?.product_colors.map((color, index) => (
@@ -111,11 +95,11 @@ function BuyProduct({ product }) {
                 </div>
                 {product?.is_stock ? (
                     <div className="gap-2.5 self-stretch px-5 py-2.5 mt-6 text-sm font-medium text-[#69BE56] w-fit rounded-xl border border-green-400 border-solid">
-                        Stokda var
+                        {translates.Stokda_var}
                     </div>
                 ) : (
                     <div className="gap-2.5 self-stretch px-5 py-2.5 mt-6 text-sm font-medium text-red-600 w-fit rounded-xl border border-red-600 border-solid">
-                        Stokda yoxdu
+                        {translates.Stokda_yoxdu}
                     </div>
                 )}
 
@@ -168,9 +152,11 @@ function BuyProduct({ product }) {
                         }
                     }}
                 >
-                    Səbətə əlavə et
+                    {translates.Səbətə_əlavə_et}
                 </Green_to_green>
-                <Green_to_none classNAME="w-1/2">İndi al</Green_to_none>
+                <Green_to_none classNAME="w-1/2">
+                    {translates.İndi_al}
+                </Green_to_none>
                 <button
                     aria-label="Add to favorites"
                     className="bg-[#E7F0E4] w-[52px] h-[52px] rounded-full flex justify-center items-center   "

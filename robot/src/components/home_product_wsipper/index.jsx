@@ -3,11 +3,13 @@ import 'swiper/css';
 import ProductDisplay from './Product_card_swipper';
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
-const Hero_Swipper = () => {
+const Hero_Swipper = ({ data }) => {
     const swiperRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
-
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
     const handleSwiperChange = (swiper) => {
         setCurrentSlide(swiper.activeIndex);
     };
@@ -31,7 +33,18 @@ const Hero_Swipper = () => {
                 ref={swiperRef}
                 onSlideChange={handleSwiperChange} // Track slide changes
             >
-                <SwiperSlide className="h-full">
+                {data.map((item) => (
+                    <SwiperSlide
+                        className="h-full"
+                        onClick={() =>
+                            router.push(`/${lang}/products/${item.slug[lang]}`)
+                        }
+                    >
+                        <ProductDisplay data={item} />
+                    </SwiperSlide>
+                ))}
+
+                {/* <SwiperSlide>
                     <ProductDisplay />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -39,15 +52,12 @@ const Hero_Swipper = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <ProductDisplay />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ProductDisplay />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
 
             {/* Custom Pagination */}
             <div className=" absolute flex justify-center bottom-5   right-5 z-[5000] ">
-                {[...Array(4)].map((_, index) => (
+                {[...Array(data.length)].map((_, index) => (
                     <button
                         key={index}
                         onClick={() => handleSlideChange(index)}

@@ -208,7 +208,7 @@ function LoginForum() {
                                 />
 
                                 {isLogin ? (
-                                    <Link href="/user/password">
+                                    <Link href={`/${lang}/user/password`}>
                                         <p className="mt-3 text-sm text-right text-sky-700">
                                             Şifrəmi unutdum
                                         </p>

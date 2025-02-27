@@ -124,9 +124,9 @@ export async function getServerSideProps(context) {
     const Vakumus_Bunner_3 = await getSection(lang, 'Vakumus-Bunner-3');
     const Translates = await getTranslates(lang);
     const typesOfRobots = await getTypesOfRobots(lang);
-    const ProductBundle1 = await get_Products_By_Param(lang, '');
-    const ProductBundle2 = await get_Products_By_Param(lang, '');
-    const ProductBundle3 = await get_Products_By_Param(lang, '');
+    const ProductBundle1 = await get_Products_By_Param(lang, `?type_id=1`);
+    const ProductBundle2 = await get_Products_By_Param(lang, '?type_id=7');
+    const ProductBundle3 = await get_Products_By_Param(lang, '?type_id=3');
     const choices = await getChoices(lang);
 
     return {

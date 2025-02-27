@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Green_to_green from './btns/green_to_green';
+import { axiosInstance } from '@/services/Requests';
+import toast from 'react-hot-toast';
 
 const ContactInfo = ({ icon, text }) => (
     <div className="flex overflow-hidden flex-col justify-center items-start p-2 w-full bg-white bg-opacity-20 rounded-[100px] max-md:pr-5 max-md:max-w-full">
@@ -15,7 +17,7 @@ const ContactInfo = ({ icon, text }) => (
     </div>
 );
 
-const ContactForm = () => {
+const ContactForm = ({ translates }) => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -31,10 +33,23 @@ const ContactForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
         // Handle form submission logic here
-        console.log(formData);
+        axiosInstance
+            .post('/contact', {
+                name: formData.name,
+                phone: formData.phone,
+                category: formData.category,
+                message: formData.name,
+            })
+            .then(() => {
+                toast.success('message sucsesfully sent');
+                // e.preventDefault();
+            })
+            .catch((err) => {
+                console.log('error', err);
+            });
+        console.log('formData', formData);
     };
 
     return (
@@ -81,14 +96,14 @@ const ContactForm = () => {
                                         aria-label="Kateqoriya seç"
                                     >
                                         <option value="">Kateqoriya seç</option>
-                                        <option value="category1">
-                                            Category 1
+                                        <option value="teklif">
+                                            {translates.teklif}
                                         </option>
-                                        <option value="category2">
-                                            Category 2
+                                        <option value="sikayyet">
+                                            {translates.sikayyet}
                                         </option>
-                                        <option value="category3">
-                                            Category 3
+                                        <option value="muraciet">
+                                            {translates.muraciet}
                                         </option>
                                     </select>
                                 </div>
@@ -166,7 +181,7 @@ function ContactSection({ contact_items, translates }) {
                     </div>
                 </div>
                 <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                    <ContactForm />
+                    <ContactForm translates={translates} />
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import strelka from '../../public/svg/strelka_white';
-function ProductDisplay() {
+function ProductDisplay({ data }) {
     const [currentImage, setCurrentImage] = useState(0);
     const images = [
         'https://cdn.builder.io/api/v1/image/assets/TEMP/ba11824ff3848c159c637498654beba7a744b5fb3391990d138077d74fcea315?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
@@ -16,14 +16,13 @@ function ProductDisplay() {
         <div className="relative h-full flex overflow-hidden flex-col px-7 pt-7 mx-auto w-full rounded-3xl bg-[#354C3D] max-md:pl-5 max-md:mt-5 max-md:max-w-full">
             <div className="flex flex-wrap gap-10 w-full text-white max-md:mr-2 max-md:max-w-full">
                 <div className="flex flex-col grow shrink-0 basis-0 w-fit">
-                    <h2 className="text-xl font-semibold">
-                        Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash
-                        Dock
-                    </h2>
-                    <p className="mt-2 text-sm">Məhsulun kodu: 1234567</p>
+                    <h2 className="text-xl font-semibold">{data.title}</h2>
+                    <p className="mt-2 text-sm">Məhsulun kodu: {data.id}</p>
                 </div>
                 <div className="flex gap-1 items-center self-start px-3 py-1.5 text-xl font-semibold text-center whitespace-nowrap bg-green-400 rounded-lg">
-                    <span className="self-stretch my-auto">300</span>
+                    <span className="self-stretch my-auto">
+                        {data.discounted_price}
+                    </span>
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/8e492fe52ba26c8f9a0439b1823a8407ac500ab1a85b2cf54f7be0e84df24e20?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -36,7 +35,7 @@ function ProductDisplay() {
                 <div className="flex relative flex-col grow shrink-0 items-center px-12 pt-20 pb-52 basis-0 min-h-[340px] w-fit max-md:px-5 max-md:pb-24 max-md:max-w-full">
                     <img
                         loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba11824ff3848c159c637498654beba7a744b5fb3391990d138077d74fcea315?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                        src={data.image}
                         className="object-cover absolute inset-0 size-full"
                         alt={`Product image`}
                     />

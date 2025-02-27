@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 import Green_to_green from '@/components/btns/green_to_green';
 import { useRouter } from 'next/router';
 import ProductCardNew from '@/components/ProductCards/productNew';
+import { useRecoilState } from 'recoil';
+import { ProductFilters } from '@/components/recoil/Atom';
 
 export default function NewProductsSection({ NewProducts, Translates }) {
     const router = useRouter();
+    const { lang = 'az' } = router.query;
+    const [Filters, setFilters] = useRecoilState(ProductFilters);
 
     return (
         <motion.section
@@ -52,7 +56,12 @@ export default function NewProductsSection({ NewProducts, Translates }) {
                     }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    <Green_to_green action={() => router.push('/products')}>
+                    <Green_to_green
+                        action={() => {
+                            router.push(`/${lang}/products`);
+                            setFilters({ ...Filters, is_new: '1' });
+                        }}
+                    >
                         {Translates?.Yeni_Məhsullar}{' '}
                     </Green_to_green>
                 </motion.div>

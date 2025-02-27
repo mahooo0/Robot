@@ -14,7 +14,7 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
     const { lang = 'az' } = router.query;
     const Path = router.asPath;
     const isAcsesuares = Path.includes('aksesuares');
-    console.log('isAcsesuares', isAcsesuares);
+    // console.log('isAcsesuares', isAcsesuares);
 
     const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
     const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
@@ -70,7 +70,7 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
         // .catch(() => {
         //     toast.error('eror');
         // });
-        // return response.data;
+        return response.data;
     };
     const mutation = useMutation({
         mutationFn: addToBasket,
@@ -146,7 +146,7 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
                         {!includes ? (
                             <>
                                 <img src="/svg/shop.svg" />
-                                Səbətə əlavə et
+                                {translates?.Səbətə_əlavə_et}
                             </>
                         ) : (
                             <>
@@ -155,7 +155,7 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
                                     src="/svg/ok.svg"
                                     className="w-[25px] aspect-square"
                                 />
-                                sebete eleve olunub
+                                {translates?.sebete_eleve_olunub}
                             </>
                         )}
                     </button>

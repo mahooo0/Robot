@@ -27,12 +27,12 @@ const productData = [
     },
 ];
 
-function ProductDetails({ product }) {
+function ProductDetails({ product, translates }) {
     return (
         <main className="flex overflow-hidden flex-col justify-center px-16 py-24 mt-5 w-full bg-neutral-100 max-md:px-5 max-md:max-w-full">
             <section className="flex flex-col max-md:max-w-full">
                 <h1 className="text-4xl font-semibold text-green-950 max-md:max-w-full">
-                    Məhsulun detalları
+                    {translates.Məhsulun_detalları}
                 </h1>
                 <div className="flex overflow-hidden flex-col justify-center p-10 mt-10 w-full bg-white rounded-3xl max-md:px-5 max-md:max-w-full">
                     <div className="flex flex-col w-full max-md:max-w-full">

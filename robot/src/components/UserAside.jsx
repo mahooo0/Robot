@@ -1,28 +1,33 @@
+import GETRequest from '@/services/QueryREq';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 function UserAside({ active }) {
+    const router = useRouter();
+    const { lang } = router.query;
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     const menuItems = [
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/62105f4dd100c43868d88a294261801888dc691b2834a74ff01a0b36d76e0d8e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            text: 'Tənzimləmələr',
+            text: translates?.Tənzimləmələr,
         },
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/9eb7d5c398a10506cc489eaf4756ac25f7b0769f75137d46182508a2a8759c7c?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            text: 'Sifarişlərim',
+            text: translates?.Sifarişlərim,
         },
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/15d6e564cf1e866c69e33a3bfe32ce14b7b8eac3d002c167c67b53f9e749a9ab?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            text: 'Bəyəndiklərim',
+            text: translates?.Bəyəndiklərim,
         },
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/7061b30f6f65f4d4982cbc393e956d18cbaffcfdaed9a9476c0c3110fefebdf4?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            text: 'Çıxış',
+            text: translates?.Çıxış,
             textColor: 'text-rose-600',
         },
     ];
-    const router = useRouter();
-    const { lang } = router.query;
+
     const Router = (index) => {
         switch (index) {
             case 0:
@@ -38,7 +43,7 @@ function UserAside({ active }) {
     };
 
     return (
-        <main className="flex overflow-hidden flex-col grow px-5 pt-5 w-full text-base bg-[#F1F5F0] h-[100%] max-md:pb-24 max-md:mt-3">
+        <aside className="flex overflow-hidden flex-col grow px-5 pt-5 w-full text-base bg-[#F1F5F0] h-[100%] max-md:pb-24 max-md:mt-3">
             <div className="flex flex-col self-center max-w-full font-medium text-black w-[122px]">
                 <img
                     loading="lazy"
@@ -53,7 +58,7 @@ function UserAside({ active }) {
                 {menuItems.map((item, index) => (
                     <div
                         key={index}
-                        className={`flex w-fit overflow-hidden flex-col justify-center p-1 ${
+                        className={`flex w-fit overflow-hidden flex-col justify-center cursor-pointer p-1 ${
                             index === active ? 'bg-[#87A28E]' : 'bg-white'
                         } rounded-3xl ${
                             index === active
@@ -78,7 +83,7 @@ function UserAside({ active }) {
                     </div>
                 ))}
             </div>
-        </main>
+        </aside>
     );
 }
 

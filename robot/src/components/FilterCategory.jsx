@@ -72,7 +72,24 @@ const FilterPrice = ({
         />
     </div>
 );
-
+const FilterArea = ({ label, Area, onAreaChange }) => (
+    <div className="flex overflow-hidden gap-3 self-stretch px-5 py-4 my-auto whitespace-nowrap bg-[#ECF1EA] rounded-3xl min-w-[240px] text-black text-opacity-60 w-[321px] ">
+        <div className="flex flex-col w-full">
+            <label htmlFor="min-price" className="self-start text-sm">
+                {label}
+            </label>
+            <input
+                type="number"
+                id="min-price"
+                placeholder="Min."
+                className="overflow-hidden px-4 py-3 mt-2 text-base bg-white rounded-xl max-md:pr-5 "
+                aria-label="Minimum price"
+                value={Area}
+                onChange={onAreaChange}
+            />
+        </div>
+    </div>
+);
 const FilterComponent = ({
     productCategories,
     accessorySeries,
@@ -170,15 +187,11 @@ const FilterComponent = ({
                     setFilters({ ...Filters, type: e.target.value })
                 }
             />
-            <FilterPrice
+            <FilterArea
                 label="room are"
-                minPrice={Filters.minArea}
-                maxPrice={Filters.maxArea}
-                onMinPriceChange={(e) =>
-                    setFilters({ ...Filters, minArea: e.target.value })
-                }
-                onMaxPriceChange={(e) =>
-                    setFilters({ ...Filters, maxArea: e.target.value })
+                Area={Filters.Area}
+                onAreaChange={(e) =>
+                    setFilters({ ...Filters, Area: e.target.value })
                 }
             />
         </section>

@@ -17,7 +17,7 @@ const ProductCard2 = ({ data, isLarge }) => {
     const { lang = 'az' } = router.query;
     const Path = router.asPath;
     const isAcsesuares = Path.includes('aksesuares');
-    console.log('isAcsesuares', isAcsesuares);
+    // console.log('isAcsesuares', isAcsesuares);
 
     const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
     const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
@@ -304,7 +304,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                             {!includes ? (
                                 <>
                                     <img src="/svg/shop.svg" />
-                                    Səbətə əlavə et
+                                    {translates?.Səbətə_əlavə_et}
                                 </>
                             ) : (
                                 <>
@@ -313,7 +313,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                                         src="/svg/ok.svg"
                                         className="w-[25px] aspect-square"
                                     />
-                                    sebete eleve olunub
+                                    {translates?.sebete_eleve_olunub}
                                 </>
                             )}{' '}
                         </motion.button>
@@ -478,7 +478,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                     {!includes ? (
                         <>
                             <img src="/svg/shop.svg" />
-                            Səbətə əlavə et
+                            {translates?.Səbətə_əlavə_et}
                         </>
                     ) : (
                         <>
@@ -487,7 +487,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                                 src="/svg/ok.svg"
                                 className="w-[25px] aspect-square"
                             />
-                            sebete eleve olunub
+                            {translates?.sebete_eleve_olunub}
                         </>
                     )}{' '}
                 </motion.button>

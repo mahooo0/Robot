@@ -5,7 +5,7 @@ const ProductCategory = ({ imageSrc, altText, categoryName, page }) => {
     const router = useRouter();
     return (
         <div
-            className="flex flex-col items-center self-stretch my-auto w-[175px]"
+            className="flex flex-col items-center self-stretch my-auto w-[175px] cursor-pointer"
             onClick={() => router.push(page)}
         >
             <img

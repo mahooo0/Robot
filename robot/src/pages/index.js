@@ -53,21 +53,21 @@ export default function Home({
     NewProducts,
     Advantages,
     MostSaledProducts,
-
     SpecialOffer,
     PaketProducts,
     Home_Special_Offers,
     VacumusProducts,
     Home_İRobot_evinizin,
     CleanersOffer,
+    hero,
 }) {
-    // console.log('MostSaledProducts:', MostSaledProducts);
+    console.log('hero:', hero);
 
     const router = useRouter();
     return (
         <div className="text-[#132A1B]">
             <Header activeIndex={0} />
-            <Home_Hero />
+            <Home_Hero hero={hero} />
             <section className="px-5 w-full flex justify-center">
                 <FeatureList Advantages={Advantages} />
             </section>
@@ -76,10 +76,7 @@ export default function Home({
                 NewProducts={NewProducts.data}
                 Translates={Translates}
             />
-            <SalesSection
-                MostSaledProducts={MostSaledProducts.data}
-                Translates={Translates}
-            />
+            <SalesSection Translates={Translates} />
             <SpecialOfferSection
                 SpecialOffer={SpecialOffer}
                 Translates={Translates}
@@ -125,12 +122,12 @@ export async function getServerSideProps(context) {
             Home_İRobot_evinizin,
             Translates,
             NewProducts,
-            MostSaledProducts,
             VacumusProducts,
             PaketProducts,
             SpecialOffer,
             CleanersOffer,
             Advantages,
+            hero,
         ] = await Promise.all([
             fetch(`${baseUrl}/section?type=Home_acsesuares`, {
                 headers: { 'Accept-Language': lang },
@@ -147,16 +144,14 @@ export async function getServerSideProps(context) {
             fetch(`${baseUrl}/translates`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
+            fetch(`${baseUrl}/products?is_new=1`, {
+                headers: { 'Accept-Language': lang },
+            }).then((res) => res.json()),
+
             fetch(`${baseUrl}/products`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
-            fetch(`${baseUrl}/products`, {
-                headers: { 'Accept-Language': lang },
-            }).then((res) => res.json()),
-            fetch(`${baseUrl}/products`, {
-                headers: { 'Accept-Language': lang },
-            }).then((res) => res.json()),
-            fetch(`${baseUrl}/products`, {
+            fetch(`${baseUrl}/products?is_paket=1`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
             fetch(`${baseUrl}/products`, {
@@ -166,6 +161,9 @@ export async function getServerSideProps(context) {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
             fetch(`${baseUrl}/advantages`, {
+                headers: { 'Accept-Language': lang },
+            }).then((res) => res.json()),
+            fetch(`${baseUrl}/hero`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
         ]);
@@ -178,12 +176,12 @@ export async function getServerSideProps(context) {
                 Home_Special_Offers,
                 NewProducts,
                 Advantages,
-                MostSaledProducts,
                 SpecialOffer: SpecialOffer?.data?.[0] || null,
                 PaketProducts,
                 VacumusProducts,
                 Home_İRobot_evinizin,
                 CleanersOffer,
+                hero,
             },
         };
     } catch (error) {
