@@ -2,12 +2,13 @@ import GETRequest from '@/services/QueryREq';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-function UserAside({ active }) {
+function UserAside({ active, translates }) {
     const router = useRouter();
     const { lang } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
+
     const menuItems = [
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/62105f4dd100c43868d88a294261801888dc691b2834a74ff01a0b36d76e0d8e?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
@@ -20,6 +21,10 @@ function UserAside({ active }) {
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/15d6e564cf1e866c69e33a3bfe32ce14b7b8eac3d002c167c67b53f9e749a9ab?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
             text: translates?.Bəyəndiklərim,
+        },
+        {
+            icon: '/image/kredit.png',
+            text: translates?.Kreditlərim,
         },
         {
             icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/7061b30f6f65f4d4982cbc393e956d18cbaffcfdaed9a9476c0c3110fefebdf4?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
@@ -39,11 +44,18 @@ function UserAside({ active }) {
             case 2:
                 router.push(`/${lang}/user/liked`);
                 break;
+            case 3:
+                router.push(`/${lang}/user/kredits`);
+                break;
+            case 4:
+                localStorage.removeItem('user-info');
+                router.push(`/${lang}`);
+                break;
         }
     };
 
     return (
-        <aside className="flex overflow-hidden flex-col grow px-5 pt-5 w-full text-base bg-[#F1F5F0] h-[100%] max-md:pb-24 max-md:mt-3">
+        <aside className="flex overflow-hidden h-full flex-col grow px-5 pt-5 w-full text-base bg-[#F1F5F0] max-md:pb-24 max-md:mt-3">
             <div className="flex flex-col self-center max-w-full font-medium text-black w-[122px]">
                 <img
                     loading="lazy"

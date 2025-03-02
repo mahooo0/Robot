@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ProductFilters } from './recoil/Atom';
+import ToggleSwitch from './checkbox';
 
 const FilterCategory = ({ label, value, options, onChange }) => (
     <div className="flex overflow-hidden flex-col justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-[322px]">
@@ -94,63 +95,39 @@ const FilterComponent = ({
     productCategories,
     accessorySeries,
     productTypes,
+    Translates,
 }) => {
-    const [category, setCategory] = useState('Robot tozsoranlar');
-    const [series, setSeries] = useState('Məhsulun seriası');
-    const [accessories, setAccessories] = useState('Aksesuarın növü');
-    // const [minPrice, setMinPrice] = useState('');
-    // const [maxPrice, setMaxPrice] = useState('');
     const [Filters, setFilters] = useRecoilState(ProductFilters);
     console.log('productTypes', productTypes);
-    const categories = [
-        {
-            label: 'Kateqoriya',
-            value: category,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/339991d818341b5e260ee198244b282711ee5d333890db5843cfbb70f53832de?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setCategory(e.target.value),
-        },
-        {
-            label: 'Seria',
-            value: series,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/a4479f02213db463f128f3a021b1e603302278f74bcd1c0743f8bcde2ad7b2d9?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setSeries(e.target.value),
-        },
-        {
-            label: 'Aksesuarlar',
-            value: accessories,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setAccessories(e.target.value),
-        },
-        {
-            label: 'Rəng',
-            value: accessories,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setAccessories(e.target.value),
-        },
-        {
-            label: 'Otağın sahəsi',
-            value: accessories,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setAccessories(e.target.value),
-        },
-        {
-            label: 'Tozsoranın növü',
-            value: accessories,
-            icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/5747c6f93a93671224ab95dfb4e2b0ea744f3af7293ebc7f0d6dbade89f9e5f5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            onChange: (e) => setAccessories(e.target.value),
-        },
-    ];
 
     return (
         <section className="flex flex-col gap-3 items-center mt-10 w-fit justify-between lg:px-[60px] md:px-[30px] px-0 h-fit">
-            <article className="w-full flex justify-between px-[20px] items-center">
-                <h6 className="text-[20px] font-medium">Filter</h6>
-                <p className=" text-[14px] text-[#337FFF] font-normal">
-                    Təmizlə
-                </p>
+            <article className="w-full  flex justify-between px-[20px] items-center">
+                <h6 className="text-[20px] font-medium">{Translates.Filter}</h6>
+                <button
+                    className=" text-[14px] text-[#337FFF] font-normal"
+                    onClick={() =>
+                        setFilters({
+                            minPrice: '',
+                            maxPrice: '',
+                            Area: '',
+                            category: '',
+                            series: '',
+                            type: '',
+                            title: '',
+                            sort: '',
+                            is_new: false,
+                            is_paket: false,
+                            is_discounted: false,
+                            is_bestseller: false,
+                        })
+                    }
+                >
+                    {Translates.Təmizlə}
+                </button>
             </article>
             <FilterPrice
-                label={'Qiymət'}
+                label={Translates.Qiymət}
                 minPrice={Filters.minPrice}
                 maxPrice={Filters.maxPrice}
                 onMinPriceChange={(e) =>
@@ -164,7 +141,7 @@ const FilterComponent = ({
                 <FilterCategory key={index} {...categoryItem} />
             ))} */}
             <FilterCategory
-                label={'Category'}
+                label={Translates.Category}
                 value={Filters.category}
                 options={productCategories}
                 onChange={(e) =>
@@ -172,7 +149,7 @@ const FilterComponent = ({
                 }
             />
             <FilterCategory
-                label={'Seriya'}
+                label={Translates.Seriya}
                 value={Filters.series}
                 options={accessorySeries}
                 onChange={(e) =>
@@ -180,7 +157,7 @@ const FilterComponent = ({
                 }
             />
             <FilterCategory
-                label={'Type'}
+                label={Translates.Type}
                 value={Filters.type}
                 options={productTypes}
                 onChange={(e) =>
@@ -188,12 +165,62 @@ const FilterComponent = ({
                 }
             />
             <FilterArea
-                label="room are"
+                label={Translates.room_are}
                 Area={Filters.Area}
                 onAreaChange={(e) =>
                     setFilters({ ...Filters, Area: e.target.value })
                 }
             />
+            <div className="w-full grid grid-cols-2 justify-center  items-center justify-items-center gap-3">
+                <div className="w-fit min-w-[100px] flex flex-col gap-2">
+                    <label htmlFor="">{Translates.iscoundet}</label>
+                    <ToggleSwitch
+                        defaultChecked={Filters.is_discounted}
+                        onChange={(e) =>
+                            setFilters({
+                                ...Filters,
+                                is_discounted: e,
+                            })
+                        }
+                    />
+                </div>
+                <div className="w-fit min-w-[100px] flex flex-col gap-2">
+                    <label htmlFor="">{Translates.new}</label>
+                    <ToggleSwitch
+                        defaultChecked={Filters.is_new}
+                        onChange={(e) =>
+                            setFilters({
+                                ...Filters,
+                                is_new: e,
+                            })
+                        }
+                    />
+                </div>
+                <div className="w-fit min-w-[100px] flex flex-col gap-2">
+                    <label htmlFor="">{Translates.bundles}</label>
+                    <ToggleSwitch
+                        defaultChecked={Filters.is_paket}
+                        onChange={(e) =>
+                            setFilters({
+                                ...Filters,
+                                is_paket: e,
+                            })
+                        }
+                    />
+                </div>
+                <div className="w-fit min-w-[100px] flex flex-col gap-2">
+                    <label htmlFor="">{Translates.bestseller}</label>
+                    <ToggleSwitch
+                        defaultChecked={Filters.is_bestseller}
+                        onChange={(e) =>
+                            setFilters({
+                                ...Filters,
+                                is_bestseller: e,
+                            })
+                        }
+                    />
+                </div>
+            </div>
         </section>
     );
 };

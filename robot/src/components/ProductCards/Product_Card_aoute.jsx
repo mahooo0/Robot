@@ -99,14 +99,14 @@ export default function Product_Card_aute({ bgcolor = '#EEEEEE', data }) {
             >
                 <img
                     onClick={() => {
+                        localStorage.setItem(
+                            'Productslug',
+                            JSON.stringify(data?.slug)
+                        );
                         router.push(
                             `/${lang}/${
                                 isAcsesuares ? 'aksesuares' : 'products'
                             }/${data?.slug[lang]}`
-                        );
-                        localStorage.setItem(
-                            'slug',
-                            JSON.stringify(data?.slug)
                         );
                     }}
                     loading="lazy"

@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 function BuyProduct({ product, translates }) {
     const [selectedColor, setSelectedColor] = useState('Qara');
     const [isliked, setIsliked] = useState(false);
+    const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
+
     const addToBasket = async (Data) => {
         const response = await axiosInstance
             .post(
@@ -26,7 +28,7 @@ function BuyProduct({ product, translates }) {
             )
             .then(() => {
                 toast.success('sucses');
-                queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+                // queryClient.invalidateQueries({ queryKey: ['basket_items'] });
             })
             .catch(() => {
                 toast.error('eror');

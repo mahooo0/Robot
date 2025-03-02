@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Green_to_green from '@/components/btns/green_to_green';
+import { useRouter } from 'next/router';
 
 export default function Special_Offer_Login({
     Home_Special_Offers,
@@ -8,7 +9,8 @@ export default function Special_Offer_Login({
 }) {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
-
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
     const containerVariants = {
         hidden: {
             opacity: 0,
@@ -136,7 +138,7 @@ export default function Special_Offer_Login({
                             <Green_to_green
                                 classNAME="mt-[32px]"
                                 action={() =>
-                                    router.push('/user/login_register')
+                                    router.push(`/${lang}/login_register`)
                                 }
                             >
                                 {Translates.Qeydiyyatdan_keç}

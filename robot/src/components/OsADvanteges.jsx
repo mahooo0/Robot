@@ -47,11 +47,11 @@ function FeatureCard({ imageSrc, title, description }) {
     );
 }
 
-function IRobotOSAdvantage() {
+function IRobotOSAdvantage({ Translates }) {
     return (
         <main className="flex flex-col self-center mt-24 w-full max-w-[1323px] max-md:mt-10 max-md:max-w-full">
             <h1 className="text-4xl font-semibold text-center text-green-950 max-md:max-w-full">
-                iRobot OS üstünlüyü
+                {Translates.iRobot_OS_üstünlüyü}
             </h1>
             <section className="flex flex-wrap gap-5 items-start mt-12 w-full max-md:mt-10 max-md:max-w-full">
                 {features.map((feature, index) => (

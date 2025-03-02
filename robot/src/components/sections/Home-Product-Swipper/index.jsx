@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import SalesSwipper from '@/components/sales.swipper.jsx';
+import { useRouter } from 'next/router';
 
 export default function ProductSwipperSection({ Ttile, data, Translates }) {
     const sectionRef = useRef(null);
@@ -9,6 +10,8 @@ export default function ProductSwipperSection({ Ttile, data, Translates }) {
         amount: 0.2,
         margin: '100px 0px 0px 0px',
     });
+    const router = useRouter();
+    const { lang = 'az' } = router.query;
 
     const headerVariants = {
         hidden: {
@@ -82,7 +85,7 @@ export default function ProductSwipperSection({ Ttile, data, Translates }) {
                     variants={buttonVariants}
                     whileHover="hover"
                     className="flex flex-row gap-2 text-[#447355] border-b border-[#447355]"
-                    onClick={() => router.push('/products')}
+                    onClick={() => router.push(`/${lang}/products`)}
                 >
                     <p>{Translates?.Bütün_məhsullar}</p>
                     <motion.img

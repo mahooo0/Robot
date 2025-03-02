@@ -62,11 +62,11 @@ function FeatureItem({ text, imageSrc, imageAlt, className = '' }) {
     );
 }
 
-function ProductFeatures() {
+function ProductFeatures({ Translates }) {
     return (
         <section className="self-center pb-14 max-w-full w-[1303px]">
             <h2 className="text-center text-[40px] font-semibold text-[#132A1B] ml-8 max-md:max-w-full mt-[100px]">
-                Məhsulların xüsusiyyətləri
+                {Translates.Məhsulların_xüsusiyyətləri}
             </h2>
             <div className="flex lg:gap-5 gap-0 max-md:flex-col">
                 <div className="flex flex-col w-[26%] max-md:ml-0 max-md:w-full">

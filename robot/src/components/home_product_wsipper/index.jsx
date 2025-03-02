@@ -36,9 +36,13 @@ const Hero_Swipper = ({ data }) => {
                 {data.map((item) => (
                     <SwiperSlide
                         className="h-full"
-                        onClick={() =>
-                            router.push(`/${lang}/products/${item.slug[lang]}`)
-                        }
+                        onClick={() => {
+                            localStorage.setItem(
+                                'Productslug',
+                                JSON.stringify(item.slug)
+                            );
+                            router.push(`/${lang}/products/${item.slug[lang]}`);
+                        }}
                     >
                         <ProductDisplay data={item} />
                     </SwiperSlide>

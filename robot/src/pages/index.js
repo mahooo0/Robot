@@ -52,7 +52,6 @@ export default function Home({
     Home_mobile_section,
     NewProducts,
     Advantages,
-    MostSaledProducts,
     SpecialOffer,
     PaketProducts,
     Home_Special_Offers,
@@ -65,7 +64,13 @@ export default function Home({
 
     const router = useRouter();
     return (
-        <div className="text-[#132A1B]">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+            className="text-[#132A1B]"
+        >
             <Header activeIndex={0} />
             <Home_Hero hero={hero} />
             <section className="px-5 w-full flex justify-center">
@@ -106,7 +111,7 @@ export default function Home({
             />
             <MobileSection Home_mobile_section={Home_mobile_section} />
             <Footer />
-        </div>
+        </motion.div>
     );
 }
 export async function getServerSideProps(context) {

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 import { motion } from 'framer-motion';
@@ -14,13 +14,13 @@ const imges = [
     'https://s3-alpha-sig.figma.com/img/4c72/adec/1c7cde4bb71c634c96c8301bd98f61d2?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q4raCtqobDw06a9azFoqkupY3RNzlEq37bkaLRSh8b37Y9byH-Hdhs0XbenLER7joddUoWJgEwiDX07n2R2hyjuaWsYCLmUV4T0gXwOCLduVwhD2yx~jpWKiDKQvN9Eq-FqbAwfVCpzVllwbEHT~-DtNEsuQTGk33QrbjSqPUQ0JWByoQi1Z33yb0hSrAS2SNEiQT9j~LttH6MIH5bg94F0EJtizExe792P1V1dUre9YnUy5Is-nxD57WO~F5zh5sDUnwnNwu-nw3Hr6~FlY7g~2dr7fXForS4p6~atNDiGlnxsU09UeOYn6BVCAZ2hS~xp3Fbc8GZNbN9myrscF2A__',
 ];
 
-function OfferNavigation({ offerindex }) {
+function OfferNavigation({ offerindex, translates }) {
     const [activeindex, setactiveindex] = useState(offerindex);
     const router = useRouter();
     const { lang = 'az' } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
     return (
         <motion.nav
             initial={{ opacity: 0, scale: 0.95 }}
@@ -81,11 +81,11 @@ function OfferNavigation({ offerindex }) {
                     </ul>
                 </section>
                 <div className="flex flex-col ml-5 w-[26%] max-md:ml-0 max-md:w-full">
-                    <div className="flex overflow-hidden flex-col justify-center items-center self-stretch px-5 m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
+                    <div className="flex overflow-hidden flex-col justify-center items-center self-stretch  m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
                         <img
                             loading="lazy"
-                            src={imges[offerindex ? offerindex : 0]}
-                            className="object-contain aspect-square w-[120px]"
+                            src={'/image/endrimli.png'}
+                            className="object-cover "
                             alt="Product"
                         />
                     </div>
@@ -150,55 +150,71 @@ function OfferNavigation({ offerindex }) {
     );
 }
 
-const OfferNav = ({ activeIndex, offerindex }) => {
-    const [isopen, setisopen] = useState(false);
+const OfferNav = ({ activeIndex, offerindex, translates }) => {
     const [menu, setMenu] = useRecoilState(MenuState);
     const router = useRouter();
     const { lang = 'az' } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+
+    // Refs for detecting clicks outside
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                setMenu((prevMenu) => ({
+                    ...prevMenu,
+                    offerbar: false, // Close the menu
+                }));
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [setMenu]);
+
     useEffect(() => {
         const handleRouteChange = () => {
             setMenu((prevMenu) => ({
                 ...prevMenu,
-                offerbar: false, // Close the product menu
+                offerbar: false, // Close on route change
             }));
         };
 
         router.events.on('routeChangeStart', handleRouteChange);
-
-        // Clean up the event listener on component unmount
         return () => {
             router.events.off('routeChangeStart', handleRouteChange);
         };
     }, [router.events, setMenu]);
-    return (
-        <li
-            className=" relative"
 
-            // onMouseLeave={() => setisopen(false)}
-            // onMouseEnter={() => setisopen(true)}
-        >
+    return (
+        <li className="relative">
             <p
-                // onClick={() => {
-                //     router.push('/products');
-                // }}
+                ref={buttonRef} // Attach ref to the `<p>` element
                 className={`text-[14px] font-normal cursor-pointer ${
                     activeIndex === 3 ? 'text-[#447355]' : 'text-black'
                 }`}
                 onClick={() =>
-                    setMenu({
+                    setMenu((prevMenu) => ({
                         prodctbar: false,
                         aksesuaresbar: false,
                         whybar: false,
-                        offerbar: !menu.offerbar,
-                    })
+                        offerbar: !prevMenu.offerbar, // Toggle instead of setting directly
+                    }))
                 }
             >
-                {translates?.Fürsətlər_və_təkliflər}
+                {translates?.Fürsətlər_və_təkliflər || 'Fürsətlər və təkliflər'}
             </p>
+
             <motion.div
+                ref={dropdownRef} // Attach ref to dropdown
                 className="absolute z-30 left-0 top-[50px] bg-white shadow-md rounded-md overflow-hidden"
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{
@@ -209,7 +225,12 @@ const OfferNav = ({ activeIndex, offerindex }) => {
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-                {menu.offerbar && <OfferNavigation offerindex={offerindex} />}
+                {menu.offerbar && (
+                    <OfferNavigation
+                        offerindex={offerindex}
+                        translates={translates}
+                    />
+                )}
             </motion.div>
         </li>
     );

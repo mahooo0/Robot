@@ -35,13 +35,13 @@ export default function App({ Component, pageProps }) {
             <RecoilRoot>
                 <Provider store={store}>
                     {/* Page Load Progress Bar */}
-                    <NextNProgress
+                    {/* <NextNProgress
                         color="#69BE56"
                         startPosition={0.3}
                         stopDelayMs={200}
                         height={3}
-                        showOnShallow={true}
-                    />
+                        showOnShallow={false}
+                    /> */}
 
                     {/* Full-Screen Loader */}
                     {loading && (

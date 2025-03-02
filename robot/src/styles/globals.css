@@ -96,3 +96,6 @@ input[type='range']::-ms-thumb {
         transform: rotate(360deg);
     }
 }
+.bg-blur {
+    backdrop-filter: blur(400px);
+}

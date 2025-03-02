@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MenuState } from './recoil/Atom';
 import { ROUTES } from '@/Helpers/Routes';
@@ -12,20 +12,14 @@ const productItems = [
     { name: 'İRobot mobil tətbiqi' },
     { name: 'Buyers Guide' },
 ];
-const imges = [
-    'https://s3-alpha-sig.figma.com/img/07df/fa2c/9fb38a84b066a8d2bf593f2c08b3f3ce?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deD~jMvHdQ0VbAzihVISVBcylO5Al9ywUdGHga7uzxK1N1xGlZnmvAabJdGGPohOy8ysATLJWdgI~38h2gmzzJCvcsXaPrxUGeq5t66hMwKuIS93GLOB~TPX3mjtMrxxEv6B8L22lcCfUi9mOW4tv-5BV4UN15bvYPJ8OpDPivBPRZOi2PIGJapb2hL5e7wlyCkRyw1sc74vE8QE~DXmO47sRr5xTNPMGzXBS3AMxC9VER4hRrU4n1vcSfHGhFk9HGL5-jxQ8qskPHPUxYpY7TB7OL53Ecwmf47LynjK8uWnaXmLkkrno7JLTS64Z2G25jdy1cMNAF14qxPini0Bag__',
-    'https://s3-alpha-sig.figma.com/img/07df/fa2c/9fb38a84b066a8d2bf593f2c08b3f3ce?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deD~jMvHdQ0VbAzihVISVBcylO5Al9ywUdGHga7uzxK1N1xGlZnmvAabJdGGPohOy8ysATLJWdgI~38h2gmzzJCvcsXaPrxUGeq5t66hMwKuIS93GLOB~TPX3mjtMrxxEv6B8L22lcCfUi9mOW4tv-5BV4UN15bvYPJ8OpDPivBPRZOi2PIGJapb2hL5e7wlyCkRyw1sc74vE8QE~DXmO47sRr5xTNPMGzXBS3AMxC9VER4hRrU4n1vcSfHGhFk9HGL5-jxQ8qskPHPUxYpY7TB7OL53Ecwmf47LynjK8uWnaXmLkkrno7JLTS64Z2G25jdy1cMNAF14qxPini0Bag__',
-    'https://s3-alpha-sig.figma.com/img/07df/fa2c/9fb38a84b066a8d2bf593f2c08b3f3ce?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deD~jMvHdQ0VbAzihVISVBcylO5Al9ywUdGHga7uzxK1N1xGlZnmvAabJdGGPohOy8ysATLJWdgI~38h2gmzzJCvcsXaPrxUGeq5t66hMwKuIS93GLOB~TPX3mjtMrxxEv6B8L22lcCfUi9mOW4tv-5BV4UN15bvYPJ8OpDPivBPRZOi2PIGJapb2hL5e7wlyCkRyw1sc74vE8QE~DXmO47sRr5xTNPMGzXBS3AMxC9VER4hRrU4n1vcSfHGhFk9HGL5-jxQ8qskPHPUxYpY7TB7OL53Ecwmf47LynjK8uWnaXmLkkrno7JLTS64Z2G25jdy1cMNAF14qxPini0Bag__',
-    'https://s3-alpha-sig.figma.com/img/4c72/adec/1c7cde4bb71c634c96c8301bd98f61d2?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q4raCtqobDw06a9azFoqkupY3RNzlEq37bkaLRSh8b37Y9byH-Hdhs0XbenLER7joddUoWJgEwiDX07n2R2hyjuaWsYCLmUV4T0gXwOCLduVwhD2yx~jpWKiDKQvN9Eq-FqbAwfVCpzVllwbEHT~-DtNEsuQTGk33QrbjSqPUQ0JWByoQi1Z33yb0hSrAS2SNEiQT9j~LttH6MIH5bg94F0EJtizExe792P1V1dUre9YnUy5Is-nxD57WO~F5zh5sDUnwnNwu-nw3Hr6~FlY7g~2dr7fXForS4p6~atNDiGlnxsU09UeOYn6BVCAZ2hS~xp3Fbc8GZNbN9myrscF2A__',
-];
 
-function WhyNavigation({ whyindex }) {
+function WhyNavigation({ whyindex, translates }) {
     const [activeindex, setactiveindex] = useState(whyindex);
     const router = useRouter();
     const { lang = 'az' } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
     return (
         <motion.nav
             initial={{ opacity: 0, scale: 0.95 }}
@@ -82,9 +76,7 @@ function WhyNavigation({ whyindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(2);
-                                    router.push(
-                                        `/${lang}/${ROUTES.mobileApp[lang]}`
-                                    );
+                                    router.push(`/${lang}/about/controll`);
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     2 === whyindex
@@ -105,9 +97,7 @@ function WhyNavigation({ whyindex }) {
                             <li
                                 onClick={() => {
                                     setactiveindex(3);
-                                    router.push(
-                                        `/${lang}/${ROUTES.buyersGuide[lang]}`
-                                    );
+                                    router.push(`/${lang}/about`);
                                 }}
                                 className={`gap-2.5 self-stretch cursor-pointer ${
                                     3 === whyindex
@@ -128,11 +118,11 @@ function WhyNavigation({ whyindex }) {
                     </ul>
                 </section>
                 <div className="flex flex-col ml-5 w-[26%] max-md:ml-0 max-md:w-full">
-                    <div className="flex overflow-hidden flex-col justify-center items-center self-stretch px-5 m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
+                    <div className="flex overflow-hidden flex-col justify-center items-center self-stretch  m-auto w-40 h-40 bg-stone-200 rounded-[100px] max-md:mt-10">
                         <img
                             loading="lazy"
-                            src={imges[whyindex ? whyindex : 0]}
-                            className="object-contain aspect-square w-[120px]"
+                            src={'/image/about.png'}
+                            className="object-cover "
                             alt="Product"
                         />
                     </div>
@@ -197,55 +187,71 @@ function WhyNavigation({ whyindex }) {
     );
 }
 
-const WhyNav = ({ activeIndex, whyindex }) => {
-    const [isopen, setisopen] = useState(false);
+const WhyNav = ({ activeIndex, whyindex, translates }) => {
     const [menu, setMenu] = useRecoilState(MenuState);
     const router = useRouter();
+    const { lang = 'az' } = router.query;
+
+    // Refs for detecting clicks outside
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                setMenu((prevMenu) => ({
+                    ...prevMenu,
+                    whybar: false, // Close the menu
+                }));
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [setMenu]);
+
     useEffect(() => {
         const handleRouteChange = () => {
             setMenu((prevMenu) => ({
                 ...prevMenu,
-                whybar: false, // Close the product menu
+                whybar: false, // Close on route change
             }));
         };
 
         router.events.on('routeChangeStart', handleRouteChange);
-
-        // Clean up the event listener on component unmount
         return () => {
             router.events.off('routeChangeStart', handleRouteChange);
         };
     }, [router.events, setMenu]);
-    const { lang = 'az' } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
-    return (
-        <li
-            className=" relative"
 
-            // onMouseLeave={() => setisopen(false)}
-            // onMouseEnter={() => setisopen(true)}
-        >
+    return (
+        <li className="relative">
             <p
-                // onClick={() => {
-                //     router.push('/products');
-                // }}
+                ref={buttonRef} // Attach ref to the `<p>` element
                 className={`text-[14px] font-normal cursor-pointer ${
                     activeIndex === 4 ? 'text-[#447355]' : 'text-black'
                 }`}
                 onClick={() =>
-                    setMenu({
+                    setMenu((prevMenu) => ({
                         prodctbar: false,
                         aksesuaresbar: false,
-                        whybar: !menu.whybar,
+                        whybar: !prevMenu.whybar, // Toggle instead of setting directly
                         offerbar: false,
-                    })
+                    }))
                 }
             >
-                {translates?.Niyə_İrobot}
+                {translates?.Niyə_İrobot || 'Niyə İrobot'}
             </p>
+
             <motion.div
+                ref={dropdownRef} // Attach ref to dropdown
                 className="absolute z-30 left-0 top-[50px] bg-white shadow-md rounded-md overflow-hidden"
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{
@@ -256,7 +262,12 @@ const WhyNav = ({ activeIndex, whyindex }) => {
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-                {menu.whybar && <WhyNavigation whyindex={whyindex} />}
+                {menu.whybar && (
+                    <WhyNavigation
+                        whyindex={whyindex}
+                        translates={translates}
+                    />
+                )}
             </motion.div>
         </li>
     );

@@ -68,7 +68,7 @@ const ProductCard = ({ data }) => {
     );
 };
 
-export default function CompareSwipperUpper({ products }) {
+export default function CompareSwipperUpper({ products, isLoading }) {
     const swiperRef = useRef(null);
 
     const handleNext = () => {
@@ -94,11 +94,61 @@ export default function CompareSwipperUpper({ products }) {
                     1024: { slidesPerView: 4 },
                 }}
             >
-                {products?.map((item) => (
-                    <SwiperSlide key={item.id} className="!w-[250px] ml-[60px]">
-                        <ProductCard data={item} />
-                    </SwiperSlide>
-                ))}
+                {isLoading
+                    ? Array.from({ length: 10 }).map((item) => (
+                          <SwiperSlide className="!w-[250px] ml-[60px]">
+                              <div
+                                  className={`w-[223px] h-[261px] rounded-[20px] flex justify-center flex-col items-center relative mt-3 bg-gray-300 animate-pulse`}
+                              >
+                                  <div className="max-h-[200px] w-full bg-gray-400 rounded-md"></div>
+                                  <div className="w-3/4 h-4 bg-gray-400 rounded-md mt-3"></div>
+                                  <div className="absolute -top-2 -right-2 w-[36px] h-[36px] bg-gray-500 rounded-full flex justify-center items-center">
+                                      <svg
+                                          width="20"
+                                          height="20"
+                                          viewBox="0 0 20 20"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                          <g clipPath="url(#clip0_325_581)">
+                                              <path
+                                                  d="M15 5L5 15"
+                                                  stroke="white"
+                                                  strokeWidth="2"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                              />
+                                              <path
+                                                  d="M5 5L15 15"
+                                                  stroke="white"
+                                                  strokeWidth="2"
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                              />
+                                          </g>
+                                          <defs>
+                                              <clipPath id="clip0_325_581">
+                                                  <rect
+                                                      width="20"
+                                                      height="20"
+                                                      fill="white"
+                                                  />
+                                              </clipPath>
+                                          </defs>
+                                      </svg>
+                                  </div>
+                              </div>
+                          </SwiperSlide>
+                      ))
+                    : products?.map((item) => (
+                          <SwiperSlide
+                              key={item.id}
+                              className="!w-[250px] ml-[60px]"
+                          >
+                              <ProductCard data={item} />
+                          </SwiperSlide>
+                      ))}
+                {}
             </Swiper>
             <div className="flex gap-3 items-center justify-end absolute -top-[50px] right-[60px]">
                 <button

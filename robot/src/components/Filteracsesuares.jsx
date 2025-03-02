@@ -45,6 +45,38 @@ const FilterCategory = ({ label, value, icon, onChange, options }) => (
         </div>
     </motion.div>
 );
+const FilterTextInput = ({ label, value, onChange, placeholder }) => (
+    <motion.div
+        className="flex overflow-hidden flex-col justify-center self-stretch px-5 py-4 my-auto bg-[#ECF1EA] rounded-3xl min-w-[240px] w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+    >
+        <div className="flex flex-col">
+            <label
+                htmlFor={`${label.toLowerCase()}-input`}
+                className="text-sm text-black text-opacity-60"
+            >
+                {label}
+            </label>
+            <motion.div
+                className="flex overflow-hidden flex-col justify-center mt-2 w-full text-base bg-white rounded-xl text-black text-opacity-90"
+                whileHover={{ scale: 1.05 }}
+            >
+                <div className="flex gap-10 items-center">
+                    <input
+                        type="text"
+                        id={`${label.toLowerCase()}-input`}
+                        className="flex-grow bg-transparent outline-none p-3 border-transparent border-r-8"
+                        value={value}
+                        onChange={onChange}
+                        placeholder={placeholder || 'Enter text...'}
+                    />
+                </div>
+            </motion.div>
+        </div>
+    </motion.div>
+);
 
 const FilterPrice = ({
     minPrice,
@@ -116,7 +148,7 @@ const FilterAcsesuares = ({
 
     return (
         <motion.section
-            className=" flex-row gap-3 grid lg:grid-cols-3 grid-cols-1 items-center mt-10 flex-wrap lg:justify-between justify-center lg:px-[60px] md:px-[30px] px-3 h-fit w-[100%]"
+            className=" flex-row gap-3 grid lg:grid-cols-4 grid-cols-1 items-center mt-10 flex-wrap lg:justify-between justify-center lg:px-[60px] md:px-[30px] px-3 h-fit w-[100%]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -134,6 +166,13 @@ const FilterAcsesuares = ({
             {categories.map((categoryItem, index) => (
                 <FilterCategory key={index} {...categoryItem} />
             ))}
+            <FilterTextInput
+                label={Translates.Axtar}
+                value={Filters.title}
+                onChange={(e) =>
+                    setFilter({ ...Filters, title: e.target.value })
+                }
+            />
         </motion.section>
     );
 };

@@ -5,7 +5,7 @@ import { axiosInstance } from '@/services/Requests';
 import GETRequest from '@/services/QueryREq';
 import { useRouter } from 'next/router';
 
-const Settings = () => {
+const Settings = ({ translates }) => {
     const [show, setshow] = useState(false);
     const [User, setUSer] = useState(null);
     const [isConfrim, setisConfrim] = useState(false);
@@ -13,9 +13,9 @@ const Settings = () => {
     const [Code, setCode] = useState('');
     const router = useRouter();
     const { lang } = router.query;
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
 
     const [formData, setFormData] = useState({
         fullName: '',

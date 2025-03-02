@@ -6,6 +6,7 @@ export default function OTP({
     email = 'example@gmail.com',
     length = 4,
     onComplete,
+    Translates,
 }) {
     const [otp, setOtp] = useState(new Array(length).fill(''));
     const inputRefs = useRef([]);
@@ -67,10 +68,11 @@ export default function OTP({
         <div className="w-1/2 h-full flex items-center flex-col  justify-center rounded-3xl bg-[#f3f6f4] p-8">
             <div className="text-center">
                 <h2 className="text-2xl font-semibold text-gray-900">
-                    OTP kod təsdiqi
+                    {Translates?.OTP_kod_təsdiqi}
                 </h2>
                 <p className="mt-3 text-gray-600  max-w-[440px] ">
-                    <span>{email}</span> ünvanına göndərilən OTP kodu daxil
+                    <span>{email}</span>{' '}
+                    {Translates?.ünvanına_göndərilən_OTP_kodu_daxil}
                     <span className="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-xs text-white">
                         i
                     </span>
@@ -104,7 +106,7 @@ export default function OTP({
                 onClick={() => onComplete?.(otp.join(''))}
                 className="mt-8 w-full max-w-[440px] rounded-full bg-green-500 py-4 text-center text-lg font-medium text-white transition-colors hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
-                Təsdiq et
+                {Translates?.Təsdiq_et}
             </button>
         </div>
     );

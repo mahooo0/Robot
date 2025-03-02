@@ -30,7 +30,7 @@ function ProductImages({ product }) {
             <div className="flex overflow-hidden flex-col w-full rounded-3xl border border-solid border-zinc-100 max-md:max-w-full">
                 <img
                     loading="lazy"
-                    src={product?.sliders[imgid].image}
+                    src={product?.sliders[imgid]?.image}
                     alt="Main gallery image"
                     className="object-cover w-full aspect-[1.23] max-md:max-w-full"
                 />

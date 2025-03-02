@@ -5,14 +5,14 @@ import { useRouter } from 'next/router';
 
 import React, { useState } from 'react';
 
-export default function Help({ data }) {
+export default function Help({ translates }) {
     const [variat, setvariant] = useState(0);
     const [selectedOption, setSelectedOption] = useState(0);
     const [progress, setProgress] = useState(1);
     const [floor, setfloor] = useState(1);
     const router = useRouter();
 
-    const { translates } = data || {};
+    // const { translates } = data || {};
     // console.log('translates', translates);
     const handleProgressChange = (event) => {
         setProgress(event.target.value);
@@ -53,32 +53,7 @@ export default function Help({ data }) {
             </article>
         );
     };
-    const products = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/a41362737aedeed4831e54225594d072c57c831e9f7f3ba495e34e4e2c8af806?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock',
-            price: '300',
-            currencySymbol:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/ff22683343fb044fc9eeee40fd8fa6c77af21b3d8a6b19bd891e9f47d001e6b1?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/a41362737aedeed4831e54225594d072c57c831e9f7f3ba495e34e4e2c8af806?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock',
-            price: '300',
-            currencySymbol:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/671501f8c8a7fc628778c8b462a4c5241d4a6b57a6492e5c936f73cc847f4db5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/a41362737aedeed4831e54225594d072c57c831e9f7f3ba495e34e4e2c8af806?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock',
-            price: '300',
-            currencySymbol:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/1f64d911509a7a5129a68fe20293824c84f314a27499ac89342581f50541fb08?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-    ];
+
     const { lang = 'az' } = router.query;
     console.log('selectedOption', selectedOption);
     console.log('progress', progress);
@@ -470,5 +445,27 @@ export default function Help({ data }) {
                     <Footer />
                 </div>
             );
+    }
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const Translates = await TranslatesResponse.json();
+
+        return {
+            props: {
+                translates: Translates,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
     }
 }

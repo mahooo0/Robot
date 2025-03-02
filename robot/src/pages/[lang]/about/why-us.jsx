@@ -12,47 +12,28 @@ import {
     getSupports,
     getTranslates,
 } from '@/services/Requests';
+import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function WhyUs({ data, lang }) {
-    const { choices, translates, supports, advantages } = data;
-    const helpData = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/3bcd91055783e850ce350db9e3b1e18a036771ee4dbb602d047b0e9ceee40d68?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Testdən keç',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Testdən keç',
-            page: '/user/help',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/274fcf70462b6cfce6ed1a77a92ed79c22246f989eba9ebe4321020077cf9d53?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Ekspert məsləhəti',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Bizimlə əlaqə',
-            page: '/contact',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/79161b1f02d51e9a189b3e58d236194f37f61ff45fdcf797e0654e2adb59b400?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Mağazamıza yaxınlaş',
-            linkText: 'Testdən keç',
-            page: '/products/compare',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-        },
-    ];
+export default function WhyUs({ data }) {
+    const { choices, translates, supports, advantages, hero } = data;
+    const router = useRouter();
+    const { lang } = router.query;
     return (
         <div>
             <Header activeIndex={4} whyindex={1} />
             <main>
                 <section className="w-full flex justify-center">
-                    <IROSComponent />
+                    <IROSComponent
+                        data={hero}
+                        Translates={translates}
+                        isWhyPage={true}
+                    />
                 </section>
-                <h2 className="self-center text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full mt-[60px] ">
+                <h2
+                    className="self-center text-4xl font-semibold text-center text-[#132A1B] max-md:max-w-full mt-[60px] "
+                    id="Seçimdə_kömək_etmək"
+                >
                     {translates.Seçim_etməkdə}
                 </h2>
                 <section className="flex overflow-hidden flex-col justify-center px-[60px] py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[48px]">
@@ -98,7 +79,7 @@ export default function WhyUs({ data, lang }) {
                         </div>
                     </div>
                 </section>
-                <section className="py-[100px]">
+                <section className="py-[100px]" id="Etibarlı_dəstək">
                     <SupportSection
                         supports={supports}
                         title={translates?.SupportSectionTitle}
@@ -123,14 +104,21 @@ export default function WhyUs({ data, lang }) {
     );
 }
 export async function getServerSideProps(context) {
-    const { lang = 'az' } = context.params;
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
     const choices = await getChoices(lang);
     const supports = await getSupports(lang);
     const translates = await getTranslates(lang);
     const advantages = await getAdvantages(lang);
+    const heroResponse = await fetch(`${baseUrl}/section?type=Irobot_Os_hero`, {
+        headers: { 'Accept-Language': lang },
+    });
+
+    const hero = await heroResponse.json();
     return {
         props: {
             data: {
+                hero,
                 choices,
                 translates,
                 supports,

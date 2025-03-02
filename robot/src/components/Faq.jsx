@@ -86,7 +86,7 @@ function FAQItem({ question, imageSrc, description, isOpen, onClick }) {
     );
 }
 
-function FAQSection({ Title, data }) {
+function FAQSection({ Title, data, id = '' }) {
     const [openIndex, setOpenIndex] = useState(null);
 
     const handleToggle = (index) => {
@@ -94,7 +94,10 @@ function FAQSection({ Title, data }) {
     };
 
     return (
-        <section className="flex flex-wrap gap-10 justify-between items-start max-md:max-w-full bg-[#ECF3EA] lg:px-[60px] px-[30px] py-[100px]">
+        <section
+            id={id}
+            className="flex flex-wrap gap-10 justify-between items-start max-md:max-w-full bg-[#ECF3EA] lg:px-[60px] px-[30px] py-[100px]"
+        >
             <h2 className="text-[40px] font-semibold w-[364px] text-[#132A1B]">
                 {Title}
             </h2>

@@ -54,15 +54,17 @@ export default function Product({
         }${Filters.Area ? `&room_area=${Filters.Area}` : ''}${
             Filters.title ? `&title=${Filters.title}` : ''
         }${Filters.sort ? `&sort=${Filters.sort}` : ''}${
-            Filters.is_new ? `&sort=${Filters.is_new}` : ''
+            Filters.is_new ? `&sort=1` : ''
+        }${Filters.is_paket ? `&is_paket=1` : ''}${
+            Filters.is_bestseller ? `&is_bestseller=1` : ''
         }`,
         'products',
         [lang, page, Filters]
     );
     useEffect(() => {
-        console.log('Filters', Filters);
-    }, [Filters]);
-    console.log('productCategories', productCategories);
+        console.log('products', products);
+    }, [products]);
+    console.log('products', products);
 
     // Chunk the products array
     const chunkedProducts = chunkArray(products?.data || []);
@@ -73,6 +75,7 @@ export default function Product({
             <ProductHero Product_Hero={Product_Hero} Translates={Translates} />
             <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
                 <FilterComponent
+                    Translates={Translates}
                     productCategories={productCategories}
                     accessorySeries={accessorySeries}
                     productTypes={productTypes}
@@ -80,11 +83,11 @@ export default function Product({
                 <section className="lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
                     <div className="w-full flex justify-between items-center flex-wrap">
                         <p className="text-[16px] font-normal text-opacity-60">
-                            200 Məhsul
+                            {products?.count} {Translates.Məhsul}
                         </p>
                         <div className="flex flex-row gap-3 items-center flex-wrap">
                             <p className="text-[16px] font-normal text-opacity-60">
-                                Sırala{' '}
+                                {Translates.Sırala}
                             </p>
                             <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px]">
                                 <select
@@ -104,13 +107,17 @@ export default function Product({
                                     <option value="A-Z">A-Z</option>
                                     <option value="Z-A">Z-A</option>
                                     <option value="expensive-cheap">
-                                        expensive-cheap
+                                        {Translates.expensive_cheap}
                                     </option>
                                     <option value="cheap-expensive">
-                                        cheap-expensive
+                                        {Translates.cheap_expensive}
                                     </option>
-                                    <option value="old-new">old-new</option>
-                                    <option value="new-old">new-old</option>
+                                    <option value="old-new">
+                                        {Translates.old_new}
+                                    </option>
+                                    <option value="new-old">
+                                        {Translates.new_old}
+                                    </option>
                                 </select>
                             </div>
                         </div>

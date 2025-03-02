@@ -24,7 +24,7 @@ const buttons = [
     },
 ];
 
-const Mobile_aplication = ({ data }) => {
+const Mobile_aplication = (data) => {
     const {
         app_hero,
         app_content,
@@ -179,61 +179,7 @@ const Mobile_aplication = ({ data }) => {
                         );
                     }
                 })}
-                {/* 
-                <section className="flex flex-row-reverse flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div
-                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
-                        data-aos="fade-left"
-                    >
-                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
-                            İstədiyiniz şəkildə təmizləyin
-                        </h2>
-                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
-                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
-                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
-                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
-                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
-                        </p>
-                    </div>
-                    <div
-                        data-aos="fade-right"
-                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
-                    >
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            alt="iRobot Home App interface showing customizable cleaning map"
-                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
-                        />
-                    </div>
-                </section>
-                <section className="flex flex-row flex-wrap gap-10 lg:justify-between justify-center items-center w-full max-md:max-w-full px-[60px] mt-[48px]">
-                    <div
-                        data-aos="fade-right"
-                        className="flex flex-col self-stretch my-auto min-w-[240px] w-[571px] max-md:max-w-full"
-                    >
-                        <h2 className="text-5xl font-semibold text-[#447355] max-md:max-w-full max-md:text-4xl">
-                            İstədiyiniz şəkildə təmizləyin
-                        </h2>
-                        <p className="mt-3 text-base text-black text-opacity-80 max-md:max-w-full">
-                            Sizin iRobot Home Tətbiqiniz sizə robotunuzun
-                            öyrənməsinə və evinizi xəritələməsinə imkan verir.
-                            İstədiyiniz zaman və istədiyiniz yerdə təmizləmək
-                            üçün xəritələrinizi fərdiləşdirə bilərsiniz.
-                        </p>
-                    </div>
-                    <div
-                        data-aos="fade-left"
-                        className="flex overflow-hidden flex-col justify-center self-stretch py-6 my-auto rounded-3xl min-w-[240px] w-[538px] max-md:max-w-full"
-                    >
-                        <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/76796a4ee1629267b6c25c286c4a96d63ad563a3a82d8757f7069f091eb79410?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                            alt="iRobot Home App interface showing customizable cleaning map"
-                            className="object-contain w-full aspect-[0.56] max-md:max-w-full"
-                        />
-                    </div>
-                </section>*/}
+
                 <section className="relative flex flex-col justify-center items-start px-16 py-56 w-full min-h-[656px] max-md:px-5 max-md:py-24 max-md:max-w-full mt-[100px] text-white">
                     <img
                         loading="lazy"
@@ -291,23 +237,36 @@ const Mobile_aplication = ({ data }) => {
 };
 export async function getServerSideProps(context) {
     const { lang = 'az' } = context.params;
-    const app_hero = await getApp_hero(lang);
-    const app_content = await getApp_content(lang);
-    const translates = await getTranslates(lang);
-    const instructions = await getInstructions(lang);
-    const magical_word = await getMagical_word(lang);
-    const app_faqs = await getApp_faqs(lang);
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    // const app_hero = await getApp_hero(lang);/app_content
+    const app_hero = await fetch(`${baseUrl}/section?type=app_hero`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
+    // const app_content = await fetch(`${baseUrl}/app_content`, {
+    //     headers: { 'Accept-Language': lang },
+    // }).then((response) => response.json());
+    const translates = await fetch(`${baseUrl}/translates`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
+    const instructions = await fetch(`${baseUrl}/instructions`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
+    // const magical_word = await fetch(`${baseUrl}/magical_word`, {
+    //     headers: { 'Accept-Language': lang },
+    // }).then((response) => response.json());
+    const app_faqs = await fetch(`${baseUrl}/app_faqs`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
 
     return {
         props: {
-            data: {
-                app_hero,
-                app_content,
-                translates,
-                instructions,
-                magical_word,
-                app_faqs,
-            }, // Data will be available in the BuyersGuide component as a
+            app_hero,
+            app_content: {},
+            translates,
+            instructions,
+            magical_word: {},
+            app_faqs,
         },
     };
 }

@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Product_Card_aute from '@/components/ProductCards/Product_Card_aoute';
 import Settings from '@/components/Setting';
@@ -6,7 +7,7 @@ import GETRequest from '@/services/QueryREq';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function Liked() {
+export default function Liked({ translates }) {
     const router = useRouter();
     const { lang = 'az' } = router.query;
     const { data: favorites, isLoading } = GETRequest(
@@ -14,9 +15,9 @@ export default function Liked() {
         'favorites',
         [lang]
     );
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
     console.log('favorites', favorites);
     console.log('translates', translates);
 
@@ -25,7 +26,7 @@ export default function Liked() {
             <Header activeIndex={0} />
             <div className="flex flex-row h-full">
                 <div className="w-[20%] h-[100%] mr-3">
-                    <UserAside active={2} />
+                    <UserAside active={2} translates={translates} />
                 </div>
                 <div className="w-full h-full bg-[#F1F5F0] flex flex-col">
                     <h3 className="text-[28px] font-semibold m-[40px]">
@@ -61,12 +62,32 @@ export default function Liked() {
                                       data={item.product}
                                   />
                               ))}
-                        {/* <Product_Card_aute bgcolor="#FFFFFF" />
-                        <Product_Card_aute bgcolor="#FFFFFF" />
-                        <Product_Card_aute bgcolor="#FFFFFF" /> */}
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const translates = await TranslatesResponse.json();
+
+        return {
+            props: {
+                translates,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

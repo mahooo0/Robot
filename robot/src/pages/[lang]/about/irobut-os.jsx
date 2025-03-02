@@ -7,29 +7,52 @@ import IRobotOSInfo from '@/components/osInfoSection';
 import ProductFeatures from '@/components/oSproductBunner';
 import React from 'react';
 
-export default function IrobutOs() {
+export default function IrobutOs({
+    Translates,
+    Irobot_Os_hero,
+    haqqında_Section,
+    təmizlik_hero,
+    təmizlik_section2,
+    Buttom_Section,
+}) {
     return (
         <div>
             {' '}
             <Header activeIndex={4} whyindex={0} />
             <main>
                 <section className="w-full flex justify-center px-[20px]">
-                    <IROSComponent />
+                    <IROSComponent
+                        data={Irobot_Os_hero}
+                        Translates={Translates}
+                    />
                 </section>
-                <section className="w-full flex justify-center px-[20px]">
-                    <IRobotOSAdvantage />
+                <section
+                    className="w-full flex justify-center px-[20px]"
+                    id="Üstünlüyü"
+                >
+                    <IRobotOSAdvantage Translates={Translates} />
                 </section>
-                <IRobotOSInfo />
-                <section className="w-full flex justify-center px-5">
-                    <ProductFeatures />
+                <IRobotOSInfo
+                    Translates={Translates}
+                    id="Haqqında"
+                    haqqında_Section={haqqında_Section}
+                    təmizlik_hero={təmizlik_hero}
+                    təmizlik_section2={təmizlik_section2}
+                />
+                <section
+                    className="w-full flex justify-center px-5"
+                    id="Detallar"
+                >
+                    <ProductFeatures Translates={Translates} />
                 </section>
+                <div></div>
                 <FAQSection
-                    Title={'İRobot OS haqqında tez-tez verilən suallar'}
+                    id="Tez_tez_verilən_suallar"
+                    Title={Translates.Tez_tez_verilən_suallar}
                 />
                 <section
                     style={{
-                        backgroundImage:
-                            'url(https://s3-alpha-sig.figma.com/img/e3c4/8633/0fd2d30d582a678cbce7a5913b6f244a?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IlvuH38fDfP1x4k-tuzNcos-quIosoMq~sdeYwYwL0bS946hq0cgxgSOEL9kU3nf2ED0bhJ88GGbcCZxiKbmlOpzcYXxir791R~gVHP6kjsbex-6dEfZPwq0cuWpoYwbaXB2A9DO5BzWWNZBz39gq6l52Z~PdgGemJb5IdhfmNdjV~Kzh3zK2YrP9g6bV8v5sWZBogFRCCqODhfOEQq5EoDatF~l7JtQHmgVQKFoupkzifJht5jExMmyssq820mSw~7LrV1XvnMmFjOGHSFa4q0q-vWY-o~~ON6ckcQkqxtXeJyr8gapRWtby~ZHN27tHJl5GgYgD5RdIplkNIn1Gg__)',
+                        backgroundImage: `url(${Buttom_Section.image})`,
                         backgroundSize: 'cover', // This makes the image cover the entire div
                         backgroundPosition: 'center', // Centers the image
                         backgroundRepeat: 'no-repeat', // Prevents the image from repeating
@@ -40,12 +63,10 @@ export default function IrobutOs() {
                 >
                     <div className="flex flex-col -mb-8 max-w-full w-[533px] max-md:mb-2.5">
                         <h2 className="text-4xl font-semibold max-md:max-w-full">
-                            Nə qədər çox öyrənsən, bir o qədər az təmizlərsən.
+                            {Buttom_Section.title}{' '}
                         </h2>
                         <p className="mt-5 text-base max-md:max-w-full">
-                            iRobot OS yalnızca iyi bilgilendirilmiş olmakla
-                            kalmıyor; sizin için özelleştirilmiş bir temizlik
-                            deneyimi sunmak için sürekli olarak öğreniyor.
+                            {Buttom_Section.description}
                         </p>
                     </div>
                 </section>
@@ -53,4 +74,72 @@ export default function IrobutOs() {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+        const Buttom_Section_Response = await fetch(
+            `${baseUrl}/section?type=Nə_qədər_çox_öyrənsən	`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+
+        const Buttom_Section = await Buttom_Section_Response.json();
+        const İstədiyiniz_kimi_təmizlikResponse = await fetch(
+            `${baseUrl}/section?type=İstədiyiniz_kimi_təmizlik`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+
+        const təmizlik_section2 =
+            await İstədiyiniz_kimi_təmizlikResponse.json();
+        const Irobot_Os_heroResponse = await fetch(
+            `${baseUrl}/section?type=Irobot_Os_hero`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+
+        const Irobot_Os_hero = await Irobot_Os_heroResponse.json();
+        const İstədiyiniz_zaman_təmizlikResponse = await fetch(
+            `${baseUrl}/section?type=İstədiyiniz_zaman_təmizlik`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+
+        const təmizlik_hero = await İstədiyiniz_zaman_təmizlikResponse.json();
+        const iRobot_OS_haqqında_məlumat_Response = await fetch(
+            `${baseUrl}/section?type=iRobot_OS_haqqında_məlumat`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
+
+        const haqqında_Section =
+            await iRobot_OS_haqqında_məlumat_Response.json();
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const Translates = await TranslatesResponse.json();
+
+        return {
+            props: {
+                Translates,
+                Irobot_Os_hero,
+                haqqında_Section,
+                təmizlik_hero,
+                təmizlik_section2,
+                Buttom_Section,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

@@ -36,15 +36,49 @@ function ProductDisplay({ data }) {
                     <img
                         loading="lazy"
                         src={data.image}
-                        className="object-cover absolute inset-0 size-full"
+                        className="object-cover z-20  absolute inset-0 size-full"
                         alt={`Product image`}
                     />
-                    {/* <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ba2a3e937a089f83f9fdb0d31ee77e4adff6d6f1cda500388791b46649d2530?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        className="object-contain w-14 aspect-square rounded-[100px] shadow-[0px_0px_12px_rgba(0,0,0,0.3)]"
-                        alt="Product detail"
-                    /> */}
+                </div>
+                <div className="w-[100%]   absolute  top-[0%] left-0 h-[100%] rounded-full">
+                    <svg
+                        className="w-full h-full"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="650"
+                        height="600"
+                        viewBox="0 0 650 500"
+                        fill="none"
+                    >
+                        <g filter="url(#filter0_f_14_510)">
+                            <circle cx="325" cy="250" r="125" fill="#E7F0E4" />
+                        </g>
+                        <defs>
+                            <filter
+                                id="filter0_f_14_510"
+                                x="-200"
+                                y="-275"
+                                width="1050"
+                                height="1050"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                            >
+                                <feFlood
+                                    flood-opacity="0"
+                                    result="BackgroundImageFix"
+                                />
+                                <feBlend
+                                    mode="normal"
+                                    in="SourceGraphic"
+                                    in2="BackgroundImageFix"
+                                    result="shape"
+                                />
+                                <feGaussianBlur
+                                    stdDeviation="200"
+                                    result="effect1_foregroundBlur_14_510"
+                                />
+                            </filter>
+                        </defs>
+                    </svg>
                 </div>
             </div>
             <div className=" absolute top-0  w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 duration-150">

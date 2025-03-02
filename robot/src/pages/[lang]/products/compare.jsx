@@ -9,8 +9,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-export default function compare() {
+export default function compare({ translates }) {
     const [isToggled, setIsToggled] = useState(false);
+    const [Filter, setFilter] = useState(2);
     const router = useRouter();
     const { lang = 'az' } = router.query;
     const handleToggle = () => {
@@ -19,9 +20,15 @@ export default function compare() {
     const [compareProducts, setCompareProducts] =
         useRecoilState(CompareProducts);
     const { data: products, isLoading: ProductLoading } = GETRequest(
-        `/products`,
+        `/products${
+            Filter === 1
+                ? '?category_id=4'
+                : Filter === 2
+                ? '?type_id=1'
+                : '?category_id=5'
+        }`,
         'products',
-        [lang]
+        [lang, Filter]
     );
     useEffect(() => {
         console.log('compareProducts', compareProducts);
@@ -33,19 +40,37 @@ export default function compare() {
             <Header activeIndex={0} />
             <main className="bg-[#ECF3EA] pt-[40px] text-center flex justify-center flex-col items-center w-full pb-[100px]">
                 <h1 className=" text-[40px] font-semibold max-w-[446px]">
-                    Müqayisə etmək üçün məhsulları seç
+                    {translates.Müqayisə_etmək_üçün_məhsulları_seç}
                 </h1>
                 <p className="text-black text-[16px] font-normal max-w-[446px] text-center mt-[12px]">
-                    Filter compare tool by category
+                    {translates.Filter_compare_tool_by_category}
                 </p>
                 <div className="flex flex-row gap-3 flex-wrap mt-[48px]">
-                    <Green_to_none>Robot tozsoranlar</Green_to_none>
-                    <Green_to_none>2-si 1-də məhsul</Green_to_none>
-                    <Green_to_none isactive={true}>Robot süpürgə</Green_to_none>
+                    <Green_to_none
+                        isactive={Filter === 1}
+                        action={() => setFilter(1)}
+                    >
+                        {translates.Roomba_Robot_Vacuums}
+                    </Green_to_none>
+                    <Green_to_none
+                        isactive={Filter === 2}
+                        action={() => setFilter(2)}
+                    >
+                        {translates.to_in_one}
+                    </Green_to_none>
+                    <Green_to_none
+                        isactive={Filter === 3}
+                        action={() => setFilter(3)}
+                    >
+                        {translates.Robot_süpürgə}
+                    </Green_to_none>
                 </div>
-                <CompareSwipperUpper products={products?.data} />
+                <CompareSwipperUpper
+                    products={products?.data}
+                    isLoading={ProductLoading}
+                />
                 <h2 className=" text-[36px] font-semibold  mt-[103px] lg:text-left text-center w-full lg:pl-[310px] pl-0">
-                    Seçilən məhsullar
+                    {translates.Seçilən_məhsullar}
                 </h2>
                 <div className="w-full flex flex-row relative  mt-7 ">
                     <div className="lg:absolute md:absolute  top-0 left-0 h-[100%] bg-[#ECF3EA] max-w-[310px] flex flex-col lg:pl-[60px] pl-[30px] z-50 ">
@@ -67,12 +92,12 @@ export default function compare() {
                                 <span className="sr-only">Toggle Switch</span>
                             </button>
                             <h2 className="mt-3 text-base font-medium text-green-950">
-                                Yalnız fərqləri göstər
+                                {translates.Yalnız_fərqləri_göstər}
                             </h2>
                         </section>
                         <div className=" h-[86px] w-full flex items-center justify-center border-t mt-[348px] border-black border-opacity-15">
                             <p className="text-[20px] font-medium">
-                                Məhsulun xüsusiyyəti
+                                {translates.Məhsulun_xüsusiyyəti}
                             </p>
                         </div>
                         <div className=" h-[86px] w-full flex items-center justify-center border-t mt-[28px] border-black border-opacity-15">
@@ -95,4 +120,26 @@ export default function compare() {
             <Footer />
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const translates = await TranslatesResponse.json();
+
+        return {
+            props: {
+                translates,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

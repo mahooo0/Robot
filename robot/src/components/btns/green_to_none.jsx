@@ -1,8 +1,14 @@
 import React from 'react';
 
-export default function Green_to_none({ children, isactive, classNAME }) {
+export default function Green_to_none({
+    children,
+    isactive,
+    classNAME,
+    action,
+}) {
     return (
         <button
+            onClick={action}
             className={`px-4 py-2 md:px-[28px] md:py-[14px] ${classNAME} ${
                 isactive
                     ? 'bg-[#69BE56] text-white'

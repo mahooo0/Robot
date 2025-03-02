@@ -5,22 +5,23 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function login_register() {
+export default function Pasword({ Translates, hero }) {
     const [sucses, setsucses] = useState('1');
     const [Otp, setOtp] = useState('1');
     const [showPassword, setShowPassword] = useState(false);
     const [Email, setEmail] = useState(false);
     const router = useRouter();
+    const { lang } = router.query;
     const MyComponent = ({ sucses }) => {
         let content;
 
         switch (sucses) {
             case '1':
                 content = (
-                    <div className="flex justify-center items-center lg:w-1/2 md:w-1/2 w-full h-full flex-col">
+                    <div className="flex justify-center items-center lg:w-[80%] md:w-1/2 w-full h-full flex-col">
                         <div className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
                             <h1 className="text-4xl font-semibold text-green-950">
-                                Şifrəni bərpası
+                                {Translates?.Şifrəni_bərpası}
                             </h1>
                         </div>
                         <form
@@ -58,7 +59,7 @@ export default function login_register() {
                                 classNAME="w-full mt-[28px] "
                                 type="submit"
                             >
-                                Göndər
+                                {Translates?.Göndər}
                             </Green_to_green>
                         </form>
                     </div>
@@ -73,9 +74,9 @@ export default function login_register() {
                         <p className="w-[457px] text-[20px] font-medium text-center mt-[28px]">
                             <a
                                 className="text-[#1661A7]"
-                                onClick={() => setsucses('3')}
+                                // onClick={() => setsucses('3')}
                             >
-                                ilahanazarli@gmail.com
+                                {Email}
                             </a>{' '}
                             email ünvanına link göndərildi.
                         </p>
@@ -85,6 +86,7 @@ export default function login_register() {
             case '3':
                 content = (
                     <OTP
+                        Translates={Translates}
                         email={Email}
                         onComplete={(otpcode) => {
                             console.log('otp', otpcode);
@@ -100,7 +102,7 @@ export default function login_register() {
                     <div className="flex justify-center items-center lg:w-1/2 md:w-1/2 w-full h-full flex-col">
                         <div className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
                             <h1 className="text-4xl font-semibold text-green-950">
-                                Şifrəni bərpası
+                                {Translates?.Şifrəni_bərpası}
                             </h1>
                         </div>
                         <div>
@@ -110,11 +112,11 @@ export default function login_register() {
                                     className="sr-only"
                                     // htmlFor={label.toLowerCase().replace(/\s+/g, '-')}
                                 >
-                                    Şifrə
+                                    {Translates?.Şifrə}
                                 </label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
-                                    placeholder="Şifrə"
+                                    placeholder={Translates?.Şifrə}
                                     aria-label="Şifrə"
                                     // value={password}
                                     // onChange={(e) =>
@@ -128,12 +130,12 @@ export default function login_register() {
                                     className="sr-only"
                                     // htmlFor={label.toLowerCase().replace(/\s+/g, '-')}
                                 >
-                                    Şifrənin təkrarı
+                                    {Translates?.Şifrənin_təkrarı}
                                 </label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
-                                    placeholder="Şifrə"
-                                    aria-label="Şifrə"
+                                    placeholder={Translates?.Şifrənin_təkrarı}
+                                    aria-label={Translates?.Şifrənin_təkrarı}
                                     // value={password}
                                     // onChange={(e) =>
                                     //     setPassword(e.target.value)
@@ -145,7 +147,7 @@ export default function login_register() {
                                 classNAME="w-full mt-[28px] "
                                 action={() => setsucses('4')}
                             >
-                                Göndər
+                                {Translates?.Göndər}
                             </Green_to_green>
                         </div>
                     </div>
@@ -165,7 +167,7 @@ export default function login_register() {
                             />
                         </div>
                         <p className="w-[457px] text-[20px] font-medium text-center mt-[28px]">
-                            Şifrəniz uğurla bərpa edildi!
+                            {Translates?.Şifrəniz_uğurla_bərpa_edildi}
                         </p>
                     </div>
                 );
@@ -175,7 +177,7 @@ export default function login_register() {
                     <div className="flex justify-center items-center lg:w-1/2 md:w-1/2 w-full h-full flex-col">
                         <header className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
                             <h1 className="text-4xl font-semibold text-green-950">
-                                Şifrəni bərpası
+                                {Translates?.Şifrəni_bərpası}
                             </h1>
                         </header>
                         <div>
@@ -199,7 +201,7 @@ export default function login_register() {
                                 classNAME="w-full mt-[28px] "
                                 action={() => setsucses(true)}
                             >
-                                Göndər
+                                {Translates?.Göndər}
                             </Green_to_green>
                         </div>
                     </div>
@@ -220,13 +222,43 @@ export default function login_register() {
             <MyComponent sucses={sucses} />
             <div className="lg:block md:block hidden p-5 h-full rounded-3xl overflow-hidden ">
                 <img
-                    className="w-full h-full object-cover rounded-3xl"
-                    src="https://s3-alpha-sig.figma.com/img/2f73/d843/e07270bf6d5658a1dcb43323a99e1812?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ltJ7Oc3QJNRqyRcFqc3uwP7MqgtPRlcav2S4y~HNC2LpjooE4lJOadrjLdk9uyNwlOUrrA0boqIJWVHPfHOVWHe5qLzEax7V0ff4pay7fM6-c0CcvQQFU~-lMAnKrjmFq0t6YFYBLz~MrMn-22xCqu6XTewOXwtEKbEobUEAMjrfy0WgWxr0QvPEIY-AQhd4IlRKJqpv-iVNoDEX-OJx2QZ7xmMecIqR~wKdGNVZZhgePamwy0Gbg4K~NPlcqd4BUM1pQDl3XNsWCL0fFwRKs~kFLPhh9yxLantQEQPpLc414lwLwWS9kplnG2J9yKzLeLVRfVAniN0UiyVVPZbF2Q__"
+                    className="w-full max-w-1/2 h-full object-cover rounded-3xl"
+                    src={hero.image}
                 />
             </div>
-            <div className=" absolute rounded-full w-[48px] h-[48px] flex justify-center items-center top-[60px] left-[60px] bg-white ">
+            <div
+                onClick={() => router.push(`/${lang}`)}
+                className=" absolute rotate-180 rounded-full w-[48px] h-[48px] flex justify-center items-center top-[60px] left-[60px] bg-white "
+            >
                 <img src="/svg/Strelka_black.svg" className=" rotate-180" />
             </div>
         </div>
     );
+}
+export async function getServerSideProps(context) {
+    const { lang } = context.params;
+    const baseUrl = 'https://irobot.avtoicare.az/api';
+
+    try {
+        // Fetch data sequentially
+
+        const TranslatesResponse = await fetch(`${baseUrl}/translates`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const Translates = await TranslatesResponse.json();
+        const heroRespose = await fetch(`${baseUrl}/section?type=Mops_Hero`, {
+            headers: { 'Accept-Language': lang },
+        });
+        const hero = await heroRespose.json();
+
+        return {
+            props: {
+                Translates,
+                hero,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return { props: { data: null, error: error.message } };
+    }
 }

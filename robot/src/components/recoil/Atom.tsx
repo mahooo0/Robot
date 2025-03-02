@@ -35,7 +35,10 @@ export const ProductFilters = atom({
         type: '',
         title: '',
         sort: '',
-        is_new: '',
+        is_new: false,
+        is_paket: false,
+        is_discounted: false,
+        is_bestseller: false,
     },
 });
 export const CompareProducts = atom({
@@ -50,6 +53,7 @@ export const AcsesuaresFilters = atom({
         catgory: '',
         series: '',
         type: '',
+        title: '',
     },
 });
 // export const MenuStateTwo = atom({

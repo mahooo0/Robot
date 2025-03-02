@@ -6,13 +6,17 @@ import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ROUTES } from '@/Helpers/Routes';
+import GETRequest from '@/services/QueryREq';
 
-function LoginForum() {
+function LoginForum({ translates }) {
     const [isLogin, setIsLogin] = useState(true);
     const [Loading, setLoading] = useState(false);
     const router = useRouter();
     const { lang = 'az' } = router.query;
 
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
     const toggleView = (view) => {
         setIsLogin(view === 'login');
     };
@@ -101,11 +105,10 @@ function LoginForum() {
         <main className="flex flex-col max-w-[440px] mx-auto p-4">
             <header className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
                 <h1 className="text-4xl font-semibold text-green-950">
-                    Xoş gəldiniz!
+                    {translates?.Xoş_gəldiniz}!
                 </h1>
                 <p className="mt-3 text-base text-black text-opacity-80">
-                    Xoş gəldiniz! Hesabınıza daxil olun və ya qeydiyyatdan
-                    keçin.
+                    {translates?.login_desc}
                 </p>
             </header>
 
@@ -119,7 +122,7 @@ function LoginForum() {
                                 : 'text-gray-600'
                         }`}
                     >
-                        Daxil ol
+                        {translates?.Daxil_ol}
                     </button>
                     <button
                         onClick={() => toggleView('register')}
@@ -129,7 +132,7 @@ function LoginForum() {
                                 : 'text-gray-600'
                         }`}
                     >
-                        Qeydiyyat
+                        {translates?.Qeydiyyat}
                     </button>
                 </div>
 
@@ -197,7 +200,7 @@ function LoginForum() {
                                     <Field
                                         type="password"
                                         name="password"
-                                        placeholder="Şifrə"
+                                        placeholder="password"
                                         className="w-full bg-transparent border-none outline-none"
                                     />
                                 </div>
@@ -210,7 +213,7 @@ function LoginForum() {
                                 {isLogin ? (
                                     <Link href={`/${lang}/user/password`}>
                                         <p className="mt-3 text-sm text-right text-sky-700">
-                                            Şifrəmi unutdum
+                                            {translates?.Şifrəmi_unutdum}
                                         </p>
                                     </Link>
                                 ) : (
@@ -221,15 +224,9 @@ function LoginForum() {
                                             className="w-5 h-5 text-sky-700 border-sky-700 rounded focus:ring-sky-700"
                                         />
                                         <p className="self-stretch my-auto">
-                                            Mən{' '}
-                                            <span className="text-sky-700">
-                                                Qaydalar
-                                            </span>{' '}
-                                            və{' '}
-                                            <span className="text-sky-700">
-                                                Şərtləri
-                                            </span>{' '}
-                                            oxudum və razıyam.
+                                            {
+                                                translates?.Mən_Qaydalar_və_Şərtləri_oxudum_və_razıyam
+                                            }
                                         </p>
                                     </div>
                                 )}
@@ -239,7 +236,9 @@ function LoginForum() {
                                 type="submit"
                                 className="gap-2.5 self-stretch px-7 py-3.5 mt-7 w-full text-base font-medium text-white bg-green-400 rounded-[100px]"
                             >
-                                {isLogin ? 'Daxil ol' : 'Qeydiyyatdan keç'}
+                                {isLogin
+                                    ? translates?.Daxil_ol
+                                    : translates?.Qeydiyyat}
                             </button>
                         </Form>
                     )}

@@ -6,9 +6,15 @@ import GETRequest from '@/services/QueryREq';
 
 export default function SalesSection({ Translates }) {
     // console.log('MostSaledProducts', MostSaledProducts);
-    const [Filter, setFilter] = useState('');
+    const [Filter, setFilter] = useState(2);
     const { data: products, isLoading: ProductLoading } = GETRequest(
-        `/products?is_bestseller=1`,
+        `${
+            Filter === 1
+                ? `/products?is_bestseller=1&category_id=5`
+                : Filter === 2
+                ? `/products?is_bestseller=1&category_id=4`
+                : `/accessories?is_bestseller=1`
+        }`,
         'products',
         [Filter]
     );
@@ -48,8 +54,11 @@ export default function SalesSection({ Translates }) {
                             visible: { opacity: 1, y: 0 },
                         }}
                     >
-                        <Green_to_none isactive={false}>
-                            Robot Tozsoranlar
+                        <Green_to_none
+                            isactive={Filter === 1}
+                            action={() => setFilter(1)}
+                        >
+                            {Translates?.Robot_süpürgə}
                         </Green_to_none>
                     </motion.div>
                     <motion.div
@@ -58,8 +67,11 @@ export default function SalesSection({ Translates }) {
                             visible: { opacity: 1, y: 0 },
                         }}
                     >
-                        <Green_to_none isactive={true}>
-                            Robot Tozsoranlar
+                        <Green_to_none
+                            isactive={Filter === 2}
+                            action={() => setFilter(2)}
+                        >
+                            {Translates?.Robot_Tozsoranlar}
                         </Green_to_none>
                     </motion.div>
                     <motion.div
@@ -68,8 +80,11 @@ export default function SalesSection({ Translates }) {
                             visible: { opacity: 1, y: 0 },
                         }}
                     >
-                        <Green_to_none isactive={false}>
-                            Robot Tozsoranlar
+                        <Green_to_none
+                            isactive={Filter === 3}
+                            action={() => setFilter(3)}
+                        >
+                            {Translates?.Aksesuarlar}{' '}
                         </Green_to_none>
                     </motion.div>
                 </motion.div>

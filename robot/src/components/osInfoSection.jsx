@@ -1,6 +1,7 @@
 import React from 'react';
 import Green_to_green from './btns/green_to_green';
-
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 const SectionTitle = ({ title }) => (
     <h2 className="text-4xl font-semibold text-center text-[#447355] max-md:max-w-full">
         {title}
@@ -46,33 +47,61 @@ const HeroSection = ({
     buttonText,
     imageSrc,
     imageAlt,
-}) => (
-    <div className="flex flex-col mt-12 w-full max-md:mt-10 max-md:max-w-full">
-        <div className="flex flex-wrap gap-5 lg:justify-between  justify-center items-center w-full max-md:max-w-full lg:h-[502px] h-fit">
-            <div className="flex overflow-hidden flex-col justify-center  px-10 pt-10   rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-[539px] w-full max-md:px-5 pb-4   !h-full">
-                <div className="flex flex-col w-full max-md:max-w-full">
+}) => {
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: 'easeOut' },
+        },
+    };
+    const router = useRouter();
+    const { lang } = router.query;
+    return (
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            className="flex flex-col mt-12 w-full max-md:mt-10 max-md:max-w-full"
+            viewport={{ once: true }}
+        >
+            <div className="flex gap-5 lg:justify-between justify-center items-center w-full max-md:max-w-full lg:h-[502px] h-fit">
+                <motion.div
+                    variants={fadeInUp}
+                    className="flex overflow-hidden flex-col justify-center px-10 pt-10 rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-[60%] w-full max-md:px-5 pb-4 !h-full"
+                >
                     <div className="flex flex-col w-full max-md:max-w-full">
-                        <h2 className="text-4xl font-semibold text-[#87A28E] max-md:max-w-full">
-                            {title}
-                        </h2>
-                        <p className="mt-3 text-base text-white max-md:max-w-full">
-                            {description}
-                        </p>
+                        <div className="flex flex-col w-full max-md:max-w-full">
+                            <h2 className="text-4xl font-semibold text-[#87A28E] max-md:max-w-full">
+                                {title}
+                            </h2>
+                            <p className="mt-3 text-base text-white max-md:max-w-full">
+                                {description}
+                            </p>
+                        </div>
+                        <div className="mt-7">
+                            <Green_to_green
+                                action={() => router.push(`/${lang}/products`)}
+                            >
+                                {buttonText}
+                            </Green_to_green>
+                        </div>
                     </div>
-                    <div className="mt-7">
-                        <Green_to_green>{buttonText}</Green_to_green>
-                    </div>
-                </div>
+                </motion.div>
+                <motion.img
+                    loading="lazy"
+                    src={imageSrc}
+                    alt={imageAlt}
+                    className="self-stretch object-cover rounded-3xl aspect-[1.52] min-w-[240px] max-sm:hidden w-full max-md:max-w-full h-[100%]"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                    viewport={{ once: true }}
+                />
             </div>
-            <img
-                loading="lazy"
-                src={imageSrc}
-                alt={imageAlt}
-                className=" self-stretch  object-cover rounded-3xl aspect-[1.52] min-w-[240px] lg:w-[761px] w-full max-md:max-w-full h-[100%]"
-            />
-        </div>
-    </div>
-);
+        </motion.div>
+    );
+};
 
 const featureData = [
     {
@@ -101,46 +130,57 @@ const featureData = [
     },
 ];
 
-function IRobotOSInfo() {
+function IRobotOSInfo({
+    haqqında_Section,
+    təmizlik_hero,
+    təmizlik_section2,
+    id,
+    Translates,
+}) {
+    console.log('haqqında_Section', haqqında_Section);
+
     return (
-        <main className="flex overflow-hidden flex-col px-16 py-24 mt-24 w-full bg-[#F1F5F0] max-md:px-5 max-md:mt-10 max-md:max-w-full">
+        <section
+            id={id}
+            className="flex overflow-hidden flex-col px-16 py-24 mt-24 w-full bg-[#F1F5F0] max-md:px-5 max-md:mt-10 max-md:max-w-full"
+        >
             <h1 className="self-center text-4xl font-semibold text-center text-black max-md:max-w-full">
-                iRobot OS haqqında məlumat
+                {Translates.iRobot_OS_haqqında_məlumat}
             </h1>
             <section className="flex flex-col mt-12 max-md:mt-10 max-md:max-w-full">
-                <SectionTitle title="İstədiyiniz yerdə təmizlik" />
+                <SectionTitle title={Translates.İstədiyiniz_yerdə_təmizlik} />
                 <HeroSection
-                    title="Hər otağı bir anda öyrənir və etiketləyir"
-                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever"
-                    buttonText="Məhsula adı"
-                    imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/02f8fb6a6a9482e4490f0953f2b18d8140761c6f0bec2ec1c370f75e5a020b6d?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                    title={haqqında_Section.title}
+                    description={haqqında_Section.description}
+                    buttonText={Translates.Məhsular}
+                    imageSrc={haqqında_Section.image}
                     imageAlt="iRobot cleaning demonstration"
                 />
                 <FeatureList features={featureData} />
             </section>
             <section className="flex flex-col mt-24 w-full max-md:mt-10 max-md:max-w-full">
-                <SectionTitle title="İstədiyiniz zaman təmizlik" />
+                <SectionTitle title={Translates.İstədiyiniz_zaman_təmizlik} />
                 <HeroSection
-                    title="Programınız karmaşık. Onu temizlememe izin verin!"
-                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever"
-                    buttonText="Müqayisə et"
-                    imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/34e39e61d5633c5cd20f1bafb4ba4bb05c99c112900b6f8e62fd255b9376e6af?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                    imageAlt="iRobot cleaning schedule demonstration"
+                    title={təmizlik_hero.title}
+                    description={təmizlik_hero.description}
+                    buttonText={Translates.Məhsular}
+                    imageSrc={təmizlik_hero.image}
+                    imageAlt="iRobot cleaning demonstration"
                 />
                 <FeatureList features={featureData} />
             </section>
             <section className="flex flex-col mt-24 w-full max-md:mt-10 max-md:max-w-full">
-                <SectionTitle title="İstədiyiniz kimi təmizlik" />
+                <SectionTitle title={Translates.İstədiyiniz_kimi_təmizlik} />
                 <HeroSection
-                    title="Smart Scrub sabit təzyiqlə irəli-geri hərəkət edir və 2 dəfə dərindən təmizləyir"
-                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever"
-                    buttonText="Məhsulun adı"
-                    imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/d5025352636bf292651cc27f9bb659013aeae1dca8113e6515ea658ae047b723?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                    imageAlt="iRobot Smart Scrub demonstration"
+                    title={təmizlik_section2.title}
+                    description={təmizlik_section2.description}
+                    buttonText={Translates.Məhsular}
+                    imageSrc={təmizlik_section2.image}
+                    imageAlt="iRobot cleaning demonstration"
                 />
                 <FeatureList features={featureData} />
             </section>
-        </main>
+        </section>
     );
 }
 

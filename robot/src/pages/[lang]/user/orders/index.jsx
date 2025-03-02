@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Orders from '@/components/Orders';
 import UserAside from '@/components/UserAside';
@@ -8,14 +9,15 @@ export default function index({ Translates }) {
     console.log('Translates', Translates);
 
     return (
-        <div className="h-[100vh] w-full bg-[F1F5F0]   relative">
+        <div className=" w-full bg-[F1F5F0]   relative">
             <Header activeIndex={0} />
             <div className="flex flex-row h-full">
-                <div className="w-[20%] h-[100%] mr-3">
-                    <UserAside active={1} />
+                <div className="w-[20%]  mr-3">
+                    <UserAside active={1} translates={Translates} />
                 </div>
                 <Orders Translates={Translates} />
             </div>
+            <Footer />
         </div>
     );
 }

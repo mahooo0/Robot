@@ -1,18 +1,37 @@
+import { motion } from 'framer-motion';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function _() {
+export default function NotFoundPage() {
     const router = useRouter();
+
     return (
         <div>
             <Header activeIndex={0} />
-            <main className="w-full flex justify-center">
+            <motion.main
+                className="w-full flex justify-center"
+                initial={{ opacity: 0, y: 50 }} // Start hidden & moved down
+                animate={{ opacity: 1, y: 0 }} // Fade in & move up
+                exit={{ opacity: 0, y: -20 }} // Fade out & move up on exit
+                transition={{ duration: 0.5, ease: 'easeInOut' }} // Smooth animation
+            >
                 <div className="flex flex-col self-center mt-10 mb-10 max-w-full w-[532px] max-md:mt-10">
-                    <div className="flex flex-wrap gap-1 items-center self-end font-bold text-center whitespace-nowrap text-[200px] text-neutral-600 max-md:max-w-full max-md:text-4xl">
-                        <img src="/svg/404.svg" />
-                    </div>
-                    <section className="flex flex-col mt-5 w-full max-md:max-w-full">
+                    <motion.div
+                        className="flex flex-wrap gap-1 items-center self-end font-bold text-center whitespace-nowrap text-[200px] text-neutral-600 w-full max-md:text-4xl"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                    >
+                        <img src="/svg/404.svg" className="w-full" />
+                    </motion.div>
+                    <motion.section
+                        className="flex flex-col mt-5 w-full max-md:max-w-full"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                    >
                         <div className="flex flex-col w-full text-center max-md:max-w-full">
                             <h1 className="text-xl font-semibold text-green-950 max-md:max-w-full">
                                 OPPS! Səhifə tapılmadı
@@ -22,7 +41,12 @@ export default function _() {
                                 verdi.
                             </p>
                         </div>
-                        <div className="flex gap-3 justify-center items-center self-center mt-10 w-60 max-w-full text-base font-medium text-green-950">
+                        <motion.div
+                            className="flex gap-3 justify-center items-center self-center mt-10 w-60 max-w-full text-base font-medium text-green-950"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.5 }}
+                        >
                             <button
                                 onClick={() => router.push('/')}
                                 className="flex gap-2.5 justify-center items-center self-stretch px-7 py-3.5 my-auto w-60 border border-solid border-gray-600 border-opacity-40 rounded-[100px] max-md:px-5"
@@ -37,10 +61,11 @@ export default function _() {
                                     className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
                                 />
                             </button>
-                        </div>
-                    </section>
+                        </motion.div>
+                    </motion.section>
                 </div>
-            </main>
+            </motion.main>
+            <Footer />
         </div>
     );
 }

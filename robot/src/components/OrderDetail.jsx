@@ -5,7 +5,7 @@ import RemuveOrder from './RemuveOrder';
 import ReatingDialogg from './retingDialog';
 import ChangeOrderAdress from './changeOrderIdress';
 
-function OrderDetails() {
+function OrderDetails({ translates }) {
     const [isCanselDioalogOpen, setIsCanselDioalogOpen] = useState(false);
     const [IsAdressDioalogOpen, setIsAdressDioalogOpen] = useState(false);
     const [ProductId, setProductId] = useState(null);
@@ -21,32 +21,6 @@ function OrderDetails() {
         { label: 'Çatdırıldı', date: '05.02.2024', status: 'pending' },
     ];
 
-    const products = [
-        {
-            id: 1,
-            name: 'Roomba® j7+',
-            price: 300,
-            image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/14cdd3abb6d139c9b2383f07363293b7137b81992924730e917ff8dc525040c8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-        {
-            id: 2,
-            name: 'Roomba® j7+',
-            price: 300,
-            image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/14cdd3abb6d139c9b2383f07363293b7137b81992924730e917ff8dc525040c8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-        {
-            id: 3,
-            name: 'Roomba® j7+',
-            price: 300,
-            image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/14cdd3abb6d139c9b2383f07363293b7137b81992924730e917ff8dc525040c8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-        {
-            id: 4,
-            name: 'Roomba® j7+',
-            price: 300,
-            image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/14cdd3abb6d139c9b2383f07363293b7137b81992924730e917ff8dc525040c8?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-        },
-    ];
     const router = useRouter();
 
     const { lang = 'az', id } = router.query;
@@ -55,9 +29,9 @@ function OrderDetails() {
         `getOrderItem/${id}`,
         [lang]
     );
-    const { data: translates } = GETRequest(`/translates`, `/translates`, [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, `/translates`, [
+    //     lang,
+    // ]);
     console.log('translates', translates);
     const tarnslation = {};
     return (

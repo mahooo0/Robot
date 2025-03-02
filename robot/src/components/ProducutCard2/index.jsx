@@ -146,7 +146,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                                 }/${data?.slug[lang]}`
                             );
                             localStorage.setItem(
-                                'slug',
+                                'Productslug',
                                 JSON.stringify(data?.slug)
                             );
                         }}
@@ -343,7 +343,7 @@ const ProductCard2 = ({ data, isLarge }) => {
                             }/${data?.slug[lang]}`
                         );
                         localStorage.setItem(
-                            'slug',
+                            'Productslug',
                             JSON.stringify(data?.slug)
                         );
                     }}
@@ -438,7 +438,10 @@ const ProductCard2 = ({ data, isLarge }) => {
                             data?.slug[lang]
                         }`
                     );
-                    localStorage.setItem('slug', JSON.stringify(data?.slug));
+                    localStorage.setItem(
+                        'Productslug',
+                        JSON.stringify(data?.slug)
+                    );
                 }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={

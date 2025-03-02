@@ -6,8 +6,11 @@ function ProductCardNew({ data, Translates }) {
     const { lang = 'az' } = router.query;
     return (
         <article
-            onClick={() => router.push(`/${lang}/products/${data.slug[lang]}`)}
-            className="flex overflow-hidden cursor-pointer flex-col grow shrink self-stretch pt-7 pl-7 my-auto rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-full  md:lg:w-full max-md:max-w-full"
+            onClick={() => {
+                localStorage.setItem('Productslug', JSON.stringify(data.slug));
+                router.push(`/${lang}/products/${data.slug[lang]}`);
+            }}
+            className="flex relative overflow-hidden cursor-pointer flex-col grow shrink self-stretch pt-7 pl-7 my-auto rounded-3xl bg-[#132A1B] min-w-[240px] lg:w-full  md:lg:w-full max-md:max-w-full"
         >
             <div className="flex z-10 flex-wrap gap-5 justify-between max-w-full w-full ">
                 <div className="flex flex-col text-xl font-semibold">
@@ -35,7 +38,47 @@ function ProductCardNew({ data, Translates }) {
                 src={data.image}
                 className="object-contain self-end -mt-2.5 max-w-full aspect-[1.06] w-[380px]"
                 alt="Roomba Combo® 10 Max Saug- und Wischroboter + AutoWash Dock"
-            />
+            />{' '}
+            <div className="w-[100%]   absolute  top-[0%] left-0 h-[100%] rounded-full">
+                <svg
+                    className="w-full h-full"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="650"
+                    height="600"
+                    viewBox="0 0 650 500"
+                    fill="none"
+                >
+                    <g filter="url(#filter0_f_14_510)">
+                        <circle cx="325" cy="250" r="125" fill="#E7F0E4" />
+                    </g>
+                    <defs>
+                        <filter
+                            id="filter0_f_14_510"
+                            x="-200"
+                            y="-275"
+                            width="1050"
+                            height="1050"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                        >
+                            <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"
+                            />
+                            <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="BackgroundImageFix"
+                                result="shape"
+                            />
+                            <feGaussianBlur
+                                stdDeviation="200"
+                                result="effect1_foregroundBlur_14_510"
+                            />
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
         </article>
     );
 }

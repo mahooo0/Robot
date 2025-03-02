@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import GETRequest from '@/services/QueryREq';
 import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 function MonthlyPaymentBar({ monthOptions, kredit_items, oncange }) {
     const [selectedMonth, setSelectedMonth] = React.useState(0);
     console.log('monthOptions', monthOptions);
@@ -118,6 +119,7 @@ function KreditPOpUP({ show }) {
     React.useEffect(() => {
         setShow(show);
     }, [show]);
+    const queruqlient = useQueryClient();
     const monthOptions = [
         { months: 3, interest: 0 },
         { months: 6, interest: 0 },
@@ -227,7 +229,7 @@ function KreditPOpUP({ show }) {
                                     localStorage.getItem('user-info');
                                 const user = JSON.parse(userStr);
                                 console.log('kredit_items', kredit_items);
-                                axiosInstance
+                                await axiosInstance
                                     .post(
                                         'multipleUpdate',
                                         {
@@ -239,8 +241,13 @@ function KreditPOpUP({ show }) {
                                             },
                                         }
                                     )
-                                    .then(() => {
+                                    .then((response) => {
                                         toast.success('sucses');
+                                        console.log('response', response);
+                                        setShow(false);
+                                        queruqlient.invalidateQueries({
+                                            queryKey: ['basket_items'],
+                                        });
                                     })
                                     .catch((err) => {
                                         toast.error('error');

@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function AcsesuaresSection({ Home_acsesuares, Translates }) {
     const router = useRouter();
-
+    const { lang = 'az' } = router.query;
     return (
         <motion.section
             initial={{ opacity: 0, y: 50 }}
@@ -44,7 +44,9 @@ export default function AcsesuaresSection({ Home_acsesuares, Translates }) {
                     transition={{ delay: 0.6, duration: 0.7, ease: 'easeOut' }}
                     className="mt-7"
                 >
-                    <Green_to_green action={() => router.push('/aksesuares')}>
+                    <Green_to_green
+                        action={() => router.push(`/${lang}/aksesuares`)}
+                    >
                         {Translates?.Aksesuarlara_bax}
                     </Green_to_green>
                 </motion.div>

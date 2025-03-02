@@ -13,6 +13,7 @@ import Acsesuares_Categories from '@/components/sections/Acsesuares/Categories';
 import GETRequest from '@/services/QueryREq';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { motion } from 'framer-motion';
 
 export default function Aksesuares({
     Translates,
@@ -31,7 +32,9 @@ export default function Aksesuares({
             Filters.series ? `&accessory_serie_id=${Filters.series}` : ''
         }${Filters.minPrice ? `&min_price=${Filters.minPrice}` : ''}${
             Filters.catgory ? `&accessory_category_id=${Filters.catgory}` : ''
-        }${Filters.type ? `&accessory_type_id=${Filters.type}` : ''}`,
+        }${Filters.type ? `&accessory_type_id=${Filters.type}` : ''}${
+            Filters.title ? `&title=${Filters.title}` : ''
+        }`,
         'accessories',
         [page, Filters]
     );
@@ -54,8 +57,16 @@ export default function Aksesuares({
 
         return result;
     }
+
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+            className="text-[#132A1B]"
+        >
+            {' '}
             <Header activeIndex={2} productIndex={2} />
             <Acsesuares_Categories
                 AccessorySeries={AccessorySeries}
@@ -115,9 +126,8 @@ export default function Aksesuares({
                     totalPages={Acsesuares?.meta?.last_page}
                 />
             </div>
-
             <Footer />
-        </div>
+        </motion.div>
     );
 }
 export async function getServerSideProps(context) {
