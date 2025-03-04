@@ -19,10 +19,11 @@ const scrollToElement = (id) => {
     }
 };
 
-export default function BuyersGuide({ data, lang }) {
+export default function BuyersGuide({ data }) {
     console.log('data:', data.questions);
     console.log('data:', data.choices);
-
+    const router = useRouter();
+    const { lang } = router.query;
     // const [language, setlanguage] = useRecoilState(languageState);
 
     // const {
@@ -42,40 +43,11 @@ export default function BuyersGuide({ data, lang }) {
         });
     }, []);
 
-    const helpData = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/3bcd91055783e850ce350db9e3b1e18a036771ee4dbb602d047b0e9ceee40d68?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Testdən keç',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Testdən keç',
-            page: '/user/help',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/274fcf70462b6cfce6ed1a77a92ed79c22246f989eba9ebe4321020077cf9d53?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Ekspert məsləhəti',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Bizimlə əlaqə',
-            page: '/contact',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/79161b1f02d51e9a189b3e58d236194f37f61ff45fdcf797e0654e2adb59b400?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Mağazamıza yaxınlaş',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-        },
-    ];
-    const router = useRouter();
-
     return (
         <div>
             <Header activeIndex={4} whyindex={3} />
             <main className=" overflow-hidden">
-                {/* <section className="flex relative flex-col items-center px-20 pt-32 pb-7 w-full min-h-[500px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
+                <section className="flex relative flex-col items-center px-20 pt-32 pb-7 w-full min-h-[500px] max-md:px-5 max-md:pt-24 max-md:max-w-full">
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e0ce25143976452c62e52edd732f9e520ab2fc787ed9afaf9f03a0be7fef783?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
@@ -110,9 +82,9 @@ export default function BuyersGuide({ data, lang }) {
                             />
                         </div>
                     </div>
-                </section> */}
+                </section>
                 {/* question1 */}
-                {/* {data.questions.questions.map((question) => (
+                {data.questions.questions.map((question) => (
                     <section
                         data-aos="fade-up"
                         className="flex flex-col w-full max-md:max-w-full lg:px-[60px] px-[30px] mt-[100px]"
@@ -139,7 +111,7 @@ export default function BuyersGuide({ data, lang }) {
                             />
                         </div>
                     </section>
-                ))} */}
+                ))}
 
                 <section className="flex overflow-hidden flex-col justify-center px-20 py-16 w-full bg-[#ECF3EA] max-md:px-5 max-md:max-w-full mt-[100px] mb-[100px]">
                     <div className="flex flex-col w-full max-md:max-w-full">
@@ -158,7 +130,7 @@ export default function BuyersGuide({ data, lang }) {
                                             linkText={
                                                 data.translates.Testdən_keç
                                             }
-                                            page={`/${lang}/${ROUTES.test[lang]}`}
+                                            page={`/${lang}/user/help`}
                                         />
                                     );
                                 } else if (index === 1) {
@@ -171,7 +143,7 @@ export default function BuyersGuide({ data, lang }) {
                                             linkText={
                                                 data.translates.Bizimlə_əlaqə
                                             }
-                                            page={`/${lang}/${ROUTES.cotact[lang]}`}
+                                            page={`/${lang}/contact`}
                                         />
                                     );
                                 }
@@ -194,13 +166,13 @@ export default function BuyersGuide({ data, lang }) {
 }
 export async function getServerSideProps(context) {
     const { lang = 'az' } = context.params;
-    // const questions = await getQuestions(lang);
+    const questions = await getQuestions(lang);
     const choices = await getChoices(lang);
     const translates = await getTranslates(lang);
     return {
         props: {
             data: {
-                questions: {},
+                questions,
                 choices,
                 translates,
             }, // Data will be available in the BuyersGuide component as a

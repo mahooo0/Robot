@@ -3,10 +3,7 @@ import KreditPOpUP from './KreditPopUp';
 import { useRecoilState } from 'recoil';
 import { deliveryTypeState } from './recoil/Atom';
 
-const PersonalInfo = () => {
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+const PersonalInfo = ({ translates }) => {
     const [user, setUser] = useState(null);
     useEffect(() => {
         const userStr = localStorage.getItem('user-info');
@@ -16,7 +13,7 @@ const PersonalInfo = () => {
     return (
         <section className="flex overflow-hidden flex-col justify-center p-10 w-full rounded-3xl bg-stone-100 max-md:px-5 max-md:max-w-full">
             <h2 className="text-sm text-black text-opacity-60 max-md:max-w-full">
-                Şəxsi məlumatlarım
+                {translates.Şəxsi_məlumatlarım}
             </h2>
             <div className="flex flex-col mt-6 w-full text-base text-black max-md:max-w-full">
                 <p className="overflow-hidden px-5 py-4 w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] max-md:max-w-full">
@@ -66,7 +63,7 @@ const DeliveryOption = ({ icon, label, isSelected, onChange }) => (
     </div>
 );
 
-const DeliveryType = () => {
+const DeliveryType = ({ translates }) => {
     const [DeliveryTypeState, setDeliveryTypeState] =
         useRecoilState(deliveryTypeState);
     console.log('DeliveryTypeState', DeliveryTypeState);
@@ -74,7 +71,7 @@ const DeliveryType = () => {
     return (
         <section className="flex overflow-hidden flex-col p-10 mt-5 w-full rounded-3xl bg-stone-100 max-md:px-5 max-md:max-w-full">
             <h2 className="self-start text-sm text-black text-opacity-60">
-                Çatdırılma növü
+                {translates.Çatdırılma_növü}
             </h2>
             <div className="flex flex-col mt-7 w-full text-base max-md:max-w-full">
                 <div
@@ -84,7 +81,7 @@ const DeliveryType = () => {
                 >
                     <DeliveryOption
                         icon="https://cdn.builder.io/api/v1/image/assets/TEMP/069c849c202edd381dc01dab436eb0f059276eec2ac290a4d4063c34df9d8be5?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        label="Ünvana çatdırılma"
+                        label={translates.Ünvana_çatdırılma}
                         isSelected={DeliveryTypeState.delivery}
                         onChange={() =>
                             setDeliveryTypeState({
@@ -95,7 +92,7 @@ const DeliveryType = () => {
                     />
                     <DeliveryOption
                         icon="https://cdn.builder.io/api/v1/image/assets/TEMP/837b11af13b9d62572b8fcef96de03cfcb6f6486ce8994e43c8d7b1469ae3915?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        label="Mağazadan təhvil al"
+                        label={translates.Mağazadan_təhvil_al}
                         isSelected={!DeliveryTypeState.delivery}
                         onChange={() =>
                             setDeliveryTypeState({
@@ -110,7 +107,7 @@ const DeliveryType = () => {
                     <div className="flex flex-col mt-7 w-full max-md:max-w-full">
                         <div className="flex overflow-hidden flex-wrap gap-5 justify-between px-5 py-4 max-w-full text-black bg-white border border-solid border-black border-opacity-10 rounded-[200px] w-[702px]">
                             <label htmlFor="citySelect" className="sr-only">
-                                Şəhər seç
+                                {translates.Şəhər_seç}
                             </label>
                             <select
                                 onChange={(e) => {
@@ -143,7 +140,7 @@ const DeliveryType = () => {
                             }}
                             type="text"
                             className="overflow-hidden px-5 py-4 mt-5 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[200px] text-black text-opacity-60 w-[702px]"
-                            placeholder="Çatdırılacaq ünvan"
+                            placeholder={translates.Çatdırılacaq_ünvan}
                             aria-label="Çatdırılacaq ünvan"
                         />
                         <textarea
@@ -153,7 +150,7 @@ const DeliveryType = () => {
                                     message: e.target.value,
                                 });
                             }}
-                            placeholder="Əlavə məlumat"
+                            placeholder={translates.Əlavə_məlumat}
                             className="overflow-hidden px-5 py-4 mt-5 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[20px] text-black text-opacity-60 w-[702px] h-[155px]"
                         ></textarea>
                     </div>
@@ -161,7 +158,7 @@ const DeliveryType = () => {
                     <div className="mt-[28px]">
                         <div className="flex overflow-hidden flex-wrap gap-5 justify-between px-5 py-4 max-w-full text-black bg-white border border-solid border-black border-opacity-10 rounded-[200px] w-[702px]">
                             <label htmlFor="citySelect" className="sr-only">
-                                Şəhər seç
+                                {translates.mağaza_seç}
                             </label>
                             <select
                                 onChange={(e) => {
@@ -187,7 +184,7 @@ const DeliveryType = () => {
                                     message: e.target.value,
                                 });
                             }}
-                            placeholder="Əlavə məlumat"
+                            placeholder={translates.Əlavə_məlumat}
                             className="overflow-hidden px-5 py-4 mt-5 max-w-full bg-white border border-solid border-black border-opacity-10 rounded-[20px] text-black text-opacity-60 w-[702px] h-[155px]"
                         ></textarea>
                     </div>
@@ -228,14 +225,14 @@ const PaymentOption = ({ icon, label, isSelected, onChange }) => (
     </div>
 );
 
-const PaymentType = () => {
+const PaymentType = ({ translates }) => {
     const [DeliveryTypeState, setDeliveryTypeState] =
         useRecoilState(deliveryTypeState);
     return (
         <section className="flex overflow-hidden flex-col justify-center items-start p-10 mt-5 w-full rounded-3xl bg-stone-100 max-md:px-5 max-md:max-w-full">
             <div className="flex flex-col w-full max-w-screen-sm max-md:max-w-full">
                 <h2 className="text-sm text-black text-opacity-60 max-md:max-w-full">
-                    Ödəniş növü
+                    {translates.Ödəniş_növü}
                 </h2>
                 <div
                     className="flex flex-wrap gap-5 items-center mt-6 w-full text-base text-black max-md:max-w-full"
@@ -244,7 +241,7 @@ const PaymentType = () => {
                 >
                     <PaymentOption
                         icon="https://cdn.builder.io/api/v1/image/assets/TEMP/91bb95cf028fab2ddf525bb950de33e5f3f7af2e0e956710a76b71059f55e0df?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        label="Nağd ödəniş"
+                        label={translates.Nağd_ödəniş}
                         isSelected={DeliveryTypeState.peymantType === 'cash'}
                         onChange={() =>
                             setDeliveryTypeState({
@@ -255,7 +252,7 @@ const PaymentType = () => {
                     />
                     <PaymentOption
                         icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a32a107c46e265516d4671cf353ef70a561fe879c4b02e34543c7628a8962265?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        label="Onlayn debet kartla ödəniş"
+                        label={translates.Onlayn_debet_kartla_ödəniş}
                         isSelected={DeliveryTypeState.peymantType === 'online'}
                         onChange={() =>
                             setDeliveryTypeState({
@@ -267,29 +264,29 @@ const PaymentType = () => {
 
                     <PaymentOption
                         icon="https://cdn.builder.io/api/v1/image/assets/TEMP/a32a107c46e265516d4671cf353ef70a561fe879c4b02e34543c7628a8962265?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
-                        label="Hissə-hissə al"
-                        isSelected={DeliveryTypeState.peymantType === 'kredit'}
+                        label={translates.Hissə_hissə_al}
+                        isSelected={DeliveryTypeState.peymantType === 'credit'}
                         onChange={() =>
                             setDeliveryTypeState({
                                 ...DeliveryTypeState,
-                                peymantType: 'kredit',
+                                peymantType: 'credit',
                             })
                         }
                     />
                 </div>
             </div>
-            <KreditPOpUP show={DeliveryTypeState.peymantType === 'kredit'} />
+            <KreditPOpUP show={DeliveryTypeState.peymantType === 'credit'} />
         </section>
     );
 };
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ translates }) => {
     return (
         <>
             <div className="flex flex-col w-full max-w-[782px] max-md:px-4">
-                <PersonalInfo />
-                <DeliveryType />
-                <PaymentType />
+                <PersonalInfo translates={translates} />
+                <DeliveryType translates={translates} />
+                <PaymentType translates={translates} />
             </div>
         </>
     );

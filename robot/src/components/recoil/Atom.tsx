@@ -13,6 +13,10 @@ export const languageState = atom({
     key: 'languagestatekey',
     default: 'az',
 });
+export const RefetchBusked = atom({
+    key: 'RefetchBusked',
+    default: false,
+});
 export const deliveryTypeState = atom({
     key: 'deliveryTypeState',
     default: {

@@ -5,6 +5,8 @@ import GETRequest from '@/services/QueryREq';
 import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { RefetchBusked } from './recoil/Atom';
 function MonthlyPaymentBar({ monthOptions, kredit_items, oncange }) {
     const [selectedMonth, setSelectedMonth] = React.useState(0);
     console.log('monthOptions', monthOptions);
@@ -115,17 +117,13 @@ function KreditPOpUP({ show }) {
     const [selectedMonth, setSelectedMonth] = React.useState(3);
     const [Show, setShow] = React.useState(show);
     const [monthlyPayment, setMonthlyPayment] = React.useState(100);
+    const [refetchBusked, setRefetchBusked] = useRecoilState(RefetchBusked);
+
     const [kredit_items, setKredit_item] = React.useState([]);
     React.useEffect(() => {
         setShow(show);
     }, [show]);
     const queruqlient = useQueryClient();
-    const monthOptions = [
-        { months: 3, interest: 0 },
-        { months: 6, interest: 0 },
-        { months: 12, interest: 0 },
-        { months: 18, interest: 0 },
-    ];
 
     const products = [
         {
@@ -245,6 +243,7 @@ function KreditPOpUP({ show }) {
                                         toast.success('sucses');
                                         console.log('response', response);
                                         setShow(false);
+                                        setRefetchBusked(!refetchBusked);
                                         queruqlient.invalidateQueries({
                                             queryKey: ['basket_items'],
                                         });

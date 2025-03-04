@@ -197,13 +197,19 @@ export async function getServerSideProps(context) {
             headers: { 'Accept-Language': lang },
         });
         const choices = await choicesResponse.json();
-        const ProductBundle1Response = await fetch(`${baseUrl}/products?`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle1Response = await fetch(
+            `${baseUrl}/products?is_discounted=true`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle1 = await ProductBundle1Response.json();
-        const ProductBundle2Response = await fetch(`${baseUrl}/products`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const ProductBundle2Response = await fetch(
+            `${baseUrl}/products?page=2&is_discounted=true`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const ProductBundle2 = await ProductBundle2Response.json();
         return {
             props: {

@@ -9,12 +9,7 @@ import HelpSection from '@/components/sections/Help-Section';
 import AcsesuaresSection from '@/components/sections/Home-acsesuares';
 import VakumusHeroRight from '@/components/sections/Vakumus/heroRight';
 import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
-import {
-    get_Products_By_Param,
-    getChoices,
-    getSection,
-    getTranslates,
-} from '@/services/Requests';
+
 import { useRouter } from 'next/router';
 import React from 'react';
 const scrollToElement = (id) => {

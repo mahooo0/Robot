@@ -19,6 +19,8 @@ export default function WhyUs({ data }) {
     const { choices, translates, supports, advantages, hero } = data;
     const router = useRouter();
     const { lang } = router.query;
+    console.log('lang', lang);
+
     return (
         <div>
             <Header activeIndex={4} whyindex={1} />
@@ -50,7 +52,7 @@ export default function WhyUs({ data }) {
                                             linkText={
                                                 data.translates.Testdən_keç
                                             }
-                                            page={`/${lang}/${ROUTES.test[lang]}`}
+                                            page={`/${lang}/user/help`}
                                         />
                                     );
                                 } else if (index === 1) {
@@ -63,7 +65,7 @@ export default function WhyUs({ data }) {
                                             linkText={
                                                 data.translates.Bizimlə_əlaqə
                                             }
-                                            page={`/${lang}/${ROUTES.cotact[lang]}`}
+                                            page={`/${lang}/contact`}
                                         />
                                     );
                                 }
@@ -94,7 +96,7 @@ export default function WhyUs({ data }) {
                 </section>
                 <section className="my-[100px] lg:px-[145px] ">
                     <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
-                        Digər kateqoriyalar
+                        {translates.Digər_kateqoriyalar}
                     </h2>
                     <ProductCategories />
                 </section>

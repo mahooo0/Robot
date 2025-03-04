@@ -69,7 +69,7 @@ const ContactForm = ({ translates }) => {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="Ad və soyad"
+                                placeholder={translates?.Ad_və_soyad}
                                 className="overflow-hidden px-5 py-4 w-full bg-white border border-solid border-black border-opacity-10 rounded-[100px] max-md:max-w-full"
                                 aria-label="Ad və soyad"
                             />
@@ -95,7 +95,9 @@ const ContactForm = ({ translates }) => {
                                         className="w-full bg-transparent"
                                         aria-label="Kateqoriya seç"
                                     >
-                                        <option value="">Kateqoriya seç</option>
+                                        <option value="">
+                                            {translates?.Kateqoriya_seç}
+                                        </option>
                                         <option value="teklif">
                                             {translates.teklif}
                                         </option>
@@ -114,13 +116,13 @@ const ContactForm = ({ translates }) => {
                                 name="note"
                                 value={formData.note}
                                 onChange={handleChange}
-                                placeholder="Qeyd"
+                                placeholder={translates.Qeyd}
                                 className="overflow-hidden px-5 pt-4 pb-16 w-full bg-white rounded-3xl border border-solid border-black border-opacity-10 max-md:max-w-full"
                                 aria-label="Qeyd"
                             ></textarea>
                         </div>
                     </div>
-                    <Green_to_green> Göndər</Green_to_green>
+                    <Green_to_green> {translates.Göndər}</Green_to_green>
                 </div>
             </div>
         </form>

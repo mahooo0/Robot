@@ -4,20 +4,53 @@ import KreditMain from '@/components/Kredits';
 import KreditDetail from '@/components/Kredits/detail';
 import Settings from '@/components/Setting';
 import UserAside from '@/components/UserAside';
-import React from 'react';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 
 export default function Kredits({ Translates }) {
     console.log('Translates', Translates);
-
+    const router = useRouter();
+    const { lang, id } = router.query;
+    const { data: KreditDetailData } = GETRequest(
+        `/credit-detail/${id}`,
+        'credit-detail',
+        [lang, id]
+    );
+    useEffect(() => {
+        console.log('KreditDetailData', KreditDetailData);
+    }, [KreditDetailData]);
     return (
-        <div className="h-[100vh] w-full bg-[F1F5F0]   relative">
+        <div className=" w-full bg-[F1F5F0]   relative">
             <Header activeIndex={0} />
             <div className="flex flex-row h-full">
-                <div className=" w-[20%] h-[100%] mr-3">
+                <div className=" w-[20%]  mr-3">
                     <UserAside active={3} translates={Translates} />
                 </div>
-                {/* <KreditMain translates={Translates} /> */}
-                <KreditDetail />
+                <KreditDetail
+                    date={KreditDetailData?.date}
+                    productImage={KreditDetailData?.product.image}
+                    productName={KreditDetailData?.product.title}
+                    months={KreditDetailData?.product.month}
+                    interestRate={KreditDetailData?.product.percent}
+                    monthlyPayment={KreditDetailData?.product.monthly_payment}
+                    payments={KreditDetailData?.credit_items.map((item) => {
+                        return {
+                            date: item.date,
+                            amountDue: item.monthly_payment,
+                            amountPaid: 1,
+                            status: item.status,
+                            remainingAmount: item.remaining_amount,
+                        };
+                    })}
+                />
+                {/* {
+            date: 'string',
+            amountDue: 1,
+            amountPaid: 1,
+            status: 'string',
+            remainingAmount: 1,
+        }, */}
             </div>
             <Footer />
         </div>
@@ -34,6 +67,7 @@ export async function getServerSideProps(context) {
             headers: { 'Accept-Language': lang },
         });
         const Translates = await TranslatesResponse.json();
+
         return {
             props: {
                 Translates,

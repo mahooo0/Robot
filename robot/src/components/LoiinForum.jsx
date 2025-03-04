@@ -104,7 +104,7 @@ function LoginForum({ translates }) {
     return (
         <main className="flex flex-col max-w-[440px] mx-auto p-4">
             <header className="flex flex-col items-center self-center max-w-full text-center w-[360px]">
-                <h1 className="text-4xl font-semibold text-green-950">
+                <h1 className="text-3xl font-semibold text-green-950">
                     {translates?.Xoş_gəldiniz}!
                 </h1>
                 <p className="mt-3 text-base text-black text-opacity-80">
@@ -112,7 +112,7 @@ function LoginForum({ translates }) {
                 </p>
             </header>
 
-            <section className="flex flex-col mt-16 w-full">
+            <section className="flex flex-col mt-6 w-full">
                 <div className="flex gap-0.5 items-center self-center p-2 text-base font-medium bg-white rounded-[100px]">
                     <button
                         onClick={() => toggleView('login')}
@@ -147,7 +147,7 @@ function LoginForum({ translates }) {
                     onSubmit={handleSubmit}
                 >
                     {({ isSubmitting }) => (
-                        <Form className="flex flex-col mt-10 w-full">
+                        <Form className="flex flex-col mt-6 w-full">
                             {!isLogin && (
                                 <>
                                     <div className="flex flex-col w-full">

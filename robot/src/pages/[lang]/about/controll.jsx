@@ -243,18 +243,18 @@ export async function getServerSideProps(context) {
     const app_hero = await fetch(`${baseUrl}/section?type=app_hero`, {
         headers: { 'Accept-Language': lang },
     }).then((response) => response.json());
-    // const app_content = await fetch(`${baseUrl}/app_content`, {
-    //     headers: { 'Accept-Language': lang },
-    // }).then((response) => response.json());
+    const app_content = await fetch(`${baseUrl}/app_content`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
     const translates = await fetch(`${baseUrl}/translates`, {
         headers: { 'Accept-Language': lang },
     }).then((response) => response.json());
     const instructions = await fetch(`${baseUrl}/instructions`, {
         headers: { 'Accept-Language': lang },
     }).then((response) => response.json());
-    // const magical_word = await fetch(`${baseUrl}/magical_word`, {
-    //     headers: { 'Accept-Language': lang },
-    // }).then((response) => response.json());
+    const magical_word = await fetch(`${baseUrl}/magical_word`, {
+        headers: { 'Accept-Language': lang },
+    }).then((response) => response.json());
     const app_faqs = await fetch(`${baseUrl}/app_faqs`, {
         headers: { 'Accept-Language': lang },
     }).then((response) => response.json());
@@ -262,10 +262,10 @@ export async function getServerSideProps(context) {
     return {
         props: {
             app_hero,
-            app_content: {},
+            app_content,
             translates,
             instructions,
-            magical_word: {},
+            magical_word,
             app_faqs,
         },
     };

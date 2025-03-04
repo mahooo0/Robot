@@ -91,7 +91,7 @@ export default function Special_Offer_Login({
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
                         loading="lazy"
-                        src="https://s3-alpha-sig.figma.com/img/062a/6c94/e9387bfd561c7718aeb38d6d402d3173?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=W0RyGo8EKjkOurF5BZo~tcdPdKpcDy7OSbRtBz2QlDNDO50Hqtsdmzjq8Pa4j8ZvUCyXK2bbEzgkqcnV6q08pECi83cWjNhQI04IQomJlKAjTh1I7cfosI~SUJuNtVQj6jIUDo33wIr30JPaGSI-a~rtNjhuOJrnI8YcRI6Z7ys~QXkNdcxDY55HmwOQhC6kS0FEkWeVSXji-iJN9Vz64Lar4BGsSe9eQLEJpVxcHL~aDJkOruTsYNj3fI2u8DUt~hkai1geh8q680w07uZWSWOlwS28az70qiYvJ0c3p~sKr1AUkVLeu0jQjflkLx~cTHcUgAwuNdYIUcBDNCa~0Q__"
+                        src={Home_Special_Offers.image}
                         alt="Special offer illustration"
                         className="object-contain grow shrink-0 max-w-full aspect-[1.06] w-[343px] max-md:mt-10"
                     />
@@ -155,7 +155,7 @@ export default function Special_Offer_Login({
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
                         loading="lazy"
-                        src="https://s3-alpha-sig.figma.com/img/8f06/bda5/d6bb2e0cbb668f78f4572a4272c6d283?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NR4fBS0LYA2zb-FuV16A58E~JOj5ZCzOi8wvr6pSAJv~RLSFzAbeFojywLTUq5F17nTAYo3AClosB4yoaBY3X64ib0uRdCjc71OMXyldfBBvmk-J1lgCGpkV-r77j6sZUo5lRweQ2dF4xtLL2co0wapY0tf3-ER9pAQm1fcfBLBhRN5BNPw-zSfyDnpvQHE9Iq7-Hd-JTcD~a8cL77PM9j8Kr9Me~a~Siit1PCrxrVRKKWLBDtiBt8YaN6xseyCcfpqMCRZ9mm-LBSt-nGrg-kgTJvjm-PZ07ofltA9I2Bst9V6aZCfTfeA5cqbZMSrdmH87x61LLKflhhvq8r3yGQ__"
+                        src={Home_Special_Offers.image1}
                         alt="Special offer promotion"
                         className="object-contain grow shrink-0 mt-2 max-w-full aspect-[0.97] w-[303px] max-md:mt-10"
                     />

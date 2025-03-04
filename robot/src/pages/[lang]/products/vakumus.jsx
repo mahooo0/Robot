@@ -106,7 +106,7 @@ export default function category({
                 <HelpSection helpData={choices} translates={Translates} />
                 <section className="my-[100px] lg:px-[145px] ">
                     <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
-                        Digər kateqoriyalar
+                        {Translates.Digər_kateqoriyalar}
                     </h2>
                     <ProductCategories />
                 </section>

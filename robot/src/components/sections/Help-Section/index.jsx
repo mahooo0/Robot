@@ -54,9 +54,9 @@ export default function HelpSection({ helpData, translates }) {
                                 }
                                 page={
                                     index === 0
-                                        ? `/${lang}/test`
+                                        ? `/${lang}/user/help`
                                         : index === 1
-                                        ? `/${lang}/cotact`
+                                        ? `/${lang}/contact`
                                         : undefined
                                 }
                             />

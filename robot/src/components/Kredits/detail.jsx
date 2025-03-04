@@ -154,12 +154,14 @@ export default function KreditDetail({
                         <div>
                             <span
                                 className={`rounded-full px-2 py-1 text-xs ${
-                                    payment.status === 'Ödənilib'
+                                    payment.status === 1
                                         ? 'bg-green-100 text-green-700'
                                         : 'bg-red-100 text-red-700'
                                 }`}
                             >
-                                {payment.status}
+                                {payment.status === 1
+                                    ? 'odenilib'
+                                    : 'odenilmiyib'}
                             </span>
                         </div>
                         <div>{payment.remainingAmount} ₼</div>

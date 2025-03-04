@@ -215,7 +215,6 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         className="py-[18px] flex justify-center border-b border-solid border-gray-200 bg-[#ffffff] text-black relative"
                     >
-                        {/* Bottom section with navigation */}\{' '}
                         <div className="!px-[60px] mx-auto flex w-full items-center justify-between gap-5 lg:flex-row flex-col-reverse md:px-5">
                             <ul className="flex gap-5 flex-row text-nowrap flex-wrap ">
                                 <ProductNav
@@ -312,7 +311,7 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                 ? { opacity: 100, zIndex: 40 }
                                 : { opacity: 0, display: 'none' }
                         }
-                        className="top-[100%] bg-black bg-opacity-50 backdrop-blur-sm w-[100vw] h-[100vh] duration-300 inset-0"
+                        className="top-[100%] bg-black bg-opacity-50 backdrop-blur-sm w-full h-[100vh] duration-300 inset-0"
                     >
                         <div
                             className="w-fit absolute top-3 z-40 right-[30px]"

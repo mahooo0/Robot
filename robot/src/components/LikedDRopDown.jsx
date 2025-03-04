@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import GETRequest from '@/services/QueryREq';
 import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
-import { useQueryClient } from '@tanstack/react-query';
-import { ROUTES } from '@/Helpers/Routes';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useRecoilState } from 'recoil';
+import { RefetchBusked } from './recoil/Atom';
 
 const cartItems = [
     {
@@ -27,6 +28,7 @@ function LikedDrop({ show_shop_modal }) {
     const [items, setItems] = useState(cartItems);
     const router = useRouter();
     const queryClient = useQueryClient();
+    const [refetchBusked, setRefetchBusked] = useRecoilState(RefetchBusked);
     const updateQuantity = async (id, change) => {
         // setItems((prevItems) =>
         //     prevItems.map((item) =>
@@ -77,8 +79,9 @@ function LikedDrop({ show_shop_modal }) {
                 }
             )
             .then(() => {
-                toast.success('Basket item deleted ');
                 queryClient.invalidateQueries({ queryKey: ['basket_items'] });
+                setRefetchBusked(!refetchBusked);
+                toast.success('Basket item deleted ');
             })
             .catch((error) => {
                 console.log('Basket Error ', error);
@@ -91,11 +94,29 @@ function LikedDrop({ show_shop_modal }) {
     );
     const { lang = 'az' } = router.query;
 
-    const { data: basked, isLoading: baskedLoading } = GETRequest(
-        `/basket_items`,
-        'basket_items',
-        [lang, show_shop_modal]
-    );
+    // const { data: basked, isLoading: baskedLoading } = GETRequest(
+    //     `/basket_items`,
+    //     'basket_items',
+    //     [lang, show_shop_modal]
+    // );
+
+    const { data: basked, isLoading: baskedLoading } = useQuery({
+        queryKey: ['basket_items', show_shop_modal, refetchBusked],
+        queryFn: async () => {
+            const userStr = localStorage.getItem('user-info');
+            const getData = await axiosInstance.get('/basket_items', {
+                headers: {
+                    'Accept-Language': lang,
+                    Authorization: userStr
+                        ? `Bearer ${JSON.parse(userStr).token}`
+                        : '',
+                },
+            });
+            return getData.data;
+        },
+        staleTime: 1000 * 60 * 60,
+    });
+
     const { data: translates } = GETRequest(`/translates`, 'translates', [
         lang,
     ]);
@@ -126,7 +147,7 @@ function LikedDrop({ show_shop_modal }) {
             </div>
             <hr className="shrink-0 mt-5 max-w-full h-px border border-solid border-black border-opacity-10 w-[431px] " />
             <div className="w-full h-[300px] overflow-y-scroll px-5 overflow-x-hidden srollbar">
-                {baskedLoading
+                {show_shop_modal && baskedLoading
                     ? Array.from({ length: 5 }).map((_, i) => (
                           <React.Fragment key={i}>
                               <div className="flex flex-col w-full max-md:max-w-full">

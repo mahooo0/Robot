@@ -1,15 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Green_to_green from './btns/green_to_green';
 import { InstallmentPayment } from './mouthly_period';
 import Green_to_none from './btns/green_to_none';
 import { axiosInstance } from '@/services/Requests';
 import toast from 'react-hot-toast';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
+import { useQueryClient } from '@tanstack/react-query';
 
 function BuyProduct({ product, translates }) {
     const [selectedColor, setSelectedColor] = useState('Qara');
     const [isliked, setIsliked] = useState(false);
-    const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
+    const [includes, setincludes] = useState(false);
 
+    const router = useRouter();
+    const { lang } = router.query;
+    const { data: favorites } = GETRequest(`/favorites`, 'favorites', [lang]);
+    const checkLikedProducts = () => {
+        if (favorites?.some((item) => item.product.id === product?.id)) {
+            setIsliked(true);
+        } else {
+            setIsliked(false);
+        }
+    };
+    useEffect(() => {
+        // Initial check on render
+        checkLikedProducts();
+    }, [favorites]);
+    const { data: basked } = GETRequest(`/basket_items`, 'basket_items', [
+        lang,
+    ]);
+    useEffect(() => {
+        if (
+            basked?.basket_items.find((item) => item.product.id === product?.id)
+        ) {
+            console.log('include');
+            setincludes(true);
+        }
+        basked?.basket_items;
+        // // Initial check on render
+        // // checkLikedProducts();
+    }, [basked]);
     const addToBasket = async (Data) => {
         const response = await axiosInstance
             .post(
@@ -28,6 +59,7 @@ function BuyProduct({ product, translates }) {
             )
             .then(() => {
                 toast.success('sucses');
+                setincludes(true);
                 // queryClient.invalidateQueries({ queryKey: ['basket_items'] });
             })
             .catch(() => {
@@ -36,6 +68,7 @@ function BuyProduct({ product, translates }) {
         // return response.data;
     };
     console.log('product', product);
+    const queryClient = useQueryClient();
 
     return (
         <div className="flex flex-col lg:w-1/2 w-full max-md:mt-10 max-md:max-w-full">
@@ -139,30 +172,76 @@ function BuyProduct({ product, translates }) {
             <div className="flex lg:flex-row flex-col  gap-2 items-center mt-10 w-full text-base font-medium text-white max-md:max-w-full">
                 {' '}
                 <Green_to_green
-                    classNAME="w-1/2"
-                    action={async () => {
-                        const userStr = localStorage.getItem('user-info');
-                        if (userStr) {
-                            const user = JSON.parse(userStr);
+                    classNAME="w-full"
+                    action={
+                        includes
+                            ? () => {}
+                            : async () => {
+                                  const userStr =
+                                      localStorage.getItem('user-info');
+                                  if (userStr) {
+                                      const user = JSON.parse(userStr);
 
-                            await addToBasket({
-                                product_id: product?.id,
-                                quantity: 1,
-                                price: +product?.discounted_price,
-                                token: user.token,
-                            });
-                        }
-                    }}
+                                      await addToBasket({
+                                          product_id: product?.id,
+                                          quantity: 1,
+                                          price: +product?.discounted_price,
+                                          token: user.token,
+                                      });
+                                  }
+                              }
+                    }
                 >
-                    {translates.Səbətə_əlavə_et}
+                    {includes
+                        ? translates?.sebete_eleve_olunub
+                        : translates.Səbətə_əlavə_et}
                 </Green_to_green>
-                <Green_to_none classNAME="w-1/2">
+                {/* <Green_to_none classNAME="w-1/2">
                     {translates.İndi_al}
-                </Green_to_none>
+                </Green_to_none> */}
                 <button
                     aria-label="Add to favorites"
                     className="bg-[#E7F0E4] w-[52px] h-[52px] rounded-full flex justify-center items-center   "
-                    onClick={() => setIsliked((prew) => !prew)}
+                    onClick={async () => {
+                        const userStr = localStorage.getItem('user-info');
+                        if (userStr) {
+                            const User = JSON.parse(userStr);
+                            console.log('User', User);
+
+                            if (User) {
+                                axiosInstance
+                                    .post(
+                                        '/favorites/toggleFavorite',
+                                        { product_id: product?.id },
+                                        {
+                                            headers: {
+                                                Authorization: `Bearer ${User.token}`,
+                                                Accept: 'application/json',
+                                            },
+                                        }
+                                    )
+                                    .then(() => {
+                                        // toast.success(
+                                        //     'Product is sucsesfully aded to favorites'
+                                        // );
+                                        if (isliked) {
+                                            setIsliked(false);
+                                        } else {
+                                            setIsliked(true);
+                                        }
+                                        queryClient.invalidateQueries({
+                                            queryKey: ['favorites'],
+                                        });
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                    });
+                            }
+                        } else {
+                            router.push(`/${lang}/login_register`);
+                            // navigate();
+                        }
+                    }}
                 >
                     <img
                         loading="lazy"

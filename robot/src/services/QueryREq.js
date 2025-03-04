@@ -30,7 +30,7 @@ export default function GETRequest(api, querykey, dependencies, params) {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60, // 1 hour
+        staleTime: 1000 * 60 * 60,
     });
 
     return { data, isLoading, isError };

@@ -11,7 +11,14 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 export default function App({ Component, pageProps }) {
-    const queryClient = new QueryClient();
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                gcTime: 5 * 60 * 1000,
+                staleTime: 60 * 1000,
+            },
+        },
+    });
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 

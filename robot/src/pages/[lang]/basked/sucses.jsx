@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
+import { useRouter } from 'next/router';
 export default function Sucses({ Translates }) {
     useEffect(() => {
         const duration = 6 * 1000;
@@ -47,7 +48,8 @@ export default function Sucses({ Translates }) {
         return () => clearInterval(interval);
     }, []);
     console.log('Translates', Translates);
-
+    const router = useRouter();
+    const { lang } = router.query;
     return (
         <div>
             <Header />
@@ -66,10 +68,16 @@ export default function Sucses({ Translates }) {
                     </p>
                 </div>
                 <div className="flex felx-row gap-4 mt-[40px] justify-center">
-                    <button className="px-[71px] py-[14px] bg-[#69BE56] text-white flex justify-between rounded-[100px]">
+                    <button
+                        onClick={() => router.push(`/${lang}/user/orders`)}
+                        className="px-[71px] py-[14px] bg-[#69BE56] text-white flex justify-between rounded-[100px]"
+                    >
                         {Translates.Sifarişini_izlə}
                     </button>
-                    <button className="px-[71px] py-[14px] border bg-[#ffffff] text-black flex justify-center items-center flex-row gap-2 rounded-[100px]">
+                    <button
+                        onClick={() => router.push(`/${lang}`)}
+                        className="px-[71px] py-[14px] border bg-[#ffffff] text-black flex justify-center items-center flex-row gap-2 rounded-[100px]"
+                    >
                         {Translates.Ana_səhifəyə_qayıt}
                         <svg
                             width="24"

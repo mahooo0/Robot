@@ -19,7 +19,7 @@ const cartItems = [
     },
 ];
 
-function ShoppingCart({ basked }) {
+function ShoppingCart({ basked, translates }) {
     return (
         <main className="flex  gap-5 justify-between items-start mt-10 lg:flex-row  flex-col ">
             <section className="flex flex-col max-md:max-w-full lg:w-[75%] w-full lg:border-r-2 md:border-r-2  border-none pr-[40px] border-black border-opacity-10 ">
@@ -31,7 +31,7 @@ function ShoppingCart({ basked }) {
                 ))}
             </section>
             {/* <div className="shrink-0 self-stretch w-px border border-solid border-black border-opacity-10 h-[480px]" /> */}
-            <OrderSummary basked={basked} />
+            <OrderSummary basked={basked} translates={translates} />
         </main>
     );
 }

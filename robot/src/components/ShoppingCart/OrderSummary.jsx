@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Green_to_green from '../btns/green_to_green';
 import { useRouter } from 'next/router';
 import GETRequest from '@/services/QueryREq';
@@ -78,14 +78,15 @@ function ProductCardKredit() {
             </section>
         );
 }
-function OrderSummary({ isConfrim, basked }) {
+function OrderSummary({ isConfrim, basked, translates }) {
     const router = useRouter();
     const { lang = 'az' } = router.query;
     const [DeliveryTypeState, setDeliveryTypeState] =
         useRecoilState(deliveryTypeState);
-    const { data: translates } = GETRequest(`/translates`, 'translates', [
-        lang,
-    ]);
+    // const { data: translates } = GETRequest(`/translates`, 'translates', [
+    //     lang,
+    // ]);
+    useEffect(() => {}, [basked]);
     const [isLoading, setIsLoading] = React.useState(false);
     const queryClient = useQueryClient();
     return (
@@ -184,7 +185,9 @@ function OrderSummary({ isConfrim, basked }) {
                                     }
                                 }}
                             >
-                                {isLoading ? 'Loading...' : 'testiq'}
+                                {isLoading
+                                    ? 'Loading...'
+                                    : translates?.Sifariş_et}
                             </Green_to_green>
                         ) : (
                             <Green_to_green

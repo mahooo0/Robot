@@ -22,7 +22,20 @@ export default function KreditMain({ translates }) {
                 </h1>
             </div>
             <div className="flex flex-col gap-3 mt-4 ">
-                {loading ? <>loading</> : credits.map(() => <KreditCard />)}
+                {loading ? (
+                    <>loading</>
+                ) : (
+                    credits.map((item) => (
+                        <KreditCard
+                            image={item.product.image}
+                            date={item.date}
+                            title={item.product.title}
+                            duration={item.month}
+                            price={item.price}
+                            href={`/${lang}/user/kredits/${item.id}`}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

@@ -1,37 +1,41 @@
 import { ROUTES } from '@/Helpers/Routes';
 import GETRequest from '@/services/QueryREq';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion'; // Import motion from framer-motion
 import { useRouter } from 'next/router';
+import { axiosInstance } from '@/services/Requests';
+import toast from 'react-hot-toast';
 
 function Footer() {
     const router = useRouter();
     const { lang = 'az' } = router.query;
-
+    const { data: translates } = GETRequest(`/translates`, 'translates', [
+        lang,
+    ]);
     const productLinks = [
         {
-            text: 'Məhsulları müqayisə et',
+            text: translates?.Məhsulları_müqayisə_et,
             opacity: '90',
             page: `/${lang}/products/compare`,
         },
         {
-            text: 'Hansı məhsul mənə uyğundur?',
+            text: translates?.Hansı_məhsul_mənə_uyğundur,
             page: `/${lang}/user/help`,
             opacity: '80',
         },
         {
-            text: 'Braava Robot Mops',
+            text: translates?.Braava_Robot_Mops,
             page: `/${lang}/products/mop`,
             opacity: '90',
         },
         {
-            text: 'İrobot Paket məhsullar',
+            text: translates?.İrobot_Paket_məhsullar,
             page: `/${lang}/products/bundles`,
             opacity: '90',
         },
         {
-            text: 'Roomba Robot Vacuums',
+            text: translates?.Roomba_Robot_Vacuums,
             page: `/${lang}/products/vakumus`,
             opacity: '90',
         },
@@ -40,10 +44,10 @@ function Footer() {
     console.log('data', data);
 
     const supportLinks = [
-        { text: 'Bizimlə əlaqə', page: `/${lang}/contact` },
-        { text: 'Sifarişi izlə', page: `/${lang}/user/orders` },
-        { text: 'Qaydalar və şərtlər', page: '#' },
-        { text: 'Geri qaytarmalar', page: '#' },
+        { text: translates?.Bizimlə_əlaqə, page: `/${lang}/contact` },
+        { text: translates?.Sifarişi_izlə, page: `/${lang}/user/orders` },
+        { text: translates?.Qaydalar_və_şərtlər, page: '#' },
+        { text: translates?.Geri_qaytarmalar, page: '#' },
     ];
 
     const socialIcons = [
@@ -68,7 +72,21 @@ function Footer() {
             alt: 'Social media icon 5',
         },
     ];
+    const [email, setEmail] = useState('');
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('Submitted Email:', email);
+        axiosInstance
+            .post(`subscribe`, { email: email })
+            .then(() => {
+                toast.success('sucsesfully subscribed');
+            })
+            .catch((err) => {
+                console.log('err', err);
+                toast.error('some thing went wrong ');
+            });
+    };
     return (
         <footer className="flex overflow-hidden flex-col pt-11 pb-7 w-full bg-neutral-950 max-md:max-w-full">
             <img
@@ -83,7 +101,7 @@ function Footer() {
                     <div className="flex gap-10 items-start min-w-[240px] max-md:max-w-full flex-wrap">
                         <nav className="flex flex-col w-[218px]">
                             <h2 className="text-base font-medium text-white">
-                                Məhsullar
+                                {translates?.Məhsullar}
                             </h2>
                             <ul className="flex flex-col mt-5 max-w-full text-sm text-white w-[218px]">
                                 {productLinks.map((link, index) => (
@@ -105,7 +123,7 @@ function Footer() {
                         </nav>
                         <nav className="flex flex-col w-[134px]">
                             <h2 className="text-base font-medium text-white">
-                                Dəstək
+                                {translates?.Dəstək}
                             </h2>
                             <ul className="flex flex-col mt-5 max-w-full text-sm text-white text-opacity-90 w-[134px]">
                                 {supportLinks.map((link, index) => (
@@ -128,12 +146,14 @@ function Footer() {
                     </div>
                     <section className="flex flex-col min-w-[240px] w-[423px] max-md:max-w-full">
                         <p className="text-sm text-white">
-                            iRobot'tan en son teklifler, yeni ürünler ve daha
-                            fazlası için e-posta adresinizi aşağıya girin.
+                            {translates?.Footer_desc}
                         </p>
-                        <form className="flex overflow-hidden gap-5 justify-between py-1.5 pr-1.5 pl-4 mt-5 w-full border border-solid bg-white bg-opacity-0 border-white border-opacity-10 rounded-[100px] max-md:max-w-full flex-nowrap">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="flex overflow-hidden gap-5 justify-between py-1.5 pr-1.5 pl-4 mt-5 w-full border border-solid bg-white bg-opacity-0 border-white border-opacity-10 rounded-[100px] max-md:max-w-full flex-nowrap"
+                        >
                             <label htmlFor="email" className="sr-only">
-                                Email
+                                {translates?.Email}
                             </label>
                             <div className="flex gap-2 items-center my-auto text-base whitespace-nowrap text-white text-opacity-60">
                                 <img
@@ -146,6 +166,8 @@ function Footer() {
                                     type="email"
                                     id="email"
                                     placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="bg-transparent border-none text-white text-opacity-60 focus:outline-none w-full"
                                 />
                             </div>
@@ -153,7 +175,7 @@ function Footer() {
                                 type="submit"
                                 className="gap-2.5 self-stretch px-6 py-3 text-sm font-medium text-white bg-[#69BE56] rounded-[100px] max-md:px-5 text-nowrap"
                             >
-                                Abunə ol
+                                {translates?.Abunə_ol}
                             </button>
                         </form>
                     </section>
@@ -170,7 +192,7 @@ function Footer() {
                                     loading="lazy"
                                     src={icon.icon}
                                     alt={icon.title}
-                                    className="object-contain shrink-0 self-stretch my-auto w-10 rounded-lg aspect-square"
+                                    className="object-contain shrink-0 self-s</Link>tretch my-auto w-10 rounded-lg aspect-square"
                                 />
                             </Link>
                         </motion.div>

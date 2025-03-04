@@ -84,9 +84,12 @@ export async function getServerSideProps(context) {
             headers: { 'Accept-Language': lang },
         });
         const Translates = await TranslatesResponse.json();
-        const AccessoryesResponse = await fetch(`${baseUrl}/accessories`, {
-            headers: { 'Accept-Language': lang },
-        });
+        const AccessoryesResponse = await fetch(
+            `${baseUrl}/accessories?is_discounted=true`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        );
         const Accessoryes = await AccessoryesResponse.json();
         const AccessorySeriesResponse = await fetch(
             `${baseUrl}/accessorySeries`,
