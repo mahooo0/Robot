@@ -11,15 +11,21 @@ export default function Help({ translates }) {
     const [progress, setProgress] = useState(1);
     const [floor, setfloor] = useState(1);
     const router = useRouter();
-
+    const { lang = 'az' } = router.query;
     // const { translates } = data || {};
     // console.log('translates', translates);
     const handleProgressChange = (event) => {
         setProgress(event.target.value);
     };
-    const ProductCard = ({ image, img_alt, title, price }) => {
+    const ProductCard = ({ image, img_alt, title, price, slug }) => {
         return (
-            <article className="flex overflow-hidden flex-col grow shrink self-stretch px-6 pt-6 pb-10 my-auto rounded-3xl bg-[#87A28E] min-w-[240px] w-[315px] max-md:px-5">
+            <article
+                onClick={() => {
+                    localStorage.setItem('Productslug', JSON.stringify(slug)),
+                        router.push(`/${lang}/products/${slug[lang]}`);
+                }}
+                className="flex overflow-hidden flex-col grow shrink self-stretch px-6 pt-6 pb-10 my-auto rounded-3xl bg-[#87A28E] min-w-[240px] w-[315px] max-md:px-5"
+            >
                 <img
                     loading="lazy"
                     src={image}
@@ -44,9 +50,9 @@ export default function Help({ translates }) {
                         </div>
                     </div>
                 </div>
-                <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 text-base font-medium bg-white hover:bg-[#69BE56] duration-300 hover:text-white rounded-[100px] text-green-950 max-md:px-5">
+                {/* <button className="gap-2.5 self-stretch px-7 py-3.5 mt-7 text-base font-medium bg-white hover:bg-[#69BE56] duration-300 hover:text-white rounded-[100px] text-green-950 max-md:px-5">
                     {translates?.Səbətə_əlavə_et}
-                </button>
+                </button> */}
                 <button className="gap-2.5 self-stretch px-7 py-3.5 mt-3 text-base font-medium border border-white border-solid rounded-[100px] max-md:px-5">
                     {translates?.Məhsula_bax}
                 </button>
@@ -54,7 +60,6 @@ export default function Help({ translates }) {
         );
     };
 
-    const { lang = 'az' } = router.query;
     console.log('selectedOption', selectedOption);
     console.log('progress', progress);
     console.log('floor', floor);
@@ -189,11 +194,11 @@ export default function Help({ translates }) {
                                         {/* <div className="flex flex-col ml-5 w-[19%] max-md:ml-0 max-md:w-full"></div> */}
                                     </div>
                                 </div>
-                                <div className="flex flex-wrap gap-10 self-end mt-24 max-w-full w-[553px] max-md:mt-10 max-md:mr-2">
+                                <div className="flex  gap-10 max-sm:gap-2 self-end mt-24 max-w-full w-[553px] max-md:mt-10 max-md:mr-2">
                                     <div className="flex flex-auto gap-3 items-center my-auto">
-                                        <div className="flex shrink-0 self-stretch my-auto h-3 bg-white rounded-3xl lg:w-[126px] md:w-[126px] w-[90px]" />
-                                        <div className="flex shrink-0 self-stretch my-auto h-3 rounded-3xl bg-white bg-opacity-40 lg:w-[126px] md:w-[126px] w-[90px]" />
-                                        <div className="flex shrink-0 self-stretch my-auto h-3 rounded-3xl bg-white bg-opacity-40 lg:w-[126px] md:w-[126px] w-[90px]" />
+                                        <div className="flex shrink-0 self-stretch my-auto h-3 bg-white rounded-3xl lg:w-[126px] md:w-[126px] w-[50px]" />
+                                        <div className="flex shrink-0 self-stretch my-auto h-3 rounded-3xl bg-white bg-opacity-40 lg:w-[126px] md:w-[126px] w-[50px]" />
+                                        <div className="flex shrink-0 self-stretch my-auto h-3 rounded-3xl bg-white bg-opacity-40 lg:w-[126px] md:w-[126px] w-[50px]" />
                                     </div>
                                     <button
                                         className="flex gap-2 items-center py-0.5 text-base font-medium text-white"

@@ -8,6 +8,7 @@ import ProductCategories from '@/components/ProductCategorys';
 import HelpSection from '@/components/sections/Help-Section';
 import VakumusHero from '@/components/sections/Vakumus/hero';
 import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 const scrollToElement = (id) => {
@@ -20,7 +21,7 @@ export default function Paket({
     Translates,
     Vakumus_Hero,
     ProductBundle1,
-
+    seo,
     choices,
     Home_acsesuares,
 }) {
@@ -74,31 +75,38 @@ export default function Paket({
     const router = useRouter();
 
     return (
-        <div>
-            {' '}
-            <Header activeIndex={1} productIndex={1} />
-            <main>
+        <>
+            <Head>
+                <title>{seo.meta_title}</title>
+                <meta name="description" content={seo.meta_description} />
+                <meta name="keywords" content={seo.meta_keywords} />
+            </Head>{' '}
+            <div>
                 {' '}
-                <VakumusHero
-                    Vakumus_Hero={Vakumus_Hero}
-                    Translates={Translates}
-                />
-                <section className="w-full  mt-[100px]" id="vakumus">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center">
-                        {Translates?.Sərt_səthlərdəki}{' '}
-                    </h2>
-                    <ProductBundle ProductBundle1={ProductBundle1.data} />
-                </section>
-                <HelpSection helpData={choices} translates={Translates} />
-                <section className="my-[100px] lg:px-[145px] ">
-                    <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
-                        {Translates.Digər_kateqoriyalar}
-                    </h2>
-                    <ProductCategories />
-                </section>
-            </main>
-            <Footer />
-        </div>
+                <Header activeIndex={1} productIndex={1} />
+                <main>
+                    {' '}
+                    <VakumusHero
+                        Vakumus_Hero={Vakumus_Hero}
+                        Translates={Translates}
+                    />
+                    <section className="w-full  mt-[100px]" id="vakumus">
+                        <h2 className="text-[#447355] text-[40px] font-semibold text-center">
+                            {Translates?.Sərt_səthlərdəki}{' '}
+                        </h2>
+                        <ProductBundle ProductBundle1={ProductBundle1.data} />
+                    </section>
+                    <HelpSection helpData={choices} translates={Translates} />
+                    <section className="my-[100px] lg:px-[145px] ">
+                        <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
+                            {Translates.Digər_kateqoriyalar}
+                        </h2>
+                        <ProductCategories />
+                    </section>
+                </main>
+                <Footer />
+            </div>
+        </>
     );
 }
 export async function getServerSideProps(context) {
@@ -113,6 +121,12 @@ export async function getServerSideProps(context) {
                 headers: { 'Accept-Language': lang },
             }
         );
+        const seo = await fetch(
+            `https://irobot.avtoicare.az/api/seo_pages?type=mop`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        ).then((response) => response.json());
         const Home_acsesuaresResponse = await fetch(
             `${baseUrl}/section?type=Home_acsesuares`,
             {
@@ -146,7 +160,7 @@ export async function getServerSideProps(context) {
                 Translates,
                 Vakumus_Hero,
                 ProductBundle1,
-
+                seo,
                 choices,
                 Home_acsesuares,
             },

@@ -13,6 +13,9 @@ function Footer() {
     const { data: translates } = GETRequest(`/translates`, 'translates', [
         lang,
     ]);
+    const { data: logo, isLoading: logoLoading } = GETRequest(`/logo`, 'logo', [
+        lang,
+    ]);
     const productLinks = [
         {
             text: translates?.Məhsulları_müqayisə_et,
@@ -46,8 +49,11 @@ function Footer() {
     const supportLinks = [
         { text: translates?.Bizimlə_əlaqə, page: `/${lang}/contact` },
         { text: translates?.Sifarişi_izlə, page: `/${lang}/user/orders` },
-        { text: translates?.Qaydalar_və_şərtlər, page: '#' },
-        { text: translates?.Geri_qaytarmalar, page: '#' },
+        {
+            text: translates?.Qaydalar_və_şərtlər,
+            page: `/${lang}/privacy-policy`,
+        },
+        { text: translates?.Geri_qaytarmalar, page: `/${lang}/privacy-policy` },
     ];
 
     const socialIcons = [
@@ -91,7 +97,7 @@ function Footer() {
         <footer className="flex overflow-hidden flex-col pt-11 pb-7 w-full bg-neutral-950 max-md:max-w-full">
             <img
                 loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/5f060ee9f104ed380ef1d7c8af2e078a619de7661b3f83b01a5e731b49d11667?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2"
+                src={logo?.image}
                 alt="Company logo"
                 className="object-contain self-center w-40 max-w-full aspect-[3.91]"
             />

@@ -9,6 +9,7 @@ import HelpSection from '@/components/sections/Help-Section';
 import AcsesuaresSection from '@/components/sections/Home-acsesuares';
 import VakumusHeroRight from '@/components/sections/Vakumus/heroRight';
 import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
+import Head from 'next/head';
 
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -26,51 +27,59 @@ export default function Paket({
     ProductBundle3,
     Home_acsesuares,
     choices,
+    seo,
 }) {
     // const router = useRouter();
     return (
-        <div>
-            {' '}
-            <Header activeIndex={1} productIndex={3} />
-            <main>
+        <>
+            <Head>
+                <title>{seo.meta_title}</title>
+                <meta name="description" content={seo.meta_description} />
+                <meta name="keywords" content={seo.meta_keywords} />
+            </Head>{' '}
+            <div>
                 {' '}
-                <VakumusHeroRight
-                    Vakumus_Hero={Vakumus_Hero}
-                    Translates={Translates}
-                />
-                <section className="w-full  mt-[100px]" id="vakumus">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center">
-                        {Translates?.Ən_güclü_təmizlik}{' '}
-                    </h2>
-                    <ProductBundle ProductBundle1={ProductBundle1.data} />
-                </section>
-                <section className="w-full mt-[100px] bg-[#ECF3EA] py-[100px]">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center ">
-                        {Translates?.Döşəmə_təmizliyinə}
-                    </h2>
+                <Header activeIndex={1} productIndex={3} />
+                <main>
+                    {' '}
+                    <VakumusHeroRight
+                        Vakumus_Hero={Vakumus_Hero}
+                        Translates={Translates}
+                    />
+                    <section className="w-full  mt-[100px]" id="vakumus">
+                        <h2 className="text-[#447355] text-[40px] font-semibold text-center">
+                            {Translates?.Ən_güclü_təmizlik}{' '}
+                        </h2>
+                        <ProductBundle ProductBundle1={ProductBundle1.data} />
+                    </section>
+                    <section className="w-full mt-[100px] bg-[#ECF3EA] py-[100px]">
+                        <h2 className="text-[#447355] text-[40px] font-semibold text-center ">
+                            {Translates?.Döşəmə_təmizliyinə}
+                        </h2>
 
-                    <ProductBundle ProductBundle1={ProductBundle2.data} />
-                </section>
-                <section className="w-full mt-[100px]  ">
-                    <h2 className="text-[#447355] text-[40px] font-semibold text-center max-w-[985px]  self-center mx-auto">
-                        {Translates?.Eksklüziv_robot_və}
-                    </h2>
-                    <ProductBundle ProductBundle1={ProductBundle3.data} />
-                </section>
-                <AcsesuaresSection
-                    Home_acsesuares={Home_acsesuares}
-                    Translates={Translates}
-                />{' '}
-                <HelpSection helpData={choices} translates={Translates} />
-                <section className="my-[100px] lg:px-[145px] ">
-                    <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
-                        {Translates.Digər_kateqoriyalar}
-                    </h2>
-                    <ProductCategories />
-                </section>
-            </main>
-            <Footer />
-        </div>
+                        <ProductBundle ProductBundle1={ProductBundle2.data} />
+                    </section>
+                    <section className="w-full mt-[100px]  ">
+                        <h2 className="text-[#447355] text-[40px] font-semibold text-center max-w-[985px]  self-center mx-auto">
+                            {Translates?.Eksklüziv_robot_və}
+                        </h2>
+                        <ProductBundle ProductBundle1={ProductBundle3.data} />
+                    </section>
+                    <AcsesuaresSection
+                        Home_acsesuares={Home_acsesuares}
+                        Translates={Translates}
+                    />{' '}
+                    <HelpSection helpData={choices} translates={Translates} />
+                    <section className="my-[100px] lg:px-[145px] ">
+                        <h2 className="text-[40px] font-semibold text-center text-[#447355] ">
+                            {Translates.Digər_kateqoriyalar}
+                        </h2>
+                        <ProductCategories />
+                    </section>
+                </main>
+                <Footer />
+            </div>
+        </>
     );
 }
 export async function getServerSideProps(context) {
@@ -79,6 +88,12 @@ export async function getServerSideProps(context) {
 
     try {
         // Fetch data sequentially
+        const seo = await fetch(
+            `https://irobot.avtoicare.az/api/seo_pages?type=bundles`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        ).then((response) => response.json());
         const Vakumus_HeroResponse = await fetch(
             `${baseUrl}/section?type=Bundles_Hero`,
             {
@@ -138,6 +153,7 @@ export async function getServerSideProps(context) {
                 ProductBundle3,
                 choices,
                 Home_acsesuares,
+                seo,
             },
         };
     } catch (error) {

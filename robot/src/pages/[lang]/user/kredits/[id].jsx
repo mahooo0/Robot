@@ -43,6 +43,7 @@ export default function Kredits({ Translates }) {
                             remainingAmount: item.remaining_amount,
                         };
                     })}
+                    Translates={Translates}
                 />
                 {/* {
             date: 'string',

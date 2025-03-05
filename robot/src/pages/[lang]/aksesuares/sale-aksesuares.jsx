@@ -8,69 +8,50 @@ import SaleAcsesuaresHero from '@/components/sections/Help-Section/SaleAcsesuare
 import ProductBundle from '@/components/sections/Vakumus/ProductBundle';
 import { getChoices } from '@/services/Requests';
 import HelpSection from '@/components/sections/Help-Section';
+import Head from 'next/head';
 
 export default function SaleAksesuares({
     accessoryCategories,
     Accessoryes,
     choices,
     Translates,
+    seo,
 }) {
     console.log('Accessoryes', Accessoryes);
 
-    const helpData = [
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/3bcd91055783e850ce350db9e3b1e18a036771ee4dbb602d047b0e9ceee40d68?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Testdən keç',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Testdən keç',
-            page: '/user/help',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/274fcf70462b6cfce6ed1a77a92ed79c22246f989eba9ebe4321020077cf9d53?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Ekspert məsləhəti',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-            linkText: 'Bizimlə əlaqə',
-            page: '/contact',
-        },
-        {
-            imageSrc:
-                'https://cdn.builder.io/api/v1/image/assets/TEMP/79161b1f02d51e9a189b3e58d236194f37f61ff45fdcf797e0654e2adb59b400?placeholderIfAbsent=true&apiKey=c6f3c7bb740649e5a32c147b3037a1c2',
-            title: 'Mağazamıza yaxınlaş',
-            description:
-                'Hansı məhsulun sizin üçün uyğun olduğunu müəyyən etmək üçün məhsul testimizdə bir neçə sadə suala cavab verin. Testdən keçin',
-        },
-    ];
-
     return (
-        <div>
-            {' '}
-            <Header activeIndex={3} offerindex={1} />
-            <main className="mb-[100px]">
-                <SaleAcsesuaresHero
-                    accessoryCategories={accessoryCategories}
-                    Translates={Translates}
-                />
+        <>
+            <Head>
+                <title>{seo.meta_title}</title>
+                <meta name="description" content={seo.meta_description} />
+                <meta name="keywords" content={seo.meta_keywords} />
+            </Head>{' '}
+            <div>
+                {' '}
+                <Header activeIndex={3} offerindex={1} />
+                <main className="mb-[100px]">
+                    <SaleAcsesuaresHero
+                        accessoryCategories={accessoryCategories}
+                        Translates={Translates}
+                    />
 
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#ECF3EA] py-[100px]">
-                    <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
-                        {Translates._Endirim}{' '}
-                    </h2>
-                    <ProductBundle ProductBundle1={Accessoryes.data} />
-                </section>
-                <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#FFFFFF] py-[100px]">
-                    <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
-                        {Translates.Digər_aksesuarlar}
-                    </h2>
-                    <ProductBundle ProductBundle1={Accessoryes.data} />
-                </section>
-                <HelpSection helpData={choices} translates={Translates} />
-            </main>
-            <Footer />
-        </div>
+                    <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#ECF3EA] py-[100px]">
+                        <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
+                            {Translates._Endirim}{' '}
+                        </h2>
+                        <ProductBundle ProductBundle1={Accessoryes.data} />
+                    </section>
+                    <section className="w-full lg:px-[60px] px-[30px] mt-[40px] bg-[#FFFFFF] py-[100px]">
+                        <h2 className=" text-[48px] font-semibold text-center  mt-[40px]  text-[#447355]">
+                            {Translates.Digər_aksesuarlar}
+                        </h2>
+                        <ProductBundle ProductBundle1={Accessoryes.data} />
+                    </section>
+                    <HelpSection helpData={choices} translates={Translates} />
+                </main>
+                <Footer />
+            </div>
+        </>
     );
 }
 export async function getServerSideProps(context) {
@@ -117,9 +98,15 @@ export async function getServerSideProps(context) {
             headers: { 'Accept-Language': lang },
         });
         const choices = await choicesResponse.json();
-
+        const seo = await fetch(
+            `https://irobot.avtoicare.az/api/seo_pages?type=sale_acsesuares`,
+            {
+                headers: { 'Accept-Language': lang },
+            }
+        ).then((response) => response.json());
         return {
             props: {
+                seo,
                 Translates,
                 AccessorySeries,
                 accessoryCategories,

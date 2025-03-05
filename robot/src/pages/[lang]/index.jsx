@@ -18,6 +18,7 @@ export async function getServerSideProps(context) {
     try {
         // Fetch all data concurrently
         const [
+            seo,
             Home_acsesuares,
             Home_mobile_section,
             Home_Special_Offers,
@@ -31,6 +32,9 @@ export async function getServerSideProps(context) {
             Advantages,
             hero,
         ] = await Promise.all([
+            fetch(`${baseUrl}/seo_pages?type=Home`, {
+                headers: { 'Accept-Language': lang },
+            }).then((res) => res.json()),
             fetch(`${baseUrl}/section?type=Home_acsesuares`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
@@ -84,6 +88,7 @@ export async function getServerSideProps(context) {
                 Home_İRobot_evinizin,
                 CleanersOffer,
                 hero,
+                seo,
             },
         };
     } catch (error) {

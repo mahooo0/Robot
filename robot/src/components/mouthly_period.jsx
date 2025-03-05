@@ -47,13 +47,6 @@ const MonthlyPayment = ({ price }) => {
     );
 };
 
-const periods = [
-    { months: 3, percentage: 0 },
-    { months: 6, percentage: 0 },
-    { months: 12, percentage: 0 },
-    { months: 18, percentage: 0 },
-];
-
 export const InstallmentPayment = ({ product }) => {
     const [currentCalculation, setCurrentCalculation] = React.useState(0);
     return (
@@ -65,7 +58,7 @@ export const InstallmentPayment = ({ product }) => {
                 Hissə-hissə al:
             </p>
             <div className="flex lg:flex-row flex-col gap-7 ">
-                <div className="flex gap-7 items-end self-stretch my-auto text-center min-w-[240px]">
+                <div className="flex gap-7  flex-wrap items-end self-stretch my-auto text-center min-w-[240px]">
                     {product?.calculated_prices.map((period, i) => (
                         <PaymentPeriod
                             action={() => setCurrentCalculation(i)}

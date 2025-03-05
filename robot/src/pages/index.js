@@ -34,6 +34,7 @@ import Special_Offer from '@/components/sections/Home-Special-Offer';
 import Special_Offer_Login from '@/components/sections/Home-Special-Offer';
 import ProductSwipperSection from '@/components/sections/Home-Product-Swipper';
 import Home_IRobo_Bunner from '@/components/sections/Home-Bunner-Buttom';
+import Head from 'next/head';
 // import ProductBundle from '@/components/ProductBundle';
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -59,59 +60,69 @@ export default function Home({
     Home_İRobot_evinizin,
     CleanersOffer,
     hero,
+    seo,
 }) {
-    console.log('hero:', hero);
+    console.log('seo:', seo);
 
     const router = useRouter();
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.3 }}
-            className="text-[#132A1B]"
-        >
-            <Header activeIndex={0} />
-            <Home_Hero hero={hero} />
-            <section className="px-5 w-full flex justify-center">
-                <FeatureList Advantages={Advantages} />
-            </section>
-            <ProductCategories />
-            <NewProductsSection
-                NewProducts={NewProducts.data}
-                Translates={Translates}
-            />
-            <SalesSection Translates={Translates} />
-            <SpecialOfferSection
-                SpecialOffer={SpecialOffer}
-                Translates={Translates}
-            />
-            <Paket_bundle
-                Translates={Translates}
-                PaketProducts={PaketProducts.data}
-            />
-            <Special_Offer_Login
-                Home_Special_Offers={Home_Special_Offers}
-                Translates={Translates}
-            />
-            <ProductSwipperSection
-                data={VacumusProducts.data}
-                Ttile={Translates.Robot_süpürgələr}
-                Translates={Translates}
-            />
-            <Home_IRobo_Bunner Home_İRobot_evinizin={Home_İRobot_evinizin} />
-            <ProductSwipperSection
-                data={CleanersOffer.data}
-                Ttile={Translates.Robot_süpürgələr}
-                Translates={Translates}
-            />
-            <AcsesuaresSection
-                Home_acsesuares={Home_acsesuares}
-                Translates={Translates}
-            />
-            <MobileSection Home_mobile_section={Home_mobile_section} />
-            <Footer />
-        </motion.div>
+        <>
+            <Head>
+                <title>{seo.meta_title}</title>
+                <meta name="description" content={seo.meta_description} />
+                <meta name="keywords" content={seo.meta_keywords} />
+            </Head>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.3 }}
+                className="text-[#132A1B]"
+            >
+                <Header activeIndex={0} />
+                <Home_Hero hero={hero} />
+                <section className="px-5 w-full flex justify-center">
+                    <FeatureList Advantages={Advantages} />
+                </section>
+                <ProductCategories />
+                <NewProductsSection
+                    NewProducts={NewProducts.data}
+                    Translates={Translates}
+                />
+                <SalesSection Translates={Translates} />
+                <SpecialOfferSection
+                    SpecialOffer={SpecialOffer}
+                    Translates={Translates}
+                />
+                <Paket_bundle
+                    Translates={Translates}
+                    PaketProducts={PaketProducts.data}
+                />
+                <Special_Offer_Login
+                    Home_Special_Offers={Home_Special_Offers}
+                    Translates={Translates}
+                />
+                <ProductSwipperSection
+                    data={VacumusProducts.data}
+                    Ttile={Translates.Robot_süpürgələr}
+                    Translates={Translates}
+                />
+                <Home_IRobo_Bunner
+                    Home_İRobot_evinizin={Home_İRobot_evinizin}
+                />
+                <ProductSwipperSection
+                    data={CleanersOffer.data}
+                    Ttile={Translates.Robot_süpürgələr}
+                    Translates={Translates}
+                />
+                <AcsesuaresSection
+                    Home_acsesuares={Home_acsesuares}
+                    Translates={Translates}
+                />
+                <MobileSection Home_mobile_section={Home_mobile_section} />
+                <Footer />
+            </motion.div>
+        </>
     );
 }
 export async function getServerSideProps(context) {
@@ -121,6 +132,7 @@ export async function getServerSideProps(context) {
     try {
         // Fetch all data concurrently
         const [
+            seo,
             Home_acsesuares,
             Home_mobile_section,
             Home_Special_Offers,
@@ -134,6 +146,9 @@ export async function getServerSideProps(context) {
             Advantages,
             hero,
         ] = await Promise.all([
+            fetch(`${baseUrl}/seo_pages?type=Home`, {
+                headers: { 'Accept-Language': lang },
+            }).then((res) => res.json()),
             fetch(`${baseUrl}/section?type=Home_acsesuares`, {
                 headers: { 'Accept-Language': lang },
             }).then((res) => res.json()),
@@ -187,6 +202,7 @@ export async function getServerSideProps(context) {
                 Home_İRobot_evinizin,
                 CleanersOffer,
                 hero,
+                seo,
             },
         };
     } catch (error) {

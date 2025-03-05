@@ -9,6 +9,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import GETRequest from '@/services/QueryREq';
+import Head from 'next/head';
+import { axiosInstance } from '@/services/Requests';
 
 export default function App({ Component, pageProps }) {
     const queryClient = new QueryClient({
@@ -21,6 +24,20 @@ export default function App({ Component, pageProps }) {
     });
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [fawIcon, setFawIcon] = useState('');
+
+    useEffect(() => {
+        const fetchFavicon = async () => {
+            try {
+                const response = await axiosInstance.get('/favicon');
+                setFawIcon(response.data.image);
+            } catch (error) {
+                console.error('Error fetching favicon:', error);
+            }
+        };
+
+        fetchFavicon();
+    }, []);
 
     useEffect(() => {
         const handleStart = () => setLoading(true);
@@ -41,16 +58,9 @@ export default function App({ Component, pageProps }) {
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
                 <Provider store={store}>
-                    {/* Page Load Progress Bar */}
-                    {/* <NextNProgress
-                        color="#69BE56"
-                        startPosition={0.3}
-                        stopDelayMs={200}
-                        height={3}
-                        showOnShallow={false}
-                    /> */}
-
-                    {/* Full-Screen Loader */}
+                    <Head>
+                        <link rel="icon" href={fawIcon || ''} />
+                    </Head>
                     {loading && (
                         <div className="loading-overlay">
                             <div className="spinner"></div>

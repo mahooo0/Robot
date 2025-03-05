@@ -13,6 +13,9 @@
 //       status: string
 //       remainingAmount: number
 //     }[]
+
+import { useRouter } from 'next/router';
+
 //   }
 export default function KreditDetail({
     date = '12 oktyabr 2024',
@@ -31,18 +34,25 @@ export default function KreditDetail({
             remainingAmount: 1,
         },
     ],
+    Translates,
 }) {
     const totalPaid = payments.reduce(
         (sum, payment) => sum + payment.amountPaid,
         0
     );
     const totalRemaining = totalAmount - totalPaid;
-
+    const router = useRouter();
+    const { lang } = router.query;
     return (
         <div className="w-full space-y-6 rounded-2xl bg-[#F1F5F0] p-6">
             {/* Header Date */}
             <div className="w-full  h-[100px] flex flex-col gap-5">
-                <button className="flex flex-row gap-2">
+                <button
+                    className="flex flex-row gap-2"
+                    onClick={() => {
+                        router.push(`/${lang}/user/kredits`);
+                    }}
+                >
                     <svg
                         width="20"
                         height="21"
@@ -77,10 +87,10 @@ export default function KreditDetail({
                             </clipPath>
                         </defs>
                     </svg>
-                    <p>Geri</p>
+                    <p>{Translates.Geri}</p>
                 </button>
                 <h1 className="text-[28px] font-semibold">
-                    Sifarişimin_detalları
+                    {Translates.Sifarişimin_detalları}
                 </h1>
             </div>
             <div className="text-sm text-gray-500">{date}</div>
@@ -112,13 +122,13 @@ export default function KreditDetail({
                     </div>
                     <div className="rounded-xl bg-[#F5F5F5] text-center px-6 py-3">
                         <div className="text-sm text-gray-500">
-                            İlk faiz dərəcəsi
+                            {Translates.İlk_faiz_dərəcəsi}
                         </div>
                         <div className="mt-1 font-medium">{interestRate}%</div>
                     </div>
                     <div className="rounded-xl bg-[#F5F5F5] text-center px-6 py-3">
                         <div className="text-sm text-gray-500">
-                            Aylıq ödəniş
+                            {Translates.Aylıq_ödəniş}
                         </div>
                         <div className="mt-1 font-medium">
                             {monthlyPayment} ₼
@@ -130,16 +140,16 @@ export default function KreditDetail({
             {/* Payment Schedule */}
             <div className="space-y-4 bg-white py-[24px] px-[20px] rounded-[20px]">
                 <h3 className="text-lg font-medium text-gray-900">
-                    Ödəniş qrafiki
+                    {Translates.Ödəniş_qrafiki}
                 </h3>
 
                 {/* Table Header */}
                 <div className="grid grid-cols-5 gap-4 rounded-t-xl bg-gray-50 p-4 text-sm font-medium text-gray-500">
-                    <div>Ödəniş tarixi</div>
-                    <div>Ödənilməli məbləğ</div>
-                    <div>Ödənən məbləğ</div>
-                    <div>Status</div>
-                    <div>Qalıq məbləğ</div>
+                    <div>{Translates.Ödəniş_tarixi}</div>
+                    <div>{Translates.Ödənilməli_məbləğ}</div>
+                    <div>{Translates.Ödənən_məbləğ}</div>
+                    <div>{Translates.Status}</div>
+                    <div>{Translates.Qalıq_məbləğ}</div>
                 </div>
 
                 {/* Table Rows */}
@@ -171,17 +181,21 @@ export default function KreditDetail({
                 {/* Summary Row */}
                 <div className="grid grid-cols-3 gap-4 rounded-b-xl bg-gray-50 p-4 text-sm">
                     <div>
-                        <span className="text-gray-500">Cəmi məbləğ: </span>
+                        <span className="text-gray-500">
+                            {Translates.Cəmi_məbləğ}:{' '}
+                        </span>
                         <span className="font-medium">{totalAmount} ₼</span>
                     </div>
                     <div>
                         <span className="text-gray-500">
-                            Ödənən cəmi məbləğ:{' '}
+                            {Translates.Ödənən_cəmi_məbləğ}
                         </span>
                         <span className="font-medium">{totalPaid} ₼</span>
                     </div>
                     <div>
-                        <span className="text-gray-500">Cəmi qalıq: </span>
+                        <span className="text-gray-500">
+                            {Translates.Cəmi_qalıq}:{' '}
+                        </span>
                         <span className="font-medium">{totalRemaining} ₼</span>
                     </div>
                 </div>
@@ -202,7 +216,7 @@ export default function KreditDetail({
                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                     />
                 </svg>
-                Müqaviləni yüklə
+                {Translates.Müqaviləni_yüklə}
             </button>
         </div>
     );

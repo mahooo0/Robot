@@ -89,6 +89,9 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
         [lang]
     );
 
+    const { data: logo, isLoading: logoLoading } = GETRequest(`/logo`, 'logo', [
+        lang,
+    ]);
     return (
         <>
             <motion.header
@@ -239,9 +242,9 @@ const Header = ({ activeIndex, productIndex, whyindex, offerindex }) => {
                                 />
                             </ul>
                             <div className="w-[160px] h-[40px]">
-                                <Image
+                                <img
                                     onClick={() => router.push('/')}
-                                    src={ph}
+                                    src={logo?.image}
                                     alt="Header Logo"
                                     width={160}
                                     height={40}

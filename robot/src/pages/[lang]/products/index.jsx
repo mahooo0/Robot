@@ -11,6 +11,7 @@ import { ProductFilters } from '@/components/recoil/Atom';
 import ProductHero from '@/components/sections/Product-hero';
 import GETRequest from '@/services/QueryREq';
 import { getSection, getTranslates } from '@/services/Requests';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -38,6 +39,7 @@ export default function Product({
     productCategories,
     accessorySeries,
     productTypes,
+    seo,
 }) {
     const router = useRouter();
     const [page, setpage] = useState(1);
@@ -70,112 +72,122 @@ export default function Product({
     const chunkedProducts = chunkArray(products?.data || []);
 
     return (
-        <div>
-            <Header activeIndex={1} productIndex={2} />
-            <ProductHero Product_Hero={Product_Hero} Translates={Translates} />
-            <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
-                <FilterComponent
+        <>
+            <Head>
+                <title>{seo.meta_title}</title>
+                <meta name="description" content={seo.meta_description} />
+                <meta name="keywords" content={seo.meta_keywords} />
+            </Head>{' '}
+            <div>
+                <Header activeIndex={1} productIndex={2} />
+                <ProductHero
+                    Product_Hero={Product_Hero}
                     Translates={Translates}
-                    productCategories={productCategories}
-                    accessorySeries={accessorySeries}
-                    productTypes={productTypes}
                 />
-                <section className="lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
-                    <div className="w-full flex justify-between items-center flex-wrap">
-                        <p className="text-[16px] font-normal text-opacity-60">
-                            {products?.count} {Translates.Məhsul}
-                        </p>
-                        <div className="flex flex-row gap-3 items-center flex-wrap">
+                <div className="w-full flex lg:flex-row md:flex-row flex-col mb-[128px] lg:items-start md:items-start items-center">
+                    <FilterComponent
+                        Translates={Translates}
+                        productCategories={productCategories}
+                        accessorySeries={accessorySeries}
+                        productTypes={productTypes}
+                    />
+                    <section className="lg:pr-[60px] pr-[30px] mt-[60px] w-[100%]">
+                        <div className="w-full flex justify-between items-center flex-wrap">
                             <p className="text-[16px] font-normal text-opacity-60">
-                                {Translates.Sırala}
+                                {products?.count} {Translates.Məhsul}
                             </p>
-                            <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px]">
-                                <select
-                                    value={Filters.sort}
-                                    name=""
-                                    id=""
-                                    onChange={(e) =>
-                                        setFilters({
-                                            ...Filters,
-                                            sort: e.target.value,
-                                        })
-                                    }
-                                    className="bg-[#ECF1EA] w-full"
-                                >
-                                    <option value="">select</option>
+                            <div className="flex flex-row gap-3 items-center flex-wrap">
+                                <p className="text-[16px] font-normal text-opacity-60">
+                                    {Translates.Sırala}
+                                </p>
+                                <div className="p-3 bg-[#ECF1EA] w-[283px] h-[48px] rounded-[10px]">
+                                    <select
+                                        value={Filters.sort}
+                                        name=""
+                                        id=""
+                                        onChange={(e) =>
+                                            setFilters({
+                                                ...Filters,
+                                                sort: e.target.value,
+                                            })
+                                        }
+                                        className="bg-[#ECF1EA] w-full"
+                                    >
+                                        <option value="">select</option>
 
-                                    <option value="A-Z">A-Z</option>
-                                    <option value="Z-A">Z-A</option>
-                                    <option value="expensive-cheap">
-                                        {Translates.expensive_cheap}
-                                    </option>
-                                    <option value="cheap-expensive">
-                                        {Translates.cheap_expensive}
-                                    </option>
-                                    <option value="old-new">
-                                        {Translates.old_new}
-                                    </option>
-                                    <option value="new-old">
-                                        {Translates.new_old}
-                                    </option>
-                                </select>
+                                        <option value="A-Z">A-Z</option>
+                                        <option value="Z-A">Z-A</option>
+                                        <option value="expensive-cheap">
+                                            {Translates.expensive_cheap}
+                                        </option>
+                                        <option value="cheap-expensive">
+                                            {Translates.cheap_expensive}
+                                        </option>
+                                        <option value="old-new">
+                                            {Translates.old_new}
+                                        </option>
+                                        <option value="new-old">
+                                            {Translates.new_old}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Render chunked products */}
-                    {!ProductLoading ? (
-                        chunkedProducts.map((chunk, index) => (
-                            <div
-                                key={index}
-                                className="flex flex-row flex-wrap justify-between gap-5 mt-7"
-                            >
-                                {chunk.map((prod) => (
-                                    <Product_Card_aute
-                                        key={prod.id}
-                                        data={prod}
-                                    />
-                                ))}
-                            </div>
-                        ))
-                    ) : (
-                        <>
-                            <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
-                                {Array.from({ length: 10 }).map(() => (
-                                    <div className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px] relative">
-                                        <div className="relative rounded-2xl bg-gray-200 animate-pulse">
-                                            <div className="w-full rounded-3xl aspect-[1.24] bg-gray-300"></div>
-                                        </div>
-
-                                        <div className="flex flex-col mt-3 w-full">
-                                            <div className="flex flex-col w-full">
-                                                <div className="w-full h-6 bg-gray-200 rounded animate-pulse"></div>
-                                                <div className="mt-2 h-4 bg-gray-200 rounded animate-pulse"></div>
+                        {/* Render chunked products */}
+                        {!ProductLoading ? (
+                            chunkedProducts.map((chunk, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-row flex-wrap justify-between gap-5 mt-7"
+                                >
+                                    {chunk.map((prod) => (
+                                        <Product_Card_aute
+                                            key={prod.id}
+                                            data={prod}
+                                        />
+                                    ))}
+                                </div>
+                            ))
+                        ) : (
+                            <>
+                                <div className="flex flex-row flex-wrap justify-between gap-5 mt-7">
+                                    {Array.from({ length: 10 }).map(() => (
+                                        <div className="flex flex-col grow shrink self-stretch pb-3 my-auto min-w-[240px] w-[252px] relative">
+                                            <div className="relative rounded-2xl bg-gray-200 animate-pulse">
+                                                <div className="w-full rounded-3xl aspect-[1.24] bg-gray-300"></div>
                                             </div>
-                                            <div className="flex justify-between items-center mt-3 w-full">
-                                                <div className="flex gap-1 items-center self-stretch my-auto">
-                                                    <div className="h-6 w-20 bg-gray-200 rounded animate-pulse"></div>
-                                                    <div className="h-6 w-6 bg-gray-200 rounded-full animate-pulse"></div>
+
+                                            <div className="flex flex-col mt-3 w-full">
+                                                <div className="flex flex-col w-full">
+                                                    <div className="w-full h-6 bg-gray-200 rounded animate-pulse"></div>
+                                                    <div className="mt-2 h-4 bg-gray-200 rounded animate-pulse"></div>
+                                                </div>
+                                                <div className="flex justify-between items-center mt-3 w-full">
+                                                    <div className="flex gap-1 items-center self-stretch my-auto">
+                                                        <div className="h-6 w-20 bg-gray-200 rounded animate-pulse"></div>
+                                                        <div className="h-6 w-6 bg-gray-200 rounded-full animate-pulse"></div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <div className="w-[44px] h-[44px] rounded-full bg-gray-200 flex justify-center items-center absolute top-3 right-3 animate-pulse"></div>
                                         </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                        <ProductPagination
+                            currentPage={page}
+                            onPageChange={(i) => setpage(i)}
+                            totalPages={products?.meta?.total}
+                        />
+                    </section>
+                </div>
 
-                                        <div className="w-[44px] h-[44px] rounded-full bg-gray-200 flex justify-center items-center absolute top-3 right-3 animate-pulse"></div>
-                                    </div>
-                                ))}
-                            </div>
-                        </>
-                    )}
-                    <ProductPagination
-                        currentPage={page}
-                        onPageChange={(i) => setpage(i)}
-                        totalPages={products?.meta?.total}
-                    />
-                </section>
+                <Footer />
             </div>
-
-            <Footer />
-        </div>
+        </>
     );
 }
 export async function getServerSideProps(context) {
@@ -190,7 +202,9 @@ export async function getServerSideProps(context) {
                 headers: { 'Accept-Language': lang },
             }
         ).then((response) => response.json());
-
+        const seo = await fetch(`${baseUrl}/seo_pages?type=products`, {
+            headers: { 'Accept-Language': lang },
+        }).then((response) => response.json());
         const Translates = await fetch(`${baseUrl}/translates`, {
             headers: { 'Accept-Language': lang },
         }).then((response) => response.json());
@@ -207,6 +221,7 @@ export async function getServerSideProps(context) {
         }).then((response) => response.json());
         return {
             props: {
+                seo,
                 Translates,
                 Product_Hero,
                 productCategories,

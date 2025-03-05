@@ -2,6 +2,8 @@ import React, { use, useEffect, useState } from 'react';
 import KreditPOpUP from './KreditPopUp';
 import { useRecoilState } from 'recoil';
 import { deliveryTypeState } from './recoil/Atom';
+import GETRequest from '@/services/QueryREq';
+import { useRouter } from 'next/router';
 
 const PersonalInfo = ({ translates }) => {
     const [user, setUser] = useState(null);
@@ -67,7 +69,9 @@ const DeliveryType = ({ translates }) => {
     const [DeliveryTypeState, setDeliveryTypeState] =
         useRecoilState(deliveryTypeState);
     console.log('DeliveryTypeState', DeliveryTypeState);
-
+    const router = useRouter();
+    const { lang } = router.query;
+    const { data: shops } = GETRequest(`/shops`, 'shops', [lang]);
     return (
         <section className="flex overflow-hidden flex-col p-10 mt-5 w-full rounded-3xl bg-stone-100 max-md:px-5 max-md:max-w-full">
             <h2 className="self-start text-sm text-black text-opacity-60">
@@ -170,10 +174,9 @@ const DeliveryType = ({ translates }) => {
                                 id="citySelect"
                                 className="flex-grow bg-transparent"
                             >
-                                <option>mağaza 1</option>
-                                <option>mağaza 2</option>
-                                <option>mağaza 3</option>
-                                <option>mağaza 4</option>
+                                {shops?.map((item) => (
+                                    <option>{item.title}</option>
+                                ))}
                             </select>
                         </div>
 
